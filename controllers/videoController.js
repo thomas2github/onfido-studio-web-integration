@@ -12,10 +12,12 @@ exports.video_upload = function(req, res) {
     const video = {
         applicant_id: req.params.id
     };
+    const refferer = req.protocol + '://' + req.hostname + ':*/*';
     const sdkTokenRequest = {
         applicantId: req.params.id,
-        referrer: 'http://localhost:3000/*'
-    }
+        // referrer: 'http://localhost:3000/*'
+        referrer: refferer
+    };
     onfido.sdkToken.generate( sdkTokenRequest )
         .then((sdkToken) => {
             res.render('videoUpload', { video: video, sdkToken: sdkToken });

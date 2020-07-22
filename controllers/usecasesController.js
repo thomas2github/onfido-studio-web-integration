@@ -19,9 +19,11 @@ exports.usecases_doc_plus_selfie = function(req, res) {
             lastName: 'ln-' + now
         })
         .then((applicant) => {
+            const refferer = req.protocol + '://' + req.hostname + ':*/*';
             const sdkTokenRequest = {
-                applicantId: applicant.id,
-                referrer: 'http://localhost:3000/*'
+                applicantId: req.params.id,
+                // referrer: 'http://localhost:3000/*'
+                referrer: refferer
             };         
             // Get SDK Token
             onfido.sdkToken.generate( sdkTokenRequest )
