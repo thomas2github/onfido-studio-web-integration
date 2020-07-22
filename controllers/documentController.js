@@ -14,11 +14,12 @@ exports.document_upload = function(req, res) {
     const document = {
         applicant_id: req.params.id
     };
-    const refferer = req.protocol + '://' + req.hostname + ':*/*';
+    const referrer = '*://*/*';
+    console.log('>>>>>>>        referrer: ' + referrer);
     const sdkTokenRequest = {
         applicantId: req.params.id,
         // referrer: 'http://localhost:3000/*'
-        referrer: refferer
+        referrer: referrer
     };
     const countries = require('../datas/supportedDocumentsByCountry.json');
     onfido.sdkToken.generate( sdkTokenRequest )
