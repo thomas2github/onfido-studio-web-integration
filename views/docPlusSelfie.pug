@@ -18,6 +18,8 @@ block content
                             p.card-category=  'Applicant id: ' + applicant.id
                         .card-body
                             .d-flex.justify-content-around
+                                p= 'sdk token: ' + sdkToken + ' - referrer: ' + referrer
+                            .d-flex.justify-content-around
                                 a(href='https://onfido.com/supported-documents/' target='_blank') supported documents        
                             .d-flex.justify-content-around
                                 #onfido-mount(data-applicant-id=applicant.id data-token=sdkToken)

@@ -29,7 +29,7 @@ exports.usecases_doc_plus_selfie = function(req, res) {
             // Get SDK Token
             onfido.sdkToken.generate( sdkTokenRequest )
                 .then((sdkToken) => {
-                    res.render('docPlusSelfie', {applicant: applicant, sdkToken: sdkToken});
+                    res.render('docPlusSelfie', {applicant: applicant, sdkToken: sdkToken, referrer: referrer});
                 });
         })
         .catch((error) => {
@@ -79,9 +79,12 @@ exports.usecases_doc_plus_video = function(req, res) {
             lastName: 'ln-' + now
         })
         .then((applicant) => {
+            const referrer = '*://*/*';
+            console.log('>>>>>>>        referrer: ' + referrer);
             const sdkTokenRequest = {
                 applicantId: applicant.id,
-                referrer: 'http://localhost:3000/*'
+                // referrer: 'http://localhost:3000/*'
+                referrer: referrer
             };         
             // Get SDK Token
             onfido.sdkToken.generate( sdkTokenRequest )
@@ -238,9 +241,12 @@ exports.usecases_known_faces = function(req, res) {
             lastName: 'ln-' + now
         })
         .then((applicant) => {
+            const referrer = '*://*/*';
+            console.log('>>>>>>>        referrer: ' + referrer);
             const sdkTokenRequest = {
                 applicantId: applicant.id,
-                referrer: 'http://localhost:3000/*'
+                // referrer: 'http://localhost:3000/*'
+                referrer: referrer
             };         
             // Get SDK Token
             onfido.sdkToken.generate( sdkTokenRequest )
