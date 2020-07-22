@@ -1,0 +1,50 @@
+extends layout
+
+block content
+    .content
+        .container-fluid
+            .row.justify-content-center
+                .col-lg-6.col-md-8.col-sm-12
+                    form(method='post' action='' enctype='multipart/form-data')
+                        .card
+                            .card-header.card-header-info
+                                .float-left
+                                    button.btn.btn-info.mr-4.goback &lt;
+                                h4.card-title= 'Autofill (beta)'
+                            .card-body
+                                .row.justify-content-center
+                                    .col-10
+                                        a(href='https://onfido.com/supported-documents/' target='_blank') supported documents
+                                .row.justify-content-center
+                                    .col-10
+                                        .form-group
+                                            label.bmd-label-floating Issuing country
+                                            select#issuingCountry.form-control(name='issuingCountry')
+                                                each country in countries
+                                                    option(value=country.countryCode data-supportedDocuments=country.supportedDocuments)= country.countryName
+                                        .form-group
+                                            label.bmd-label-floating Document type
+                                            select#type.form-control(name='type')
+                                                option(value='unknown') Unknown
+                                        .form-group
+                                            label.bmd-label-floating Document side
+                                            select#side.form-control(name='side')
+                                                option(value='front' selected) Front
+                                                option(value='back') Back
+                                        .form-group
+                                            label.bmd-label-floating File
+                                            input#file.form-control(type='file' name='file' accept='image/jpeg,image/png,application/pdf')
+                                            p (jpg/png/pdf - min: 32Ko max: 10Mo)
+                                        button.btn.btn-info(type='submit') upload
+                        if applicantId
+                            .card
+                                .card-body
+                                    .row.justify-content-center
+                                        .col-10
+                                            h6 Extracted Data
+                                            .float-right
+                                                a(href='/resources/applicants/'+applicantId) view applicant details
+                                            pre= JSON.stringify(result, null, 4)
+
+append bottom
+    script(src='/javascripts/selectCountryAndDocumentType.js')

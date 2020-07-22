@@ -1,0 +1,103 @@
+mixin displayDate(date)
+    if date
+        if moment(date).format('YYYY/MM/DD') == moment(new Date()).format('YYYY/MM/DD')
+            span= moment(date).format('HH:mm')
+        else if moment(date).format('YYYY/MM') == moment(new Date()).format('YYYY/MM')
+            span= moment(date).format('D MMMM HH:mm')
+        else if moment(date).format('YYYY') == moment(new Date()).format('YYYY')
+            span= moment(date).format('D MMMM')
+        else 
+            span= moment(date).format('DD.MM.YYYY')
+        
+mixin displayJson(json, level)
+    if json
+        each val, key in json
+            if typeof val === 'object'
+                +displayJson(val, level+1)
+            else
+                span(style='margin-left: '+level+'em')= key + ': '
+                    b= val
+                br
+
+mixin displayCheckStatus(status)
+    if status
+        case status
+            when 'in_progess'
+                span.badge(class='badge-primary')= status
+            when 'awaiting_applicant'
+                span.badge(class='badge-warning')= status
+            when 'complete'
+                span.badge(class='badge-success')= status
+            when 'withdrawn'
+                span.badge(class='badge-secondary')= status
+            when 'paused'
+                span.badge(class='badge-secondary')= status
+            when 'reopened'
+                span.badge(class='badge-primary')= status
+            default
+                span.badge(class='badge-warning')= status
+
+mixin displayCheckResult(result)
+    if result
+        case result
+            when 'clear'
+                span.badge(class='badge-success')= result
+            when 'consider'
+                span.badge(class='badge-warning')= result
+            default
+                span.badge(class='badge-warning')= result
+
+mixin displayReportStatus(status)
+    if status
+        case status
+            when 'awaiting_data'
+                span.badge(class='badge-secondary')= status
+            when 'awaiting_approval'
+                span.badge(class='badge-primary')= status
+            when 'complete'
+                span.badge(class='badge-success')= status
+            when 'withdrawn'
+                span.badge(class='badge-secondary')= status
+            when 'paused'
+                span.badge(class='badge-secondary')= status
+            default
+                span.badge(class='badge-warning')= status
+
+mixin displayReportResult(result)
+    if result
+        case result
+            when 'clear'
+                span.badge(class='badge-success')= result
+            when 'consider'
+                span.badge(class='badge-warning')= result
+            default
+                span.badge(class='badge-secondary')= result
+
+mixin displayReportSubResult(subResult)
+    if subResult
+        case subResult
+            when 'clear'
+                span.badge(class='badge-success')= subResult
+            when 'rejected'
+                span.badge(class='badge-secondary')= subResult
+            when 'suspected'
+                span.badge(class='badge-danger')= subResult
+            when 'caution'
+                span.badge(class='badge-warning')= subResult
+            default
+                span.badge(class='badge-secondary')= subResult
+
+mixin displayBreakdownIcon(result)
+    if result
+        case result
+            when 'clear'
+                i.material-icons.ml-2(title=result style='font-size: 18px; vertical-align:middle; diplay: inline-block' class='text-success')= 'check_circle'
+            when 'consider'
+            when 'caution'
+                i.material-icons.ml-2(title=result style='font-size: 18px; vertical-align:middle; diplay: inline-block' class='text-warning')= 'error_outline'
+            when 'suspected'
+                i.material-icons.ml-2(title=result style='font-size: 18px; vertical-align:middle; diplay: inline-block' class='text-danger')= 'error'
+            when 'rejected'
+                i.material-icons.ml-2(title=result style='font-size: 18px; vertical-align:middle; diplay: inline-block' class='text-danger')= 'cancel'
+            default
+                span.ml-2.text-secondary= result

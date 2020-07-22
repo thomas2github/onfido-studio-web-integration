@@ -1,0 +1,425 @@
+extends layout
+
+block content
+    .content
+        .container-fluid
+            .row
+                //- BEGIN DOCUMENT REPORT
+                .col-xl-3.col-lg-4.col-md-6.col-sm-12
+                    .card.card-stats
+                        .card-header.card-header-primary.card-header-icon
+                            .card-icon
+                                i.material-icons content_copy
+                            h4.card-title 
+                                | Document Report
+                            p.card-category
+                                | catch fraud on id documents
+                            p.card-category
+                                a(href='https://onfido.com/supported-documents/' target='_blank') supported documents
+                            a.btn.btn-sm.d-none.btn-primary(href='#') view report
+                        .card-body.text-left
+                            h4.card-title(data-toggle='collapse' data-target='#policeRecord')
+                                | Police Record
+                                .float-right +
+                            #policeRecord.collapse
+                                p.card-category
+                                    | Asserts whether the document has been identified as lost, stolen or otherwise compromised.
+                            h4.card-title(data-toggle='collapse' data-target='#compromisedDocument')
+                                | Compromised Document
+                                .float-right +
+                            #compromisedDocument.collapse
+                                p.card-category
+                                    | Asserts whether the image of the document has been found in our internal database of compromised documents.
+                            h4.card-title(data-toggle='collapse' data-target='#dataConsistency')
+                                | Data Consistency
+                                .float-right +
+                            #dataConsistency.collapse
+                                p.card-category
+                                    | Asserts whether data represented in multiple places on the document is consistent. For example, between MRZ lines and OCR extracted text on passports. Uses the following sub-breakdowns:
+                                ul
+                                    li document type
+                                    li gender
+                                    li date of expiry
+                                    li nationality
+                                    li issuing country
+                                    li document numbers
+                                    li date of birth
+                                    li lastname
+                                    li firstname
+                            h4.card-title(data-toggle='collapse' data-target='#dataValidation')
+                                | Data Validation
+                                .float-right +
+                            #dataValidation.collapse
+                                p.card-category
+                                    | Asserts whether algorithmically validatable elements are correct. Uses the following sub-breakdowns:
+                                ul
+                                    li document expiration
+                                    li gender
+                                    li document numbers
+                                    li expiry date
+                                    li date of birth
+                                    li mrz
+                            h4.card-title(data-toggle='collapse' data-target='#visualAuthenticity')
+                                | Visual Authenticity
+                                .float-right +
+                            #visualAuthenticity.collapse
+                                p.card-category
+                                    | Asserts whether visual (non-textual) elements are correct given the document type. Uses the following sub-breakdowns:
+                                ul
+                                    li original document present
+                                    li digital tampering
+                                    li picture face integrity
+                                    li security features
+                                    li template
+                                    li fonts
+                                    li face detection
+                            h4.card-title(data-toggle='collapse' data-target='#imageIntegrity')
+                                | Image Integrity
+                                .float-right +
+                            #imageIntegrity.collapse
+                                p.card-category
+                                    | Asserts whether the document was of sufficient quality to verify. Uses the following sub-breakdowns:
+                                ul
+                                    li colour picture
+                                    li consclusive document quality
+                                    li supported document
+                                    li image quality
+                            h4.card-title(data-toggle='collapse' data-target='#dataComparison')
+                                | Data Comparison
+                                .float-right +
+                            #dataComparison.collapse
+                                p.card-category
+                                    | Asserts whether data on the document is consistent with data provided when creating an applicant through the API. The onfido name comparison system uses a Levenshtein-like fuzzy matching for these fields. The purpose of this inexact matching is to avoid unnecessary failures if the names are mathematically close enough. This breakdown can switched off if needed. Uses the following sub-breakdowns:
+                                ul
+                                    li gender
+                                    li date of birth
+                                    li lastname
+                                    li firstname
+                            h4.card-title(data-toggle='collapse' data-target='#ageValidation')
+                                | Age Validation
+                                .float-right +
+                            #ageValidation.collapse
+                                p.card-category
+                                    | Asserts whether the age calculated from the document’s date of birth data point is greater than or equal the minimum accepted age set at account level. The standard threshold is 16 years old but you can write to your Onfido contact to have this changed.
+                        .card-footer.d-none
+                                .stats
+                                    a.btn.btn-sm.d-none.btn-primary(href='/reports/document') create document report
+                //- END DOCUMENT REPORT
+
+                //- BEGIN FACIAL SIMALIRITY REPORT
+                .col-xl-3.col-lg-4.col-md-6.col-sm-12
+                    .card.card-stats
+                        .card-header.card-header-warning.card-header-icon
+                            .card-icon
+                                i.material-icons portrait
+                            h4.card-title 
+                                | Facial Simalarity Report
+                            p.card-category
+                                | selfie or video liveness
+                            a.btn.btn-sm.d-none.btn-warning(href='#') view report
+                        .card-body.text-left
+                            h4.card-title(data-toggle='collapse' data-target='#photo')
+                                | Photo
+                                .float-right +
+                            #photo.collapse
+                                p.card-category
+                                    | The Facial Similarity Photo report uses a live photo. The photo needs to be a live photo taken at the time of check submission, so that it can assess whether the holder of the identity document is the same person as the one on the document. Uses the following sub-breakdowns:
+                                ul
+                                    li image integrity
+                                        ul
+                                            li face detected
+                                            li source integrity (score)
+                                    li face comparison
+                                        ul
+                                            li face match (score)
+                                    li visual authenticity
+                                        ul
+                                            li spoofing detection (score)
+                            h4.card-title(data-toggle='collapse' data-target='#photoFullyAuto')
+                                | Photo Fully Auto
+                                .float-right +
+                            #photoFullyAuto.collapse
+                                p.card-category
+                                    | Like the Facial Similarity Photo report, the Photo Fully Auto report uses a live photo. The photo needs to be a live photo taken at the time of check submission, so that the report can assess whether the holder of the identity document is the same person as the one on the document.
+                                p.card-category
+                                    | Photo Fully Auto is intended to be paired with manual review by your own team.
+                                p.card-category
+                                    | Unlike the other Facial Similarity reports, the Facial Similarity Photo Fully Auto report only uses algorithms to return a result, and does not include expert review by Onfido’s super recogniser analysts. This guarantees faster results, but it also means more reports are likely to end with faces not being detected, or with users incorrectly rejected. Uses the following sub-breakdowns:
+                                ul
+                                    li image integrity
+                                        ul
+                                            li face detected
+                                            li source integrity (score)
+                                    li face comparison
+                                        ul
+                                            li face match (score)
+                                    li visual authenticity
+                                        ul
+                                            li spoofing detection (score)
+                            h4.card-title(data-toggle='collapse' data-target='#video')
+                                | Video
+                                .float-right +
+                            #video.collapse
+                                p.card-category
+                                    | In the Facial Similarity Video report, live videos are collected and uploaded by one of the Onfido SDKs (iOS, Android or JS).
+                                p.card-category
+                                    | In addition to confirming the two faces match, Facial Similarity Video assesses active liveness by asking users to repeat randomly generated numbers and perform a random head movement. This prevents impersonation - for example masks, and deep fakes displayed on digital screens.
+                                p.card-category
+                                    | In order for a Facial Similarity Video report to complete automatically, the user needs to turn their head in the correct direction and correctly say the 3 randomly generated digits in one of our supported languages. Uses the following sub-breakdowns:
+                                ul
+                                    li image integrity
+                                        ul
+                                            li face detected
+                                            li source integrity (score)
+                                    li face comparison
+                                        ul
+                                            li face match (score)
+                                    li visual authenticity
+                                        ul
+                                            li spoofing detection (score)
+                                            li liveness detected
+                        .card-footer.d-none
+                            .stats
+                                a.btn.btn-sm.d-none.btn-warning(href='/reports/facial-similarity') create facial similarity report
+                //- END FACIAL SIMILARITY REPORT
+
+                //- BEGIN WATCHLIST REPORT
+                .col-xl-3.col-lg-4.col-md-6.col-sm-12
+                    .card.card-stats
+                        .card-header.card-header-success.card-header-icon
+                            .card-icon
+                                i.material-icons visibility
+                            h4.card-title 
+                                | Watchlist Report
+                            p.card-category
+                                | screening global watchlists for KYC
+                            a.btn.btn-sm.d-none.btn-success(href='#') view report
+                        .card-body.text-left
+                            h4.card-title(data-toggle='collapse' data-target='#watchlistEnhanced')
+                                | Enhanced
+                                .float-right +
+                            #watchlistEnhanced.collapse
+                                p.card-category
+                                    | A watchlist enhanced check provides a granular breakdown of any records found when screening global watchlists. These include the following breakdowns:
+                                ul
+                                    li sanctions lists
+                                    li politically exposed persons
+                                    li law-enforcement and regulatory bodies monitored lists (including terrorism, money laundering and most wanted lists)
+                                    li adverse media
+                            h4.card-title(data-toggle='collapse' data-target='#watchlistStandard')
+                                | Standard
+                                .float-right +
+                            #watchlistStandard.collapse
+                                p.card-category
+                                    | A watchlist standard check provides a granular breakdown of any records found when screening global watchlists. These include:
+                                ul
+                                    li sanctions lists
+                                    li politically exposed persons
+                                    li law-enforcement and regulatory bodies monitored lists (including terrorism, money laundering and most wanted lists)
+                            h4.card-title(data-toggle='collapse' data-target='#watchlistPepsOnly')
+                                | Peps Only
+                                .float-right +
+                            #watchlistPepsOnly.collapse
+                                p.card-category
+                                    | A watchlist peps only check is a subset of the watchlist standard check. It provides a granular breakdown of politically exposed person breakdown matches.
+                                p.card-category
+                                    | Each match will be returned under records and includes, but is not limited to: name of match, associates, date of birth, related keywords, type of list, name of list, and when the entry was last updated. When available, URLs to data sources are provided, as well as pictures of the individual found in the match. This allows you to quickly assess the relevancy of the match and eliminate false positives.
+                            h4.card-title(data-toggle='collapse' data-target='#watchlistSanctionsOnly')
+                                | Sanctions Only
+                                .float-right +
+                            #watchlistSanctionsOnly.collapse
+                                p.card-category
+                                    | A watchlist sanctions only check is a subset of the watchlist standard check. It provides a granular breakdown of sanction breakdown matches.
+                                p.card-category
+                                    | Each match will be returned under records and includes, but is not limited to: name of match, associates, date of birth, related keywords, type of list, name of list, and when the entry was last updated. When available, URLs to data sources are provided, as well as pictures of the individual found in the match. This allows you to quickly assess the relevancy of the match and eliminate false positives.
+                        .card-footer.d-none
+                            .stats
+                                a.btn.btn-sm.d-none.btn-success(href='/reports/watchlist') create watchlist report
+                //- END WATCHLIST REPORT
+
+                //- BEGIN IDENTITY ENHANCED REPORT
+                .col-xl-3.col-lg-4.col-md-6.col-sm-12
+                    .card.card-stats
+                        .card-header.card-header-danger.card-header-icon
+                            .card-icon
+                                i.material-icons how_to_reg
+                            h4.card-title 
+                                | Identity Enhanced Report
+                            p.card-category
+                                | validate data against verified databases
+                            p.card-category
+                                a(href='https://documentation.onfido.com/supported-applicant-countries/' target='_blank') supported countries
+                            a.btn.btn-sm.d-none.btn-danger(href='#') view report
+                        .card-body.text-left
+                            h4.card-title(data-toggle='collapse' data-target='#identityEnhanced')
+                                | Identity Enhanced
+                                .float-right +
+                            #identityEnhanced.collapse
+                                p.card-category
+                                    | An Identity Enhanced report validates an applicant’s address, date of birth, name, and mortality (where applicable) by cross-referencing their details against a range of verified databases.
+                                p.card-category
+                                    | For applicants in the United States, the Identity Enhanced report can optionally match the Social Security Number, either the full 9 digits or the last 4.
+                                p.card-category
+                                    | Identity Enhanced reports will be run in the country of the applicants address. Please make sure that the country is supported for Identity Enhanced reports.
+                                p.card-category
+                                    | Report results vary depending on the address country they were run in.
+                                p.card-category
+                                    | Uses the following data sources:
+                                ul
+                                    li credit agencies
+                                    li voting register
+                                    li telephone database
+                                    li government
+                                    li business registration
+                                    li consumer database
+                                    li utility registration
+                                    li postal authorities
+                                    li commercial database
+                                    li proprietary (confidential database)
+                                    li register of deaths
+                        .card-footer.d-none
+                            .stats
+                                a.btn.btn-sm.d-none.btn-danger(href='/reports/identity-enhanced') create identity enhanced report
+                //- END IDENTITY ENHANCED REPORT
+
+            .row
+                //- BEGIN KNOWN FACES REPORT
+                .col-xl-3.col-lg-4.col-md-6.col-sm-12
+                    .card.card-stats
+                        .card-header.card-header-info.card-header-icon
+                            .card-icon
+                                i.material-icons people_alt
+                            h4.card-title 
+                                | Known Faces Report (BETA)
+                            p.card-category
+                                | catch repeat fraud attempts
+                            a.btn.btn-sm.d-none.btn-info(href='#') view report    
+                        .card-body.text-left
+                            h4.card-title(data-toggle='collapse' data-target='#knownFaces')
+                                | Known Faces
+                                .float-right +
+                            #knownFaces.collapse
+                                p.card-category
+                                    | Known Faces is currently a BETA product. Please contact client-support@onfido.com if you would like to find out more.
+                                p.card-category
+                                    | The Known Faces report compares a specific applicant’s likeness in their most recent live photo to live photos from all applicants in your Onfido account database. It alerts you to faces which have already been through your identity verification flow, so you can catch repeat identity fraud attempts, and help confused users who may have forgotten they already registered with you to recover their accounts.
+                                p.card-category
+                                    | Each applicant you run a Known Faces report against must have an uploaded live photo.
+                                p.card-category
+                                    | You can run Known Faces as a standalone report, but we recommend that you combine it with a Document and Facial Similarity report in the same check.
+                                p.card-category
+                                    | As a standalone report, Known Faces will not make an assessment of whether the face on the live photo is real and not a spoof (e.g. photos of photos, photos of screens): it is only concerned with the matching of faces, regardless of whether they are real faces or not. Combining Known Faces with the Document and Facial Similarity reports will guarantee the live photo is real and not a spoof, as this is assessed as part of the Facial Similarity report.
+                                p.card-category
+                                    | No matches will be returned against any permanently deleted applicants. If you delete an individual’s applicant object, then that individual goes through the identity verification flow again and then you run a Known Faces report against them, this will not return any matches. This is because no data would be available to match against.
+                                p.card-category
+                                    | Uses the following sub-breakdowns:
+                                ul
+                                    li previously seen faces
+                                    li image integrity
+                        .card-footer.d-none
+                            .stats
+                                a.btn.btn-sm.d-none.btn-info(href='/reports/known-faces') create known faces report
+                //- END KNOWN FACES REPORT
+
+                //- BEGIN POA REPORT
+                .col-xl-3.col-lg-4.col-md-6.col-sm-12
+                    .card.card-stats
+                        .card-header.card-header-secondary.card-header-icon
+                            .card-icon
+                                i.material-icons person_pin_circle
+                            h4.card-title 
+                                | Proof of Address Report (UK only)
+                            p.card-category
+                                | validate proof of address documents
+                            a.btn.btn-sm.d-none.btn-secondary(href='#') view report
+                        .card-body.text-left
+                            h4.card-title(data-toggle='collapse' data-target='#poa')
+                                | Proof of Address
+                                .float-right +
+                            #poa.collapse
+                                p.card-category
+                                    | The Onfido Proof of Address (PoA) solution allows users to upload PoA documents from anywhere in the world.
+                                p.card-category
+                                    | Supported document types:
+                                ul
+                                    li bank statement/building society statements
+                                    li utility bill (electricity, water, gas, broadband )
+                                    li council tax
+                                    li benefits letter (i.e. job seeker allowance, house benefits,tax credits)
+                                p.card-caterory
+                                    | Uses the following sub-breakdowns:
+                                ul 
+                                    li image integrity
+                                    li document classification
+                                    li data comparison          
+                        .card-footer.d-none
+                            .stats
+                                a.btn.btn-sm.d-none.btn-secondary(href='/reports/proof-of-address') create proof of address report
+                //- END POA REPORT
+
+                //- BEGIN RTW REPORT
+                .col-xl-3.col-lg-4.col-md-6.col-sm-12
+                    .card.card-stats
+                        .card-header.card-header-secondary.card-header-icon
+                            .card-icon
+                                i.material-icons work
+                            h4.card-title 
+                                | Right to Work (UK only)
+                            p.card-category
+                                | has applicant the right to work
+                            a.btn.btn-sm.d-none.btn-secondary(href='#') view report
+                        .card-body.text-left
+                            h4.card-title(data-toggle='collapse' data-target='#poa')
+                                | Proof of Address
+                                .float-right +
+                            #poa.collapse
+                                p.card-category
+                                    | A Right to Work report identifies whether an applicant has the right to work within the United Kingdom.
+                                p.card-category
+                                    | UK citizens - document requirements:
+                                ul
+                                    li passport
+                                    li UK birth certificate AND proof of national insurance number
+                                    li UK adoption certificate AND proof of national insurance number
+                                    li UK Certificate of Naturalisation (or Registration) AND proof of national insurance number
+                                p.card-caterory
+                                    | EU/EEA/Swiss citizens - document requirements:
+                                ul 
+                                    li passport
+                                    li national identity card
+                                    li registration certificate
+                                p.card-caterory
+                                    | Non-UK/EU/EEA/Swiss citizens - document requirements:
+                                ul 
+                                    li biometric residence Permit (or biometric residence card) - cannot be expired
+                                    li passport AND visa within current passport - cannot be expired
+                                    li UK immigration status document AND proof of national insurance number
+                                    li home office letter - must have been issued within the last 6 months
+                                    li application registration card - cannot be expired
+                                    li positive verification notice - cannot be expired
+                                p.card-caterory
+                                    | Proof of name change, one of the following:
+                                ul
+                                    li marriage certificate
+                                    li divorce decree (absolute)
+                                    li deed poll
+                                    li adoption certificate
+                                p.card-caterory
+                                    | Tier 4 (general) student
+                                ul
+                                    li proof of term (and vacation) dates
+                                p.card-caterory
+                                    | Tier 2 and tier 5 permit visas
+                                ul
+                                    li certificate of sponsorship
+                                p.card-caterory
+                                    | Proof of national insurance number, one of the following:
+                                ul
+                                    li P45 or P60
+                                    li payslip
+                                    li HMRC letter
+                                    li benefits letter
+                        .card-footer.d-none
+                            .stats
+                                a.btn.btn-sm.d-none.btn-secondary(href='/reports/right-to-work') create right to work report
+                //- END RTW REPORT

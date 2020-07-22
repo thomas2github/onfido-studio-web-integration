@@ -1,0 +1,26 @@
+extends layout
+
+append head
+    link(href='https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/css/bootstrap4-toggle.min.css' rel='stylesheet')
+    // Onfido SDK CSS
+    link(rel='stylesheet' href='/dist/style.css')
+
+block content
+    .content
+        .container-fluid
+            .row.justify-content-center
+                .col-lg-6.col-md-8.col-sm-12
+                    .card
+                        .card-header.card-header-info
+                            .float-left
+                                button.btn.btn-info.mr-4.goback &lt;
+                            h4.card-title= 'Known faces'
+                        .card-body
+                            .row.justify-content-center
+                                .col-10
+                                    #onfido-mount(data-applicant-id= applicant.id data-token=sdkToken)
+        
+append bottom
+    script(src='/dist/onfido.min.js')
+    script(src='https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/js/bootstrap4-toggle.min.js')
+    script(src='/javascripts/knownFaces.js')

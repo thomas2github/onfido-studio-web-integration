@@ -1,0 +1,36 @@
+extends layout
+
+block content
+    .content
+        .container-fluid
+            .row
+                .col-md-12
+                    form
+                        .card
+                            .card-header.card-header-info
+                                .float-left
+                                    button.btn.btn-info.mr-4.goback &lt;
+                                h4.card-title= 'Video created at '
+                                    +displayDate(video.createdAt)
+                                p.card-category=  video.id
+                            .card-body
+                                .row
+                                    .col-sm-6
+                                        .form-group.row
+                                            label.col-sm-4.col-form-label(for='fileName') File name
+                                            .col-sm-8
+                                                input#fileName.form-control-plaintext(type='text' readonly='' value=video.fileName)
+                                        .form-group.row
+                                            label.col-sm-4.col-form-label(for='fileType') File type
+                                            .col-sm-8
+                                                input#fileType.form-control-plaintext(type='text' readonly='' value=video.fileType)
+                                        .form-group.row
+                                            label.col-sm-4.col-form-label(for='fileSize') File Size
+                                            .col-sm-8
+                                                input#fileSize.form-control-plaintext(type='text' readonly='' value=(Math.round(video.fileSize/1024) + ' Ko'))
+                                    .col-sm-6
+                                .row
+                                    .col-sm-12
+                                        .text-center
+                                            a.btn.btn-primary(href='/resources/videos/' + video.id + '/download' target='_blank') download (WIP)
+

@@ -1,0 +1,26 @@
+extends layout
+
+append head
+    // Onfido SDK CSS
+    link(rel='stylesheet' href='/dist/style.css')
+
+block content
+    .content
+        .container-fluid
+            .row.justify-content-center
+                .col-lg-6.col-md-8.col-sm-12
+                    .card
+                        .card-header.card-header-info
+                            .float-left
+                                button.btn.btn-info.mr-4.goback &lt;
+                            h4.card-title= 'Doc + Video'
+                            //- p.card-category=  'Applicant: ' + applicant.firstName + ' ' + applicant.lastName
+                            p.card-category=  'Applicant id: ' + applicant.id
+                        .card-body
+                            .d-flex.justify-content-around
+                                a(href='https://onfido.com/supported-documents/' target='_blank') supported documents        
+                            .d-flex.justify-content-around
+                                #onfido-mount(data-applicant-id=applicant.id data-token=sdkToken)
+append bottom
+    script(src='/dist/onfido.min.js')
+    script(src='/javascripts/docPlusVideo.js')

@@ -1,0 +1,69 @@
+extends layout
+
+block content
+    .content
+        .container-fluid
+            .row
+                .col-md-12
+                    form
+                        .card
+                            .card-header.card-header-primary
+                                .float-left
+                                    button.btn.btn-primary.mr-4.goback &lt;
+                                h4.card-title= 'Report created at '
+                                    +displayDate(report.createdAt)
+                                p.card-category=  report.id
+                            .card-body
+                                .row
+                                    .col-sm-6
+                                        .form-group.row
+                                            label.col-sm-4.col-form-label(for='name') name
+                                            .col-sm-8
+                                                input#name.form-control-plaintext(type='text' readonly='' value=report.name)
+                                        .form-group.row
+                                            label.col-sm-4.col-form-label(for='properties') Properties
+                                            .col-sm-8
+                                                +displayJson(report.properties,0)
+                                    .col-sm-6
+                                        .form-group.row
+                                            label.col-sm-4.col-form-label(for='status') Status
+                                            .col-sm-8
+                                                +displayReportStatus(report.status)
+                                        .form-group.row
+                                            label.col-sm-4.col-form-label(for='result') Result
+                                            .col-sm-8
+                                                +displayReportResult(report.result)
+                                        .form-group.row
+                                            label.col-sm-4.col-form-label(for='subResult') Sub Result
+                                            .col-sm-8
+                                                +displayReportSubResult(report.subResult)
+                    .card
+                        .card-header.card-header-success
+                            h4.card-title Breakdown
+                        .card-body
+                            //TODO use mixins to display breakdown based on the report name
+                            //- Document	
+                            //-     document --> https://documentation.onfido.com/#breakdowns
+                            //- Facial Similarity	
+                            //-     facial_similarity_photo -> https://documentation.onfido.com/#photo
+                            //-     facial_similarity_photo_fully_auto -> https://documentation.onfido.com/#photo-fully-auto
+                            //-     facial_similarity_video -> https://documentation.onfido.com/#video
+                            //- Known Faces (beta)	
+                            //-     known_faces -> https://documentation.onfido.com/#known-faces-report-beta
+                            //- Identity	
+                            //-     identity_enhanced -> https://documentation.onfido.com/#identity-enhanced-report
+                            //- Watchlist	
+                            //-     watchlist_enhanced -> https://documentation.onfido.com/#watchlist-enhanced
+                            //-     watchlist_standard -> https://documentation.onfido.com/#watchlist-standard
+                            //-     watchlist_peps_only -> https://documentation.onfido.com/#watchlist-peps-only
+                            //-     watchlist_sanctions_only -> https://documentation.onfido.com/#watchlist-sanctions-only
+                            //- Proof of Address	
+                            //-     proof_of_address -> https://documentation.onfido.com/#proof-of-address-report
+                            //- Right to Work	
+                            //-     right_to_work -> https://documentation.onfido.com/#right-to-work-report
+                            
+                            include mixins/reportBreakdown
+                            +reportBreakdown(report.breakdown)
+                            
+                            //- pre
+                            //-     code= JSON.stringify(report.breakdown, null, 4)

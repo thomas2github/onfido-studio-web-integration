@@ -1,0 +1,63 @@
+extends layout
+
+append head
+    link(href='https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/css/bootstrap4-toggle.min.css' rel='stylesheet')
+    // Onfido SDK CSS
+    link(rel='stylesheet' href='/dist/style.css')
+
+block content
+    .content
+        .container-fluid
+            .card
+                .card-header.card-header-info
+                    .float-left
+                        button.btn.btn-info.mr-4.goback &lt;
+                    h4.card-title= 'Photo facial'
+                    p.card-category=  'Applicant id: ' + photo.applicant_id
+                .card-body
+                    .row
+                        .col-md-12
+                            .d-flex.flex-row.justify-content-center
+                                .card.text-center.mr-4.js-showWebUpload(style='width:12rem;')
+                                    i.material-icons.pt-4(style='font-size:48px') cloud_upload
+                                    .card-body
+                                        p.card-text= 'web upload'
+                                .card.text-center.mr-4.js-showOnfidoWebSdk(style='width:12rem;' data-token=sdkToken data-applicant-id=photo.applicant_id)
+                                    i.material-icons.md-primary.pt-4(style='font-size:48px; color: #9c27b0;') camera_enhance
+                                    .card-body.text-primary
+                                        p.card-text= 'Onfido SDK'
+                                .d-flex.flex-column.justify-content-center.flex-wrap
+                                    .form-check.form-check-inline
+                                        input#useModal.form-check-input(type='checkbox' data-toggle='toggle' data-style='mr-1' data-size='xs')
+                                        label.form-check-label(for='useModal') display in modal
+                                    .form-check.form-check-inline
+                                        input#welcomeStep.form-check-input(type='checkbox' data-toggle='toggle' data-style='mr-1' data-size='xs')
+                                        label.form-check-label(for='welcomeStep') add welcome step
+                                .d-flex.flex-column.justify-content-center.flex-wrap
+                                    .form-check.form-check-inline
+                                        input#forceCrossDevice.form-check-input(type='checkbox' data-toggle='toggle' data-style='mr-1' data-size='xs')
+                                        label.form-check-label(for='forceCrossDevice') capture on mobile device
+                                    .form-check.form-check-inline
+                                        input#useMultipleSelfieCapture.form-check-input(type='checkbox' data-toggle='toggle' data-style='mr-1' data-size='xs' checked)
+                                        label.form-check-label(for='useMultipleSelfieCapture') take additional selfie snapshots
+                                    .form-check.form-check-inline
+                                        input#advancedValidation.form-check-input(type='checkbox' data-toggle='toggle' data-style='mr-1' data-size='xs' checked)
+                                        label.form-check-label(for='advancedValidation') limit to one face
+                    form#webUpload(style='display: none' method='post' action='' enctype='multipart/form-data')
+                        .row.justify-content-md-center
+                            .col-sm-auto
+                                .form-group.row
+                                    label.col-sm-4.col-form-label(for='file') File
+                                    .col-sm-8
+                                        input#file(type='file' name='file' style='opacity:1 !important' accept='image/jpeg,image/png,application/pdf')
+                                        p (jpg/png/pdf - min: 32Ko max: 10Mo)
+                        .row.d-flex.flex-row.justify-content-center
+                            button.btn.btn-info(type='submit') upload (WIP)
+                    #onfidoWebSdk(style='display: none')
+                        .row.d-flex.flex-row.justify-content-center
+                            #onfido-mount
+        
+append bottom
+    script(src='/dist/onfido.min.js')
+    script(src='https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/js/bootstrap4-toggle.min.js')
+    script(src='/javascripts/photoUpload.js')

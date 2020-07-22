@@ -1,0 +1,3438 @@
+[
+    {
+    "countryName":"Afghanistan",
+    "countryCode":"AFG",
+    "supportedDocuments":[
+        {
+            "docTypeName":"Passport",
+            "docTypeCode":"passport"
+        }
+    ]
+    },
+    {
+    "countryName":"Albania",
+    "countryCode":"ALB",
+    "supportedDocuments":[
+        {
+            "docTypeName":"Driving Licence",
+            "docTypeCode":"driving_licence"
+        },
+        {
+            "docTypeName":"National Identity Card",
+            "docTypeCode":"national_identity_card"
+        },
+        {
+            "docTypeName":"Passport",
+            "docTypeCode":"passport"
+        }
+    ]
+    },
+    {
+    "countryName":"Algeria",
+    "countryCode":"DZA",
+    "supportedDocuments":[
+        {
+            "docTypeName":"National Identity Card",
+            "docTypeCode":"national_identity_card"
+        },
+        {
+            "docTypeName":"Passport",
+            "docTypeCode":"passport"
+        }
+    ]
+    },
+    {
+    "countryName":"Andorra",
+    "countryCode":"AND",
+    "supportedDocuments":[
+        {
+            "docTypeName":"Driving Licence",
+            "docTypeCode":"driving_licence"
+        },
+        {
+            "docTypeName":"Passport",
+            "docTypeCode":"passport"
+        }
+    ]
+    },
+    {
+    "countryName":"Angola",
+    "countryCode":"AGO",
+    "supportedDocuments":[
+        {
+            "docTypeName":"National Identity Card",
+            "docTypeCode":"national_identity_card"
+        },
+        {
+            "docTypeName":"Passport",
+            "docTypeCode":"passport"
+        }
+    ]
+    },
+    {
+    "countryName":"Anguilla",
+    "countryCode":"AIA",
+    "supportedDocuments":[
+        {
+            "docTypeName":"Passport",
+            "docTypeCode":"passport"
+        }
+    ]
+    },
+    {
+    "countryName":"Antigua and Barbuda",
+    "countryCode":"ATG",
+    "supportedDocuments":[
+        {
+            "docTypeName":"Passport",
+            "docTypeCode":"passport"
+        }
+    ]
+    },
+    {
+    "countryName":"Argentina",
+    "countryCode":"ARG",
+    "supportedDocuments":[
+        {
+            "docTypeName":"Driving Licence",
+            "docTypeCode":"driving_licence"
+        },
+        {
+            "docTypeName":"National Identity Card",
+            "docTypeCode":"national_identity_card"
+        },
+        {
+            "docTypeName":"Passport",
+            "docTypeCode":"passport"
+        }
+    ]
+    },
+    {
+    "countryName":"Armenia",
+    "countryCode":"ARM",
+    "supportedDocuments":[
+        {
+            "docTypeName":"Driving Licence",
+            "docTypeCode":"driving_licence"
+        },
+        {
+            "docTypeName":"Passport",
+            "docTypeCode":"passport"
+        }
+    ]
+    },
+    {
+    "countryName":"Australia",
+    "countryCode":"AUS",
+    "supportedDocuments":[
+        {
+            "docTypeName":"Driving Licence",
+            "docTypeCode":"driving_licence"
+        },
+        {
+            "docTypeName":"Passport",
+            "docTypeCode":"passport"
+        }
+    ]
+    },
+    {
+    "countryName":"Austria",
+    "countryCode":"AUT",
+    "supportedDocuments":[
+        {
+            "docTypeName":"Driving Licence",
+            "docTypeCode":"driving_licence"
+        },
+        {
+            "docTypeName":"National Identity Card",
+            "docTypeCode":"national_identity_card"
+        },
+        {
+            "docTypeName":"Passport",
+            "docTypeCode":"passport"
+        },
+        {
+            "docTypeName":"Residence Permit",
+            "docTypeCode":"residence_permit"
+        },
+        {
+            "docTypeName":"Visa",
+            "docTypeCode":"visa"
+        }
+    ]
+    },
+    {
+    "countryName":"Azerbaijan",
+    "countryCode":"AZE",
+    "supportedDocuments":[
+        {
+            "docTypeName":"Driving Licence",
+            "docTypeCode":"driving_licence"
+        },
+        {
+            "docTypeName":"National Identity Card",
+            "docTypeCode":"national_identity_card"
+        },
+        {
+            "docTypeName":"Passport",
+            "docTypeCode":"passport"
+        }
+    ]
+    },
+    {
+    "countryName":"Bahamas",
+    "countryCode":"BHS",
+    "supportedDocuments":[
+        {
+            "docTypeName":"Driving Licence",
+            "docTypeCode":"driving_licence"
+        },
+        {
+            "docTypeName":"Passport",
+            "docTypeCode":"passport"
+        }
+    ]
+    },
+    {
+    "countryName":"Bahrain",
+    "countryCode":"BHR",
+    "supportedDocuments":[
+        {
+            "docTypeName":"National Identity Card",
+            "docTypeCode":"national_identity_card"
+        },
+        {
+            "docTypeName":"Passport",
+            "docTypeCode":"passport"
+        }
+    ]
+    },
+    {
+    "countryName":"Bangladesh",
+    "countryCode":"BGD",
+    "supportedDocuments":[
+        {
+            "docTypeName":"Driving Licence",
+            "docTypeCode":"driving_licence"
+        },
+        {
+            "docTypeName":"National Identity Card",
+            "docTypeCode":"national_identity_card"
+        },
+        {
+            "docTypeName":"Passport",
+            "docTypeCode":"passport"
+        }
+    ]
+    },
+    {
+    "countryName":"Barbados",
+    "countryCode":"BRB",
+    "supportedDocuments":[
+        {
+            "docTypeName":"Driving Licence",
+            "docTypeCode":"driving_licence"
+        },
+        {
+            "docTypeName":"Passport",
+            "docTypeCode":"passport"
+        }
+    ]
+    },
+    {
+    "countryName":"Belarus",
+    "countryCode":"BLR",
+    "supportedDocuments":[
+        {
+            "docTypeName":"Driving Licence",
+            "docTypeCode":"driving_licence"
+        },
+        {
+            "docTypeName":"Passport",
+            "docTypeCode":"passport"
+        }
+    ]
+    },
+    {
+    "countryName":"Belgium",
+    "countryCode":"BEL",
+    "supportedDocuments":[
+        {
+            "docTypeName":"Driving Licence",
+            "docTypeCode":"driving_licence"
+        },
+        {
+            "docTypeName":"National Identity Card",
+            "docTypeCode":"national_identity_card"
+        },
+        {
+            "docTypeName":"Passport",
+            "docTypeCode":"passport"
+        },
+        {
+            "docTypeName":"Residence Permit",
+            "docTypeCode":"residence_permit"
+        },
+        {
+            "docTypeName":"Visa",
+            "docTypeCode":"visa"
+        }
+    ]
+    },
+    {
+    "countryName":"Belize",
+    "countryCode":"BLZ",
+    "supportedDocuments":[
+        {
+            "docTypeName":"Passport",
+            "docTypeCode":"passport"
+        }
+    ]
+    },
+    {
+    "countryName":"Benin",
+    "countryCode":"BEN",
+    "supportedDocuments":[
+        {
+            "docTypeName":"Passport",
+            "docTypeCode":"passport"
+        }
+    ]
+    },
+    {
+    "countryName":"Bermuda",
+    "countryCode":"BMU",
+    "supportedDocuments":[
+        {
+            "docTypeName":"Driving Licence",
+            "docTypeCode":"driving_licence"
+        },
+        {
+            "docTypeName":"Passport",
+            "docTypeCode":"passport"
+        }
+    ]
+    },
+    {
+    "countryName":"Bhutan",
+    "countryCode":"BTN",
+    "supportedDocuments":[
+        {
+            "docTypeName":"Passport",
+            "docTypeCode":"passport"
+        }
+    ]
+    },
+    {
+    "countryName":"Bolivia",
+    "countryCode":"BOL",
+    "supportedDocuments":[
+        {
+            "docTypeName":"Driving Licence",
+            "docTypeCode":"driving_licence"
+        },
+        {
+            "docTypeName":"National Identity Card",
+            "docTypeCode":"national_identity_card"
+        },
+        {
+            "docTypeName":"Passport",
+            "docTypeCode":"passport"
+        }
+    ]
+    },
+    {
+    "countryName":"Bosnia and Herzegovina",
+    "countryCode":"BIH",
+    "supportedDocuments":[
+        {
+            "docTypeName":"Driving Licence",
+            "docTypeCode":"driving_licence"
+        },
+        {
+            "docTypeName":"National Identity Card",
+            "docTypeCode":"national_identity_card"
+        },
+        {
+            "docTypeName":"Passport",
+            "docTypeCode":"passport"
+        }
+    ]
+    },
+    {
+    "countryName":"Botswana",
+    "countryCode":"BWA",
+    "supportedDocuments":[
+        {
+            "docTypeName":"Driving Licence",
+            "docTypeCode":"driving_licence"
+        },
+        {
+            "docTypeName":"National Identity Card",
+            "docTypeCode":"national_identity_card"
+        },
+        {
+            "docTypeName":"Passport",
+            "docTypeCode":"passport"
+        }
+    ]
+    },
+    {
+    "countryName":"Brazil",
+    "countryCode":"BRA",
+    "supportedDocuments":[
+        {
+            "docTypeName":"Driving Licence",
+            "docTypeCode":"driving_licence"
+        },
+        {
+            "docTypeName":"National Identity Card (RG Card)",
+            "docTypeCode":"national_identity_card"
+        },
+        {
+            "docTypeName":"Passport",
+            "docTypeCode":"passport"
+        }
+    ]
+    },
+    {
+    "countryName":"Brunei Darussalam",
+    "countryCode":"BRN",
+    "supportedDocuments":[
+        {
+            "docTypeName":"Driving Licence",
+            "docTypeCode":"driving_licence"
+        },
+        {
+            "docTypeName":"National Identity Card",
+            "docTypeCode":"national_identity_card"
+        },
+        {
+            "docTypeName":"Passport",
+            "docTypeCode":"passport"
+        }
+    ]
+    },
+    {
+    "countryName":"Bulgaria",
+    "countryCode":"BGR",
+    "supportedDocuments":[
+        {
+            "docTypeName":"Driving Licence",
+            "docTypeCode":"driving_licence"
+        },
+        {
+            "docTypeName":"National Identity Card",
+            "docTypeCode":"national_identity_card"
+        },
+        {
+            "docTypeName":"Passport",
+            "docTypeCode":"passport"
+        },
+        {
+            "docTypeName":"Residence Permit",
+            "docTypeCode":"residence_permit"
+        }
+    ]
+    },
+    {
+    "countryName":"Burkina Faso",
+    "countryCode":"BFA",
+    "supportedDocuments":[
+        {
+            "docTypeName":"Passport",
+            "docTypeCode":"passport"
+        }
+    ]
+    },
+    {
+    "countryName":"Burundi",
+    "countryCode":"BDI",
+    "supportedDocuments":[
+        {
+            "docTypeName":"Passport",
+            "docTypeCode":"passport"
+        }
+    ]
+    },
+    {
+    "countryName":"Cambodia",
+    "countryCode":"KHM",
+    "supportedDocuments":[
+        {
+            "docTypeName":"Passport",
+            "docTypeCode":"passport"
+        }
+    ]
+    },
+    {
+    "countryName":"Cameroon",
+    "countryCode":"CMR",
+    "supportedDocuments":[
+        {
+            "docTypeName":"Driving Licence",
+            "docTypeCode":"driving_licence"
+        },
+        {
+            "docTypeName":"National Identity Card",
+            "docTypeCode":"national_identity_card"
+        },
+        {
+            "docTypeName":"Passport",
+            "docTypeCode":"passport"
+        }
+    ]
+    },
+    {
+    "countryName":"Canada",
+    "countryCode":"CAN",
+    "supportedDocuments":[
+        {
+            "docTypeName":"Driving Licence",
+            "docTypeCode":"driving_licence"
+        },
+        {
+            "docTypeName":"National Health Insurance Card",
+            "docTypeCode":"national_insurance_card"
+        },
+        {
+            "docTypeName":"National Identity Card",
+            "docTypeCode":"national_identity_card"
+        },
+        {
+            "docTypeName":"Passport",
+            "docTypeCode":"passport"
+        },
+        {
+            "docTypeName":"Residence Permit",
+            "docTypeCode":"residence_permit"
+        },
+        {
+            "docTypeName":"Visa",
+            "docTypeCode":"visa"
+        }
+    ]
+    },
+    {
+    "countryName":"Cape Verde",
+    "countryCode":"CPV",
+    "supportedDocuments":[
+        {
+            "docTypeName":"Passport",
+            "docTypeCode":"passport"
+        }
+    ]
+    },
+    {
+    "countryName":"Cayman Islands",
+    "countryCode":"CYM",
+    "supportedDocuments":[
+        {
+            "docTypeName":"Passport",
+            "docTypeCode":"passport"
+        }
+    ]
+    },
+    {
+    "countryName":"Central African Republic",
+    "countryCode":"CAF",
+    "supportedDocuments":[
+        {
+            "docTypeName":"Passport",
+            "docTypeCode":"passport"
+        }
+    ]
+    },
+    {
+    "countryName":"Chad",
+    "countryCode":"TCD",
+    "supportedDocuments":[
+        {
+            "docTypeName":"Passport",
+            "docTypeCode":"passport"
+        }
+    ]
+    },
+    {
+    "countryName":"Chile",
+    "countryCode":"CHL",
+    "supportedDocuments":[
+        {
+            "docTypeName":"Driving Licence",
+            "docTypeCode":"driving_licence"
+        },
+        {
+            "docTypeName":"National Identity Card",
+            "docTypeCode":"national_identity_card"
+        },
+        {
+            "docTypeName":"Passport",
+            "docTypeCode":"passport"
+        }
+    ]
+    },
+    {
+    "countryName":"China",
+    "countryCode":"CHN",
+    "supportedDocuments":[
+        {
+            "docTypeName":"Driving Licence",
+            "docTypeCode":"driving_licence"
+        },
+        {
+            "docTypeName":"National Identity Card",
+            "docTypeCode":"national_identity_card"
+        },
+        {
+            "docTypeName":"Passport",
+            "docTypeCode":"passport"
+        }
+    ]
+    },
+    {
+    "countryName":"Colombia",
+    "countryCode":"COL",
+    "supportedDocuments":[
+        {
+            "docTypeName":"Driving Licence",
+            "docTypeCode":"driving_licence"
+        },
+        {
+            "docTypeName":"National Identity Card",
+            "docTypeCode":"national_identity_card"
+        },
+        {
+            "docTypeName":"Passport",
+            "docTypeCode":"passport"
+        },
+        {
+            "docTypeName":"Residence Permit",
+            "docTypeCode":"residence_permit"
+        }
+    ]
+    },
+    {
+    "countryName":"Comoros",
+    "countryCode":"COM",
+    "supportedDocuments":[
+        {
+            "docTypeName":"Passport",
+            "docTypeCode":"passport"
+        }
+    ]
+    },
+    {
+    "countryName":"Congo, Republic of",
+    "countryCode":"COG",
+    "supportedDocuments":[
+        {
+            "docTypeName":"Passport",
+            "docTypeCode":"passport"
+        }
+    ]
+    },
+    {
+    "countryName":"Congo, The Democratic Republic of (DRC)",
+    "countryCode":"COD",
+    "supportedDocuments":[
+        {
+            "docTypeName":"Passport",
+            "docTypeCode":"passport"
+        }
+    ]
+    },
+    {
+    "countryName":"Costa Rica",
+    "countryCode":"CRI",
+    "supportedDocuments":[
+        {
+            "docTypeName":"Driving Licence",
+            "docTypeCode":"driving_licence"
+        },
+        {
+            "docTypeName":"National Identity Card",
+            "docTypeCode":"national_identity_card"
+        },
+        {
+            "docTypeName":"Passport",
+            "docTypeCode":"passport"
+        },
+        {
+            "docTypeName":"Residence Permit",
+            "docTypeCode":"residence_permit"
+        }
+    ]
+    },
+    {
+    "countryName":"Côte D'Ivoire",
+    "countryCode":"CIV",
+    "supportedDocuments":[
+        {
+            "docTypeName":"Driving Licence",
+            "docTypeCode":"driving_licence"
+        },
+        {
+            "docTypeName":"National Identity Card",
+            "docTypeCode":"national_identity_card"
+        },
+        {
+            "docTypeName":"Passport",
+            "docTypeCode":"passport"
+        }
+    ]
+    },
+    {
+    "countryName":"Croatia",
+    "countryCode":"HRV",
+    "supportedDocuments":[
+        {
+            "docTypeName":"Driving Licence",
+            "docTypeCode":"driving_licence"
+        },
+        {
+            "docTypeName":"National Identity Card",
+            "docTypeCode":"national_identity_card"
+        },
+        {
+            "docTypeName":"Passport",
+            "docTypeCode":"passport"
+        },
+        {
+            "docTypeName":"Residence Permit",
+            "docTypeCode":"residence_permit"
+        }
+    ]
+    },
+    {
+    "countryName":"Cuba",
+    "countryCode":"CUB",
+    "supportedDocuments":[
+        {
+            "docTypeName":"Passport",
+            "docTypeCode":"passport"
+        }
+    ]
+    },
+    {
+    "countryName":"Cyprus",
+    "countryCode":"CYP",
+    "supportedDocuments":[
+        {
+            "docTypeName":"Driving Licence",
+            "docTypeCode":"driving_licence"
+        },
+        {
+            "docTypeName":"National Identity Card",
+            "docTypeCode":"national_identity_card"
+        },
+        {
+            "docTypeName":"Passport",
+            "docTypeCode":"passport"
+        },
+        {
+            "docTypeName":"Residence Permit",
+            "docTypeCode":"residence_permit"
+        }
+    ]
+    },
+    {
+    "countryName":"Czech Republic",
+    "countryCode":"CZE",
+    "supportedDocuments":[
+        {
+            "docTypeName":"Driving Licence",
+            "docTypeCode":"driving_licence"
+        },
+        {
+            "docTypeName":"National Identity Card",
+            "docTypeCode":"national_identity_card"
+        },
+        {
+            "docTypeName":"Passport",
+            "docTypeCode":"passport"
+        },
+        {
+            "docTypeName":"Residence Permit",
+            "docTypeCode":"residence_permit"
+        },
+        {
+            "docTypeName":"Visa",
+            "docTypeCode":"visa"
+        }
+    ]
+    },
+    {
+    "countryName":"Denmark",
+    "countryCode":"DNK",
+    "supportedDocuments":[
+        {
+            "docTypeName":"Driving Licence",
+            "docTypeCode":"driving_licence"
+        },
+        {
+            "docTypeName":"Passport",
+            "docTypeCode":"passport"
+        },
+        {
+            "docTypeName":"Residence Permit",
+            "docTypeCode":"residence_permit"
+        },
+        {
+            "docTypeName":"Visa",
+            "docTypeCode":"visa"
+        }
+    ]
+    },
+    {
+    "countryName":"Djibouti",
+    "countryCode":"DJI",
+    "supportedDocuments":[
+        {
+            "docTypeName":"Passport",
+            "docTypeCode":"passport"
+        }
+    ]
+    },
+    {
+    "countryName":"Dominica",
+    "countryCode":"DMA",
+    "supportedDocuments":[
+        {
+            "docTypeName":"Passport",
+            "docTypeCode":"passport"
+        }
+    ]
+    },
+    {
+    "countryName":"Dominican Republic",
+    "countryCode":"DOM",
+    "supportedDocuments":[
+        {
+            "docTypeName":"Driving Licence",
+            "docTypeCode":"driving_licence"
+        },
+        {
+            "docTypeName":"National Identity Card",
+            "docTypeCode":"national_identity_card"
+        },
+        {
+            "docTypeName":"Passport",
+            "docTypeCode":"passport"
+        }
+    ]
+    },
+    {
+    "countryName":"Ecuador",
+    "countryCode":"ECU",
+    "supportedDocuments":[
+        {
+            "docTypeName":"Driving Licence",
+            "docTypeCode":"driving_licence"
+        },
+        {
+            "docTypeName":"National Identity Card",
+            "docTypeCode":"national_identity_card"
+        },
+        {
+            "docTypeName":"Passport",
+            "docTypeCode":"passport"
+        }
+    ]
+    },
+    {
+    "countryName":"Egypt",
+    "countryCode":"EGY",
+    "supportedDocuments":[
+        {
+            "docTypeName":"Driving Licence",
+            "docTypeCode":"driving_licence"
+        },
+        {
+            "docTypeName":"Passport",
+            "docTypeCode":"passport"
+        }
+    ]
+    },
+    {
+    "countryName":"El Salvador",
+    "countryCode":"SLV",
+    "supportedDocuments":[
+        {
+            "docTypeName":"Driving Licence",
+            "docTypeCode":"driving_licence"
+        },
+        {
+            "docTypeName":"National Identity Card",
+            "docTypeCode":"national_identity_card"
+        },
+        {
+            "docTypeName":"Passport",
+            "docTypeCode":"passport"
+        }
+    ]
+    },
+    {
+    "countryName":"Equatorial Guinea",
+    "countryCode":"GNQ",
+    "supportedDocuments":[
+        {
+            "docTypeName":"Passport",
+            "docTypeCode":"passport"
+        }
+    ]
+    },
+    {
+    "countryName":"Eritrea",
+    "countryCode":"ERI",
+    "supportedDocuments":[
+        {
+            "docTypeName":"Passport",
+            "docTypeCode":"passport"
+        }
+    ]
+    },
+    {
+    "countryName":"Estonia",
+    "countryCode":"EST",
+    "supportedDocuments":[
+        {
+            "docTypeName":"Driving Licence",
+            "docTypeCode":"driving_licence"
+        },
+        {
+            "docTypeName":"National Identity Card",
+            "docTypeCode":"national_identity_card"
+        },
+        {
+            "docTypeName":"Passport",
+            "docTypeCode":"passport"
+        },
+        {
+            "docTypeName":"Residence Permit",
+            "docTypeCode":"residence_permit"
+        },
+        {
+            "docTypeName":"Visa",
+            "docTypeCode":"visa"
+        }
+    ]
+    },
+    {
+    "countryName":"Ethiopia",
+    "countryCode":"ETH",
+    "supportedDocuments":[
+        {
+            "docTypeName":"National Identity Card",
+            "docTypeCode":"national_identity_card"
+        },
+        {
+            "docTypeName":"Passport",
+            "docTypeCode":"passport"
+        },
+        {
+            "docTypeName":"Residence Permit",
+            "docTypeCode":"residence_permit"
+        }
+    ]
+    },
+    {
+    "countryName":"Faroe Islands",
+    "countryCode":"FRO",
+    "supportedDocuments":[
+        {
+            "docTypeName":"Driving Licence",
+            "docTypeCode":"driving_licence"
+        },
+        {
+            "docTypeName":"Passport",
+            "docTypeCode":"passport"
+        }
+    ]
+    },
+    {
+    "countryName":"Fiji",
+    "countryCode":"FJI",
+    "supportedDocuments":[
+        {
+            "docTypeName":"Driving Licence",
+            "docTypeCode":"driving_licence"
+        },
+        {
+            "docTypeName":"Passport",
+            "docTypeCode":"passport"
+        }
+    ]
+    },
+    {
+    "countryName":"Finland",
+    "countryCode":"FIN",
+    "supportedDocuments":[
+        {
+            "docTypeName":"Driving Licence",
+            "docTypeCode":"driving_licence"
+        },
+        {
+            "docTypeName":"National Identity Card",
+            "docTypeCode":"national_identity_card"
+        },
+        {
+            "docTypeName":"Passport",
+            "docTypeCode":"passport"
+        },
+        {
+            "docTypeName":"Residence Permit",
+            "docTypeCode":"residence_permit"
+        },
+        {
+            "docTypeName":"Visa",
+            "docTypeCode":"visa"
+        }
+    ]
+    },
+    {
+    "countryName":"France",
+    "countryCode":"FRA",
+    "supportedDocuments":[
+        {
+            "docTypeName":"Driving Licence",
+            "docTypeCode":"driving_licence"
+        },
+        {
+            "docTypeName":"National Health Insurance Card",
+            "docTypeCode":"national_insurance_card"
+        },
+        {
+            "docTypeName":"National Identity Card",
+            "docTypeCode":"national_identity_card"
+        },
+        {
+            "docTypeName":"Passport",
+            "docTypeCode":"passport"
+        },
+        {
+            "docTypeName":"Residence Permit",
+            "docTypeCode":"residence_permit"
+        },
+        {
+            "docTypeName":"Visa",
+            "docTypeCode":"visa"
+        }
+    ]
+    },
+    {
+    "countryName":"French Polynesia",
+    "countryCode":"PYF",
+    "supportedDocuments":[
+        {
+            "docTypeName":"Driving Licence",
+            "docTypeCode":"driving_licence"
+        }
+    ]
+    },
+    {
+    "countryName":"Gabon",
+    "countryCode":"GAB",
+    "supportedDocuments":[
+        {
+            "docTypeName":"Passport",
+            "docTypeCode":"passport"
+        }
+    ]
+    },
+    {
+    "countryName":"Gambia",
+    "countryCode":"GMB",
+    "supportedDocuments":[
+        {
+            "docTypeName":"Passport",
+            "docTypeCode":"passport"
+        }
+    ]
+    },
+    {
+    "countryName":"Georgia",
+    "countryCode":"GEO",
+    "supportedDocuments":[
+        {
+            "docTypeName":"Driving Licence",
+            "docTypeCode":"driving_licence"
+        },
+        {
+            "docTypeName":"National Identity Card",
+            "docTypeCode":"national_identity_card"
+        },
+        {
+            "docTypeName":"Passport",
+            "docTypeCode":"passport"
+        }
+    ]
+    },
+    {
+    "countryName":"Germany",
+    "countryCode":"DEU",
+    "supportedDocuments":[
+        {
+            "docTypeName":"Driving Licence",
+            "docTypeCode":"driving_licence"
+        },
+        {
+            "docTypeName":"National Identity Card",
+            "docTypeCode":"national_identity_card"
+        },
+        {
+            "docTypeName":"Passport",
+            "docTypeCode":"passport"
+        },
+        {
+            "docTypeName":"Residence Permit",
+            "docTypeCode":"residence_permit"
+        },
+        {
+            "docTypeName":"Visa",
+            "docTypeCode":"visa"
+        }
+    ]
+    },
+    {
+    "countryName":"Ghana",
+    "countryCode":"GHA",
+    "supportedDocuments":[
+        {
+            "docTypeName":"Driving Licence",
+            "docTypeCode":"driving_licence"
+        },
+        {
+            "docTypeName":"National Identity Card",
+            "docTypeCode":"national_identity_card"
+        },
+        {
+            "docTypeName":"Passport",
+            "docTypeCode":"passport"
+        }
+    ]
+    },
+    {
+    "countryName":"Gibraltar",
+    "countryCode":"GIB",
+    "supportedDocuments":[
+        {
+            "docTypeName":"Driving Licence",
+            "docTypeCode":"driving_licence"
+        },
+        {
+            "docTypeName":"National Identity Card",
+            "docTypeCode":"national_identity_card"
+        },
+        {
+            "docTypeName":"Passport",
+            "docTypeCode":"passport"
+        }
+    ]
+    },
+    {
+    "countryName":"Greece",
+    "countryCode":"GRC",
+    "supportedDocuments":[
+        {
+            "docTypeName":"Driving Licence",
+            "docTypeCode":"driving_licence"
+        },
+        {
+            "docTypeName":"National Identity Card",
+            "docTypeCode":"national_identity_card"
+        },
+        {
+            "docTypeName":"Passport",
+            "docTypeCode":"passport"
+        },
+        {
+            "docTypeName":"Residence Permit",
+            "docTypeCode":"residence_permit"
+        },
+        {
+            "docTypeName":"Visa",
+            "docTypeCode":"visa"
+        }
+    ]
+    },
+    {
+    "countryName":"Grenada",
+    "countryCode":"GRD",
+    "supportedDocuments":[
+        {
+            "docTypeName":"Passport",
+            "docTypeCode":"passport"
+        }
+    ]
+    },
+    {
+    "countryName":"Guatemala",
+    "countryCode":"GTM",
+    "supportedDocuments":[
+        {
+            "docTypeName":"Driving Licence",
+            "docTypeCode":"driving_licence"
+        },
+        {
+            "docTypeName":"National Identity Card",
+            "docTypeCode":"national_identity_card"
+        },
+        {
+            "docTypeName":"Passport",
+            "docTypeCode":"passport"
+        }
+    ]
+    },
+    {
+    "countryName":"Guernsey",
+    "countryCode":"GGY",
+    "supportedDocuments":[
+        {
+            "docTypeName":"Driving Licence",
+            "docTypeCode":"driving_licence"
+        },
+        {
+            "docTypeName":"Passport",
+            "docTypeCode":"passport"
+        }
+    ]
+    },
+    {
+    "countryName":"Guinea",
+    "countryCode":"GIN",
+    "supportedDocuments":[
+        {
+            "docTypeName":"Passport",
+            "docTypeCode":"passport"
+        }
+    ]
+    },
+    {
+    "countryName":"Guinea-Bissau",
+    "countryCode":"GNB",
+    "supportedDocuments":[
+        {
+            "docTypeName":"Passport",
+            "docTypeCode":"passport"
+        }
+    ]
+    },
+    {
+    "countryName":"Guyana",
+    "countryCode":"GUY",
+    "supportedDocuments":[
+        {
+            "docTypeName":"Passport",
+            "docTypeCode":"passport"
+        }
+    ]
+    },
+    {
+    "countryName":"Haiti",
+    "countryCode":"HTI",
+    "supportedDocuments":[
+        {
+            "docTypeName":"Passport",
+            "docTypeCode":"passport"
+        }
+    ]
+    },
+    {
+    "countryName":"Holy See (Vatican City State)",
+    "countryCode":"VAT",
+    "supportedDocuments":[
+        {
+            "docTypeName":"Passport",
+            "docTypeCode":"passport"
+        }
+    ]
+    },
+    {
+    "countryName":"Honduras",
+    "countryCode":"HND",
+    "supportedDocuments":[
+        {
+            "docTypeName":"Passport",
+            "docTypeCode":"passport"
+        }
+    ]
+    },
+    {
+    "countryName":"Hong Kong",
+    "countryCode":"HKG",
+    "supportedDocuments":[
+        {
+            "docTypeName":"Driving Licence",
+            "docTypeCode":"driving_licence"
+        },
+        {
+            "docTypeName":"National Identity Card (HKID)",
+            "docTypeCode":"national_identity_card"
+        },
+        {
+            "docTypeName":"Passport",
+            "docTypeCode":"passport"
+        }
+    ]
+    },
+    {
+    "countryName":"Hungary",
+    "countryCode":"HUN",
+    "supportedDocuments":[
+        {
+            "docTypeName":"Driving Licence",
+            "docTypeCode":"driving_licence"
+        },
+        {
+            "docTypeName":"National Identity Card",
+            "docTypeCode":"national_identity_card"
+        },
+        {
+            "docTypeName":"Passport",
+            "docTypeCode":"passport"
+        },
+        {
+            "docTypeName":"Residence Permit",
+            "docTypeCode":"residence_permit"
+        },
+        {
+            "docTypeName":"Visa",
+            "docTypeCode":"visa"
+        }
+    ]
+    },
+    {
+    "countryName":"Iceland",
+    "countryCode":"ISL",
+    "supportedDocuments":[
+        {
+            "docTypeName":"Driving Licence",
+            "docTypeCode":"driving_licence"
+        },
+        {
+            "docTypeName":"National Identity Card",
+            "docTypeCode":"national_identity_card"
+        },
+        {
+            "docTypeName":"Passport",
+            "docTypeCode":"passport"
+        },
+        {
+            "docTypeName":"Visa",
+            "docTypeCode":"visa"
+        }
+    ]
+    },
+    {
+    "countryName":"India",
+    "countryCode":"IND",
+    "supportedDocuments":[
+        {
+            "docTypeName":"National Identity Card (Aadhar Card)",
+            "docTypeCode":"national_identity_card"
+        },
+        {
+            "docTypeName":"Passport",
+            "docTypeCode":"passport"
+        },
+        {
+            "docTypeName":"Tax Id (PAN Card)",
+            "docTypeCode":"tax_id"
+        },
+        {
+            "docTypeName":"Voter Id",
+            "docTypeCode":"voter_id"
+        }
+    ]
+    },
+    {
+    "countryName":"Indonesia",
+    "countryCode":"IDN",
+    "supportedDocuments":[
+        {
+            "docTypeName":"Driving Licence",
+            "docTypeCode":"driving_licence"
+        },
+        {
+            "docTypeName":"National Identity Card",
+            "docTypeCode":"national_identity_card"
+        },
+        {
+            "docTypeName":"Passport",
+            "docTypeCode":"passport"
+        }
+    ]
+    },
+    {
+    "countryName":"Iran, Islamic Republic Of",
+    "countryCode":"IRN",
+    "supportedDocuments":[
+        {
+            "docTypeName":"Passport",
+            "docTypeCode":"passport"
+        }
+    ]
+    },
+    {
+    "countryName":"Iraq",
+    "countryCode":"IRQ",
+    "supportedDocuments":[
+        {
+            "docTypeName":"Passport",
+            "docTypeCode":"passport"
+        }
+    ]
+    },
+    {
+    "countryName":"Ireland",
+    "countryCode":"IRL",
+    "supportedDocuments":[
+        {
+            "docTypeName":"Birth Certificate*",
+            "docTypeCode":"birth_certificate"
+        },
+        {
+            "docTypeName":"Driving Licence",
+            "docTypeCode":"driving_licence"
+        },
+        {
+            "docTypeName":"Passport",
+            "docTypeCode":"passport"
+        },
+        {
+            "docTypeName":"Passport Card",
+            "docTypeCode":"passport_card"
+        },
+        {
+            "docTypeName":"Residence Permit",
+            "docTypeCode":"residence_permit"
+        },
+        {
+            "docTypeName":"Visa",
+            "docTypeCode":"visa"
+        }
+    ]
+    },
+    {
+    "countryName":"Isle of Man",
+    "countryCode":"IMN",
+    "supportedDocuments":[
+        {
+            "docTypeName":"Driving Licence",
+            "docTypeCode":"driving_licence"
+        },
+        {
+            "docTypeName":"Passport",
+            "docTypeCode":"passport"
+        }
+    ]
+    },
+    {
+    "countryName":"Israel",
+    "countryCode":"ISR",
+    "supportedDocuments":[
+        {
+            "docTypeName":"Driving Licence",
+            "docTypeCode":"driving_licence"
+        },
+        {
+            "docTypeName":"Passport",
+            "docTypeCode":"passport"
+        }
+    ]
+    },
+    {
+    "countryName":"Italy",
+    "countryCode":"ITA",
+    "supportedDocuments":[
+        {
+            "docTypeName":"Driving Licence",
+            "docTypeCode":"driving_licence"
+        },
+        {
+            "docTypeName":"National Identity Card",
+            "docTypeCode":"national_identity_card"
+        },
+        {
+            "docTypeName":"Passport",
+            "docTypeCode":"passport"
+        },
+        {
+            "docTypeName":"Residence Permit",
+            "docTypeCode":"residence_permit"
+        },
+        {
+            "docTypeName":"Visa",
+            "docTypeCode":"visa"
+        }
+    ]
+    },
+    {
+    "countryName":"Jamaica",
+    "countryCode":"JAM",
+    "supportedDocuments":[
+        {
+            "docTypeName":"Driving Licence",
+            "docTypeCode":"driving_licence"
+        },
+        {
+            "docTypeName":"Passport",
+            "docTypeCode":"passport"
+        }
+    ]
+    },
+    {
+    "countryName":"Japan",
+    "countryCode":"JPN",
+    "supportedDocuments":[
+        {
+            "docTypeName":"Driving Licence",
+            "docTypeCode":"driving_licence"
+        },
+        {
+            "docTypeName":"National Identity Card (Individual Number Card)",
+            "docTypeCode":"national_identity_card"
+        },
+        {
+            "docTypeName":"Passport",
+            "docTypeCode":"passport"
+        },
+        {
+            "docTypeName":"Postal Identity Card (Juminhyo)",
+            "docTypeCode":"postal_id_card"
+        },
+        {
+            "docTypeName":"Residence Permit",
+            "docTypeCode":"residence_permit"
+        },
+        {
+            "docTypeName":"Social Security Card (Individual Number Paper Slip)",
+            "docTypeCode":"social_security_card"
+        }
+    ]
+    },
+    {
+    "countryName":"Jersey",
+    "countryCode":"JEY",
+    "supportedDocuments":[
+        {
+            "docTypeName":"Driving Licence",
+            "docTypeCode":"driving_licence"
+        },
+        {
+            "docTypeName":"Passport",
+            "docTypeCode":"passport"
+        }
+    ]
+    },
+    {
+    "countryName":"Jordan",
+    "countryCode":"JOR",
+    "supportedDocuments":[
+        {
+            "docTypeName":"Driving Licence",
+            "docTypeCode":"driving_licence"
+        },
+        {
+            "docTypeName":"National Identity Card",
+            "docTypeCode":"national_identity_card"
+        },
+        {
+            "docTypeName":"Passport",
+            "docTypeCode":"passport"
+        }
+    ]
+    },
+    {
+    "countryName":"Kazakhstan",
+    "countryCode":"KAZ",
+    "supportedDocuments":[
+        {
+            "docTypeName":"Passport",
+            "docTypeCode":"passport"
+        }
+    ]
+    },
+    {
+    "countryName":"Kenya",
+    "countryCode":"KEN",
+    "supportedDocuments":[
+        {
+            "docTypeName":"Driving Licence",
+            "docTypeCode":"driving_licence"
+        },
+        {
+            "docTypeName":"National Identity Card",
+            "docTypeCode":"national_identity_card"
+        },
+        {
+            "docTypeName":"Passport",
+            "docTypeCode":"passport"
+        }
+    ]
+    },
+    {
+    "countryName":"Kiribati",
+    "countryCode":"KIR",
+    "supportedDocuments":[
+        {
+            "docTypeName":"Passport",
+            "docTypeCode":"passport"
+        }
+    ]
+    },
+    {
+    "countryName":"Korea, Democratic People's Republic of (North Korea)",
+    "countryCode":"PRK",
+    "supportedDocuments":[
+        {
+            "docTypeName":"Passport",
+            "docTypeCode":"passport"
+        }
+    ]
+    },
+    {
+    "countryName":"Korea, Republic of (South Korea)",
+    "countryCode":"KOR",
+    "supportedDocuments":[
+        {
+            "docTypeName":"Driving Licence",
+            "docTypeCode":"driving_licence"
+        },
+        {
+            "docTypeName":"National Identity Card",
+            "docTypeCode":"national_identity_card"
+        },
+        {
+            "docTypeName":"Passport",
+            "docTypeCode":"passport"
+        }
+    ]
+    },
+    {
+    "countryName":"Kosovo",
+    "countryCode":"RKS",
+    "supportedDocuments":[
+        {
+            "docTypeName":"Driving Licence",
+            "docTypeCode":"driving_licence"
+        },
+        {
+            "docTypeName":"National Identity Card",
+            "docTypeCode":"national_identity_card"
+        },
+        {
+            "docTypeName":"Passport",
+            "docTypeCode":"passport"
+        }
+    ]
+    },
+    {
+    "countryName":"Kuwait",
+    "countryCode":"KWT",
+    "supportedDocuments":[
+        {
+            "docTypeName":"Driving Licence",
+            "docTypeCode":"driving_licence"
+        },
+        {
+            "docTypeName":"National Identity Card",
+            "docTypeCode":"national_identity_card"
+        },
+        {
+            "docTypeName":"Passport",
+            "docTypeCode":"passport"
+        }
+    ]
+    },
+    {
+    "countryName":"Kyrgyzstan",
+    "countryCode":"KGZ",
+    "supportedDocuments":[
+        {
+            "docTypeName":"Passport",
+            "docTypeCode":"passport"
+        }
+    ]
+    },
+    {
+    "countryName":"Lao People's Democratic Republic",
+    "countryCode":"LAO",
+    "supportedDocuments":[
+        {
+            "docTypeName":"Passport",
+            "docTypeCode":"passport"
+        }
+    ]
+    },
+    {
+    "countryName":"Latvia",
+    "countryCode":"LVA",
+    "supportedDocuments":[
+        {
+            "docTypeName":"Driving Licence",
+            "docTypeCode":"driving_licence"
+        },
+        {
+            "docTypeName":"National Identity Card",
+            "docTypeCode":"national_identity_card"
+        },
+        {
+            "docTypeName":"Passport",
+            "docTypeCode":"passport"
+        },
+        {
+            "docTypeName":"Residence Permit",
+            "docTypeCode":"residence_permit"
+        },
+        {
+            "docTypeName":"Visa",
+            "docTypeCode":"visa"
+        }
+    ]
+    },
+    {
+    "countryName":"Lebanon",
+    "countryCode":"LBN",
+    "supportedDocuments":[
+        {
+            "docTypeName":"Passport",
+            "docTypeCode":"passport"
+        }
+    ]
+    },
+    {
+    "countryName":"Lesotho",
+    "countryCode":"LSO",
+    "supportedDocuments":[
+        {
+            "docTypeName":"National Identity Card",
+            "docTypeCode":"national_identity_card"
+        },
+        {
+            "docTypeName":"Passport",
+            "docTypeCode":"passport"
+        }
+    ]
+    },
+    {
+    "countryName":"Liberia",
+    "countryCode":"LBR",
+    "supportedDocuments":[
+        {
+            "docTypeName":"Passport",
+            "docTypeCode":"passport"
+        }
+    ]
+    },
+    {
+    "countryName":"Libya",
+    "countryCode":"LBY",
+    "supportedDocuments":[
+        {
+            "docTypeName":"Passport",
+            "docTypeCode":"passport"
+        }
+    ]
+    },
+    {
+    "countryName":"Liechtenstein",
+    "countryCode":"LIE",
+    "supportedDocuments":[
+        {
+            "docTypeName":"Driving Licence",
+            "docTypeCode":"driving_licence"
+        },
+        {
+            "docTypeName":"National Identity Card",
+            "docTypeCode":"national_identity_card"
+        },
+        {
+            "docTypeName":"Passport",
+            "docTypeCode":"passport"
+        },
+        {
+            "docTypeName":"Residence Permit",
+            "docTypeCode":"residence_permit"
+        },
+        {
+            "docTypeName":"Visa",
+            "docTypeCode":"visa"
+        }
+    ]
+    },
+    {
+    "countryName":"Lithuania",
+    "countryCode":"LTU",
+    "supportedDocuments":[
+        {
+            "docTypeName":"Driving Licence",
+            "docTypeCode":"driving_licence"
+        },
+        {
+            "docTypeName":"National Identity Card",
+            "docTypeCode":"national_identity_card"
+        },
+        {
+            "docTypeName":"Passport",
+            "docTypeCode":"passport"
+        },
+        {
+            "docTypeName":"Residence Permit",
+            "docTypeCode":"residence_permit"
+        },
+        {
+            "docTypeName":"Visa",
+            "docTypeCode":"visa"
+        }
+    ]
+    },
+    {
+    "countryName":"Luxembourg",
+    "countryCode":"LUX",
+    "supportedDocuments":[
+        {
+            "docTypeName":"Driving Licence",
+            "docTypeCode":"driving_licence"
+        },
+        {
+            "docTypeName":"National Identity Card",
+            "docTypeCode":"national_identity_card"
+        },
+        {
+            "docTypeName":"Passport",
+            "docTypeCode":"passport"
+        },
+        {
+            "docTypeName":"Residence Permit",
+            "docTypeCode":"residence_permit"
+        },
+        {
+            "docTypeName":"Visa",
+            "docTypeCode":"visa"
+        }
+    ]
+    },
+    {
+    "countryName":"Macao",
+    "countryCode":"MAC",
+    "supportedDocuments":[
+        {
+            "docTypeName":"Driving Licence",
+            "docTypeCode":"driving_licence"
+        },
+        {
+            "docTypeName":"Residence Permit",
+            "docTypeCode":"residence_permit"
+        }
+    ]
+    },
+    {
+    "countryName":"Macedonia, the Former Yugoslav Republic Of",
+    "countryCode":"MKD",
+    "supportedDocuments":[
+        {
+            "docTypeName":"Driving Licence",
+            "docTypeCode":"driving_licence"
+        },
+        {
+            "docTypeName":"National Identity Card",
+            "docTypeCode":"national_identity_card"
+        },
+        {
+            "docTypeName":"Passport",
+            "docTypeCode":"passport"
+        },
+        {
+            "docTypeName":"Residence Permit",
+            "docTypeCode":"residence_permit"
+        }
+    ]
+    },
+    {
+    "countryName":"Madagascar",
+    "countryCode":"MDG",
+    "supportedDocuments":[
+        {
+            "docTypeName":"Passport",
+            "docTypeCode":"passport"
+        }
+    ]
+    },
+    {
+    "countryName":"Malawi",
+    "countryCode":"MWI",
+    "supportedDocuments":[
+        {
+            "docTypeName":"National Identity Card",
+            "docTypeCode":"national_identity_card"
+        },
+        {
+            "docTypeName":"Passport",
+            "docTypeCode":"passport"
+        }
+    ]
+    },
+    {
+    "countryName":"Malaysia",
+    "countryCode":"MYS",
+    "supportedDocuments":[
+        {
+            "docTypeName":"Driving Licence",
+            "docTypeCode":"driving_licence"
+        },
+        {
+            "docTypeName":"National Identity Card",
+            "docTypeCode":"national_identity_card"
+        },
+        {
+            "docTypeName":"Passport",
+            "docTypeCode":"passport"
+        },
+        {
+            "docTypeName":"Residence Permit",
+            "docTypeCode":"residence_permit"
+        }
+    ]
+    },
+    {
+    "countryName":"Maldives",
+    "countryCode":"MDV",
+    "supportedDocuments":[
+        {
+            "docTypeName":"Passport",
+            "docTypeCode":"passport"
+        }
+    ]
+    },
+    {
+    "countryName":"Mali",
+    "countryCode":"MLI",
+    "supportedDocuments":[
+        {
+            "docTypeName":"Passport",
+            "docTypeCode":"passport"
+        }
+    ]
+    },
+    {
+    "countryName":"Malta",
+    "countryCode":"MLT",
+    "supportedDocuments":[
+        {
+            "docTypeName":"Driving Licence",
+            "docTypeCode":"driving_licence"
+        },
+        {
+            "docTypeName":"National Identity Card",
+            "docTypeCode":"national_identity_card"
+        },
+        {
+            "docTypeName":"Passport",
+            "docTypeCode":"passport"
+        },
+        {
+            "docTypeName":"Residence Permit",
+            "docTypeCode":"residence_permit"
+        },
+        {
+            "docTypeName":"Visa",
+            "docTypeCode":"visa"
+        }
+    ]
+    },
+    {
+    "countryName":"Marshall Islands",
+    "countryCode":"MHL",
+    "supportedDocuments":[
+        {
+            "docTypeName":"Passport",
+            "docTypeCode":"passport"
+        }
+    ]
+    },
+    {
+    "countryName":"Mauritania",
+    "countryCode":"MRT",
+    "supportedDocuments":[
+        {
+            "docTypeName":"Passport",
+            "docTypeCode":"passport"
+        }
+    ]
+    },
+    {
+    "countryName":"Mauritius",
+    "countryCode":"MUS",
+    "supportedDocuments":[
+        {
+            "docTypeName":"National Identity Card",
+            "docTypeCode":"national_identity_card"
+        },
+        {
+            "docTypeName":"Passport",
+            "docTypeCode":"passport"
+        }
+    ]
+    },
+    {
+    "countryName":"Mexico",
+    "countryCode":"MEX",
+    "supportedDocuments":[
+        {
+            "docTypeName":"Driving Licence",
+            "docTypeCode":"driving_licence"
+        },
+        {
+            "docTypeName":"Passport",
+            "docTypeCode":"passport"
+        },
+        {
+            "docTypeName":"Voter Id",
+            "docTypeCode":"voter_id"
+        },
+        {
+            "docTypeName":"Work Permit (Matrícula Consular de Alta Seguridad)",
+            "docTypeCode":"work_permit"
+        }
+    ]
+    },
+    {
+    "countryName":"Micronesia, Federated States Of",
+    "countryCode":"FSM",
+    "supportedDocuments":[
+        {
+            "docTypeName":"Passport",
+            "docTypeCode":"passport"
+        }
+    ]
+    },
+    {
+    "countryName":"Moldova, Republic of",
+    "countryCode":"MDA",
+    "supportedDocuments":[
+        {
+            "docTypeName":"Driving Licence",
+            "docTypeCode":"driving_licence"
+        },
+        {
+            "docTypeName":"National Identity Card",
+            "docTypeCode":"national_identity_card"
+        },
+        {
+            "docTypeName":"Passport",
+            "docTypeCode":"passport"
+        },
+        {
+            "docTypeName":"Residence Permit",
+            "docTypeCode":"residence_permit"
+        }
+    ]
+    },
+    {
+    "countryName":"Monaco",
+    "countryCode":"MCO",
+    "supportedDocuments":[
+        {
+            "docTypeName":"National Identity Card",
+            "docTypeCode":"national_identity_card"
+        },
+        {
+            "docTypeName":"Passport",
+            "docTypeCode":"passport"
+        },
+        {
+            "docTypeName":"Residence Permit",
+            "docTypeCode":"residence_permit"
+        }
+    ]
+    },
+    {
+    "countryName":"Mongolia",
+    "countryCode":"MNG",
+    "supportedDocuments":[
+        {
+            "docTypeName":"Driving Licence",
+            "docTypeCode":"driving_licence"
+        },
+        {
+            "docTypeName":"Passport",
+            "docTypeCode":"passport"
+        }
+    ]
+    },
+    {
+    "countryName":"Montenegro",
+    "countryCode":"MNE",
+    "supportedDocuments":[
+        {
+            "docTypeName":"Driving Licence",
+            "docTypeCode":"driving_licence"
+        },
+        {
+            "docTypeName":"National Identity Card",
+            "docTypeCode":"national_identity_card"
+        },
+        {
+            "docTypeName":"Passport",
+            "docTypeCode":"passport"
+        }
+    ]
+    },
+    {
+    "countryName":"Montserrat",
+    "countryCode":"MSR",
+    "supportedDocuments":[
+        {
+            "docTypeName":"Passport",
+            "docTypeCode":"passport"
+        }
+    ]
+    },
+    {
+    "countryName":"Morocco",
+    "countryCode":"MAR",
+    "supportedDocuments":[
+        {
+            "docTypeName":"Driving Licence",
+            "docTypeCode":"driving_licence"
+        },
+        {
+            "docTypeName":"National Identity Card",
+            "docTypeCode":"national_identity_card"
+        },
+        {
+            "docTypeName":"Passport",
+            "docTypeCode":"passport"
+        }
+    ]
+    },
+    {
+    "countryName":"Mozambique",
+    "countryCode":"MOZ",
+    "supportedDocuments":[
+        {
+            "docTypeName":"National Identity Card",
+            "docTypeCode":"national_identity_card"
+        },
+        {
+            "docTypeName":"Passport",
+            "docTypeCode":"passport"
+        }
+    ]
+    },
+    {
+    "countryName":"Myanmar",
+    "countryCode":"MMR",
+    "supportedDocuments":[
+        {
+            "docTypeName":"Passport",
+            "docTypeCode":"passport"
+        }
+    ]
+    },
+    {
+    "countryName":"Namibia",
+    "countryCode":"NAM",
+    "supportedDocuments":[
+        {
+            "docTypeName":"Driving Licence",
+            "docTypeCode":"driving_licence"
+        },
+        {
+            "docTypeName":"National Identity Card",
+            "docTypeCode":"national_identity_card"
+        },
+        {
+            "docTypeName":"Passport",
+            "docTypeCode":"passport"
+        }
+    ]
+    },
+    {
+    "countryName":"Nauru",
+    "countryCode":"NRU",
+    "supportedDocuments":[
+        {
+            "docTypeName":"Passport",
+            "docTypeCode":"passport"
+        }
+    ]
+    },
+    {
+    "countryName":"Nepal",
+    "countryCode":"NPL",
+    "supportedDocuments":[
+        {
+            "docTypeName":"Passport",
+            "docTypeCode":"passport"
+        }
+    ]
+    },
+    {
+    "countryName":"Netherlands",
+    "countryCode":"NLD",
+    "supportedDocuments":[
+        {
+            "docTypeName":"Driving Licence",
+            "docTypeCode":"driving_licence"
+        },
+        {
+            "docTypeName":"National Identity Card",
+            "docTypeCode":"national_identity_card"
+        },
+        {
+            "docTypeName":"Passport",
+            "docTypeCode":"passport"
+        },
+        {
+            "docTypeName":"Residence Permit",
+            "docTypeCode":"residence_permit"
+        },
+        {
+            "docTypeName":"Visa",
+            "docTypeCode":"visa"
+        }
+    ]
+    },
+    {
+    "countryName":"New Zealand",
+    "countryCode":"NZL",
+    "supportedDocuments":[
+        {
+            "docTypeName":"Driving Licence",
+            "docTypeCode":"driving_licence"
+        },
+        {
+            "docTypeName":"Passport",
+            "docTypeCode":"passport"
+        }
+    ]
+    },
+    {
+    "countryName":"Nicaragua",
+    "countryCode":"NIC",
+    "supportedDocuments":[
+        {
+            "docTypeName":"Passport",
+            "docTypeCode":"passport"
+        }
+    ]
+    },
+    {
+    "countryName":"Niger",
+    "countryCode":"NER",
+    "supportedDocuments":[
+        {
+            "docTypeName":"Passport",
+            "docTypeCode":"passport"
+        }
+    ]
+    },
+    {
+    "countryName":"Nigeria",
+    "countryCode":"NGA",
+    "supportedDocuments":[
+        {
+            "docTypeName":"Driving Licence",
+            "docTypeCode":"driving_licence"
+        },
+        {
+            "docTypeName":"National Identity Card",
+            "docTypeCode":"national_identity_card"
+        },
+        {
+            "docTypeName":"Passport",
+            "docTypeCode":"passport"
+        },
+        {
+            "docTypeName":"Voter Id",
+            "docTypeCode":"voter_id"
+        }
+    ]
+    },
+    {
+    "countryName":"Norway",
+    "countryCode":"NOR",
+    "supportedDocuments":[
+        {
+            "docTypeName":"Driving Licence",
+            "docTypeCode":"driving_licence"
+        },
+        {
+            "docTypeName":"Passport",
+            "docTypeCode":"passport"
+        },
+        {
+            "docTypeName":"Residence Permit",
+            "docTypeCode":"residence_permit"
+        },
+        {
+            "docTypeName":"Visa",
+            "docTypeCode":"visa"
+        }
+    ]
+    },
+    {
+    "countryName":"Oman",
+    "countryCode":"OMN",
+    "supportedDocuments":[
+        {
+            "docTypeName":"Driving Licence",
+            "docTypeCode":"driving_licence"
+        },
+        {
+            "docTypeName":"National Identity Card",
+            "docTypeCode":"national_identity_card"
+        },
+        {
+            "docTypeName":"Passport",
+            "docTypeCode":"passport"
+        },
+        {
+            "docTypeName":"Residence Permit",
+            "docTypeCode":"residence_permit"
+        }
+    ]
+    },
+    {
+    "countryName":"Pakistan",
+    "countryCode":"PAK",
+    "supportedDocuments":[
+        {
+            "docTypeName":"Driving Licence",
+            "docTypeCode":"driving_licence"
+        },
+        {
+            "docTypeName":"National Identity Card",
+            "docTypeCode":"national_identity_card"
+        },
+        {
+            "docTypeName":"Passport",
+            "docTypeCode":"passport"
+        }
+    ]
+    },
+    {
+    "countryName":"Palau",
+    "countryCode":"PLW",
+    "supportedDocuments":[
+        {
+            "docTypeName":"Passport",
+            "docTypeCode":"passport"
+        }
+    ]
+    },
+    {
+    "countryName":"Palestine, State of",
+    "countryCode":"PSE",
+    "supportedDocuments":[
+        {
+            "docTypeName":"Passport",
+            "docTypeCode":"passport"
+        }
+    ]
+    },
+    {
+    "countryName":"Panama",
+    "countryCode":"PAN",
+    "supportedDocuments":[
+        {
+            "docTypeName":"Passport",
+            "docTypeCode":"passport"
+        }
+    ]
+    },
+    {
+    "countryName":"Papua New Guinea",
+    "countryCode":"PNG",
+    "supportedDocuments":[
+        {
+            "docTypeName":"Passport",
+            "docTypeCode":"passport"
+        }
+    ]
+    },
+    {
+    "countryName":"Paraguay",
+    "countryCode":"PRY",
+    "supportedDocuments":[
+        {
+            "docTypeName":"Driving Licence",
+            "docTypeCode":"driving_licence"
+        },
+        {
+            "docTypeName":"National Identity Card",
+            "docTypeCode":"national_identity_card"
+        },
+        {
+            "docTypeName":"Passport",
+            "docTypeCode":"passport"
+        }
+    ]
+    },
+    {
+    "countryName":"Peru",
+    "countryCode":"PER",
+    "supportedDocuments":[
+        {
+            "docTypeName":"Driving Licence",
+            "docTypeCode":"driving_licence"
+        },
+        {
+            "docTypeName":"National Identity Card",
+            "docTypeCode":"national_identity_card"
+        },
+        {
+            "docTypeName":"Passport",
+            "docTypeCode":"passport"
+        }
+    ]
+    },
+    {
+    "countryName":"Philippines",
+    "countryCode":"PHL",
+    "supportedDocuments":[
+        {
+            "docTypeName":"Driving Licence",
+            "docTypeCode":"driving_licence"
+        },
+        {
+            "docTypeName":"National Identity Card",
+            "docTypeCode":"national_identity_card"
+        },
+        {
+            "docTypeName":"Passport",
+            "docTypeCode":"passport"
+        },
+        {
+            "docTypeName":"Postal Identity Card",
+            "docTypeCode":"postal_id_card"
+        },
+        {
+            "docTypeName":"Professional Qualification Card",
+            "docTypeCode":"professional_qualification_card"
+        },
+        {
+            "docTypeName":"Social Security Card",
+            "docTypeCode":"social_security_card"
+        },
+        {
+            "docTypeName":"Voter Id",
+            "docTypeCode":"voter_id"
+        }
+    ]
+    },
+    {
+    "countryName":"Poland",
+    "countryCode":"POL",
+    "supportedDocuments":[
+        {
+            "docTypeName":"Driving Licence",
+            "docTypeCode":"driving_licence"
+        },
+        {
+            "docTypeName":"National Identity Card",
+            "docTypeCode":"national_identity_card"
+        },
+        {
+            "docTypeName":"Passport",
+            "docTypeCode":"passport"
+        },
+        {
+            "docTypeName":"Residence Permit",
+            "docTypeCode":"residence_permit"
+        },
+        {
+            "docTypeName":"Visa",
+            "docTypeCode":"visa"
+        }
+    ]
+    },
+    {
+    "countryName":"Portugal",
+    "countryCode":"PRT",
+    "supportedDocuments":[
+        {
+            "docTypeName":"Driving Licence",
+            "docTypeCode":"driving_licence"
+        },
+        {
+            "docTypeName":"National Identity Card",
+            "docTypeCode":"national_identity_card"
+        },
+        {
+            "docTypeName":"Passport",
+            "docTypeCode":"passport"
+        },
+        {
+            "docTypeName":"Residence Permit",
+            "docTypeCode":"residence_permit"
+        },
+        {
+            "docTypeName":"Visa",
+            "docTypeCode":"visa"
+        }
+    ]
+    },
+    {
+    "countryName":"Puerto Rico",
+    "countryCode":"PRI",
+    "supportedDocuments":[
+        {
+            "docTypeName":"Driving Licence",
+            "docTypeCode":"driving_licence"
+        },
+        {
+            "docTypeName":"National Identity Card",
+            "docTypeCode":"national_identity_card"
+        },
+        {
+            "docTypeName":"Passport",
+            "docTypeCode":"passport"
+        }
+    ]
+    },
+    {
+    "countryName":"Qatar",
+    "countryCode":"QAT",
+    "supportedDocuments":[
+        {
+            "docTypeName":"Driving Licence",
+            "docTypeCode":"driving_licence"
+        },
+        {
+            "docTypeName":"National Identity Card",
+            "docTypeCode":"national_identity_card"
+        },
+        {
+            "docTypeName":"Passport",
+            "docTypeCode":"passport"
+        },
+        {
+            "docTypeName":"Residence Permit",
+            "docTypeCode":"residence_permit"
+        }
+    ]
+    },
+    {
+    "countryName":"Romania",
+    "countryCode":"ROU",
+    "supportedDocuments":[
+        {
+            "docTypeName":"Driving Licence",
+            "docTypeCode":"driving_licence"
+        },
+        {
+            "docTypeName":"National Identity Card",
+            "docTypeCode":"national_identity_card"
+        },
+        {
+            "docTypeName":"Passport",
+            "docTypeCode":"passport"
+        },
+        {
+            "docTypeName":"Residence Permit",
+            "docTypeCode":"residence_permit"
+        }
+    ]
+    },
+    {
+    "countryName":"Russian Federation",
+    "countryCode":"RUS",
+    "supportedDocuments":[
+        {
+            "docTypeName":"Driving Licence",
+            "docTypeCode":"driving_licence"
+        },
+        {
+            "docTypeName":"National Identity Card (Internal Passport)",
+            "docTypeCode":"national_identity_card"
+        },
+        {
+            "docTypeName":"Passport",
+            "docTypeCode":"passport"
+        }
+    ]
+    },
+    {
+    "countryName":"Rwanda",
+    "countryCode":"RWA",
+    "supportedDocuments":[
+        {
+            "docTypeName":"Driving Licence",
+            "docTypeCode":"driving_licence"
+        },
+        {
+            "docTypeName":"National Identity Card",
+            "docTypeCode":"national_identity_card"
+        },
+        {
+            "docTypeName":"Passport",
+            "docTypeCode":"passport"
+        }
+    ]
+    },
+    {
+    "countryName":"Saint Barthélemy",
+    "countryCode":"BLM",
+    "supportedDocuments":[
+        {
+            "docTypeName":"Driving Licence",
+            "docTypeCode":"driving_licence"
+        }
+    ]
+    },
+    {
+    "countryName":"Saint Kitts And Nevis",
+    "countryCode":"KNA",
+    "supportedDocuments":[
+        {
+            "docTypeName":"Passport",
+            "docTypeCode":"passport"
+        }
+    ]
+    },
+    {
+    "countryName":"Saint Lucia",
+    "countryCode":"LCA",
+    "supportedDocuments":[
+        {
+            "docTypeName":"Passport",
+            "docTypeCode":"passport"
+        }
+    ]
+    },
+    {
+    "countryName":"Saint Martin",
+    "countryCode":"MAF",
+    "supportedDocuments":[
+        {
+            "docTypeName":"Driving Licence",
+            "docTypeCode":"driving_licence"
+        }
+    ]
+    },
+    {
+    "countryName":"Saint Vincent And The Grenadines",
+    "countryCode":"VCT",
+    "supportedDocuments":[
+        {
+            "docTypeName":"Passport",
+            "docTypeCode":"passport"
+        }
+    ]
+    },
+    {
+    "countryName":"Samoa",
+    "countryCode":"WSM",
+    "supportedDocuments":[
+        {
+            "docTypeName":"Passport",
+            "docTypeCode":"passport"
+        }
+    ]
+    },
+    {
+    "countryName":"San Marino",
+    "countryCode":"SMR",
+    "supportedDocuments":[
+        {
+            "docTypeName":"Passport",
+            "docTypeCode":"passport"
+        }
+    ]
+    },
+    {
+    "countryName":"Sao Tome and Principe",
+    "countryCode":"STP",
+    "supportedDocuments":[
+        {
+            "docTypeName":"Passport",
+            "docTypeCode":"passport"
+        }
+    ]
+    },
+    {
+    "countryName":"Saudi Arabia",
+    "countryCode":"SAU",
+    "supportedDocuments":[
+        {
+            "docTypeName":"Driving Licence",
+            "docTypeCode":"driving_licence"
+        },
+        {
+            "docTypeName":"Passport",
+            "docTypeCode":"passport"
+        },
+        {
+            "docTypeName":"Residence Permit",
+            "docTypeCode":"residence_permit"
+        }
+    ]
+    },
+    {
+    "countryName":"Senegal",
+    "countryCode":"SEN",
+    "supportedDocuments":[
+        {
+            "docTypeName":"National Identity Card",
+            "docTypeCode":"national_identity_card"
+        },
+        {
+            "docTypeName":"Passport",
+            "docTypeCode":"passport"
+        }
+    ]
+    },
+    {
+    "countryName":"Serbia",
+    "countryCode":"SRB",
+    "supportedDocuments":[
+        {
+            "docTypeName":"Driving Licence",
+            "docTypeCode":"driving_licence"
+        },
+        {
+            "docTypeName":"National Identity Card",
+            "docTypeCode":"national_identity_card"
+        },
+        {
+            "docTypeName":"Passport",
+            "docTypeCode":"passport"
+        }
+    ]
+    },
+    {
+    "countryName":"Seychelles",
+    "countryCode":"SYC",
+    "supportedDocuments":[
+        {
+            "docTypeName":"Passport",
+            "docTypeCode":"passport"
+        }
+    ]
+    },
+    {
+    "countryName":"Sierra Leone",
+    "countryCode":"SLE",
+    "supportedDocuments":[
+        {
+            "docTypeName":"Passport",
+            "docTypeCode":"passport"
+        }
+    ]
+    },
+    {
+    "countryName":"Singapore",
+    "countryCode":"SGP",
+    "supportedDocuments":[
+        {
+            "docTypeName":"Driving Licence",
+            "docTypeCode":"driving_licence"
+        },
+        {
+            "docTypeName":"National Identity Card (NRIC)",
+            "docTypeCode":"national_identity_card"
+        },
+        {
+            "docTypeName":"Passport",
+            "docTypeCode":"passport"
+        },
+        {
+            "docTypeName":"Work Permit",
+            "docTypeCode":"work_permit"
+        }
+    ]
+    },
+    {
+    "countryName":"Slovakia",
+    "countryCode":"SVK",
+    "supportedDocuments":[
+        {
+            "docTypeName":"Driving Licence",
+            "docTypeCode":"driving_licence"
+        },
+        {
+            "docTypeName":"National Identity Card",
+            "docTypeCode":"national_identity_card"
+        },
+        {
+            "docTypeName":"Passport",
+            "docTypeCode":"passport"
+        },
+        {
+            "docTypeName":"Residence Permit",
+            "docTypeCode":"residence_permit"
+        },
+        {
+            "docTypeName":"Visa",
+            "docTypeCode":"visa"
+        }
+    ]
+    },
+    {
+    "countryName":"Slovenia",
+    "countryCode":"SVN",
+    "supportedDocuments":[
+        {
+            "docTypeName":"Driving Licence",
+            "docTypeCode":"driving_licence"
+        },
+        {
+            "docTypeName":"National Identity Card",
+            "docTypeCode":"national_identity_card"
+        },
+        {
+            "docTypeName":"Passport",
+            "docTypeCode":"passport"
+        },
+        {
+            "docTypeName":"Residence Permit",
+            "docTypeCode":"residence_permit"
+        },
+        {
+            "docTypeName":"Visa",
+            "docTypeCode":"visa"
+        }
+    ]
+    },
+    {
+    "countryName":"Solomon Islands",
+    "countryCode":"SLB",
+    "supportedDocuments":[
+        {
+            "docTypeName":"Passport",
+            "docTypeCode":"passport"
+        }
+    ]
+    },
+    {
+    "countryName":"Somalia",
+    "countryCode":"SOM",
+    "supportedDocuments":[
+        {
+            "docTypeName":"Passport",
+            "docTypeCode":"passport"
+        }
+    ]
+    },
+    {
+    "countryName":"South Africa",
+    "countryCode":"ZAF",
+    "supportedDocuments":[
+        {
+            "docTypeName":"Driving Licence",
+            "docTypeCode":"driving_licence"
+        },
+        {
+            "docTypeName":"National Identity Card",
+            "docTypeCode":"national_identity_card"
+        },
+        {
+            "docTypeName":"Passport",
+            "docTypeCode":"passport"
+        }
+    ]
+    },
+    {
+    "countryName":"South Sudan",
+    "countryCode":"SSD",
+    "supportedDocuments":[
+        {
+            "docTypeName":"Passport",
+            "docTypeCode":"passport"
+        }
+    ]
+    },
+    {
+    "countryName":"Spain",
+    "countryCode":"ESP",
+    "supportedDocuments":[
+        {
+            "docTypeName":"Driving Licence",
+            "docTypeCode":"driving_licence"
+        },
+        {
+            "docTypeName":"National Identity Card",
+            "docTypeCode":"national_identity_card"
+        },
+        {
+            "docTypeName":"Passport",
+            "docTypeCode":"passport"
+        },
+        {
+            "docTypeName":"Residence Permit",
+            "docTypeCode":"residence_permit"
+        },
+        {
+            "docTypeName":"Visa",
+            "docTypeCode":"visa"
+        }
+    ]
+    },
+    {
+    "countryName":"Sri Lanka",
+    "countryCode":"LKA",
+    "supportedDocuments":[
+        {
+            "docTypeName":"Driving Licence",
+            "docTypeCode":"driving_licence"
+        },
+        {
+            "docTypeName":"Passport",
+            "docTypeCode":"passport"
+        }
+    ]
+    },
+    {
+    "countryName":"Sudan",
+    "countryCode":"SDN",
+    "supportedDocuments":[
+        {
+            "docTypeName":"Passport",
+            "docTypeCode":"passport"
+        }
+    ]
+    },
+    {
+    "countryName":"Suriname",
+    "countryCode":"SUR",
+    "supportedDocuments":[
+        {
+            "docTypeName":"Passport",
+            "docTypeCode":"passport"
+        }
+    ]
+    },
+    {
+    "countryName":"Swaziland",
+    "countryCode":"SWZ",
+    "supportedDocuments":[
+        {
+            "docTypeName":"National Identity Card",
+            "docTypeCode":"national_identity_card"
+        },
+        {
+            "docTypeName":"Passport",
+            "docTypeCode":"passport"
+        }
+    ]
+    },
+    {
+    "countryName":"Sweden",
+    "countryCode":"SWE",
+    "supportedDocuments":[
+        {
+            "docTypeName":"Driving Licence",
+            "docTypeCode":"driving_licence"
+        },
+        {
+            "docTypeName":"National Identity Card",
+            "docTypeCode":"national_identity_card"
+        },
+        {
+            "docTypeName":"Passport",
+            "docTypeCode":"passport"
+        },
+        {
+            "docTypeName":"Residence Permit",
+            "docTypeCode":"residence_permit"
+        },
+        {
+            "docTypeName":"Tax Id",
+            "docTypeCode":"tax_id"
+        },
+        {
+            "docTypeName":"Visa",
+            "docTypeCode":"visa"
+        }
+    ]
+    },
+    {
+    "countryName":"Switzerland",
+    "countryCode":"CHE",
+    "supportedDocuments":[
+        {
+            "docTypeName":"Driving Licence",
+            "docTypeCode":"driving_licence"
+        },
+        {
+            "docTypeName":"National Identity Card",
+            "docTypeCode":"national_identity_card"
+        },
+        {
+            "docTypeName":"Passport",
+            "docTypeCode":"passport"
+        },
+        {
+            "docTypeName":"Residence Permit",
+            "docTypeCode":"residence_permit"
+        },
+        {
+            "docTypeName":"Visa",
+            "docTypeCode":"visa"
+        }
+    ]
+    },
+    {
+    "countryName":"Syrian Arab Republic",
+    "countryCode":"SYR",
+    "supportedDocuments":[
+        {
+            "docTypeName":"Passport",
+            "docTypeCode":"passport"
+        }
+    ]
+    },
+    {
+    "countryName":"Taiwan, Republic Of China",
+    "countryCode":"TWN",
+    "supportedDocuments":[
+        {
+            "docTypeName":"Driving Licence",
+            "docTypeCode":"driving_licence"
+        },
+        {
+            "docTypeName":"National Identity Card",
+            "docTypeCode":"national_identity_card"
+        },
+        {
+            "docTypeName":"Passport",
+            "docTypeCode":"passport"
+        },
+        {
+            "docTypeName":"Residence Permit",
+            "docTypeCode":"residence_permit"
+        }
+    ]
+    },
+    {
+    "countryName":"Tajikistan",
+    "countryCode":"TJK",
+    "supportedDocuments":[
+        {
+            "docTypeName":"Passport",
+            "docTypeCode":"passport"
+        }
+    ]
+    },
+    {
+    "countryName":"Tanzania, United Republic of",
+    "countryCode":"TZA",
+    "supportedDocuments":[
+        {
+            "docTypeName":"Driving Licence",
+            "docTypeCode":"driving_licence"
+        },
+        {
+            "docTypeName":"National Identity Card",
+            "docTypeCode":"national_identity_card"
+        },
+        {
+            "docTypeName":"Passport",
+            "docTypeCode":"passport"
+        },
+        {
+            "docTypeName":"Residence Permit",
+            "docTypeCode":"residence_permit"
+        },
+        {
+            "docTypeName":"Voter Id",
+            "docTypeCode":"voter_id"
+        }
+    ]
+    },
+    {
+    "countryName":"Thailand",
+    "countryCode":"THA",
+    "supportedDocuments":[
+        {
+            "docTypeName":"Driving Licence",
+            "docTypeCode":"driving_licence"
+        },
+        {
+            "docTypeName":"National Identity Card",
+            "docTypeCode":"national_identity_card"
+        },
+        {
+            "docTypeName":"Passport",
+            "docTypeCode":"passport"
+        }
+    ]
+    },
+    {
+    "countryName":"Timor-Leste",
+    "countryCode":"TLS",
+    "supportedDocuments":[
+        {
+            "docTypeName":"Passport",
+            "docTypeCode":"passport"
+        }
+    ]
+    },
+    {
+    "countryName":"Togo",
+    "countryCode":"TGO",
+    "supportedDocuments":[
+        {
+            "docTypeName":"Passport",
+            "docTypeCode":"passport"
+        }
+    ]
+    },
+    {
+    "countryName":"Tonga",
+    "countryCode":"TON",
+    "supportedDocuments":[
+        {
+            "docTypeName":"Passport",
+            "docTypeCode":"passport"
+        }
+    ]
+    },
+    {
+    "countryName":"Trinidad and Tobago",
+    "countryCode":"TTO",
+    "supportedDocuments":[
+        {
+            "docTypeName":"Driving Licence",
+            "docTypeCode":"driving_licence"
+        },
+        {
+            "docTypeName":"National Identity Card",
+            "docTypeCode":"national_identity_card"
+        },
+        {
+            "docTypeName":"Passport",
+            "docTypeCode":"passport"
+        }
+    ]
+    },
+    {
+    "countryName":"Tunisia",
+    "countryCode":"TUN",
+    "supportedDocuments":[
+        {
+            "docTypeName":"Driving Licence",
+            "docTypeCode":"driving_licence"
+        },
+        {
+            "docTypeName":"Passport",
+            "docTypeCode":"passport"
+        }
+    ]
+    },
+    {
+    "countryName":"Turkey",
+    "countryCode":"TUR",
+    "supportedDocuments":[
+        {
+            "docTypeName":"Driving Licence",
+            "docTypeCode":"driving_licence"
+        },
+        {
+            "docTypeName":"National Identity Card",
+            "docTypeCode":"national_identity_card"
+        },
+        {
+            "docTypeName":"Passport",
+            "docTypeCode":"passport"
+        },
+        {
+            "docTypeName":"Residence Permit",
+            "docTypeCode":"residence_permit"
+        }
+    ]
+    },
+    {
+    "countryName":"Turkmenistan",
+    "countryCode":"TKM",
+    "supportedDocuments":[
+        {
+            "docTypeName":"Passport",
+            "docTypeCode":"passport"
+        }
+    ]
+    },
+    {
+    "countryName":"Turks and Caicos Islands",
+    "countryCode":"TCA",
+    "supportedDocuments":[
+        {
+            "docTypeName":"Passport",
+            "docTypeCode":"passport"
+        }
+    ]
+    },
+    {
+    "countryName":"Tuvalu",
+    "countryCode":"TUV",
+    "supportedDocuments":[
+        {
+            "docTypeName":"Passport",
+            "docTypeCode":"passport"
+        }
+    ]
+    },
+    {
+    "countryName":"Uganda",
+    "countryCode":"UGA",
+    "supportedDocuments":[
+        {
+            "docTypeName":"Driving Licence",
+            "docTypeCode":"driving_licence"
+        },
+        {
+            "docTypeName":"National Identity Card",
+            "docTypeCode":"national_identity_card"
+        },
+        {
+            "docTypeName":"Passport",
+            "docTypeCode":"passport"
+        }
+    ]
+    },
+    {
+    "countryName":"Ukraine",
+    "countryCode":"UKR",
+    "supportedDocuments":[
+        {
+            "docTypeName":"Driving Licence",
+            "docTypeCode":"driving_licence"
+        },
+        {
+            "docTypeName":"National Identity Card",
+            "docTypeCode":"national_identity_card"
+        },
+        {
+            "docTypeName":"Passport",
+            "docTypeCode":"passport"
+        }
+    ]
+    },
+    {
+    "countryName":"United Arab Emirates",
+    "countryCode":"ARE",
+    "supportedDocuments":[
+        {
+            "docTypeName":"Driving Licence",
+            "docTypeCode":"driving_licence"
+        },
+        {
+            "docTypeName":"National Identity Card",
+            "docTypeCode":"national_identity_card"
+        },
+        {
+            "docTypeName":"Passport",
+            "docTypeCode":"passport"
+        },
+        {
+            "docTypeName":"Residence Permit",
+            "docTypeCode":"residence_permit"
+        }
+    ]
+    },
+    {
+    "countryName":"United Kingdom (UK)",
+    "countryCode":"GBR",
+    "supportedDocuments":[
+        {
+            "docTypeName":"Asylum Registration Card (Application Registration Card)",
+            "docTypeCode":"application_registration_card"
+        },
+        {
+            "docTypeName":"Birth Certificate*",
+            "docTypeCode":"birth_certificate"
+        },
+        {
+            "docTypeName":"Certificate of Naturalisation*",
+            "docTypeCode":"naturalisation_certificate"
+        },
+        {
+            "docTypeName":"Driving Licence",
+            "docTypeCode":"driving_licence"
+        },
+        {
+            "docTypeName":"Home Office Letter*",
+            "docTypeCode":"home_office_letter"
+        },
+        {
+            "docTypeName":"Immigration Status Document*",
+            "docTypeCode":"immigration_status_document"
+        },
+        {
+            "docTypeName":"Passport",
+            "docTypeCode":"passport"
+        },
+        {
+            "docTypeName":"Residence Permit",
+            "docTypeCode":"residence_permit"
+        },
+        {
+            "docTypeName":"Visa",
+            "docTypeCode":"visa"
+        },
+        {
+            "docTypeName":"Work Permit",
+            "docTypeCode":"work_permit"
+        }
+    ]
+    },
+    {
+    "countryName":"United States of America",
+    "countryCode":"USA",
+    "supportedDocuments":[
+        {
+            "docTypeName":"Driving Licence",
+            "docTypeCode":"driving_licence"
+        },
+        {
+            "docTypeName":"National Identity Card (State ID)",
+            "docTypeCode":"national_identity_card"
+        },
+        {
+            "docTypeName":"Passport",
+            "docTypeCode":"passport"
+        },
+        {
+            "docTypeName":"Passport Card",
+            "docTypeCode":"passport_card"
+        },
+        {
+            "docTypeName":"Residence Permit",
+            "docTypeCode":"residence_permit"
+        },
+        {
+            "docTypeName":"Visa",
+            "docTypeCode":"visa"
+        },
+        {
+            "docTypeName":"Work Permit",
+            "docTypeCode":"work_permit"
+        }
+    ]
+    },
+    {
+    "countryName":"Uruguay",
+    "countryCode":"URY",
+    "supportedDocuments":[
+        {
+            "docTypeName":"Driving Licence",
+            "docTypeCode":"driving_licence"
+        },
+        {
+            "docTypeName":"National Identity Card",
+            "docTypeCode":"national_identity_card"
+        },
+        {
+            "docTypeName":"Passport",
+            "docTypeCode":"passport"
+        }
+    ]
+    },
+    {
+    "countryName":"Uzbekistan",
+    "countryCode":"UZB",
+    "supportedDocuments":[
+        {
+            "docTypeName":"Passport",
+            "docTypeCode":"passport"
+        }
+    ]
+    },
+    {
+    "countryName":"Vanuatu",
+    "countryCode":"VUT",
+    "supportedDocuments":[
+        {
+            "docTypeName":"Passport",
+            "docTypeCode":"passport"
+        }
+    ]
+    },
+    {
+    "countryName":"Venezuela, Bolivarian Republic of",
+    "countryCode":"VEN",
+    "supportedDocuments":[
+        {
+            "docTypeName":"Driving Licence",
+            "docTypeCode":"driving_licence"
+        },
+        {
+            "docTypeName":"National Identity Card",
+            "docTypeCode":"national_identity_card"
+        },
+        {
+            "docTypeName":"Passport",
+            "docTypeCode":"passport"
+        }
+    ]
+    },
+    {
+    "countryName":"Vietnam",
+    "countryCode":"VNM",
+    "supportedDocuments":[
+        {
+            "docTypeName":"Driving Licence",
+            "docTypeCode":"driving_licence"
+        },
+        {
+            "docTypeName":"National Identity Card",
+            "docTypeCode":"national_identity_card"
+        },
+        {
+            "docTypeName":"Passport",
+            "docTypeCode":"passport"
+        }
+    ]
+    },
+    {
+    "countryName":"Virgin Islands, British",
+    "countryCode":"VIR",
+    "supportedDocuments":[
+        {
+            "docTypeName":"Passport",
+            "docTypeCode":"passport"
+        }
+    ]
+    },
+    {
+    "countryName":"Yemen",
+    "countryCode":"YEM",
+    "supportedDocuments":[
+        {
+            "docTypeName":"Driving Licence",
+            "docTypeCode":"driving_licence"
+        },
+        {
+            "docTypeName":"Passport",
+            "docTypeCode":"passport"
+        }
+    ]
+    },
+    {
+    "countryName":"Zambia",
+    "countryCode":"ZMB",
+    "supportedDocuments":[
+        {
+            "docTypeName":"Driving Licence",
+            "docTypeCode":"driving_licence"
+        },
+        {
+            "docTypeName":"Passport",
+            "docTypeCode":"passport"
+        }
+    ]
+    },
+    {
+    "countryName":"Zimbabwe",
+    "countryCode":"ZWE",
+    "supportedDocuments":[
+        {
+            "docTypeName":"Passport",
+            "docTypeCode":"passport"
+        }
+    ]
+    }
+]

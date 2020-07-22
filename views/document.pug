@@ -1,0 +1,48 @@
+extends layout
+
+block content
+    .content
+        .container-fluid
+            .row
+                .col-md-12
+                    form
+                        .card
+                            .card-header.card-header-info
+                                .float-left
+                                    button.btn.btn-info.mr-4.goback &lt;
+                                h4.card-title= 'Document created at '
+                                    +displayDate(document.createdAt)
+                                p.card-category=  document.id
+                            .card-body
+                                .row
+                                    .col-sm-6
+                                        .form-group.row
+                                            label.col-sm-4.col-form-label(for='type') Document type
+                                            .col-sm-8
+                                                input#type.form-control-plaintext(type='text' readonly='' value=document.type)
+                                        .form-group.row
+                                            label.col-sm-4.col-form-label(for='side') Document side
+                                            .col-sm-8
+                                                input#side.form-control-plaintext(type='text' readonly='' value=document.side)
+                                        .form-group.row
+                                            label.col-sm-4.col-form-label(for='issuingCountry') Issuing country
+                                            .col-sm-8
+                                                input#issuingCountry.form-control-plaintext(type='text' readonly='' value=document.issuingCountry)
+                                    .col-sm-6
+                                        .form-group.row
+                                            label.col-sm-4.col-form-label(for='fileName') File name
+                                            .col-sm-8
+                                                input#fileName.form-control-plaintext(type='text' readonly='' value=document.fileName)
+                                        .form-group.row
+                                            label.col-sm-4.col-form-label(for='fileType') File type
+                                            .col-sm-8
+                                                input#fileType.form-control-plaintext(type='text' readonly='' value=document.fileType)
+                                        .form-group.row
+                                            label.col-sm-4.col-form-label(for='fileSize') File Size
+                                            .col-sm-8
+                                                input#fileSize.form-control-plaintext(type='text' readonly='' value=(Math.round(document.fileSize/1024) + ' Ko'))
+                                .row
+                                    .col-sm-12
+                                        .text-center
+                                            a.btn.btn-primary(href='/resources/documents/' + document.id + '/download' target='_blank') download (WIP)
+

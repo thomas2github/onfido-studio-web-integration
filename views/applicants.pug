@@ -1,0 +1,32 @@
+extends layout
+
+block content
+    .content
+        .container-fluid
+            .row
+                .col-md-12
+                    .card
+                        .card-header.card-header-primary
+                            a.btn.btn-info.float-right(href='/resources/applicants/new') create
+                            h4.card-title Applicants
+                            p.card-category  Click on applicant to go details
+                        .card-body
+                            .table-responsive
+                                table.table.table-hover
+                                    thead.text-primary
+                                        th
+                                            | Name
+                                        th
+                                            | Email
+                                        th
+                                            | Created at
+                                        th
+                                            | ID
+                                    tbody
+                                        each applicant in applicants
+                                            tr.js-clickable(href='/resources/applicants/' + applicant.id)
+                                                td.text-primary= applicant.firstName + ' ' + applicant.lastName
+                                                td= applicant.email
+                                                td
+                                                    +displayDate(applicant.createdAt)
+                                                td= applicant.id

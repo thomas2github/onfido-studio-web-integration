@@ -1,0 +1,31 @@
+extends layout
+
+block content
+    .content
+        .container-fluid
+            .row.justify-content-center
+                .col-lg-6.col-md-8.col-sm-12
+                    .card
+                        .card-header.card-header-info
+                            .float-left
+                                button.btn.btn-info.mr-4.goback &lt;
+                            h4.card-title= 'Watchlist'
+                        .card-body
+                            form(action='' method='post')
+                                .row.justify-content-center
+                                    .col-10
+                                        .form-group
+                                            label.bmd-label-floating Firstname
+                                            input#firstName.form-control(type='text' name='firstName' required)
+                                        .form-group
+                                            label.bmd-label-floating Lastname
+                                            input#lastName.form-control(type='text' name='lastName' required)
+                                        .form-group
+                                            label.bmd-label-floating Record type
+                                            select#reportType.form-control(name='reportType')
+                                                option(value='watchlist_standard')= 'Standard'
+                                                option(value='watchlist_enhanced' selected)= 'Enhanced'
+                                                option(value='watchlist_peps_only')= 'Politically Exposed Person'
+                                                option(value='watchlist_sanctions_only')= 'Sanctions List'
+                                        .float-right
+                                            button.btn.btn-info(type='submit') Create check

@@ -1,0 +1,68 @@
+extends layout
+
+block content
+    .content
+        .container-fluid
+            .row
+                .col-md-12
+                    .card
+                        .card-header.card-header-warning
+                            h4.card-title Latest checks
+                            if lastestChecks.length > 0
+                                p.card-category Click on check to go details
+                        .card-body
+                            if lastestChecks
+                                .table-responsive
+                                    table.table.table-hover
+                                        thead.text-primary
+                                            th
+                                                | Applicant
+                                            th
+                                                | Created at
+                                            th
+                                                | Status
+                                            th
+                                                | Result
+                                            th
+                                                | ID
+                                        tbody
+                                            each check in lastestChecks
+                                                tr.js-clickable(href='/resources/checks/'+check.id)
+                                                    td= check.applicant.firstName + ' ' + check.applicant.lastName
+                                                    td
+                                                        +displayDate(check.createdAt)
+                                                    td
+                                                        +displayCheckStatus(check.status)
+                                                    td
+                                                        +displayCheckResult(check.result)
+                                                    td= check.id
+                    .card.mt-8
+                        .card-header.card-header-success
+                            h4.card-title Quick Action
+                            p.card-category Select use case
+                        .card-body
+                            .d-flex.flex-row.justify-content-center.flex-wrap
+                                .card.text-center.mr-4.js-clickable(href='/usecases/doc-plus-selfie', style='width:12rem;')
+                                    i.material-icons.pt-4(style='font-size:48px') photo_camera
+                                    .card-body
+                                        p.card-text= 'Doc + Selfie (SDK)'
+                                .card.text-center.mr-4.js-clickable(href='/usecases/doc-plus-video', style='width:12rem;')
+                                    i.material-icons.pt-4(style='font-size:48px') videocam
+                                    .card-body
+                                        p.card-text= 'Doc + Video (SDK)'
+                                //- .card.text-center.mr-4.js-clickable(href='#', style='width:12rem;')
+                                //-     i.material-icons.pt-4(style='font-size:48px') person_pin_circle
+                                //-     .card-body
+                                //-         p.card-text= 'Proof of Address'
+                                .card.text-center.mr-4.js-clickable(href='/usecases/watchlist', style='width:12rem;')
+                                    i.material-icons.pt-4(style='font-size:48px') visibility
+                                    .card-body
+                                        p.card-text= 'Watchlists'
+                                .card.text-center.mr-4.js-clickable(href='/usecases/autofill', style='width:12rem;')
+                                    i.material-icons.pt-4(style='font-size:48px') content_paste
+                                    .card-body
+                                        p.card-text= 'Autofill'
+                                .card.text-center.mr-4.js-clickable(href='/usecases/known-faces', style='width:12rem;')
+                                    i.material-icons.pt-4(style='font-size:48px') people_alt
+                                    .card-body
+                                        p.card-text= 'Known Faces'
