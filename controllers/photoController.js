@@ -40,24 +40,18 @@ exports.photo_upload = function(req, res) {
 
 // Handle photo save on POST.
 exports.photo_save = function(req, res) {
-    
-    // Validate file
-    body('file').custom((value, { req }) => {
-        if (!req.files) {
-          throw new Error('File must not be empty.');
-        }
-        // Indicates the success of this synchronous custom validator
-        return true;
-    }),
+
+    let fileToUpload = req.files.file;
+    fileToUpload.mv('./uploads/' + fileToUpload.name);
 
     onfido.livePhoto
         .upload({
             applicantId: req.params.id, 
             advancedValidation: req.body.advancedValidation,
-            file: fs.ReadStream(req.files.file.tempFilePath)
+            file: fs.ReadStream('./uploads/' + fileToUpload.name)
         })
         .then((document) => 
-            res.redirect('/resources/applicants/'+document.applicant_id)
+            res.redirect('/resources/applicants/'+req.params.id)
         )
         .catch((error) => {
             if (error instanceof OnfidoApiError) {

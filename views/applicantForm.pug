@@ -8,8 +8,6 @@ block content
                     form(method='post' action='')
                         .card
                             .card-header.card-header-primary
-                                .float-right
-                                    button.btn.btn-info(type='submit') save
                                 .float-left
                                     a.btn.btn-primary.mr-4.goback &lt;
                                 if applicant.id
@@ -75,4 +73,7 @@ block content
                                         .form-group.extended.collapse
                                             label.bmd-label-floating Line 3
                                             input#addressLine3.form-control(type='string' name='addressLine3' value=(applicant.address)?applicant.address.line3:null)
+                                        
+                                        .d-flex.justify-content-around
+                                            button.btn.btn-info.mt-4(type='submit') save
                     

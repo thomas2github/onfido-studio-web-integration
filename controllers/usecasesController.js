@@ -178,12 +178,12 @@ exports.usecases_autofill = function(req, res) {
 };
 
 exports.usecases_create_autofill_check = function(req, res) {
-    // create applicant
     const countries = require('../datas/supportedDocumentsByCountry.json');
     const now = moment().format('YYYYMMDD-HHmmss');
     let fileToExtract = req.files.file;
     fileToExtract.mv('./uploads/' + fileToExtract.name);
     
+    // create applicant
     onfido.applicant.create({
         firstName: 'fn-' + now,
         lastName: 'ln-' + now 

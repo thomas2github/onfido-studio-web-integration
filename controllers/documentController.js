@@ -42,40 +42,22 @@ exports.document_upload = function(req, res) {
 // Handle document save on POST.
 exports.document_save = function(req, res) {
     // Validate fields.
-    body('issuingCountry', 'Issuing country must not be empty.').trim().isLength({ min: 1 }).escape(),
-    body('type', 'Document type must not be empty.').trim().isLength({ min: 1 }).escape(),
-    body('side', 'Document type must not be empty.').trim().isLength({ min: 1 }).escape(),
-    
-    // Validate file
-    body('file').custom((value, { req }) => {
-        if (!req.files || Object.keys(req.files).length === 0) {
-          throw new Error('File must not be empty.');
-        }
-        // Indicates the success of this synchronous custom validator
-        return true;
-    }),
+    body('issuingCountry', 'Issuing country must not be empty.').trim().isLength({ min: 1 }).escape();
+    body('type', 'Document type must not be empty.').trim().isLength({ min: 1 }).escape();
+    body('side', 'Document type must not be empty.').trim().isLength({ min: 1 }).escape();
 
-    req.files.file.mv('./uploads/' + req.files.file.name),
-    
-    // res.send(JSON.stringify(
-    //     {
-    //         applicantId: req.params.id, 
-    //         issuingCountry: req.body.issuingCountry,
-    //         type: req.body.type,
-    //         side: req.body.side,
-    //         file: fs.createReadStream('./uploads/' + req.files.file.name)
-    //     }
-    // ));
+    let fileToUpload = req.files.file;
+    fileToUpload.mv('./uploads/' + fileToUpload.name);
 
     onfido.document.upload({
         applicantId: req.params.id, 
         issuingCountry: req.body.issuingCountry,
         type: req.body.type,
         side: req.body.side,
-        file: fs.createReadStream('./uploads/' + req.files.file.name)
+        file: fs.createReadStream('./uploads/' + fileToUpload.name)
     })
     .then((document) => 
-        res.redirect('/resources/applicants/'+req.applicant_id)
+        res.redirect('/resources/applicants/'+req.params.id)
     )
     .catch((error) => {
         if (error instanceof OnfidoApiError) {
@@ -113,14 +95,15 @@ exports.document_show = function(req, res) {
 exports.document_download = function(req, res) {
     onfido.document.download(req.params.id)
         .then((document) => {
-            let fileContents = Buffer.from(document, "base64");
-            var readStream = new stream.PassThrough();
-            readStream.end(fileContents);
+            // var file = __dirname + '/upload-folder/dramaticpenguin.MOV';
 
-            response.set('Content-disposition', 'attachment; filename="document.txt"');
-            response.set('Content-Type', 'text/plain');
+            // var filename = path.basename(file);
+            // var mimetype = mime.lookup(file);
 
-            readStream.pipe(response);
+            // res.setHeader('Content-disposition', 'attachment');
+            // res.setHeader('Content-type', mimetype);
+
+            // return document;
         })
         .catch((error) => {
             if (error instanceof OnfidoApiError) {

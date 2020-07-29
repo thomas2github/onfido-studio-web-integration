@@ -23,7 +23,7 @@ block content
                                 #sdkOptions.card.mx-3.mb-1
                                     .card-body
                                         h6.card-title SDK options
-                                        .d-flex.justify-content-around()
+                                        .d-flex.justify-content-around
                                             .d-flex.flex-column.flex-wrap
                                                 .form-check.form-check-inline
                                                     input#useModal.form-check-input(type='checkbox' data-toggle='toggle' data-style='mr-1' data-size='xs')
@@ -51,7 +51,6 @@ block content
                                     i.material-icons.md-primary.pt-4(style='font-size:48px; color: #9c27b0;') camera_enhance
                                     .card-body.text-primary
                                         p.card-text= 'Onfido SDK POA'
-                            
                             form#webUpload(method='post' action='' enctype='multipart/form-data' style='display: none')
                                 .row.justify-content-center
                                     .col-10
@@ -71,10 +70,10 @@ block content
                                                 option(value='back') Back
                                         .form-group
                                             label.bmd-label-floating File
-                                            input#file.form-control(type='file' name='file' accept='image/jpeg,image/png,application/pdf')
+                                            input#file.form-control(type='file' name='file' accept='image/jpeg,image/png,application/pdf' required)
                                             p (jpg/png/pdf - min: 32Ko max: 10Mo)
                                         .d-flex.justify-content-around
-                                            button.btn.btn-info(type='submit') upload (WIP)
+                                            button.btn.btn-info(type='submit') upload
                                                 
                             #onfidoWebSdk(style='display: none')
                                 .d-flex.justify-content-around
