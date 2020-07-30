@@ -87,5 +87,21 @@ exports.photo_show = function(req, res) {
 
 // Download a specific photo.
 exports.photo_download = function(req, res) {
-    res.send('NOT IMPLEMENTED: Photo download: ' + req.params.id);
+    onfido.livePhoto.download(req.params.id)
+        .then((photo) => {
+            // res.set('Content-disposition', 'attachment; filename=' + 'doc.jpg');
+            res.set('Content-Type', photo.contentType);
+            photo.asStream().pipe(res);
+        })
+        .catch((error) => {
+            if (error instanceof OnfidoApiError) {
+                // An error response was received from the Onfido API, extra info is available.
+                console.log(error.message);
+                console.log(error.type);
+                console.log(error.isClientError());
+            } else {
+                // No response was received for some reason e.g. a network error.
+                console.log(error.message);
+            }
+        });
 };

@@ -58,10 +58,42 @@ exports.video_show = function(req, res) {
 
 // Download a specific video.
 exports.video_download = function(req, res) {
-    res.send('NOT IMPLEMENTED: Video download: ' + req.params.id);
+    onfido.liveVideo.download(req.params.id)
+        .then((video) => {
+            // res.set('Content-disposition', 'attachment; filename=' + 'doc.jpg');
+            res.set('Content-Type', video.contentType);
+            video.asStream().pipe(res);
+        })
+        .catch((error) => {
+            if (error instanceof OnfidoApiError) {
+                // An error response was received from the Onfido API, extra info is available.
+                console.log(error.message);
+                console.log(error.type);
+                console.log(error.isClientError());
+            } else {
+                // No response was received for some reason e.g. a network error.
+                console.log(error.message);
+            }
+        });
 };
 
 // Download a single frame of a specific video.
 exports.video_frame = function(req, res) {
-    res.send('NOT IMPLEMENTED: Video download single frame: ' + req.params.id);
+    onfido.liveVideo.frame(req.params.id)
+        .then((video) => {
+            // res.set('Content-disposition', 'attachment; filename=' + 'doc.jpg');
+            res.set('Content-Type', video.contentType);
+            video.asStream().pipe(res);
+        })
+        .catch((error) => {
+            if (error instanceof OnfidoApiError) {
+                // An error response was received from the Onfido API, extra info is available.
+                console.log(error.message);
+                console.log(error.type);
+                console.log(error.isClientError());
+            } else {
+                // No response was received for some reason e.g. a network error.
+                console.log(error.message);
+            }
+        });
 };

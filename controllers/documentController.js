@@ -95,15 +95,9 @@ exports.document_show = function(req, res) {
 exports.document_download = function(req, res) {
     onfido.document.download(req.params.id)
         .then((document) => {
-            // var file = __dirname + '/upload-folder/dramaticpenguin.MOV';
-
-            // var filename = path.basename(file);
-            // var mimetype = mime.lookup(file);
-
-            // res.setHeader('Content-disposition', 'attachment');
-            // res.setHeader('Content-type', mimetype);
-
-            // return document;
+            // res.set('Content-disposition', 'attachment; filename=' + 'doc.jpg');
+            res.set('Content-Type', document.contentType);
+            document.asStream().pipe(res);
         })
         .catch((error) => {
             if (error instanceof OnfidoApiError) {
