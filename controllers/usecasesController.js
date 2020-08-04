@@ -33,7 +33,7 @@ exports.usecases_doc_plus_selfie = function(req, res) {
             // Get SDK Token
             onfido.sdkToken.generate( sdkTokenRequest )
                 .then((sdkToken) => {
-                    res.render('docPlusSelfie', {applicant: applicant, sdkToken: sdkToken, referrer: referrer});
+                    res.render('docPlusSelfie', {applicant: applicant, sdkToken: sdkToken});
                 });
         })
         .catch((error) => {

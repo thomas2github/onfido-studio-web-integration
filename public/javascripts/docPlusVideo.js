@@ -8,10 +8,10 @@ $(document).ready(function() {
 
     
     $('.onfido-sdk-ui-Modal-inner').remove();
-    const applicantId = $(this).attr('data-applicant-id');
+    const applicantId = $('#onfido-mount').attr('data-applicant-id');
     let onfidoSdk;
     let sdkParam = {
-        token: $(this).attr('data-token'),
+        token: $('#onfido-mount').attr('data-token'),
         containerId: 'onfido-mount',
         useModal: false,
         onComplete: function(data) {
