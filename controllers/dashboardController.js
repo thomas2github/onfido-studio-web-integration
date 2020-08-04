@@ -1,10 +1,13 @@
-const onfido = require('../onfido.js');
+// const onfido = require('../onfido.js');
 const { Onfido, Region, OnfidoApiError } = require('@onfido/api');
 const { get } = require('request');
 
 // Display dashboard.
 exports.dashboard = function(req, res) {
     let checks = [];
+    const onfido = new Onfido({
+        apiToken: req.session.apiToken
+    });
     const getChecks = async applicant => {
         return onfido.check.list(applicant.id)
             .then(applicantChecks => applicantChecks.map(check => checks.push(check)))

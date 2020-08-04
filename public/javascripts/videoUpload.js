@@ -47,7 +47,7 @@ $(document).ready(function() {
                     type: 'face',
                     options: {
                         forceCrossDevice: forceCrossDevice,
-                        requestedVairant: 'video',
+                        requestedVariant: 'video',
                         useMultipleSelfieCapture: useMultipleSelfieCapture,
                         uploadFallback: false
                     }

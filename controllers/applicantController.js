@@ -1,11 +1,13 @@
-const onfido = require('../onfido.js');
+// const onfido = require('../onfido.js');
 const { Onfido, Region, OnfidoApiError } = require('@onfido/api');
 const { body,sanitizeBody, validationResult } = require('express-validator');
 const countries = require('../datas/supportedDocumentsByCountry.json');
-const { applicant } = require('../onfido.js');
 
 // Display list of all applicants.
 exports.applicant_list = function(req, res) {
+    const onfido = new Onfido({
+        apiToken: req.session.apiToken
+    });
     onfido.applicant
         .list({ page: 0, perPage: 25, includeDeleted: false})
         .then((applicants) => 
@@ -33,17 +35,20 @@ exports.applicant_new = function(req, res) {
 // Handle applicant create on POST.
 exports.applicant_create = function(req, res) {
     // Validate fields.
-    body('firstName', 'Firstname must not be empty.').trim().isLength({ min: 1 }),
-    body('lastName', 'Lastname must not be empty.').trim().isLength({ min: 1 }),
+    body('firstName', 'Firstname must not be empty.').trim().isLength({ min: 1 });
+    body('lastName', 'Lastname must not be empty.').trim().isLength({ min: 1 });
 
     // Sanitize fields.
-    sanitizeBody('firstName').escape(),
-    sanitizeBody('lastName').escape(),
-    sanitizeBody('email').escape(),
-    sanitizeBody('dob').escape(),
+    sanitizeBody('firstName').escape();
+    sanitizeBody('lastName').escape();
+    sanitizeBody('email').escape();
+    sanitizeBody('dob').escape();
     // sanitizeBody('idNumbers.*').escape(),
-    sanitizeBody('addresse.*').escape(), 
+    sanitizeBody('addresse.*').escape(); 
 
+    const onfido = new Onfido({
+        apiToken: req.session.apiToken
+    });
     onfido.applicant
         .create({
             firstName: req.body.firstName,
@@ -71,6 +76,9 @@ exports.applicant_create = function(req, res) {
 
 // Display detail page for a specific applicant.
 exports.applicant_show = function(req, res) {
+    const onfido = new Onfido({
+        apiToken: req.session.apiToken
+    });
     onfido.applicant.find(req.params.id)
         .then((applicant) => {
             const documents = onfido.document.list(applicant.id);
@@ -98,6 +106,9 @@ exports.applicant_show = function(req, res) {
 
 // Display applicant edit form.
 exports.applicant_edit = function(req, res) {
+    const onfido = new Onfido({
+        apiToken: req.session.apiToken
+    });
     onfido.applicant.find(req.params.id)
     .then((applicant) => {
         res.render('applicantForm', { applicant: applicant, countries: countries });
@@ -109,16 +120,16 @@ exports.applicant_update = function(req, res) {
    
     // Validate fields.
     // Validate fields.
-    body('firstName', 'Firstname must not be empty.').trim().isLength({ min: 1 }),
-    body('lastName', 'Lastname must not be empty.').trim().isLength({ min: 1 }),
+    body('firstName', 'Firstname must not be empty.').trim().isLength({ min: 1 });
+    body('lastName', 'Lastname must not be empty.').trim().isLength({ min: 1 });
 
     // Sanitize fields.
-    sanitizeBody('firstName').escape(),
-    sanitizeBody('lastName').escape(),
-    sanitizeBody('email').escape(),
-    sanitizeBody('dob').escape(),
-    // sanitizeBody('idNumbers.*').escape(),
-    sanitizeBody('addresse.*').escape(), 
+    sanitizeBody('firstName').escape();
+    sanitizeBody('lastName').escape();
+    sanitizeBody('email').escape();
+    sanitizeBody('dob').escape();
+    // sanitizeBody('idNumbers.*').escape();
+    sanitizeBody('addresse.*').escape(); 
 
     applicantRequest = {
         firstName: req.body.firstName,
@@ -140,10 +151,13 @@ exports.applicant_update = function(req, res) {
             line2: req.body.addressLine2,
             line3: req.body.addressLine3
         }
-    },
+    };
 
-    console.log(req.body),
+    console.log(req.body);
 
+    const onfido = new Onfido({
+        apiToken: req.session.apiToken
+    });
     onfido.applicant
         .update(req.params.id, applicantRequest)
         .then((applicant) => 
@@ -164,6 +178,9 @@ exports.applicant_update = function(req, res) {
 
 // Handle applicant delete on GET.
 exports.applicant_delete = function(req, res) {
+    const onfido = new Onfido({
+        apiToken: req.session.apiToken
+    });
     onfido.applicant
         .delete(req.params.id)
         .then(() => 

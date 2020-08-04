@@ -1,4 +1,4 @@
-var onfido = require('../onfido.js');
+// var onfido = require('../onfido.js');
 var stream = require('stream');
 const { Onfido, OnfidoApiError } = require('@onfido/api');
 const { body,sanitizeBody, validationResult } = require('express-validator');
@@ -21,6 +21,9 @@ exports.photo_upload = function(req, res) {
         // referrer: 'http://localhost:3000/*'
         referrer: referrer
     };
+    const onfido = new Onfido({
+        apiToken: req.session.apiToken
+    });
     onfido.sdkToken.generate( sdkTokenRequest )
         .then((sdkToken) => {
             res.render('photoUpload', { photo: photo, sdkToken: sdkToken });
@@ -43,7 +46,9 @@ exports.photo_save = function(req, res) {
 
     let fileToUpload = req.files.file;
     fileToUpload.mv('./uploads/' + fileToUpload.name);
-
+    const onfido = new Onfido({
+        apiToken: req.session.apiToken
+    });
     onfido.livePhoto
         .upload({
             applicantId: req.params.id, 
@@ -68,6 +73,9 @@ exports.photo_save = function(req, res) {
 
 // Display detail page for a specific photo.
 exports.photo_show = function(req, res) {
+    const onfido = new Onfido({
+        apiToken: req.session.apiToken
+    });
     onfido.livePhoto.find(req.params.id)
         .then((photo) => {            
             res.render('photo', { photo: photo })
@@ -87,6 +95,9 @@ exports.photo_show = function(req, res) {
 
 // Download a specific photo.
 exports.photo_download = function(req, res) {
+    const onfido = new Onfido({
+        apiToken: req.session.apiToken
+    });
     onfido.livePhoto.download(req.params.id)
         .then((photo) => {
             // res.set('Content-disposition', 'attachment; filename=' + 'doc.jpg');

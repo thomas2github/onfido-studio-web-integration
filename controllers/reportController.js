@@ -1,4 +1,4 @@
-const onfido = require('../onfido.js');
+// const onfido = require('../onfido.js');
 const { Onfido, Region, OnfidoApiError } = require('@onfido/api');
 
 // Display list of all reports for a check.
@@ -8,6 +8,9 @@ exports.report_list = function(req, res) {
 
 // Display detail page for a specific report.
 exports.report_show = function(req, res) {
+    const onfido = new Onfido({
+        apiToken: req.session.apiToken
+    });
     onfido.report.find(req.params.id)
         .then((report) => {
             res.render('report', { report: report });

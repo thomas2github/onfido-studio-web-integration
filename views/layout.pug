@@ -24,7 +24,7 @@ body
                 Tip 1: You can change the color of the sidebar using: data-color="purple | azure | green | orange | danger"
                 Tip 2: you can also add an image using data-image tag
             .logo
-                a.simple-text.logo-normal(href='http://www.onfido.com')
+                a.simple-text.logo-normal(href='/')
                     img(src='/images/onfido-logo.png' width='150px')
             .sidebar-wrapper
                 ul.nav
@@ -40,10 +40,10 @@ body
                         a.nav-link(href='/reports')
                             i.material-icons grading
                             p Reports
-                    //- li.nav-item
-                    //-     a.nav-link(href='/scenario' disabled)
-                    //-         i.material-icons play_circle_filled
-                    //-         p Use cases
+                    li.nav-item
+                        a.nav-link(href='/logout')
+                            i.material-icons.text-danger exit_to_app
+                            p.text-danger Logout
                     //- li.nav-item
                     //-     a.nav-link(href='/fraud-detection' disabled)
                     //-         i.material-icons verified_user
@@ -65,13 +65,13 @@ body
                     nav.float-left
                         ul
                             li
-                                a(href='https://www.onfido.com')
+                                a(href='https://www.onfido.com' target='_blank')
                                     | Onfido
                             li
-                                a(href='https://developers.onfido.com')
+                                a(href='https://developers.onfido.com' target='_blank')
                                     | Developers
                             li
-                                a(href='https://documentation.onfido.com')
+                                a(href='https://documentation.onfido.com' target='_blank')
                                     | Documentation
                     .copyright.float-right
                         | &copy;

@@ -1,4 +1,4 @@
-const onfido = require('../onfido.js');
+// const onfido = require('../onfido.js');
 const stream = require('stream');
 const fs = require('fs');
 const { Onfido, OnfidoApiError } = require('@onfido/api');
@@ -22,6 +22,9 @@ exports.document_upload = function(req, res) {
         referrer: referrer
     };
     const countries = require('../datas/supportedDocumentsByCountry.json');
+    const onfido = new Onfido({
+        apiToken: req.session.apiToken
+    });
     onfido.sdkToken.generate( sdkTokenRequest )
         .then((sdkToken) => {
             res.render('documentUpload', { document: document, sdkToken: sdkToken, countries: countries });
@@ -49,6 +52,10 @@ exports.document_save = function(req, res) {
     let fileToUpload = req.files.file;
     fileToUpload.mv('./uploads/' + fileToUpload.name);
 
+    const onfido = new Onfido({
+        apiToken: req.session.apiToken
+    });
+
     onfido.document.upload({
         applicantId: req.params.id, 
         issuingCountry: req.body.issuingCountry,
@@ -74,6 +81,9 @@ exports.document_save = function(req, res) {
 
 // Display detail page for a specific document.
 exports.document_show = function(req, res) {
+    const onfido = new Onfido({
+        apiToken: req.session.apiToken
+    });
     onfido.document.find(req.params.id)
         .then((document) => {            
             res.render('document', { document: document })
@@ -93,6 +103,9 @@ exports.document_show = function(req, res) {
 
 // Download a specific document.
 exports.document_download = function(req, res) {
+    const onfido = new Onfido({
+        apiToken: req.session.apiToken
+    });
     onfido.document.download(req.params.id)
         .then((document) => {
             // res.set('Content-disposition', 'attachment; filename=' + 'doc.jpg');

@@ -6,7 +6,7 @@ block content
     .content
         .container-fluid
             .row
-                .col-md-12
+                .col-xl-4.col-lg-12
                     form
                         .card
                             .card-header.card-header-primary
@@ -20,33 +20,29 @@ block content
                                 p.card-category=  check.id
                             .card-body
                                 .row
-                                    .col-sm-6
-                                        .form-group.row
-                                            label.col-sm-4.col-form-label(for='firstName') Applicant firstname
-                                            .col-sm-8
-                                                input#firstName.form-control-plaintext(type='text' readonly='' value=applicant.firstName)
-                                        .form-group.row
-                                            label.col-sm-4.col-form-label(for='lastName') Applicant lastname
-                                            .col-sm-8
-                                                input#lastName.form-control-plaintext(type='text' readonly='' value=applicant.lastName)
-                                        .form-group.row
-                                            label.col-sm-4.col-form-label(for='applicantProvidesData') Data provided by apllicant?
-                                            .col-sm-8
-                                                input#applicantProvidesData.form-control-plaintext(readonly='' value=(check.applicantProvidesData)?'Yes':'No')
-                                    .col-sm-6
-                                        .form-group.row
-                                            label.col-sm-4.col-form-label(for='status') Status
-                                            .col-sm-8
-                                                +displayCheckStatus(check.status)
-                                        .form-group.row
-                                            label.col-sm-4.col-form-label(for='result') Result
-                                            .col-sm-8
-                                                +displayCheckResult(check.result)
-                                        .form-group.row
-                                            label.col-sm-4.col-form-label(for='tags') Tags
-                                            .col-sm-8
-                                                pre
-                                                    code= (check.tags.length>0)?check.tags.toString():''
+                                    .col-10
+                                        .form-group
+                                            label.bmd-label-floating Applicant firstname
+                                            input#firstName.form-control(type='text' disabled value=applicant.firstName)
+                                        .form-group
+                                            label.bmd-label-floating Applicant lastname
+                                            input#lastName.form-control(type='text' disabled value=applicant.lastName)
+                                        .form-group
+                                            label.bmd-label-floating Data provided by apllicant?
+                                            input#applicantProvidesData.form-control(disabled value=(check.applicantProvidesData)?'Yes':'No')
+                                        .form-group
+                                            label.bmd-label-floating Status
+                                            br
+                                            +displayCheckStatus(check.status)
+                                        .form-group
+                                            label.bmd-label-floating Result
+                                            br
+                                            +displayCheckResult(check.result)
+                                        .form-group
+                                            label.bmd-label-floating Tags
+                                            pre
+                                                code= (check.tags.length>0)?check.tags.toString():''
+                .col-xl-8.col-lg-12
                     .card
                         .card-header.card-header-warning
                             h4.card-title Reports

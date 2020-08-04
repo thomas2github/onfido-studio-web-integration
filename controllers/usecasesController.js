@@ -1,4 +1,4 @@
-const onfido = require('../onfido.js');
+// const onfido = require('../onfido.js');
 const { Onfido, OnfidoApiError } = require('@onfido/api');
 const moment = require('moment');
 const { findSeries } = require('async');
@@ -13,6 +13,9 @@ exports.usecases_home = function(req, res) {
 exports.usecases_doc_plus_selfie = function(req, res) {
     const now = moment().format('YYYYMMDD-HHmmss');
     // Create applicant
+    const onfido = new Onfido({
+        apiToken: req.session.apiToken
+    });
     onfido.applicant
         .create({
             firstName: 'fn-' + now,
@@ -48,6 +51,9 @@ exports.usecases_doc_plus_selfie = function(req, res) {
 exports.usecases_create_doc_plus_selfie_check = function(req, res) {
     const applicantId = req.params.id;
     // Create check
+    const onfido = new Onfido({
+        apiToken: req.session.apiToken
+    });
     onfido.check
         .create({
             applicantId: applicantId,
@@ -73,6 +79,9 @@ exports.usecases_create_doc_plus_selfie_check = function(req, res) {
 exports.usecases_doc_plus_video = function(req, res) {
     const now = moment().format('YYYYMMDD-HHmmss');
     // Create applicant
+    const onfido = new Onfido({
+        apiToken: req.session.apiToken
+    });
     onfido.applicant
         .create({
             firstName: 'fn-' + now,
@@ -108,6 +117,9 @@ exports.usecases_doc_plus_video = function(req, res) {
 exports.usecases_create_doc_plus_video_check = function(req, res) {
     const applicantId = req.params.id;
     // Create check
+    const onfido = new Onfido({
+        apiToken: req.session.apiToken
+    });
     onfido.check
         .create({
             applicantId: applicantId,
@@ -136,13 +148,16 @@ exports.usecases_watchlist = function(req, res) {
 
 exports.usecases_create_watchlist_check = function(req, res) {
     // Validate fields.
-    body('firstName', 'Firstname must not be empty.').trim().isLength({ min: 1 }),
-    body('lastName', 'Lastname must not be empty.').trim().isLength({ min: 1 }),
+    body('firstName', 'Firstname must not be empty.').trim().isLength({ min: 1 });
+    body('lastName', 'Lastname must not be empty.').trim().isLength({ min: 1 });
 
     // Sanitize fields.
-    sanitizeBody('firstName').escape(),
-    sanitizeBody('lastName').escape(),
+    sanitizeBody('firstName').escape();
+    sanitizeBody('lastName').escape();
 
+    const onfido = new Onfido({
+        apiToken: req.session.apiToken
+    });
     onfido.applicant
         .create({
             firstName: req.body.firstName,
@@ -184,6 +199,9 @@ exports.usecases_create_autofill_check = function(req, res) {
     fileToExtract.mv('./uploads/' + fileToExtract.name);
     
     // create applicant
+    const onfido = new Onfido({
+        apiToken: req.session.apiToken
+    });
     onfido.applicant.create({
         firstName: 'fn-' + now,
         lastName: 'ln-' + now 
@@ -235,6 +253,9 @@ exports.usecases_create_autofill_check = function(req, res) {
 exports.usecases_known_faces = function(req, res) {
     const now = moment().format('YYYYMMDD-HHmmss');
     // Create applicant
+    const onfido = new Onfido({
+        apiToken: req.session.apiToken
+    });
     onfido.applicant
         .create({
             firstName: 'fn-' + now,
@@ -269,6 +290,9 @@ exports.usecases_known_faces = function(req, res) {
 
 exports.usecases_create_known_faces_check = function(req, res) {
     // Create check
+    const onfido = new Onfido({
+        apiToken: req.session.apiToken
+    });
     onfido.check
         .create({
             applicantId: req.params.id,

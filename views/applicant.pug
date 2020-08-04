@@ -114,7 +114,7 @@ block content
                             if documents.length > 0
                                 .d-flex.flex-row.justify-content-center.flex-wrap
                                     each document in documents
-                                        .card.text-center.mr-4.js-clickable(href='/resources/documents/'+document.id, style='width:8rem;')
+                                        .card.text-center.mr-4.js-clickable(href='/resources/documents/'+document.id, style='width:10rem;')
                                             i.material-icons.pt-4(style='font-size:36px') assignment_ind
                                             .card-body
                                                 .card-text
@@ -122,7 +122,8 @@ block content
                                                 .card-text
                                                     small= document.side
                                                 .card-text
-                                                    small= '(' + Math.round(document.fileSize/1024).toString() + ' Ko)'
+                                                    small
+                                                        +displayDate(document.createdAt)
                     .card
                         .card-header.card-header-info
                             .float-right
@@ -138,7 +139,8 @@ block content
                                             i.material-icons.pt-4(style='font-size:36px') portrait
                                             .card-body
                                                 .card-text
-                                                    small= '(' + Math.round(photo.fileSize/1024).toString() + ' Ko)'
+                                                    small
+                                                        +displayDate(photo.createdAt)
                     .card
                         .card-header.card-header-info
                             .float-right
@@ -154,7 +156,8 @@ block content
                                             i.material-icons.pt-4(style='font-size:36px') play_circle_outline    
                                             .card-body
                                                 .card-text
-                                                    small= '(' + Math.round(video.fileSize/1024).toString() + ' Ko)'
+                                                    small
+                                                        +displayDate(video.createdAt)
     div#deleteModal.modal(tabindex='-1' role='dialog')
         .modal-dialog(role='document')
             .modal-content

@@ -1,4 +1,4 @@
-var onfido = require('../onfido.js');
+// var onfido = require('../onfido.js');
 var stream = require('stream');
 const { Onfido, OnfidoApiError } = require('@onfido/api');
 
@@ -19,6 +19,9 @@ exports.video_upload = function(req, res) {
         // referrer: 'http://localhost:3000/*'
         referrer: referrer
     };
+    const onfido = new Onfido({
+        apiToken: req.session.apiToken
+    });
     onfido.sdkToken.generate( sdkTokenRequest )
         .then((sdkToken) => {
             res.render('videoUpload', { video: video, sdkToken: sdkToken });
@@ -39,6 +42,9 @@ exports.video_upload = function(req, res) {
 
 // Display detail page for a specific video.
 exports.video_show = function(req, res) {
+    const onfido = new Onfido({
+        apiToken: req.session.apiToken
+    });
     onfido.liveVideo.find(req.params.id)
         .then((video) => {            
             res.render('video', { video: video })
@@ -58,6 +64,9 @@ exports.video_show = function(req, res) {
 
 // Download a specific video.
 exports.video_download = function(req, res) {
+    const onfido = new Onfido({
+        apiToken: req.session.apiToken
+    });
     onfido.liveVideo.download(req.params.id)
         .then((video) => {
             // res.set('Content-disposition', 'attachment; filename=' + 'doc.jpg');
@@ -79,6 +88,9 @@ exports.video_download = function(req, res) {
 
 // Download a single frame of a specific video.
 exports.video_frame = function(req, res) {
+    const onfido = new Onfido({
+        apiToken: req.session.apiToken
+    });
     onfido.liveVideo.frame(req.params.id)
         .then((video) => {
             // res.set('Content-disposition', 'attachment; filename=' + 'doc.jpg');

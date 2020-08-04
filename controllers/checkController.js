@@ -1,4 +1,4 @@
-const onfido = require('../onfido.js');
+// const onfido = require('../onfido.js');
 const { Onfido, Region, OnfidoApiError } = require('@onfido/api');
 
 // Display list of all check for an applicant.
@@ -9,6 +9,9 @@ exports.check_list = function(req, res) {
 // Display check create form.
 exports.check_new = function(req, res) {
     let check = {};
+    const onfido = new Onfido({
+        apiToken: req.session.apiToken
+    });
     const applicant = onfido.applicant.find(req.params.id);
     const documents = onfido.document.list(req.params.id);
     Promise.all([applicant, documents])
@@ -49,7 +52,9 @@ exports.check_create = function(req, res) {
     const consider = [];
 
     // res.send(JSON.stringify(req.body)+JSON.stringify(reportsName)+JSON.stringify(documentsId)+JSON.stringify(tags)+JSON.stringify(applicantProvidesData)+JSON.stringify(asynchronous)+JSON.stringify(suppressFormEmail));
-
+    const onfido = new Onfido({
+        apiToken: req.session.apiToken
+    });
     onfido.check
         .create({
             applicantId: req.params.id,
@@ -80,6 +85,9 @@ exports.check_create = function(req, res) {
 
 // Display detail page for a specific check.
 exports.check_show = function(req, res) {
+    const onfido = new Onfido({
+        apiToken: req.session.apiToken
+    });
     onfido.check.find(req.params.id)
         .then((check) => {
             const applicant = onfido.applicant.find(check.applicantId);

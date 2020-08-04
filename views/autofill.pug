@@ -35,16 +35,17 @@ block content
                                             label.bmd-label-floating File
                                             input#file.form-control(type='file' name='file' accept='image/jpeg,image/png,application/pdf')
                                             p (jpg/png/pdf - min: 32Ko max: 10Mo)
-                                        button.btn.btn-info(type='submit') upload
+                                        .d-flex.justify-content-around.mt-4
+                                            button.btn.btn-info(type='submit') upload
                         if applicantId
                             .card
                                 .card-body
                                     .row.justify-content-center
                                         .col-10
                                             h6 Extracted Data
-                                            .float-right
-                                                a(href='/resources/applicants/'+applicantId) view applicant details
                                             pre= JSON.stringify(result, null, 4)
+                                            .d-flex.justify-content-around.mt-4
+                                                a.btn.btn-info(href='/resources/applicants/'+applicantId) view applicant details
 
 append bottom
     script(src='/javascripts/selectCountryAndDocumentType.js')

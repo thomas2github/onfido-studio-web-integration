@@ -3,8 +3,8 @@ extends layout
 block content
     .content
         .container-fluid
-            .row
-                .col-md-12
+            .row.justify-content-center
+                .col-lg-6.col-md-8.col-sm-12
                     form
                         .card
                             .card-header.card-header-info
@@ -14,23 +14,17 @@ block content
                                     +displayDate(photo.createdAt)
                                 p.card-category=  photo.id
                             .card-body
-                                .row
-                                    .col-sm-6
-                                        .form-group.row
-                                            label.col-sm-4.col-form-label(for='fileName') File name
-                                            .col-sm-8
-                                                input#fileName.form-control-plaintext(type='text' readonly='' value=photo.fileName)
-                                        .form-group.row
-                                            label.col-sm-4.col-form-label(for='fileType') File type
-                                            .col-sm-8
-                                                input#fileType.form-control-plaintext(type='text' readonly='' value=photo.fileType)
-                                        .form-group.row
-                                            label.col-sm-4.col-form-label(for='fileSize') File Size
-                                            .col-sm-8
-                                                input#fileSize.form-control-plaintext(type='text' readonly='' value=(Math.round(photo.fileSize/1024) + ' Ko'))
-                                    .col-sm-6
-                                .row
-                                    .col-sm-12
-                                        .text-center
+                                .row.justify-content-center
+                                    .col-10
+                                        .form-group
+                                            label.bmd-label-floating File name
+                                            input#fileName.form-control(type='text' disabled value=photo.fileName)
+                                        .form-group
+                                            label.bmd-label-floating File type
+                                            input#fileType.form-control(type='text' disabled value=photo.fileType)
+                                        .form-group
+                                            label.bmd-label-floating File Size
+                                            input#fileSize.form-control(type='text' disabled value=(Math.round(photo.fileSize/1024) + ' Ko'))
+                                        .d-flex.justify-content-around.mt-4
                                             a.btn.btn-primary(href='/resources/photos/' + photo.id + '/download' target='_blank') view
 
