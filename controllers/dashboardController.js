@@ -24,7 +24,7 @@ exports.dashboard = function(req, res) {
             });
     }
     onfido.applicant
-        .list()
+        .list({includeDeleted: true})
         .then((applicants) => {
             Promise.all(
                 applicants.map(applicant => getChecks(applicant))

@@ -21,6 +21,8 @@ block content
                                         th
                                             | Created at
                                         th
+                                            | Delete at
+                                        th
                                             | ID
                                     tbody
                                         each applicant in applicants
@@ -29,4 +31,7 @@ block content
                                                 td= applicant.email
                                                 td
                                                     +displayDate(applicant.createdAt)
+                                                td.text-danger
+                                                    if applicant.deleteAt
+                                                        +displayDate(applicant.deleteAt)
                                                 td= applicant.id

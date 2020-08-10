@@ -9,7 +9,7 @@ exports.applicant_list = function(req, res) {
         apiToken: req.session.apiToken
     });
     onfido.applicant
-        .list({ page: 0, perPage: 25, includeDeleted: false})
+        .list({ page: 0, perPage: 25, includeDeleted: true})
         .then((applicants) => 
             res.render('applicants', { applicants: applicants })
         )
