@@ -1,0 +1,183 @@
+extends layout
+
+append head
+    // Onfido SDK CSS
+    link(rel='stylesheet' href='/dist/style.css')
+
+block content
+  .content
+        .container-fluid
+            .row.justify-content-center.mt-2
+                .col-8
+                    .card
+                        .card-body
+                            case step
+                                when 'start'
+                                    a(href='/self-identification/capture')
+                                        img(src='/images/compte-nickel-openaccount.png' width='100%')
+                                when 'capture'
+                                    .customerheader
+                                        img(src='/images/logo-compte-nickel.png' height='50')
+                                        .float-right.mt-3
+                                            h5 SOUSCRIPTION
+                                        hr
+                                    #onfido-mount(data-token=sdkToken)
+                                when 'check'
+                                    .customerheader
+                                        img(src='/images/logo-compte-nickel.png' height='50')
+                                        .float-right.mt-3
+                                            h5 SOUSCRIPTION
+                                        hr
+                                    .d-flex.flex-row.justify-content-center
+                                        .card()
+                                            .card-header.card-header-info
+                                                .float-right
+                                                    i.material-icons check_circle_outline
+                                                h4 Subscription form
+                                            .card-body
+                                                form(action='')
+                                                    .d-flex.flex-row.justify-content-center
+                                                        .yourIdentity.mx-5
+                                                            h5.mb-4.font-weight-bold Your Identity
+                                                            .form-group
+                                                                label.bmd-label-floating Firstname
+                                                                input#firstName.form-control(type='text' name='firstName' value=(frontAutofill.extractedData.firstName)?frontAutofill.extractedData.firstName:null disabled)
+                                                            .form-group
+                                                                label.bmd-label-floating Lastname
+                                                                input#lastName.form-control(type='text' name='lastName' value=(frontAutofill.extractedData.lastName)?frontAutofill.extractedData.lastName:null disabled)
+                                                            //- .form-group
+                                                            //-     label.bmd-label-floating Date of birth
+                                                            //-     input#dob.form-control(type='date' name='dob' value=(frontAutofill.extractedData.dateOfBirth)?frontAutofill.extractedData.dateOfBirth:null disabled)
+                                                            //- .form-group
+                                                            //-     label.bmd-label-floating Gender
+                                                            //-     input#gender.form-control(type='text' name='gender' value=(frontAutofill.extractedData.gender)?frontAutofill.extractedData.gender:null disabled)
+                                                        .yourDocument.mx-5
+                                                            h5.mb-4.font-weight-bold Your Document
+                                                            .form-group
+                                                                label.bmd-label-floating Issuing Country
+                                                                input#issuingCountry.form-control(type='text' name='issuingCountry' value=(frontAutofill.documentClassification.issuingCountry)?frontAutofill.documentClassification.issuingCountry:null disabled)
+                                                            .form-group
+                                                                label.bmd-label-floating Document Type
+                                                                input#documentType.form-control(type='text' name='documentType' value=(frontAutofill.documentClassification.documentType)?frontAutofill.documentClassification.documentType:null disabled)
+                                                            //- .form-group
+                                                            //-     label.bmd-label-floating Document Number
+                                                            //-     input#documentNumber.form-control(type='text' name='documentNumber' value=(frontAutofill.extractedData.documentNumber)?frontAutofill.extractedData.documentNumber:null disabled)
+                                                            //- .form-group
+                                                            //-     label.bmd-label-floating Date of Expiry
+                                                            //-     input#dateOfExpiry.form-control(type='date' name='dateOfExpiry' value=(frontAutofill.extractedData.dateOfExpiry)?frontAutofill.extractedData.dateOfExpiry:null disabled)
+                                                        //- .facialSimilarityMatch
+                                                        //-     h5.my-4.font-weight-bold Photo match
+                                                                //- p= facialSimilarityReport.status
+                                                                //- pre= JSON.stringify(facialSimilarityReport, null, 2)
+                                                        //-     img(style='width:150px;' src=frontDocumentData)
+                                                        //-     br
+                                                        //-     mg(style='width:150px;' src=photoData)
+                                                    .d-flex.flex-row.justify-content-center
+                                                        a.btn.btn-info.mt-4(href='/self-identification/validation') Finalize your subscription
+                                when 'validation'
+                                    .customerheader
+                                        img(src='/images/logo-compte-nickel.png' height='50')
+                                        .float-right.mt-3
+                                            h5 SOUSCRIPTION
+                                        hr
+                                    .d-flex.flex-row.justify-content-center
+                                        .card
+                                            .card-header.card-header-info
+                                                .float-right
+                                                    i.material-icons check_circle_outline
+                                                h4 Identity Verification Results
+                                            .card-body
+                                                .d-flex.flex-row.justify-content-center
+                                                    if check.status == 'complete'
+                                                        a.btn.btn-success.mt-4(href='/self-identification/success') Go to your customer space
+                                                    if check.status != 'complete'
+                                                        a.btn.btn-warning.mt-4(href='/self-identification/validation') Refresh
+                                                .d-flex.flex-row.justify-content-center
+                                                    a.mt-2(href='https://dashboard.onfido.com/checks/'+check.id+'/reports' target='_blank') view details on the dashboard
+                                                .justify-content-center.mt-4
+                                                    .report-title
+                                                        h5.font-weight-bold(data-toggle='toggle') Check
+                                                            | &nbsp;&nbsp;&nbsp;
+                                                            small status:&nbsp;
+                                                            +displayCheckStatus(check.status)
+                                                            | &nbsp;&nbsp;&nbsp;
+                                                            small result:&nbsp;
+                                                            +displayCheckResult(check.result)
+                                                        hr
+                                                    .report-data.hide(style='display:none;')
+                                                        pre= JSON.stringify(check, null, 2)
+                                                    br
+                                                    .report-title
+                                                        h5.font-weight-bold(data-toggle='toggle')= (firstReport.name == 'document')?'Document Report':'Facial Similarity Report'
+                                                            | &nbsp;&nbsp;&nbsp; 
+                                                            small status:&nbsp;
+                                                            +displayReportStatus(firstReport.status)
+                                                            | &nbsp;&nbsp;&nbsp;
+                                                            small result:&nbsp;
+                                                            +displayReportResult(firstReport.result)
+                                                            if firstReport.name == 'document'
+                                                                | &nbsp;&nbsp;&nbsp;
+                                                                small sub-result:&nbsp;
+                                                                +displayReportSubResult(firstReport.subResult)
+                                                        hr
+                                                    .report-data.hide(style='display:none;')
+                                                        pre= JSON.stringify(firstReport, null, 2)
+                                                    br
+                                                    .report-title
+                                                        h5.font-weight-bold(data-toggle='toggle')= (secondReport.name == 'document')?'Document Report':'Facial Similarity Report'
+                                                            | &nbsp;&nbsp;&nbsp;
+                                                            small status:&nbsp;
+                                                            +displayReportStatus(secondReport.status)
+                                                            | &nbsp;&nbsp;&nbsp;
+                                                            small result:&nbsp;
+                                                            +displayReportResult(secondReport.result)
+                                                            if secondReport.name == 'document'
+                                                                | &nbsp;&nbsp;&nbsp;
+                                                                small sub-result:&nbsp;
+                                                                +displayReportSubResult(secondReport.subResult)
+                                                        hr
+                                                    .report-data.hide(style='display:none;')
+                                                        pre= JSON.stringify(secondReport, null, 2)
+                                when 'success'
+                                    img(src='/images/compte-nickel-customer-space.png' style='width: 1000px')
+                                default
+                                    .customerheader
+                                        img(src='/images/logo-compte-nickel.png' height='50')
+                                        .float-right.mt-3
+                                            h5 SOUSCRIPTION
+                                        hr
+                                    h1 You are lost!
+                .col-4
+                        .card
+                            .card-header.card-header-success
+                                h4 Messages
+                            .card-body
+                                table.table(style='font-size: 0.7rem;')
+                                    thead
+                                        tr
+                                            th 
+                                                small DATE
+                                            th 
+                                                small API NAME
+                                            th 
+                                                small TYPE
+                                            th 
+                                                small DELAI
+                                    each message in messages
+                                        tbody
+                                            tr(data-toggle='toggle')
+                                                td= message.date
+                                                td= message.api
+                                                td= message.type
+                                                td= message.delai
+                                        tbody.hide(style='display:none;')
+                                            tr
+                                                td(colspan='4')
+                                                    pre= message.data
+                                        
+append bottom
+    script(src='/dist/onfido.min.js')
+    script(src='/javascripts/selfIdentification.js')
+
+                
+

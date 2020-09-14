@@ -9,6 +9,7 @@ $(document).ready(function() {
             );
         }
     });
-    $('#issuingCountry').val('FRA').change()
+    $('#issuingCountry').val('PRT').change()
+    $('#type').val('national_identity_card').change()
 
 });

@@ -6,3 +6,7 @@ body {
 a {
   color: #00B7FF;
 }
+
+.small-text * {
+  font-size: 0.8rem;
+}

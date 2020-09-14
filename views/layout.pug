@@ -28,34 +28,34 @@ body
                     img(src='/images/onfido-logo.png' width='150px')
             .sidebar-wrapper
                 ul.nav
-                    li.nav-item
-                        a.nav-link(href='/dashboard')
-                            i.material-icons dashboard
-                            p Dashboard
-                    li.nav-item
-                        a.nav-link(href='/resources/applicants')
-                            i.material-icons person
-                            p Applicants
-                    li.nav-item
-                        a.nav-link(href='/reports')
-                            i.material-icons grading
-                            p Reports
+                    //- li.nav-item
+                    //-     a.nav-link(href='/resources/applicants/new')
+                    //-         i.material-icons people
+                    //-         p Create an applicant
+                    //- li.nav-item
+                    //-     a.nav-link(href='/document-validation')
+                    //-         i.material-icons grading
+                    //-         p Document validation
+                    //- li.nav-item
+                    //-     a.nav-link(href='/digital-signature' target='_blank')
+                    //-         i.material-icons create
+                    //-         p Digital signature
+                    //- li.nav-item
+                    //-     a.nav-link(href='/signature-validation' target='_blank')
+                    //-         i.material-icons done_outline
+                    //-         p Signature validation
+                    //- li.nav-item
+                    //-     a.nav-link(href='/portal' target='_blank')
+                    //-         i.material-icons analytics
+                    //-         p Portal and reporting
+                    //- li.nav-item
+                    //-     a.nav-link(href='/self-identification')
+                    //-         i.material-icons face
+                    //-         p Self-identification
                     li.nav-item
                         a.nav-link(href='/logout')
                             i.material-icons.text-danger exit_to_app
                             p.text-danger Logout
-                    //- li.nav-item
-                    //-     a.nav-link(href='/fraud-detection' disabled)
-                    //-         i.material-icons verified_user
-                    //-         p Fraud detection
-                    //- li.nav-item
-                    //-     a.nav-link(href='/sdks-advantages' disabled)
-                    //-         i.material-icons check_box
-                    //-         p SDKs vs API upload
-                    //- li.nav-item
-                    //-     a.nav-link(href='/enhanced-customer-journey')
-                    //-         i.material-icons escalator
-                    //-         p Enhanced Customer Journey
         .main-panel
             // Content
             block content
@@ -120,8 +120,6 @@ body
         script(src='/assets/js/plugins/bootstrap-notify.js')
         // Control Center for Material Dashboard: parallax effects, scripts for the example pages etc
         script(src='/assets/js/material-dashboard.js')
-        // Tags input component
-        script(src='/javascripts/tag-input.umd.js')
 
         // Custom javascript
         script(src='/javascripts/layout.js')

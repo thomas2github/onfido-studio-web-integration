@@ -22,7 +22,7 @@ exports.postLogin = function(req, res) {
             //save Token in session
             req.session.apiToken = token,
             //redirect to dashboard
-            res.redirect('/dashboard')
+            res.redirect('/index')
         })
         .catch((error) => {
             if (error instanceof OnfidoApiError) {
@@ -34,11 +34,8 @@ exports.postLogin = function(req, res) {
                 // No response was received for some reason e.g. a network error.
                 console.log(error.message);
             }
+            res.render('login', { invalid: 'invalid' });
         })
-        .finally(() => {
-            //reject login request
-            res.render('login', { invalid: 'invalid' })
-        });
 };
 
 exports.logout = function(req, res) {

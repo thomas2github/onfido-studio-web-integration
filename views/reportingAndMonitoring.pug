@@ -1,0 +1,21 @@
+extends layout
+
+block content
+    .content
+        .container-fluid
+            .row.justify-content-center
+                .col-xl-6.col-lg-8
+                    .card
+                        .card-header.card-header-primary
+                            h4.card-title= 'Reporting & Monitoring'
+                        .card-body
+                            .row.justify-content-center
+                                .col-10.mt-4
+                                    .d-flex.justify-content-around
+                                        a.btn.btn-warning.mt-4(href='https://dashboard.onfido.com/analytics' target='_blank') Analytics on dashboard
+                                    .d-flex.justify-content-around
+                                        a.btn.btn-info.mt-4(href='https://dashboard.onfido.com/library?_sandbox_[0]=0' target='_blank') &nbsp;Monitor on dashboard&nbsp;
+                                    .d-flex.justify-content-around
+                                        a.btn.btn-success.px-5.mt-4(href='/report' target='_blank') Customized Report
+
+append bottom                    

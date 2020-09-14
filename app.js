@@ -10,10 +10,6 @@ const logger = require('morgan');
 const fileUpload = require('express-fileupload');
 
 const indexRouter = require('./routes/index');
-const resourcesRouter = require('./routes/resources');
-const usersRouter = require('./routes/users');
-const reportsRouter = require('./routes/reports');
-const usecasesRouter = require('./routes/usecases');
 
 let app = express();
 
@@ -39,10 +35,6 @@ app.use(fileUpload({
 }));
 
 app.use('/', indexRouter);
-app.use('/resources', resourcesRouter);
-app.use('/users', usersRouter);
-app.use('/reports', reportsRouter);
-app.use('/usecases', usecasesRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
