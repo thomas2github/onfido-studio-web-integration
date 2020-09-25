@@ -3,19 +3,20 @@ $(document).ready(function() {
     // Init & display Onfido web SDK ID Document
     $('#dislpaySdk').click(function(){
         $('.onfido-sdk-ui-Modal-inner').remove();
-        const useModal = $('#useModal').is(":checked");
-        const welcomeStep = $('#welcomeStep').is(":checked");
-        const forceCrossDevice = $('#forceCrossDevice').is(":checked");
-        const useLiveDocumentCapture = false; // $('#useLiveDocumentCapture').is(":checked");
-        const documentStep = $('#documentStep').is(":checked");
-        const selfieStep = $('#selfieStep').is(":checked");
-        const videoStep = $('#videoStep').is(":checked");
-        const completeStep = $('#completeStep').is(":checked");
-        const acceptPassport = $('#acceptPassport').is(":checked");
-        const acceptNationalId = $('#acceptNationalId').is(":checked");
-        const acceptDrivingLicence = $('#acceptDrivingLicence').is(":checked");
-        const acceptResidencePermit = $('#acceptResidencePermit').is(":checked");
-        
+        const useModal = $('#useModal').is(':checked');
+        const welcomeStep = $('#welcomeStep').is(':checked');
+        const forceCrossDevice = $('#forceCrossDevice').is(':checked');
+        const useLiveDocumentCapture = false; // $('#useLiveDocumentCapture').is(':checked');
+        const documentStep = $('#documentStep').is(':checked');
+        const selfieStep = $('#selfieStep').is(':checked');
+        const videoStep = $('#videoStep').is(':checked');
+        const completeStep = $('#completeStep').is(':checked');
+        const acceptPassport = $('#acceptPassport').is(':checked');
+        const acceptNationalId = $('#acceptNationalId').is(':checked');
+        const acceptDrivingLicence = $('#acceptDrivingLicence').is(':checked');
+        const acceptResidencePermit = $('#acceptResidencePermit').is(':checked');
+        const language = $('#language').is(':checked') ? 'fr_FR' : 'en_US';
+
         let steps = [];
         if (documentStep) {
             steps.push(
@@ -74,6 +75,7 @@ $(document).ready(function() {
         let sdkParam = {
             token: $(this).attr('data-token'),
             containerId: 'onfido-mount',
+            language: language,
             useModal: useModal,
             isModalOpen: true,
             onModalRequestClose: function() {

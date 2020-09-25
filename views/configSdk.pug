@@ -26,6 +26,9 @@ block content
                                     .form-check.ml-5
                                         input#completeStep.form-check-input(type='checkbox' data-toggle='toggle' data-style='mr-1' data-size='xs' checked)
                                         label.form-check-label(for='completeStep') add complete step
+                                    .form-check.ml-5
+                                        input#language.form-check-input(type='checkbox' data-toggle='toggle' data-style='mr-1' data-size='xs' data-on="French" data-off="English" data-onstyle="info" data-offstyle="warning")
+                                        label.form-check-label(for='lnanguage') language
                                 .d-flex.flex-column.flex-wrap
                                     h6.ml-5 Capture
                                     .form-check.ml-5
@@ -52,7 +55,7 @@ block content
                                         input#acceptDrivingLicence.form-check-input(type='checkbox' data-toggle='toggle' data-style='mr-1' data-size='xs' checked)
                                         label.form-check-label(for='acceptDrivingLicence') driving licence
                                     .form-check.ml-5
-                                        input#acceptResidencePermit.form-check-input(type='checkbox' data-toggle='toggle' data-style='mr-1' data-size='xs')
+                                        input#acceptResidencePermit.form-check-input(type='checkbox' data-toggle='toggle' data-style='mr-1' data-size='xs' checked)
                                         label.form-check-label(for='acceptResidencePermit') residence permit
                             .d-flex.flex-column.justify-content-center.flex-wrap
                                 button#dislpaySdk.btn.btn-info.my-4(type='button' data-token=sdkToken) display SDK
