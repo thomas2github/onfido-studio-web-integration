@@ -11,6 +11,11 @@ $(document).ready(function() {
         const selfieStep = $('#selfieStep').is(":checked");
         const videoStep = $('#videoStep').is(":checked");
         const completeStep = $('#completeStep').is(":checked");
+        const acceptPassport = $('#acceptPassport').is(":checked");
+        const acceptNationalId = $('#acceptNationalId').is(":checked");
+        const acceptDrivingLicence = $('#acceptDrivingLicence').is(":checked");
+        const acceptResidencePermit = $('#acceptResidencePermit').is(":checked");
+        
         let steps = [];
         if (documentStep) {
             steps.push(
@@ -19,7 +24,13 @@ $(document).ready(function() {
                     options: {
                         forceCrossDevice: forceCrossDevice,
                         useLiveDocumentCapture: useLiveDocumentCapture,
-                        uploadFallback: true
+                        uploadFallback: true,
+                        documentTypes: {
+                            passport: acceptPassport,
+                            driving_licence: acceptDrivingLicence,
+                            national_identity_card: acceptNationalId,
+                            residence_permit: acceptResidencePermit
+                        }
                     }
                 }
             );
@@ -77,9 +88,9 @@ $(document).ready(function() {
         welcomeParam = {
             type: 'welcome',
             options: {
-                title: 'Welcome on COMPTE NICKEL web sdk demo',
+                title: 'Welcome on Onfido web sdk demo',
                 descriptions: ['sdk capture with options: '],
-                nextButton: 'start COMPTE NICKEL capture'
+                nextButton: 'start Onfido capture'
             }
         };
         if (useModal) {

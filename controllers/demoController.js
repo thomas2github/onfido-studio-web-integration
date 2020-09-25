@@ -9,8 +9,8 @@ const fs = require('fs');
 exports.docCheckNew = function(req, res) {
     const countries = require('../datas/supportedDocumentsByCountry.json');
     const applicant = {
-        firstName: 'SAIF ABDULRAHMAN OBAI',
-        lastName: 'ALKAABI'
+        firstName: '',
+        lastName: ''
     };
     res.render('docCheck', { applicant: applicant, countries: countries });
 };
@@ -115,7 +115,7 @@ exports.checkResult = function(req, res) {
 exports.webSdkConfiguration = function(req, res) {
     const referrer = '*://*/*';
     const sdkTokenRequest = {
-        applicantId: '868f363e-df14-42b8-8f9c-e5cf775ee6c5',
+        applicantId: '868f363e-df14-42b8-8f9c-e5cf775ee6c5', //TODO use another applicant
         referrer: referrer
     };
     const onfido = new Onfido({
@@ -251,7 +251,7 @@ exports.selfIdentification = function(req, res) {
                 data: JSON.stringify(checkRequest, null, 2)
             };
             req.session.messages.push(message);
-            console.log('### 1. REQUEST - CREATE CHECK ###');
+            console.log('### 1. REQUEST - CREATE CHECK');
             onfido.check
                 .create(checkRequest)
                 .then((check) => {
@@ -323,7 +323,7 @@ exports.selfIdentification = function(req, res) {
                             req.session.messages.push(message);
                             console.log('### 5. REQUEST - EXTRACT DATA WITH AUTOFILL -> DOCUMENT: ' + documents[frontDocumentIndex].id + ' ###');
                             onfido.autofill
-                                .perform('0447c217-1cea-4515-bdd6-a8bad8ffeb09') //hack for autofill, paperprint doc can't be classified
+                                .perform(documents[frontDocumentIndex].id)
                                 .then((extractionResult) => {
                                     console.log('### 6. RESPONSE - DATA EXTRACTED -> FIRSTNAME: ' + extractionResult.extractedData.firstName + ' ###');
                                     nowResponse = moment();
@@ -340,10 +340,13 @@ exports.selfIdentification = function(req, res) {
                                     
                                     // update applicant
                                     nowRequest = moment();
-                                    const applicantRequest = { 
-                                        firstName: extractionResult.extractedData.firstName,
-                                        lastName: extractionResult.extractedData.lastName
-                                    };
+                                    const applicantRequest = {};
+                                    if(extractionResult.extractedData.firstName && extractionResult.extractedData.firstName!= ''){
+                                        applicantRequest['firstName'] = extractionResult.extractedData.firstName;
+                                    }
+                                    if(extractionResult.extractedData.lastName && extractionResult.extractedData.lastName!= ''){
+                                        applicantRequest['lastName'] = extractionResult.extractedData.lastName;
+                                    }
                                     message = {
                                         date: nowRequest.format('YYYY-MM-DD HH:mm:ss.SSS'),
                                         api: 'Update Applicant',

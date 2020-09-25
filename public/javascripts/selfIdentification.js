@@ -96,7 +96,7 @@ $(document).ready(function() {
     welcomeParam = {
         type: 'welcome',
         options: {
-            title: 'Welcome at COMPTE NICKEL!',
+            title: 'Welcome at Onfido!',
             descriptions: ['Take a picture of you ID document and a selfie.','We will automatically fill the subscription form.'],
             nextButton: 'Start ID verification'
         }

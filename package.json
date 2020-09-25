@@ -9,7 +9,7 @@
   },
   "dependencies": {
     "@arusanov/taginput": "^1.0.2",
-    "@onfido/api": "^1.5.1",
+    "@onfido/api": "^1.5.2",
     "async": "^3.2.0",
     "bootstrap4-toggle": "^3.6.1",
     "cookie-parser": "~1.4.4",
@@ -21,9 +21,9 @@
     "express-upload": "^0.1.0",
     "express-validator": "^6.6.1",
     "http-errors": "~1.6.3",
-    "moment": "^2.27.0",
+    "moment": "^2.28.0",
     "morgan": "~1.9.1",
-    "onfido-sdk-ui": "^5.13.0",
+    "onfido-sdk-ui": "^6.0.0",
     "pug": "^3.0.0",
     "request": "^2.88.2",
     "socket.io": "^2.3.0"

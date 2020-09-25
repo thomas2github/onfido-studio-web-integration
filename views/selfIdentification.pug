@@ -14,19 +14,15 @@ block content
                             case step
                                 when 'start'
                                     a(href='/self-identification/capture')
-                                        img(src='/images/compte-nickel-openaccount.png' width='100%')
+                                        img(src='/images/subscription-page.png' width='100%')
                                 when 'capture'
                                     .customerheader
-                                        img(src='/images/logo-compte-nickel.png' height='50')
-                                        .float-right.mt-3
-                                            h5 SOUSCRIPTION
+                                        h5 HEADER OF THE CUSTOMER PAGE
                                         hr
                                     #onfido-mount(data-token=sdkToken)
                                 when 'check'
                                     .customerheader
-                                        img(src='/images/logo-compte-nickel.png' height='50')
-                                        .float-right.mt-3
-                                            h5 SOUSCRIPTION
+                                        h5 HEADER OF THE CUSTOMER PAGE
                                         hr
                                     .d-flex.flex-row.justify-content-center
                                         .card()
@@ -76,9 +72,7 @@ block content
                                                         a.btn.btn-info.mt-4(href='/self-identification/validation') Finalize your subscription
                                 when 'validation'
                                     .customerheader
-                                        img(src='/images/logo-compte-nickel.png' height='50')
-                                        .float-right.mt-3
-                                            h5 SOUSCRIPTION
+                                        h5 HEADER OF THE CUSTOMER PAGE
                                         hr
                                     .d-flex.flex-row.justify-content-center
                                         .card
@@ -139,12 +133,10 @@ block content
                                                     .report-data.hide(style='display:none;')
                                                         pre= JSON.stringify(secondReport, null, 2)
                                 when 'success'
-                                    img(src='/images/compte-nickel-customer-space.png' style='width: 1000px')
+                                    img(src='/images/subscription-page.png' width='100%')
                                 default
                                     .customerheader
-                                        img(src='/images/logo-compte-nickel.png' height='50')
-                                        .float-right.mt-3
-                                            h5 SOUSCRIPTION
+                                        h5 HEADER OF THE CUSTOMER PAGE
                                         hr
                                     h1 You are lost!
                 .col-4

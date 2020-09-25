@@ -14,35 +14,49 @@ block content
                         .card-header.card-header-primary
                             h4.card-title= 'Web SDK configuration'
                         .card-body
-                            .row.justify-content-center
-                                .col-10.mt-4
+                            .d-flex.flex-row.justify-content-center.flex-wrap
+                                .d-flex.flex-column.flex-wrap
+                                    h6.ml-5 Display
                                     .form-check.ml-5
                                         input#useModal.form-check-input(type='checkbox' data-toggle='toggle' data-style='mr-1' data-size='xs')
-                                        label.form-check-label(for='useModal') display in modal
-                                    .form-check.ml-5
-                                        input#forceCrossDevice.form-check-input(type='checkbox' data-toggle='toggle' data-style='mr-1' data-size='xs')
-                                        label.form-check-label(for='forceCrossDevice') capture on mobile device
+                                        label.form-check-label(for='useModal') display in modal                                    
                                     .form-check.ml-5
                                         input#welcomeStep.form-check-input(type='checkbox' data-toggle='toggle' data-style='mr-1' data-size='xs' checked)
                                         label.form-check-label(for='welcomeStep') add welcome step
                                     .form-check.ml-5
-                                        input#documentStep.form-check-input(type='checkbox' data-toggle='toggle' data-style='mr-1' data-size='xs' checked)
-                                        label.form-check-label(for='documentStep') capture document
-                                    .form-check.ml-5
-                                        input#selfieStep.form-check-input(type='checkbox' data-toggle='toggle' data-style='mr-1' data-size='xs' checked)
-                                        label.form-check-label(for='selfieStep') capture selfie
-                                    .form-check.ml-5
-                                        input#videoStep.form-check-input(type='checkbox' data-toggle='toggle' data-style='mr-1' data-size='xs')
-                                        label.form-check-label(for='videoStep') capture video
-                                    .form-check.ml-5
                                         input#completeStep.form-check-input(type='checkbox' data-toggle='toggle' data-style='mr-1' data-size='xs' checked)
                                         label.form-check-label(for='completeStep') add complete step
-
-                                    .d-flex.justify-content-around
-                                        button#dislpaySdk.btn.btn-primary.mt-4(type='button' data-token=sdkToken) display SDK
-                            .row.justify-content-center
-                                .col-10.mt-4
-                                    #onfido-mount
+                                .d-flex.flex-column.flex-wrap
+                                    h6.ml-5 Capture
+                                    .form-check.ml-5
+                                        input#documentStep.form-check-input(type='checkbox' data-toggle='toggle' data-style='mr-1' data-size='xs' checked)
+                                        label.form-check-label(for='documentStep') ID document
+                                    .form-check.ml-5
+                                        input#selfieStep.form-check-input(type='checkbox' data-toggle='toggle' data-style='mr-1' data-size='xs' checked)
+                                        label.form-check-label(for='selfieStep') selfie
+                                    .form-check.ml-5
+                                        input#videoStep.form-check-input(type='checkbox' data-toggle='toggle' data-style='mr-1' data-size='xs')
+                                        label.form-check-label(for='videoStep') video (liveness)
+                                    .form-check.ml-5
+                                        input#forceCrossDevice.form-check-input(type='checkbox' data-toggle='toggle' data-style='mr-1' data-size='xs')
+                                        label.form-check-label(for='forceCrossDevice') force mobile device
+                                .d-flex.flex-column.flex-wrap
+                                    h6.ml-5 accepted document types
+                                    .form-check.ml-5
+                                        input#acceptPassport.form-check-input(type='checkbox' data-toggle='toggle' data-style='mr-1' data-size='xs' checked)
+                                        label.form-check-label(for='acceptPassport') passport
+                                    .form-check.ml-5
+                                        input#acceptNationalId.form-check-input(type='checkbox' data-toggle='toggle' data-style='mr-1' data-size='xs' checked)
+                                        label.form-check-label(for='acceptNationalId') national ID card
+                                    .form-check.ml-5
+                                        input#acceptDrivingLicence.form-check-input(type='checkbox' data-toggle='toggle' data-style='mr-1' data-size='xs' checked)
+                                        label.form-check-label(for='acceptDrivingLicence') driving licence
+                                    .form-check.ml-5
+                                        input#acceptResidencePermit.form-check-input(type='checkbox' data-toggle='toggle' data-style='mr-1' data-size='xs')
+                                        label.form-check-label(for='acceptResidencePermit') residence permit
+                            .d-flex.flex-column.justify-content-center.flex-wrap
+                                button#dislpaySdk.btn.btn-info.my-4(type='button' data-token=sdkToken) display SDK
+                                #onfido-mount
 
 append bottom
     script(src='/dist/onfido.min.js')

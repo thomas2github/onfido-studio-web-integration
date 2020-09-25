@@ -1,4 +1,4 @@
-# WEB01
+# WEBSDK
 
-Demo app
+WEB SDK Demo app
 Nodejs + Express + Onfido Node.js Client + Onfido Web SDK
