@@ -15,6 +15,7 @@ $(document).ready(function() {
         const acceptNationalId = $('#acceptNationalId').is(':checked');
         const acceptDrivingLicence = $('#acceptDrivingLicence').is(':checked');
         const acceptResidencePermit = $('#acceptResidencePermit').is(':checked');
+        const showCountrySelection = $('#showCountrySelection').is(':checked');
         const language = $('#language').is(':checked') ? 'fr_FR' : 'en_US';
 
         let steps = [];
@@ -31,7 +32,8 @@ $(document).ready(function() {
                             driving_licence: acceptDrivingLicence,
                             national_identity_card: acceptNationalId,
                             residence_permit: acceptResidencePermit
-                        }
+                        },
+                        showCountrySelection: showCountrySelection
                     }
                 }
             );
