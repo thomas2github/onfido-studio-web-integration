@@ -29,45 +29,46 @@ block content
                                             .card-header.card-header-info
                                                 .float-right
                                                     i.material-icons check_circle_outline
-                                                h4 Subscription form
+                                                //- h4 Subscription form
+                                                h4 Final step
                                             .card-body
                                                 form(action='')
-                                                    .d-flex.flex-row.justify-content-center
-                                                        .yourIdentity.mx-5
-                                                            h5.mb-4.font-weight-bold Your Identity
-                                                            .form-group
-                                                                label.bmd-label-floating Firstname
-                                                                input#firstName.form-control(type='text' name='firstName' value=(frontAutofill.extractedData.firstName)?frontAutofill.extractedData.firstName:null disabled)
-                                                            .form-group
-                                                                label.bmd-label-floating Lastname
-                                                                input#lastName.form-control(type='text' name='lastName' value=(frontAutofill.extractedData.lastName)?frontAutofill.extractedData.lastName:null disabled)
-                                                            //- .form-group
-                                                            //-     label.bmd-label-floating Date of birth
-                                                            //-     input#dob.form-control(type='date' name='dob' value=(frontAutofill.extractedData.dateOfBirth)?frontAutofill.extractedData.dateOfBirth:null disabled)
-                                                            //- .form-group
-                                                            //-     label.bmd-label-floating Gender
-                                                            //-     input#gender.form-control(type='text' name='gender' value=(frontAutofill.extractedData.gender)?frontAutofill.extractedData.gender:null disabled)
-                                                        .yourDocument.mx-5
-                                                            h5.mb-4.font-weight-bold Your Document
-                                                            .form-group
-                                                                label.bmd-label-floating Issuing Country
-                                                                input#issuingCountry.form-control(type='text' name='issuingCountry' value=(frontAutofill.documentClassification.issuingCountry)?frontAutofill.documentClassification.issuingCountry:null disabled)
-                                                            .form-group
-                                                                label.bmd-label-floating Document Type
-                                                                input#documentType.form-control(type='text' name='documentType' value=(frontAutofill.documentClassification.documentType)?frontAutofill.documentClassification.documentType:null disabled)
-                                                            //- .form-group
-                                                            //-     label.bmd-label-floating Document Number
-                                                            //-     input#documentNumber.form-control(type='text' name='documentNumber' value=(frontAutofill.extractedData.documentNumber)?frontAutofill.extractedData.documentNumber:null disabled)
-                                                            //- .form-group
-                                                            //-     label.bmd-label-floating Date of Expiry
-                                                            //-     input#dateOfExpiry.form-control(type='date' name='dateOfExpiry' value=(frontAutofill.extractedData.dateOfExpiry)?frontAutofill.extractedData.dateOfExpiry:null disabled)
-                                                        //- .facialSimilarityMatch
-                                                        //-     h5.my-4.font-weight-bold Photo match
-                                                                //- p= facialSimilarityReport.status
-                                                                //- pre= JSON.stringify(facialSimilarityReport, null, 2)
-                                                        //-     img(style='width:150px;' src=frontDocumentData)
-                                                        //-     br
-                                                        //-     mg(style='width:150px;' src=photoData)
+                                                    //- .d-flex.flex-row.justify-content-center
+                                                    //-     .yourIdentity.mx-5
+                                                    //-         h5.mb-4.font-weight-bold Your Identity
+                                                    //-         .form-group
+                                                    //-             label.bmd-label-floating Firstname
+                                                    //-             input#firstName.form-control(type='text' name='firstName' value=(frontAutofill.extractedData.firstName)?frontAutofill.extractedData.firstName:null disabled)
+                                                    //-         .form-group
+                                                    //-             label.bmd-label-floating Lastname
+                                                    //-             input#lastName.form-control(type='text' name='lastName' value=(frontAutofill.extractedData.lastName)?frontAutofill.extractedData.lastName:null disabled)
+                                                    //-         //- .form-group
+                                                    //-         //-     label.bmd-label-floating Date of birth
+                                                    //-         //-     input#dob.form-control(type='date' name='dob' value=(frontAutofill.extractedData.dateOfBirth)?frontAutofill.extractedData.dateOfBirth:null disabled)
+                                                    //-         //- .form-group
+                                                    //-         //-     label.bmd-label-floating Gender
+                                                    //-         //-     input#gender.form-control(type='text' name='gender' value=(frontAutofill.extractedData.gender)?frontAutofill.extractedData.gender:null disabled)
+                                                    //-     .yourDocument.mx-5
+                                                    //-         h5.mb-4.font-weight-bold Your Document
+                                                    //-         .form-group
+                                                    //-             label.bmd-label-floating Issuing Country
+                                                    //-             input#issuingCountry.form-control(type='text' name='issuingCountry' value=(frontAutofill.documentClassification.issuingCountry)?frontAutofill.documentClassification.issuingCountry:null disabled)
+                                                    //-         .form-group
+                                                    //-             label.bmd-label-floating Document Type
+                                                    //-             input#documentType.form-control(type='text' name='documentType' value=(frontAutofill.documentClassification.documentType)?frontAutofill.documentClassification.documentType:null disabled)
+                                                    //-         //- .form-group
+                                                    //-         //-     label.bmd-label-floating Document Number
+                                                    //-         //-     input#documentNumber.form-control(type='text' name='documentNumber' value=(frontAutofill.extractedData.documentNumber)?frontAutofill.extractedData.documentNumber:null disabled)
+                                                    //-         //- .form-group
+                                                    //-         //-     label.bmd-label-floating Date of Expiry
+                                                    //-         //-     input#dateOfExpiry.form-control(type='date' name='dateOfExpiry' value=(frontAutofill.extractedData.dateOfExpiry)?frontAutofill.extractedData.dateOfExpiry:null disabled)
+                                                    //-     //- .facialSimilarityMatch
+                                                    //-     //-     h5.my-4.font-weight-bold Photo match
+                                                    //-             //- p= facialSimilarityReport.status
+                                                    //-             //- pre= JSON.stringify(facialSimilarityReport, null, 2)
+                                                    //-     //-     img(style='width:150px;' src=frontDocumentData)
+                                                    //-     //-     br
+                                                    //-     //-     mg(style='width:150px;' src=photoData)
                                                     .d-flex.flex-row.justify-content-center
                                                         a.btn.btn-info.mt-4(href='/self-identification/validation') Finalize your subscription
                                 when 'validation'

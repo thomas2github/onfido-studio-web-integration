@@ -6,7 +6,8 @@ $(document).ready(function() {
         const useModal = $('#useModal').is(':checked');
         const welcomeStep = $('#welcomeStep').is(':checked');
         const forceCrossDevice = $('#forceCrossDevice').is(':checked');
-        const useLiveDocumentCapture = false; // $('#useLiveDocumentCapture').is(':checked');
+        const useLiveDocumentCapture = $('#useLiveDocumentCapture').is(':checked');
+        const useWebcam = false; // $('#useWebcam').is(':checked');
         const documentStep = $('#documentStep').is(':checked');
         const selfieStep = $('#selfieStep').is(':checked');
         const videoStep = $('#videoStep').is(':checked');
@@ -18,6 +19,33 @@ $(document).ready(function() {
         const showCountrySelection = $('#showCountrySelection').is(':checked');
         const language = $('#language').is(':checked') ? 'fr_FR' : 'en_US';
 
+        // const language = {
+        //     locale: 'pt_PT',
+        //     phrases: { 
+        //         capture: {
+        //             national_identity_card: {
+        //                 back: {
+        //                     instructions: "Carregue o verso do cartão de seu computador",
+        //                     title: "Envie a carteira de identidade (verso)",
+        //                     webcam: "Posicione o verso do cartão na moldura (será detectado automaticamente)"
+        //                 },
+        //                 front: {
+        //                     instructions: "Carregue a frente do cartão de seu computador",
+        //                     title: "Envie a carteira de identidade (frente) ",
+        //                     webcam: "Posicione a frente do cartão no porta-retratos (será detectado automaticamente)"
+        //                 }
+        //             },
+        //             passport: {
+        //                 front: {
+        //                     instructions: "Carregue a página da foto do passaporte de seu computador",
+        //                     title: "Envie a página da foto do passaporte",
+        //                     webcam: "Posicione a página da foto do seu passaporte no porta-retratos (será detectado automaticamente)"
+        //                 }
+        //             }
+        //         }
+        //     }
+        // };        
+
         let steps = [];
         if (documentStep) {
             steps.push(
@@ -26,6 +54,7 @@ $(document).ready(function() {
                     options: {
                         forceCrossDevice: forceCrossDevice,
                         useLiveDocumentCapture: useLiveDocumentCapture,
+                        useWebcam: useWebcam,
                         uploadFallback: true,
                         documentTypes: {
                             passport: acceptPassport,
@@ -121,7 +150,7 @@ $(document).ready(function() {
         if (welcomeStep) {
             sdkParam.steps.unshift(welcomeParam);
         }
-        
+        console.log('sdkconfig: ', sdkParam);
         onfidoSdk = Onfido.init(sdkParam);
         return false;
     });
