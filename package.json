@@ -1,6 +1,6 @@
 {
-  "name": "web01",
-  "version": "0.0.0",
+  "name": "WEBSDK",
+  "version": "1.0.0",
   "private": true,
   "scripts": {
     "start": "node ./bin/www",
@@ -12,23 +12,23 @@
     "@onfido/api": "^1.5.2",
     "async": "^3.2.0",
     "bootstrap4-toggle": "^3.6.1",
-    "cookie-parser": "~1.4.4",
-    "debug": "~2.6.9",
+    "cookie-parser": "^1.4.4",
+    "debug": "^2.6.9",
     "dotenv": "^8.2.0",
-    "express": "~4.16.1",
+    "express": "^4.17.1",
     "express-fileupload": "^1.2.0",
     "express-session": "^1.17.1",
     "express-upload": "^0.1.0",
     "express-validator": "^6.6.1",
-    "http-errors": "~1.6.3",
-    "moment": "^2.28.0",
-    "morgan": "~1.9.1",
-    "onfido-sdk-ui": "^6.0.0",
+    "http-errors": "^1.8.0",
+    "moment": "^2.29.1",
+    "morgan": "^1.10.0",
+    "onfido-sdk-ui": "^6.2.0",
     "pug": "^3.0.0",
     "request": "^2.88.2",
     "socket.io": "^2.3.0"
   },
   "devDependencies": {
-    "nodemon": "^2.0.4"
+    "nodemon": "^2.0.6"
   }
 }
