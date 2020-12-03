@@ -8,7 +8,42 @@ mixin displayDate(date)
             span= moment(date).format('D MMMM')
         else 
             span= moment(date).format('DD.MM.YYYY')
-        
+
+mixin displayStatus(status)
+    if status
+        case status
+            when 'in_progess'
+                span.badge(class='badge-info')= status
+            when 'awaiting_applicant'
+            when 'awaiting_data'
+            when 'awaiting_approval'
+                span.badge(class='badge-primary')= status
+            when 'complete'
+                span.badge(class='badge-success')= status
+            when 'withdrawn'
+                span.badge(class='badge-secondary')= status
+            when 'paused'
+                span.badge(class='badge-secondary')= status
+            when 'reopened'
+                span.badge(class='badge-info')= status
+            default
+                span.badge(class='badge-warning')= status
+
+mixin displayResult(result)
+    if result
+        case result
+            when 'clear'
+                span.badge(class='badge-success')= result
+            when 'consider'
+            when 'caution'
+                span.badge(class='badge-warning')= result
+            when 'suspected'
+                span.badge(class='badge-danger')= result
+            when 'rejected'
+                span.badge(class='badge-secondary')= result
+            default
+                span.badge(class='badge-warning')= result
+
 mixin displayJson(json, level)
     if json
         each val, key in json
@@ -18,86 +53,3 @@ mixin displayJson(json, level)
                 span(style='margin-left: '+level+'em')= key + ': '
                     b= val
                 br
-
-mixin displayCheckStatus(status)
-    if status
-        case status
-            when 'in_progess'
-                span.badge(class='badge-primary')= status
-            when 'awaiting_applicant'
-                span.badge(class='badge-warning')= status
-            when 'complete'
-                span.badge(class='badge-success')= status
-            when 'withdrawn'
-                span.badge(class='badge-secondary')= status
-            when 'paused'
-                span.badge(class='badge-secondary')= status
-            when 'reopened'
-                span.badge(class='badge-primary')= status
-            default
-                span.badge(class='badge-warning')= status
-
-mixin displayCheckResult(result)
-    if result
-        case result
-            when 'clear'
-                span.badge(class='badge-success')= result
-            when 'consider'
-                span.badge(class='badge-warning')= result
-            default
-                span.badge(class='badge-warning')= result
-
-mixin displayReportStatus(status)
-    if status
-        case status
-            when 'awaiting_data'
-                span.badge(class='badge-secondary')= status
-            when 'awaiting_approval'
-                span.badge(class='badge-primary')= status
-            when 'complete'
-                span.badge(class='badge-success')= status
-            when 'withdrawn'
-                span.badge(class='badge-secondary')= status
-            when 'paused'
-                span.badge(class='badge-secondary')= status
-            default
-                span.badge(class='badge-warning')= status
-
-mixin displayReportResult(result)
-    if result
-        case result
-            when 'clear'
-                span.badge(class='badge-success')= result
-            when 'consider'
-                span.badge(class='badge-warning')= result
-            default
-                span.badge(class='badge-secondary')= result
-
-mixin displayReportSubResult(subResult)
-    if subResult
-        case subResult
-            when 'clear'
-                span.badge(class='badge-success')= subResult
-            when 'rejected'
-                span.badge(class='badge-secondary')= subResult
-            when 'suspected'
-                span.badge(class='badge-danger')= subResult
-            when 'caution'
-                span.badge(class='badge-warning')= subResult
-            default
-                span.badge(class='badge-secondary')= subResult
-
-mixin displayBreakdownIcon(result)
-    if result
-        case result
-            when 'clear'
-                i.material-icons.ml-2(title=result style='font-size: 18px; vertical-align:middle; diplay: inline-block' class='text-success')= 'check_circle'
-            when 'consider'
-            when 'caution'
-                i.material-icons.ml-2(title=result style='font-size: 18px; vertical-align:middle; diplay: inline-block' class='text-warning')= 'error_outline'
-            when 'suspected'
-                i.material-icons.ml-2(title=result style='font-size: 18px; vertical-align:middle; diplay: inline-block' class='text-danger')= 'error'
-            when 'rejected'
-                i.material-icons.ml-2(title=result style='font-size: 18px; vertical-align:middle; diplay: inline-block' class='text-danger')= 'cancel'
-            default
-                span.ml-2.text-secondary= result

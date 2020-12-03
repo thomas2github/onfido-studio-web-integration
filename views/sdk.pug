@@ -1,0 +1,91 @@
+extends layout
+
+append head
+    link(href='https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/css/bootstrap4-toggle.min.css' rel='stylesheet')
+    // Onfido SDK CSS
+    link(rel='stylesheet' href='/dist/style.css')
+
+block content
+    .d-flex.flex-column
+        .d-flex.flex-row.justify-content-around
+            a.btn.py-4.mx-4(href='/capture') Capture (SDK)
+            - var hasSomethingToVerify = (documents.length > 0 || photos.length > 0 || videos.length > 0)
+            if hasSomethingToVerify
+                a.btn.btn-outline-secondary.py-4.mx-4(href='/checks/new') Verify (API)
+            a.btn.btn-outline-secondary.py-4.mx-4(href='/checks') Consult checks
+        .d-flex.flex-row.justify-content-around.mt-4
+            .d-flex.flex-column.flex-wrap
+                h6 Display
+                .custom-control.custom-switch
+                    input#useModal.custom-control-input(type='checkbox' checked)
+                    label.custom-control-label.text-secondary(for='useModal') display in modal                                    
+                .custom-control.custom-switch
+                    input#welcomeStep.custom-control-input(type='checkbox')
+                    label.custom-control-label.text-secondary(for='welcomeStep') add welcome step
+                .custom-control.custom-switch
+                    input#completeStep.custom-control-input(type='checkbox')
+                    label.custom-control-label.text-secondary(for='completeStep') add complete step
+                .my-2
+                h6 language
+                .btn-group.btn-group-toggle.mt-1(data-toggle='buttons')
+                    label.btn.btn-xs.btn-outline-secondary.active
+                        input#languageEN(type='radio' name='language' autocomplete='off' value='en_US' checked)
+                        | EN
+                    label.btn.btn-xs.btn-outline-secondary
+                        input#languageFR(type='radio' name='language' autocomplete='off' value='fr_FR')
+                        | FR
+                    label.btn.btn-xs.btn-outline-secondary
+                        input#languageES(type='radio' name='language' autocomplete='off' value='es_ES')
+                        | ES
+                    label.btn.btn-xs.btn-outline-secondary
+                        input#languageDE(type='radio' name='language' autocomplete='off' value='de_DE')
+                        | DE
+                    
+
+            .d-flex.flex-column.flex-wrap.ml-5
+                h6 Capture
+                .custom-control.custom-switch
+                    input#documentStep.custom-control-input(type='checkbox' checked)
+                    label.custom-control-label.text-secondary(for='documentStep') ID document
+                .custom-control.custom-switch
+                    input#selfieStep.custom-control-input(type='checkbox' checked)
+                    label.custom-control-label.text-secondary(for='selfieStep') selfie
+                .custom-control.custom-switch
+                    input#videoStep.custom-control-input(type='checkbox')
+                    label.custom-control-label.text-secondary(for='videoStep') video (liveness)
+                .custom-control.custom-switch
+                    input#forceCrossDevice.custom-control-input(type='checkbox' checked)
+                    label.custom-control-label.text-secondary(for='forceCrossDevice') force mobile device
+                .custom-control.custom-switch.d-none
+                    input#useLiveDocumentCapture.custom-control-input(type='checkbox')
+                    label.custom-control-label.text-secondary(for='useLiveDocumentCapture') use live document capture
+                .custom-control.custom-switch.d-none
+                    input#useWebcam.custom-control-input(type='checkbox')
+                    label.custom-control-label.text-secondary(for='useWebcam') use webcam
+            .d-flex.flex-column.flex-wrap.ml-5
+                h6 accepted document types
+                .custom-control.custom-switch
+                    input#acceptPassport.custom-control-input(type='checkbox' checked)
+                    label.custom-control-label.text-secondary(for='acceptPassport') passport
+                .custom-control.custom-switch
+                    input#acceptNationalId.custom-control-input(type='checkbox' checked)
+                    label.custom-control-label.text-secondary(for='acceptNationalId') national ID card
+                .custom-control.custom-switch
+                    input#acceptDrivingLicence.custom-control-input(type='checkbox')
+                    label.custom-control-label.text-secondary(for='acceptDrivingLicence') driving licence
+                .custom-control.custom-switch
+                    input#acceptResidencePermit.custom-control-input(type='checkbox')
+                    label.custom-control-label.text-secondary(for='acceptResidencePermit') residence permit
+                .custom-control.custom-switch.d-none
+                    input#showCountrySelection.custom-control-input(type='checkbox' checked)
+                    label.custom-control-label.text-secondary(for='showCountrySelection') show country selection
+        .d-flex.flex-row.justify-content-around
+            button#dislpaySdk.btn.btn-outline-info.my-4(type='button' data-token=sdkToken data-applicant-id=applicant.id) display SDK
+        .d-flex.flex-row.justify-content-around
+            #onfido-mount.my-4
+
+append bottom
+    script(src='/dist/onfido.min.js')
+    script(src='https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/js/bootstrap4-toggle.min.js')
+    script(src='/javascripts/sdk.js')
+    

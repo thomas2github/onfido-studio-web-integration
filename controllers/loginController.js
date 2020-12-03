@@ -13,14 +13,13 @@ exports.postLogin = function(req, res) {
     //test API Token
     const onfido = new Onfido({
         apiToken: token
-        // Defaults to Region.EU (api.onfido.com), supports Region.US and Region.CA
-        // region: Region.US
     });
     onfido.applicant
         .list({ page: 0, perPage: 1, includeDeleted: false})
         .then((applicants) => {
             //save Token in session
             req.session.apiToken = token,
+            req.session.stacktrace = [],
             //redirect to dashboard
             res.redirect('/index')
         })

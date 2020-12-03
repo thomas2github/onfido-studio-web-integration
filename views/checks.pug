@@ -1,0 +1,36 @@
+extends layout
+
+block content
+    .d-flex.flex-column
+        .d-flex.flex-row.justify-content-around
+            a.btn.btn-outline-secondary.py-4.mx-4(href='/sdk') Capture (SDK)
+            - var hasSomethingToVerify = (documents.length > 0 || photos.length > 0 || videos.length > 0)
+            if hasSomethingToVerify
+                a.btn.btn-outline-secondary.py-4.mx-4(href='/checks/new') Verify (API)
+            a.btn.py-4.mx-4(href='/checks') Consult checks
+        .d-flex.flex-row.justify-content-around.mt-4
+            table.table(style='font-size: 0.7rem;')
+                thead
+                    tr
+                        th 
+                            small ID
+                        th 
+                            small CREATION DATE
+                        th 
+                            small STATUS
+                        th 
+                            small RESULT
+                if checks
+                    each check in checks
+                        tbody
+                            tr
+                                td
+                                    a(href='/checks/'+check.id)= check.id
+                                td 
+                                    +displayDate(check.createdAt)
+                                td
+                                    +displayStatus(check.status)
+                                td
+                                    +displayResult(check.result)
+
+    

@@ -1,19 +1,28 @@
-include prettyDisplay
+mixin displayBreakdownIcon(result)
+    if result
+        case result
+            when 'clear'
+                i.material-icons.ml-2(title=result style='font-size: 18px; vertical-align:middle; diplay: inline-block' class='text-success')= 'check_circle'
+            when 'consider'
+            when 'caution'
+                i.material-icons.ml-2(title=result style='font-size: 18px; vertical-align:middle; diplay: inline-block' class='text-warning')= 'error_outline'
+            when 'suspected'
+                i.material-icons.ml-2(title=result style='font-size: 18px; vertical-align:middle; diplay: inline-block' class='text-danger')= 'error'
+            when 'rejected'
+                i.material-icons.ml-2(title=result style='font-size: 18px; vertical-align:middle; diplay: inline-block' class='text-danger')= 'cancel'
+            default
+                span.ml-2.text-secondary= result
+
       
 mixin reportBreakdown(breakdown)
-    append header
-        link(rel='stylesheet' href='//cdnjs.cloudflare.com/ajax/libs/jstree/3.3.8/themes/default/style.min.css')
-
-    .d-flex.flex-row.justify-content-center.flex-wrap
-        each val, key in breakdown
-            .card.mx-2.p-2(style='width:18rem;')
-                h6= key
-                    +displayBreakdownIcon(val.result)
-                if val.breakdown
-                    each val2, key2 in val.breakdown
-                        p.my-1= key2
-                            +displayBreakdownIcon(val2.result)
-                        if val2.properties
-                            each val3, key3 in val2.properties
-                                p.my-1.ml-4= key3
-                                    +displayBreakdownIcon(val3)
+    each val, key in breakdown
+        h6.mt-4= key
+            +displayBreakdownIcon(val.result)
+        if val.breakdown
+            each val2, key2 in val.breakdown
+                p.my-1= key2
+                    +displayBreakdownIcon(val2.result)
+                if val2.properties
+                    each val3, key3 in val2.properties
+                        p.my-1.ml-4= key3
+                            +displayBreakdownIcon(val3)

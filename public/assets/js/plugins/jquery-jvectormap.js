@@ -896,7 +896,7 @@ jvm.VMLElement.VMLInitialized = false;
  */
 
 // The following method of VML handling is borrowed from the
-// Raphael resources by Dmitry Baranovsky.
+// Raphael library by Dmitry Baranovsky.
 
 jvm.VMLElement.initializeVML = function() {
   try {

@@ -7,9 +7,7 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 
-const fileUpload = require('express-fileupload');
-
-const indexRouter = require('./routes/index');
+const mainRouter = require('./routes/mainRouter');
 
 let app = express();
 
@@ -26,15 +24,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(session({secret: "secret f0r TGA dem0 @pp"}));
 
-app.use(fileUpload({
-  // useTempFiles : true,
-  // tempFileDir : '/tmp/',
-  // safeFileNames: true, 
-  // preserveExtension: true,
-  createParentPath: true
-}));
-
-app.use('/', indexRouter);
+app.use('/', mainRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

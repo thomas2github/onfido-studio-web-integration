@@ -1,0 +1,121 @@
+extends layout
+
+block content
+    form(action='/checks/new' method='post')
+        .d-flex.flex-column
+            .d-flex.flex-row.justify-content-around
+                a.btn.btn-outline-secondary.py-4.mx-4(href='/sdk') Capture (SDK)
+                - var hasSomethingToVerify = (documents.length > 0 || photos.length > 0 || videos.length > 0)
+                if hasSomethingToVerify
+                    a.btn.py-4.mx-4(href='/checks/new') Verify (API)
+                a.btn.btn-outline-secondary.py-4.mx-4(href='/checks') Consult checks
+            .d-flex.flex-row.justify-content-around.mt-4
+                if documents.length > 0
+                    .d-flex.flex-column.flex-wrap.justify-content-start.align-content-start
+                        h6 Document Reports
+                        .custom-control.custom-switch
+                            input#reportDocument.custom-control-input(name='reports' type='checkbox' value='document' checked)
+                            label.custom-control-label.text-secondary(for='reportDocument') Document
+                        .custom-control.custom-switch
+                            input#reportDocumentWAI.custom-control-input(name='reports' type='checkbox' value='document_with_address_information')
+                            label.custom-control-label.text-secondary(for='reportDocumentWAI') Document with address information
+                        .custom-control.custom-switch
+                            input#reportDocumentWDLI.custom-control-input(name='reports' type='checkbox' value='document_with_driving_licence_information')
+                            label.custom-control-label.text-secondary(for='reportDocumentWDLI') Document with driving licence information
+                        .my-2
+                        //- h6 Data extraction only
+                        //- .custom-control.custom-switch
+                        //-     input#autofill.custom-control-input(name='autofill' type='checkbox' value='autofill')
+                        //-     label.custom-control-label.text-secondary(for='autofill') Autofill
+                if documents.length > 2
+                    .d-flex.flex-column.flex-wrap.justify-content-start.align-content-start.ml-5
+                        h6 Select document
+                        each document, index in documents
+                            label.image-checkbox
+                                img.mr-2(src='' width='64' height='36')
+                                input.d-none(type='checkbox' name='documents[]' value=index)
+                if photos.length > 0 || videos.length > 0 
+                    .d-flex.flex-column.flex-wrap.justify-content-start.align-content-start.ml-5
+                        h6 Facial Similarity Reports
+                        if photos.length > 0
+                            .custom-control.custom-switch
+                                input#reportPhoto.custom-control-input(name='reports' type='checkbox' value='facial_similarity_photo' checked)
+                                label.custom-control-label.text-secondary(for='reportPhoto') Photo (selfie)
+                            .custom-control.custom-switch
+                                input#reportPhotoFullyAuto.custom-control-input(name='reports' type='checkbox' value='facial_similarity_photo_fully_auto')
+                                label.custom-control-label.text-secondary(for='reportPhotoFullyAuto') Photo fully auto (selfie)
+                        if videos.length > 0
+                            .custom-control.custom-switch
+                                input#reportVideo.custom-control-input(name='reports' type='checkbox' value='facial_similarity_video' checked)
+                                label.custom-control-label.text-secondary(for='reportVideo') Video (liveness)
+                        .my-2
+                        h6 Known Faces
+                        .custom-control.custom-switch
+                                input#reportKnownFaces.custom-control-input(name='reports' type='checkbox' value='known_faces')
+                                label.custom-control-label.text-secondary(for='reportKnownFaces') Known faces
+                if documents.length > 0
+                    .d-flex.flex-column.flex-wrap.justify-content-start.align-content-start.ml-5
+                        h6 Watchlist Reports
+                        .custom-control.custom-switch
+                            input#reportWatchlistStandard.custom-control-input(name='reports' type='checkbox' value='watchlist_standard')
+                            label.custom-control-label.text-secondary(for='reportWatchlistStandard') Watchlist standard
+                        .custom-control.custom-switch
+                            input#reportWatchlistPEPS.custom-control-input(name='reports' type='checkbox' value='watchlist_peps_only')
+                            label.custom-control-label.text-secondary(for='reportWatchlistPEPS') Watchlist PEPS only
+                        .custom-control.custom-switch
+                            input#reportWatchlistSanctions.custom-control-input(name='reports' type='checkbox' value='watchlist_sanctions_only')
+                            label.custom-control-label.text-secondary(for='reportWatchlistSanctions') Watchlist sanctions only
+                        .my-2
+                        h6 Identity Reports
+                        .custom-control.custom-switch
+                            input#reportIdentityEnhanced.custom-control-input(name='reportIdentityEnhanced' type='checkbox' value='identity_enhanced')
+                            label.custom-control-label.text-secondary(for='reportIdentityEnhanced') Identity enhanced
+            .d-flex.flex-row.justify-content-around.mt-4
+                button#createCheck.btn.btn-outline-info.my-4(type='submit') submit check
+                if check
+                    a#refreshCheck.btn.btn-outline-primary.my-4(href='/checks/'+check.id) refresh
+            if check
+                .d-flex.flex-row.justify-content-around
+                    .d-flex.flex-column.justify-content-start
+                        .card(style='min-width: 726px')
+                            .card-header.card-header-primary
+                                div(data-toggle='toggle')
+                                    span.float-right
+                                        +displayResult(check.result)
+                                    h6.card-title Check
+                            .card-body.hide(style='display:none;')
+                                pre= JSON.stringify(check, null, 4)
+                        if reports
+                            each report in reports
+                                //- .card(style='min-width: 726px')
+                                //-     .card-header.card-header-info
+                                //-         div(data-toggle='toggle')
+                                //-             .float-right
+                                //-                 if report.name == 'document'
+                                //-                     +displayResult(report.subResult)
+                                //-                 else
+                                //-                     +displayResult(report.result)
+                                //-             h6.card-title= report.name
+                                //-     .card-body.hide(style='display:none;')
+                                //-         pre= JSON.stringify(report, null, 4)
+                                .card
+                                    .card-header.card-header-primary
+                                        div(data-toggle='toggle')
+                                            .float-right
+                                                if report.name == 'document'
+                                                    +displayResult(report.subResult)
+                                                else
+                                                    +displayResult(report.result)
+                                            h4.card-title= report.name + ' created at '
+                                                +displayDate(report.createdAt)
+                                            p.card-category=  report.id
+                                    .card-body.hide(style='display:none;')
+                                        h4 Properties
+                                        div
+                                            +displayJson(report.properties,0)
+                                        h4.mt-4 Breakdown
+                                        div
+                                            +reportBreakdown(report.breakdown)
+
+append bottom
+    script(src='/javascripts/checks.js')
