@@ -76,8 +76,10 @@ $(document).ready(function() {
             );
         }
         let onfidoSdk;
+        const token = $(this).attr('data-token');
+        const applicantId = $(this).attr('data-applicant-id');
         let sdkParam = {
-            token: $(this).attr('data-token'),
+            token: token,
             containerId: 'onfido-mount',
             language: language,
             useModal: useModal,
@@ -87,7 +89,7 @@ $(document).ready(function() {
                 onfidoSdk.setOptions({isModalOpen: false})
             },
             onComplete: function(data) {
-                window.location = '/checks/new';
+                window.location = '/applicants/'+applicantId;
             },
             steps: steps
         };

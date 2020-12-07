@@ -231,8 +231,8 @@ exports.createCheck = function(req, res) {
     // res.send(JSON.stringify(req.body));
     req.session.url = req.originalUrl;
     const applicant = (req.session.applicant)?req.session.applicant:null;    
-    const reportNames = req.body.reports;
-
+    const reportNames = Array.isArray(req.body.reports)?req.body.reports:[req.body.reports];
+    // TODO: use selected documents
     const onfido = new Onfido({ apiToken: req.session.apiToken });
     const nowRequest = moment();
     const request = { 
