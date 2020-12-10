@@ -43,13 +43,3 @@ mixin displayResult(result)
                 span.badge(class='badge-secondary')= result
             default
                 span.badge(class='badge-warning')= result
-
-mixin displayJson(json, level)
-    if json
-        each val, key in json
-            if typeof val === 'object'
-                +displayJson(val, level+1)
-            else
-                span(style='margin-left: '+level+'em')= key + ': '
-                    b= val
-                br

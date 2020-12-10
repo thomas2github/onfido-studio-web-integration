@@ -21,6 +21,7 @@ router.get('/stacktrace/clear', auth, main_controller.clearStacktrace);
 router.get('/applicants/:id', auth, main_controller.retrieveApplicant);
 router.post('/applicants/new', auth, main_controller.createApplicant);
 router.get('/applicants/:id/delete', auth, main_controller.deleteApplicant);
+router.get('/applicants', auth, main_controller.listApplicants);
 router.post('/applicants/delete', auth, main_controller.deleteApplicants);
 
 router.get('/sdk', auth, main_controller.initSdk);

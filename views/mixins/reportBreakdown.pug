@@ -15,14 +15,31 @@ mixin displayBreakdownIcon(result)
 
       
 mixin reportBreakdown(breakdown)
-    each val, key in breakdown
-        h6.mt-4= key
-            +displayBreakdownIcon(val.result)
-        if val.breakdown
-            each val2, key2 in val.breakdown
-                p.my-1= key2
-                    +displayBreakdownIcon(val2.result)
-                if val2.properties
-                    each val3, key3 in val2.properties
-                        p.my-1.ml-4= key3
-                            +displayBreakdownIcon(val3)
+    .d-flex.flex-wrap.justify-content-around
+        each val, key in breakdown
+            .m-4            
+                h6.mt-4= key
+                    +displayBreakdownIcon(val.result)
+                if val.breakdown
+                    each val2, key2 in val.breakdown
+                        p.my-1= key2
+                            +displayBreakdownIcon(val2.result)
+                        if val2.properties
+                            each val3, key3 in val2.properties
+                                p.my-1.ml-4= key3
+                                    +displayBreakdownIcon(val3)
+
+mixin displayJson(json, level)
+    if json
+        each val, key in json
+            if typeof val === 'object'
+                if isNaN(parseInt(key))
+                    h6(style='margin-left: '+level+'em')= key
+                else if parseInt(key) > 0
+                    br
+                +displayJson(val, level+1)
+            else
+                //- for known Faces, display link to applicant and video or photo depending on mediatype
+                span(style='margin-left: '+level+'em')= key + ': '
+                    b= val
+                br

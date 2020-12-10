@@ -1,5 +1,6 @@
 h4.text-primary.font-weight-bold Applicant
-button.btn.btn-outline-primary(data-toggle='modal' data-target='#selectApplicant') select
+//- button.btn.btn-outline-primary(data-toggle='modal' data-target='#selectApplicant') select
+a.btn.btn-outline-primary(href='/applicants/') select
 button.btn.btn-outline-success(data-toggle='modal' data-target='#createApplicant') create
 if applicant
     p.my-3
@@ -17,12 +18,12 @@ if applicant
             small.font-weight-bold.text-primary lastname: 
         span
             small= applicant?applicant.lastName:''
-    //- if documents.length > 0
-    //-     h5.my-3.text-primary documents
-    //-     each document, index in documents
-    //-         if index < 2
-    //-             p
-    //-                 image(src=document height=72 width=128)
+    if documents.length > 0
+        h5.my-3.text-primary documents
+        each document, index in documents
+            if index < 2
+                p
+                    image(src=document height=72 width=128)
     //- if photos.length > 0
     //-     h5.my-3.text-primary photos
     //-     p
@@ -36,48 +37,6 @@ if applicant
     //-             if index < 1            
     //-                 image.mr-2(src=video height=128 width=72)
     button.my-3.btn.btn-outline-danger(data-toggle='modal' data-target='#deleteApplicant') delete
-
-// Modal Select Applicant
-#selectApplicant.modal.fade(tabindex='-1')
-    .modal-dialog.modal-lg
-        .modal-content
-            .modal-header
-                h4.text-primary.font-weight-bold.modal-title Select applicant
-                button.close(type='button' data-dismiss='modal')
-                    span &times;
-            .modal-body
-                form#applicantsTotDelete(action='/applicants/delete' method='post')
-                    //- TODO: manage pagination
-                    table.table(style='font-size: 0.7rem;')
-                        thead
-                            tr
-                                th 
-                                    small Firstname
-                                th 
-                                    small Lastname
-                                th
-                                    small Id
-                                th 
-                                    small Created at
-                                //- th.text-center
-                                //-     button#deleteSelectedApplicants.btn.btn-sm.btn-outline-danger(type="submit")
-                                //-         i.material-icons.text-danger delete
-                                //-     input#switchAll.ml-2(type='checkbox')
-                        tbody
-                            if applicants
-                                - var currentId = (applicant)?applicant.id:null;
-                                each applicant in applicants
-                                    if applicant.id != currentId
-                                        tr
-                                            td= applicant.firstName
-                                            td= applicant.lastName
-                                            td
-                                                a(href='/applicants/'+applicant.id)
-                                                    .text-primary= applicant.id
-                                            td 
-                                                +displayDate(applicant.createdAt)
-                                            //- td.text-center
-                                            //-     input(type='checkbox' name='applicantsToDelete' value=applicant.id)
 
 // Modal Create Applicant
 #createApplicant.modal.fade(tabindex='-1')

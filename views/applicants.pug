@@ -1,0 +1,36 @@
+extends layout
+
+block content
+    .d-flex.flex-column
+        form#applicantsTotDelete(action='/applicants/delete' method='post')
+            //- TODO: manage pagination
+            table.table(style='font-size: 0.7rem;')
+                thead
+                    tr
+                        th 
+                            small Firstname
+                        th 
+                            small Lastname
+                        th
+                            small Id
+                        th 
+                            small Created at
+                        //- th.text-center
+                        //-     button#deleteSelectedApplicants.btn.btn-sm.btn-outline-danger(type="submit")
+                        //-         i.material-icons.text-danger delete
+                        //-     input#switchAll.ml-2(type='checkbox')
+                tbody
+                    if applicants
+                        - var currentId = (applicant)?applicant.id:null;
+                        each applicant in applicants
+                            if applicant.id != currentId
+                                tr
+                                    td= applicant.firstName
+                                    td= applicant.lastName
+                                    td
+                                        a(href='/applicants/'+applicant.id)
+                                            .text-primary= applicant.id
+                                    td 
+                                        +displayDate(applicant.createdAt)
+                                    //- td.text-center
+                                    //-     input(type='checkbox' name='applicantsToDelete' value=applicant.id)

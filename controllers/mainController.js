@@ -10,34 +10,9 @@ exports.index = function(req, res) {
     if(applicant){
         res.redirect('/applicants/'+applicant.id);
     }
-    const onfido = new Onfido({ apiToken: req.session.apiToken });
-    const nowRequest = moment();
-    const request = { page: 0, perPage: 100, includeDeleted: false}; // TODO: manage pagination
-    const message = {
-        date: nowRequest.format('YYYY-MM-DD HH:mm:ss.SSS'),
-        api: 'List Applicants',
-        type: 'REQUEST',
-        delai: '',
-        data: JSON.stringify(request, null, 2)
-    };
-    // req.session.stacktrace.push(message);
-
-    onfido.applicant.list(request).then((applicants) => {
-        const nowResponse = moment();
-        const message = {
-            date: nowResponse.format('YYYY-MM-DD HH:mm:ss.SSS'),
-            api: 'List Applicants',
-            type: 'RESPONSE',
-            delai: nowResponse-nowRequest,
-            data: JSON.stringify(applicants, null, 2)
-        };
-        // req.session.stacktrace.push(message);
-        req.session.applicants = applicants;
-        const stacktrace = (req.session.stacktrace)?req.session.stacktrace:[];
-        res.render('index', { applicants: applicants, applicant: applicant, stacktrace: stacktrace });
-    })
-    .catch((error) => console.log(error.message));
-
+    
+    const stacktrace = (req.session.stacktrace)?req.session.stacktrace:[];
+    res.render('index', { applicant: applicant, stacktrace: stacktrace });
 };
 
 exports.clearSession = function(req, res) {
@@ -53,35 +28,45 @@ exports.clearSession = function(req, res) {
     res.redirect('/index');
 };
 
-exports.createApplicant = function(req, res) {
-    const firstname = (req.body.firstname !== '')?req.body.firstname:'temp user';
-    const lastname = (req.body.lastname !== '')?req.body.lastname:'to delete';
+exports.clearStacktrace = function(req, res) {
+    req.session.stacktrace = [];
+    res.redirect(req.session.url);
+};
+
+exports.listApplicants = function(req, res) {
+    req.session.url = req.originalUrl;
+
     const onfido = new Onfido({ apiToken: req.session.apiToken });
     const nowRequest = moment();
-    const request = { firstName: firstname, lastName: lastname };
+    const request = { };
     const message = {
         date: nowRequest.format('YYYY-MM-DD HH:mm:ss.SSS'),
-        api: 'Create Applicant',
+        api: 'List Applicants',
         type: 'REQUEST',
         delai: '',
         data: JSON.stringify(request, null, 2)
     };
     req.session.stacktrace.push(message);
 
-    onfido.applicant.create(request)
-    .then((applicant) => {
+    onfido.applicant.list().then((applicants) => {
         const nowResponse = moment();
         const message = {
             date: nowResponse.format('YYYY-MM-DD HH:mm:ss.SSS'),
-            api: 'Create Applicant',
+            api: 'List Applicants',
             type: 'RESPONSE',
             delai: nowResponse-nowRequest,
-            data: JSON.stringify(applicant, null, 2)
+            data: JSON.stringify(applicants, null, 2)
         };
         req.session.stacktrace.push(message);
-        res.redirect('/applicants/'+applicant.id);
-    })
-    .catch((error) => console.log(error.message));
+
+        const applicant = (req.session.applicant)?req.session.applicant:null;
+        const stacktrace = (req.session.stacktrace)?req.session.stacktrace:[];
+        const checks = (req.session.checks)?req.session.checks:[];
+        const documents = (req.session.documents)?req.session.documents:[];
+        const photos = (req.session.photos)?req.session.photos:[];
+        const videos = (req.session.videos)?req.session.videos:[];
+        res.render('applicants', { applicants: applicants, applicant: applicant, stacktrace: stacktrace, documents: documents, photos: photos, videos: videos, checks: checks });
+    });
 };
 
 exports.retrieveApplicant = function(req, res) {
@@ -112,9 +97,33 @@ exports.retrieveApplicant = function(req, res) {
         req.session.applicant = applicant;
         
         // GET DOCUMENTS / SELFIES / VIDEOS
-        const documents = onfido.document.list(applicant.id).then((documents) => Promise.all(documents.map(document => onfido.document.download(document.id).then((document) => document.contentType))));
-        const photos = onfido.livePhoto.list(applicant.id).then((photos) => Promise.all(photos.map(photo => onfido.livePhoto.download(photo.id).then((photo) => photo.contentType))));
-        const videos = onfido.liveVideo.list(applicant.id).then((videos) => Promise.all(videos.map(video => onfido.liveVideo.frame(video.id).then((video) => video.contentType))));
+        function getFile(readerStream) {
+            let file = '';
+            readerStream.on('data', function(chunk) {
+                file += chunk;
+            });
+            readerStream.on('end',function() {
+                return file;
+            });
+            readerStream.on('error', function(err) {
+                console.log(err.stack);
+            });
+        }
+        const documents = onfido.document.list(applicant.id).then((documents) => Promise.all(documents.map(document => onfido.document.download(document.id).then((document) => {
+            let stream = document.asStream();
+            let file = '';
+            stream.on('data', function(chunk) {
+                file += chunk;
+            });
+            stream.on('end',function() {
+                return file;
+            });
+            stream.on('error', function(err) {
+                console.log(err.stack);
+            });
+        }))));
+        const photos = onfido.livePhoto.list(applicant.id).then((photos) => Promise.all(photos.map(photo => onfido.livePhoto.download(photo.id).then((photo) => getFile(photo.asStream())))));
+        const videos = onfido.liveVideo.list(applicant.id).then((videos) => Promise.all(videos.map(video => onfido.liveVideo.frame(video.id).then((video) => getFile(video.asStream())))));
         
         Promise.all([documents, photos, videos]).then((children) => {
             req.session.documents = children[0];
@@ -125,6 +134,37 @@ exports.retrieveApplicant = function(req, res) {
             const stacktrace = (req.session.stacktrace)?req.session.stacktrace:[];
             res.render('actions', { applicants: applicants, applicant: applicant, stacktrace: stacktrace, documents: children[0], photos: children[1], videos: children[2] });
         });
+    })
+    .catch((error) => console.log(error.message));
+};
+
+exports.createApplicant = function(req, res) {
+    const firstname = (req.body.firstname !== '')?req.body.firstname:'temp user';
+    const lastname = (req.body.lastname !== '')?req.body.lastname:'to delete';
+    const onfido = new Onfido({ apiToken: req.session.apiToken });
+    const nowRequest = moment();
+    const request = { firstName: firstname, lastName: lastname };
+    const message = {
+        date: nowRequest.format('YYYY-MM-DD HH:mm:ss.SSS'),
+        api: 'Create Applicant',
+        type: 'REQUEST',
+        delai: '',
+        data: JSON.stringify(request, null, 2)
+    };
+    req.session.stacktrace.push(message);
+
+    onfido.applicant.create(request)
+    .then((applicant) => {
+        const nowResponse = moment();
+        const message = {
+            date: nowResponse.format('YYYY-MM-DD HH:mm:ss.SSS'),
+            api: 'Create Applicant',
+            type: 'RESPONSE',
+            delai: nowResponse-nowRequest,
+            data: JSON.stringify(applicant, null, 2)
+        };
+        req.session.stacktrace.push(message);
+        res.redirect('/applicants/'+applicant.id);
     })
     .catch((error) => console.log(error.message));
 };
@@ -170,11 +210,6 @@ exports.deleteApplicants = function(req, res) {
     const promises = applicantIds.map(applicantId => onfido.applicant.delete(applicantId));
     Promise.all(promises).then(() => res.redirect('/index'))
     .catch((error) => console.log(error.message));
-};
-
-exports.clearStacktrace = function(req, res) {
-    req.session.stacktrace = [];
-    res.redirect(req.session.url);
 };
 
 exports.initSdk = function(req, res) {
