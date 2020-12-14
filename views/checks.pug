@@ -9,7 +9,7 @@ block content
                 a.btn.btn-outline-secondary.py-4.mx-4(href='/checks/new') Verify (API)
             a.btn.py-4.mx-4(href='/checks') Consult checks
         .d-flex.flex-row.justify-content-around.mt-4
-            table.table(style='font-size: 0.7rem;')
+            table.table(style='font-size: 0.8rem;')
                 thead
                     tr
                         th 
@@ -20,6 +20,8 @@ block content
                             small STATUS
                         th 
                             small RESULT
+                        th
+                            small NB REPORTS
                 if checks
                     each check in checks
                         tbody
@@ -32,5 +34,7 @@ block content
                                     +displayStatus(check.status)
                                 td
                                     +displayResult(check.result)
+                                td.text-center= check.reportIds.length
+                //- TODO: add nb reports and reports type + results/sub result
 
     

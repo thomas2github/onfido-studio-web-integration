@@ -23,17 +23,6 @@ block content
                             input#reportDocumentWDLI.custom-control-input(name='reports' type='checkbox' value='document_with_driving_licence_information')
                             label.custom-control-label.text-secondary(for='reportDocumentWDLI') Document with driving licence information
                         .my-2
-                        //- h6 Data extraction only
-                        //- .custom-control.custom-switch
-                        //-     input#autofill.custom-control-input(name='autofill' type='checkbox' value='autofill')
-                        //-     label.custom-control-label.text-secondary(for='autofill') Autofill
-                //- if documents.length > 2
-                //-     .d-flex.flex-column.flex-wrap.justify-content-start.align-content-start.ml-5
-                //-         h6 Select document
-                //-         each document, index in documents
-                //-             label.image-checkbox
-                //-                 img.mr-2(src='' width='64' height='36')
-                //-                 input.d-none(type='checkbox' name='documents[]' value=index)
                 if photos.length > 0 || videos.length > 0 
                     .d-flex.flex-column.flex-wrap.justify-content-start.align-content-start.ml-5
                         h6 Facial Similarity Reports
@@ -78,11 +67,14 @@ block content
                 .d-flex.flex-row.justify-content-around
                     .d-flex.flex-column.justify-content-start
                         .card(style='min-width: 726px')
-                            .card-header.card-header-primary
+                            .card-header
                                 div(data-toggle='toggle')
                                     span.float-right
                                         +displayResult(check.result)
                                     h6.card-title Check
+                                        span.ml-4
+                                            +displayDate(check.createdAt)
+                                    p.card-category=  check.id
                             .card-body.hide(style='display:none;')
                                 pre= JSON.stringify(check, null, 4)
                         if reports
@@ -99,7 +91,7 @@ block content
                                 //-     .card-body.hide(style='display:none;')
                                 //-         pre= JSON.stringify(report, null, 4)
                                 .card
-                                    .card-header.card-header-primary
+                                    .card-header
                                         div(data-toggle='toggle')
                                             .float-right
                                                 if report.subResult
@@ -108,8 +100,7 @@ block content
                                                     +displayResult(report.result)
                                                 else
                                                     +displayStatus(report.status)
-                                            h4.card-title= report.name + ' created at '
-                                                +displayDate(report.createdAt)
+                                            h6.card-title= report.name
                                             p.card-category=  report.id
                                     .card-body.hide(style='display:none;')
                                         if Object.keys(report.breakdown).length > 0

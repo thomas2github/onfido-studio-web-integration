@@ -1,0 +1,43 @@
+extends layout
+
+block content
+    .d-flex.flex-column
+        .d-flex.flex-row.justify-content-around
+            a.btn.btn-outline-secondary.py-4.mx-4(href='/sdk') Capture (SDK)
+            - var hasSomethingToVerify = (documents.length > 0 || photos.length > 0 || videos.length > 0)
+            if hasSomethingToVerify
+                a.btn.btn-outline-secondary.py-4.mx-4(href='/checks/new') Verify (API)
+            a.btn.btn-outline-secondary.py-4.mx-4(href='/checks') Consult checks
+        .d-flex.flex-row.justify-content-around.align-items-center.mt-5
+            a(href='/documents/'+documentId target='_blank')
+                img(src='/documents/'+documentId width=300)
+            .card.ml-4(style='min-width: 300px')
+                form#applicant(action='/applicants/'+applicant.id method='post')
+                    .card-body
+                        .form-group
+                            label.bmd-label-floating Firstname
+                            input#firstname.form-control(type='text' name='firstname' value=extraction.extractedData.firstName?extraction.extractedData.firstName:null)
+                        .form-group
+                            label.bmd-label-floating Lastname
+                            input#lastname.form-control(type='text' name='lastname' value=extraction.extractedData.lastName?extraction.extractedData.lastName:null)
+                        .form-group
+                            label.bmd-label-floating Date of Birth
+                            input#dob.form-control(type='text' name='dob' value=extraction.extractedData.dateOfBirth?extraction.extractedData.dateOfBirth:null)
+                        .form-group
+                            label.bmd-label-floating Document Number
+                            input#documentNumber.form-control(type='text' name='documentNumber' value=extraction.extractedData.documentNumber?extraction.extractedData.documentNumber:null)
+                        span
+                            small.font-weight-bold MRZ line 1:
+                        span
+                            small.ml-2= extraction.extractedData.mrzLine1?extraction.extractedData.mrzLine1:''
+                        br
+                        span
+                            small.font-weight-bold MRZ line 2:
+                        span
+                            small.ml-2= extraction.extractedData.mrzLine2?extraction.extractedData.mrzLine2:''
+                        br
+                        .float-right.my-3
+                            button.btn.btn-outline-success(type='submit' value='applicant') Update applicant
+
+
+    

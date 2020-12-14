@@ -19,6 +19,7 @@ router.get('/restart', auth, main_controller.clearSession);
 router.get('/stacktrace/clear', auth, main_controller.clearStacktrace);
 
 router.get('/applicants/:id', auth, main_controller.retrieveApplicant);
+router.post('/applicants/:id', auth, main_controller.updateApplicant);
 router.post('/applicants/new', auth, main_controller.createApplicant);
 router.get('/applicants/:id/delete', auth, main_controller.deleteApplicant);
 router.get('/applicants', auth, main_controller.listApplicants);
@@ -30,5 +31,11 @@ router.get('/checks/new', auth, main_controller.initCheck);
 router.post('/checks/new', auth, main_controller.createCheck);
 router.get('/checks/:id', auth, main_controller.retrieveCheck);
 router.get('/checks', auth, main_controller.listChecks);
+
+router.get('/autofill/:id', auth, main_controller.autofill)
+
+router.get('/documents/:id', auth, main_controller.downloadDocument)
+router.get('/photos/:id', auth, main_controller.downloadPhoto)
+router.get('/videos/:id', auth, main_controller.downloadVideoFrame)
 
 module.exports = router;

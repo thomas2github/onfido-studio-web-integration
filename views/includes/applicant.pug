@@ -20,22 +20,26 @@ if applicant
             small= applicant?applicant.lastName:''
     if documents.length > 0
         h5.my-3.text-primary documents
-        each document, index in documents
-            if index < 2
-                p
-                    image(src=document height=72 width=128)
-    //- if photos.length > 0
-    //-     h5.my-3.text-primary photos
-    //-     p
-    //-         each photo, index in photos
-    //-             if index < 1
-    //-                 image.mr-2(src=photo height=128 width=72)
-    //- if videos.length > 0
-    //-     h5.my-3.text-primary videos
-    //-     p
-    //-         each video, index in videos
-    //-             if index < 1            
-    //-                 image.mr-2(src=video height=128 width=72)
+        .d-flex.flex-row.flex-wrap.justify-content-start.align-items-center
+            each document, index in documents
+                if index < 2
+                    a.mb-2(href='/documents/'+document.id target='_blank')
+                        image(src='/documents/'+document.id width=75)
+                    a.ml-1.btn.btn-sm.btn-outline-secondary(href='/autofill/'+document.id) autofill
+    if photos.length > 0
+        h5.my-3.text-primary photos
+        p
+            each photo, index in photos
+                if index < 1
+                    a(href='/photos/'+photo.id target='_blank')
+                        image.mr-2(src='/photos/'+photo.id width=75)
+    if videos.length > 0
+        h5.my-3.text-primary videos
+        p
+            each video, index in videos
+                if index < 1
+                    a(href='/videos/'+video.id target='_blank')
+                        image.mr-2(src='/videos/'+video.id width=75)
     button.my-3.btn.btn-outline-danger(data-toggle='modal' data-target='#deleteApplicant') delete
 
 // Modal Create Applicant

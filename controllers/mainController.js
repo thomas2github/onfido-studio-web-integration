@@ -2,6 +2,7 @@ const { Onfido, Region, OnfidoApiError } = require('@onfido/api');
 const { on } = require('nodemon');
 const moment = require('moment');
 const app = require('../app');
+const fs = require('fs');
 
 // Display index.
 exports.index = function(req, res) {
@@ -10,7 +11,6 @@ exports.index = function(req, res) {
     if(applicant){
         res.redirect('/applicants/'+applicant.id);
     }
-    
     const stacktrace = (req.session.stacktrace)?req.session.stacktrace:[];
     res.render('index', { applicant: applicant, stacktrace: stacktrace });
 };
@@ -25,6 +25,8 @@ exports.clearSession = function(req, res) {
     req.session.check = null;
     req.session.reports = [];
     req.session.checks = [];
+    req.session.extraction = null;
+    req.session.url = null;
     res.redirect('/index');
 };
 
@@ -95,35 +97,9 @@ exports.retrieveApplicant = function(req, res) {
         };
         req.session.stacktrace.push(message);
         req.session.applicant = applicant;
-        
-        // GET DOCUMENTS / SELFIES / VIDEOS
-        function getFile(readerStream) {
-            let file = '';
-            readerStream.on('data', function(chunk) {
-                file += chunk;
-            });
-            readerStream.on('end',function() {
-                return file;
-            });
-            readerStream.on('error', function(err) {
-                console.log(err.stack);
-            });
-        }
-        const documents = onfido.document.list(applicant.id).then((documents) => Promise.all(documents.map(document => onfido.document.download(document.id).then((document) => {
-            let stream = document.asStream();
-            let file = '';
-            stream.on('data', function(chunk) {
-                file += chunk;
-            });
-            stream.on('end',function() {
-                return file;
-            });
-            stream.on('error', function(err) {
-                console.log(err.stack);
-            });
-        }))));
-        const photos = onfido.livePhoto.list(applicant.id).then((photos) => Promise.all(photos.map(photo => onfido.livePhoto.download(photo.id).then((photo) => getFile(photo.asStream())))));
-        const videos = onfido.liveVideo.list(applicant.id).then((videos) => Promise.all(videos.map(video => onfido.liveVideo.frame(video.id).then((video) => getFile(video.asStream())))));
+        const documents = onfido.document.list(applicant.id);
+        const photos = onfido.livePhoto.list(applicant.id);
+        const videos = onfido.liveVideo.list(applicant.id);
         
         Promise.all([documents, photos, videos]).then((children) => {
             req.session.documents = children[0];
@@ -134,6 +110,42 @@ exports.retrieveApplicant = function(req, res) {
             const stacktrace = (req.session.stacktrace)?req.session.stacktrace:[];
             res.render('actions', { applicants: applicants, applicant: applicant, stacktrace: stacktrace, documents: children[0], photos: children[1], videos: children[2] });
         });
+    })
+    .catch((error) => console.log(error.message));
+};
+
+exports.updateApplicant = function(req, res) {
+    const applicantId = req.params.id;
+    const firstname = (req.body.firstname !== '')?req.body.firstname:'';
+    const lastname = (req.body.lastname !== '')?req.body.lastname:'';
+    const onfido = new Onfido({ apiToken: req.session.apiToken });
+    const nowRequest = moment();
+    const request = { 
+        firstName: firstname, 
+        lastName: lastname
+    };
+    const message = {
+        date: nowRequest.format('YYYY-MM-DD HH:mm:ss.SSS'),
+        api: 'Update Applicant',
+        type: 'REQUEST',
+        delai: '',
+        data: JSON.stringify(request, null, 2)
+    };
+    req.session.stacktrace.push(message);
+
+    onfido.applicant.update(applicantId, request)
+    .then((applicant) => {
+        const nowResponse = moment();
+        const message = {
+            date: nowResponse.format('YYYY-MM-DD HH:mm:ss.SSS'),
+            api: 'Update Applicant',
+            type: 'RESPONSE',
+            delai: nowResponse-nowRequest,
+            data: JSON.stringify(applicant, null, 2)
+        };
+        req.session.stacktrace.push(message);
+        req.session.applicant = applicant;
+        res.redirect('/checks/new');
     })
     .catch((error) => console.log(error.message));
 };
@@ -267,7 +279,6 @@ exports.createCheck = function(req, res) {
     req.session.url = req.originalUrl;
     const applicant = (req.session.applicant)?req.session.applicant:null;    
     const reportNames = Array.isArray(req.body.reports)?req.body.reports:[req.body.reports];
-    // TODO: use selected documents
     const onfido = new Onfido({ apiToken: req.session.apiToken });
     const nowRequest = moment();
     const request = { 
@@ -408,7 +419,7 @@ exports.listChecks = function(req, res) {
             data: JSON.stringify(checks, null, 2)
         };
         req.session.stacktrace.push(message);
-
+        
         const applicant = (req.session.applicant)?req.session.applicant:null;
         const stacktrace = (req.session.stacktrace)?req.session.stacktrace:[];
         const applicants = (req.session.applicants)?req.session.applicants:[];
@@ -416,5 +427,68 @@ exports.listChecks = function(req, res) {
         const photos = (req.session.photos)?req.session.photos:[];
         const videos = (req.session.videos)?req.session.videos:[];
         res.render('checks', { applicants: applicants, applicant: applicant, stacktrace: stacktrace, documents: documents, photos: photos, videos: videos, checks: checks });
+
     });
+};
+
+exports.autofill = function(req, res) {
+    // res.send(JSON.stringify(req.body));
+    req.session.url = req.originalUrl;
+    const documentId = req.params.id;    
+    const onfido = new Onfido({ apiToken: req.session.apiToken });
+    const nowRequest = moment();
+    const request = { 
+        documentId: documentId
+     };
+    const message = {
+        date: nowRequest.format('YYYY-MM-DD HH:mm:ss.SSS'),
+        api: 'Autofill',
+        type: 'REQUEST',
+        delai: '',
+        data: JSON.stringify(request, null, 2)
+    };
+    req.session.stacktrace.push(message);
+
+    onfido.autofill.perform(documentId).then((extraction) => {
+        const nowResponse = moment();
+        const message = {
+            date: nowResponse.format('YYYY-MM-DD HH:mm:ss.SSS'),
+            api: 'Autofill',
+            type: 'RESPONSE',
+            delai: nowResponse-nowRequest,
+            data: JSON.stringify(extraction, null, 2)
+        };
+        req.session.stacktrace.push(message);
+        req.session.extraction = extraction;
+    })
+    .catch((error) => req.session.extraction = error)
+    .finally(() => {
+        const extraction = (req.session.extraction)?req.session.extraction:null;
+        const applicant = (req.session.applicant)?req.session.applicant:null;
+        const stacktrace = (req.session.stacktrace)?req.session.stacktrace:[];
+        const applicants = (req.session.applicants)?req.session.applicants:[];
+        const documents = (req.session.documents)?req.session.documents:[];
+        const photos = (req.session.photos)?req.session.photos:[];
+        const videos = (req.session.videos)?req.session.videos:[];
+        res.render('autofill', { applicants: applicants, applicant: applicant, stacktrace: stacktrace, documents: documents, photos: photos, videos: videos, documentId: documentId, extraction: extraction });
+    });
+    
+};
+
+exports.downloadDocument = function(req, res) {
+    const onfido = new Onfido({ apiToken: req.session.apiToken });
+    const id = req.params.id;
+    onfido.document.download(id).then(document => document.asStream().pipe(res));
+};
+
+exports.downloadPhoto = function(req, res) {
+    const onfido = new Onfido({ apiToken: req.session.apiToken });
+    const id = req.params.id;
+    onfido.livePhoto.download(id).then(photo => photo.asStream().pipe(res));
+};
+
+exports.downloadVideoFrame = function(req, res) {
+    const onfido = new Onfido({ apiToken: req.session.apiToken });
+    const id = req.params.id;
+    onfido.liveVideo.frame(id).then(frame => frame.asStream().pipe(res));
 };

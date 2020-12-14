@@ -119,5 +119,6 @@ $(document).ready(function() {
     });
 
     // $('#refreshSdk').click();
+    // TODO: get sdk events
 
 });
