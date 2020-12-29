@@ -12,12 +12,12 @@ if applicant
         span
             small.font-weight-bold.text-primary firstname: 
         span
-            small= applicant?applicant.firstName:''
+            small= applicant?applicant.first_name:''
         br 
         span
             small.font-weight-bold.text-primary lastname: 
         span
-            small= applicant?applicant.lastName:''
+            small= applicant?applicant.last_name:''
     if documents.length > 0
         h5.my-3.text-primary documents
         .d-flex.flex-row.flex-wrap.justify-content-start.align-items-center
@@ -81,12 +81,12 @@ if applicant
                     span
                         small.font-weight-bold firstname: 
                     span
-                        small= applicant?applicant.firstName:''
+                        small= applicant?applicant.first_name:''
                     br 
                     span
                         small.font-weight-bold lastname: 
                     span
-                        small= applicant?applicant.lastName:''
+                        small= applicant?applicant.last_name:''
                 .modal-footer
                         button.btn.btn-outline-secondary(type='button' data-dismiss='modal') Cancel
                         a.btn.btn-danger(type='buttton' href='/applicants/'+applicant.id+'/delete') Delete

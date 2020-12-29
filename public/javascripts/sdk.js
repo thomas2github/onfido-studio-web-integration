@@ -5,13 +5,13 @@ $(document).ready(function() {
         $('.onfido-sdk-ui-Modal-inner').remove();
         const useModal = $('#useModal').is(':checked');
         const welcomeStep = $('#welcomeStep').is(':checked');
-        const forceCrossDevice = $('#forceCrossDevice').is(':checked');
-        const useLiveDocumentCapture = $('#useLiveDocumentCapture').is(':checked');
-        const useWebcam = false; // $('#useWebcam').is(':checked');
+        const completeStep = $('#completeStep').is(':checked');
+        const hideOnfidoLogo = $('#hideOnfidoLogo').is(':checked');
         const documentStep = $('#documentStep').is(':checked');
         const selfieStep = $('#selfieStep').is(':checked');
         const videoStep = $('#videoStep').is(':checked');
-        const completeStep = $('#completeStep').is(':checked');
+        const forceCrossDevice = $('#forceCrossDevice').is(':checked');
+        const useLiveDocumentCapture = $('#useLiveDocumentCapture').is(':checked');
         const acceptPassport = $('#acceptPassport').is(':checked');
         const acceptNationalId = $('#acceptNationalId').is(':checked');
         const acceptDrivingLicence = $('#acceptDrivingLicence').is(':checked');
@@ -27,7 +27,6 @@ $(document).ready(function() {
                     options: {
                         forceCrossDevice: forceCrossDevice,
                         useLiveDocumentCapture: useLiveDocumentCapture,
-                        useWebcam: useWebcam,
                         uploadFallback: true,
                         documentTypes: {
                             passport: acceptPassport,
@@ -44,12 +43,11 @@ $(document).ready(function() {
             steps.push(
                 {
                     type: 'face',
-                    options: {
-                        forceCrossDevice: forceCrossDevice,
-                        requestedVariant: 'standard',
-                        useMultipleSelfieCapture: true,
-                        uploadFallback: true
-                    }
+                    // options: {
+                    //     requestedVariant: 'standard',
+                    //     useMultipleSelfieCapture: true,
+                    //     uploadFallback: true
+                    // }
                 }
             );
         }
@@ -58,10 +56,9 @@ $(document).ready(function() {
                 {
                     type: 'face',
                     options: {
-                        forceCrossDevice: forceCrossDevice,
                         requestedVariant: 'video',
-                        useMultipleSelfieCapture: true,
-                        uploadFallback: true
+                        // useMultipleSelfieCapture: true,
+                        // uploadFallback: true
                     }
                 }
             );
@@ -79,10 +76,19 @@ $(document).ready(function() {
         const token = $(this).attr('data-token');
         const applicantId = $(this).attr('data-applicant-id');
         let sdkParam = {
+            useModal: useModal,
+            // shouldCloseOnOverlayClick: true,
+            language: language,
+            // disableAnalytics: false,
+            // useMemoryHistory: false,
+            steps: steps,
+            // mobileFlow: false,
+            // enterpriseFeatures: {
+            //     hideOnfidoLogo: hideOnfidoLogo,
+            //     cobrand: null
+            // },
             token: token,
             containerId: 'onfido-mount',
-            language: language,
-            useModal: useModal,
             isModalOpen: true,
             onModalRequestClose: function() {
                 // Update options with the state of the modal
@@ -91,7 +97,6 @@ $(document).ready(function() {
             onComplete: function(data) {
                 window.location = '/applicants/'+applicantId;
             },
-            steps: steps
         };
         welcomeParam = {
             type: 'welcome',
@@ -118,7 +123,11 @@ $(document).ready(function() {
         return false;
     });
 
-    // $('#refreshSdk').click();
-    // TODO: get sdk events
-
+    // display sdk events
+    window.addEventListener('userAnalyticsEvent', (event) => {
+        console.log(event);
+        row = '<tbody><tr data-toggle="toggle" data-ol-has-click-handler><td>' + event.detail.eventName + '</td><td>' + Math.floor(event.timeStamp) + '</td></tr></tbody>';
+        row += '<tbody class="hide" style="display:none;"><tr><td colspan="2"><pre>' + JSON.stringify(event.detail) + '</td></tr></tbody>';
+        $('#sdk-events').append(row);
+    });
 });

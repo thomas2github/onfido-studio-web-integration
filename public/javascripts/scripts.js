@@ -7,7 +7,7 @@ $(document).ready(function() {
     });
 
     $('#switchAll').click(function(e){
-        var table= $(e.target).closest('table');
+        const table= $(e.target).closest('table');
         $('td input:checkbox',table).prop('checked', $(e.target).prop("checked"));
     });
 

@@ -27,7 +27,11 @@ body
             .ml-4
                 a.simple-text.logo-normal(href='/restart')
                     img(src='/images/onfido-logo.png' height='40px')
-            h4 DEMO
+            form.form-inline(action='/search' method='get')
+                .form-group
+                    label.bmd-label-floating uuid
+                    input#uuid.form-control(type='text' name='uuid' required style='width: 250px;')
+                button.btn.btn-sm.btn-outline-secondary.ml-4(type='submit') search
             .mr-4
                 a.nav-link(href='/logout')
                     i.material-icons.text-danger exit_to_app

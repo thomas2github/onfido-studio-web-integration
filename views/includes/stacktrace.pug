@@ -1,25 +1,39 @@
-h4.text-info.font-weight-bold.text-right API Calls
-a.btn.btn-outline-info(type='button' href='/stacktrace/clear') clear
-table.table(style='font-size: 0.7rem;')
-    thead
-        tr
-            th 
-                small DATE
-            th 
-                small API METHOD
-            th 
-                small TYPE
-            th 
-                small DELAY
-    if stacktrace
-        each message in stacktrace
-            tbody
-                tr(data-toggle='toggle')
-                    td= message.date.substr(11)
-                    td= message.api
-                    td= message.type
-                    td= message.delai
-            tbody.hide(style='display:none;')
+.nav.nav-tabs(data-tabs='tabs')
+    a.nav-item.nav-link.text-info.float-right.active(data-toggle='tab' href='#api-calls') 
+        h4.font-weight-bold API Calls
+    if showSdkEvents
+        a.nav-item.nav-link.text-info.float-left(data-toggle='tab' href='#sdk-events')
+           h4.font-weight-bold SDK Events
+.d-flex.flex-column.justify-content-start
+    a.btn.btn-outline-info(type='button' href='/stacktrace/clear') clear
+    .tab-content
+        table.table.tab-pane.active#api-calls(style='font-size: 0.7rem;')
+            thead
                 tr
-                    td(colspan='4')
-                        pre= message.data
+                    th 
+                        small DATE
+                    th 
+                        small API METHOD
+                    th 
+                        small TYPE
+                    th 
+                        small DELAY
+            if stacktrace
+                each message in stacktrace
+                    tbody
+                        tr(data-toggle='toggle')
+                            td= message.date.substr(11)
+                            td= message.api
+                            td= message.type
+                            td= message.delai
+                    tbody.hide(style='display:none;')
+                        tr
+                            td(colspan='4')
+                                pre= message.data
+        table.table.tab-pane#sdk-events(style='font-size: 0.7rem;')
+            thead
+                tr
+                    th 
+                        small EVENT
+                    th 
+                        small TIMESTAMP

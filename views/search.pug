@@ -1,0 +1,165 @@
+extends layout
+
+block content
+    //- pre= JSON.stringify(results, null, 2)
+    .card
+        .card-body
+            -var has_result = (results.applicant || results.document || results.check || results.report)
+            if !has_result
+                h6 no result founded!
+            else if results.applicant
+                h6.text-primary Applicant
+            else if results.document
+                h6.text-primary Document
+            else if results.check
+                h6.text-info Check
+            else if results.report
+                h6.text-success Report
+
+            if results.applicant
+                .d-flex.flex-row
+                    .d-flex.flex-column.mx-4
+                        .d-flex.flex-row
+                            span
+                                small.font-weight-bold.mr-2 id: 
+                            a.text-primary(href='/applicants/'+results.applicant.id)
+                                small= results.applicant.id
+                        .d-flex.flex-row 
+                            span
+                                small.font-weight-bold.mr-2 created at: 
+                            span
+                                small 
+                                    +displayDate(results.applicant.created_at)
+                    .d-flex.flex-column.mx-4
+                        .d-flex.flex-row 
+                            span
+                                small.font-weight-bold.mr-2 firstname: 
+                            span
+                                small= results.applicant.first_name?results.applicant.first_name:''
+                        .d-flex.flex-row
+                            span
+                                small.font-weight-bold.mr-2 lastname: 
+                            span
+                                small= results.applicant.last_name?results.applicant.last_name:''
+            
+            if results.document
+                .d-flex.flex-row
+                    .d-flex.flex-column.mx-4
+                        .d-flex.flex-row
+                            span
+                                small.font-weight-bold.mr-2 id: 
+                            span
+                                small= results.document.id
+                        .d-flex.flex-row
+                            span
+                                small.font-weight-bold.mr-2 applicant id: 
+                            a.text-primary(href='/applicants/'+results.document.applicant_id)
+                                small= results.document.applicant_id
+                        .d-flex.flex-row
+                            span
+                                small.font-weight-bold.mr-2 created at: 
+                            span
+                                small 
+                                    +displayDate(results.document.created_at)
+                    .d-flex.flex-column.mx-4
+                        .d-flex.flex-row
+                            span
+                                small.font-weight-bold.mr-2 issuing country: 
+                            span
+                                small= results.document.issuing_country?results.document.issuing_country:''
+                        .d-flex.flex-row
+                            span
+                                small.font-weight-bold.mr-2 type: 
+                            span
+                                small= results.document.type
+                        .d-flex.flex-row
+                            span
+                                small.font-weight-bold.mr-2 side: 
+                            span
+                                small= results.document.side?results.document.side:''
+                        .d-flex.flex-row
+                            span
+                                small.font-weight-bold.mr-2 file name: 
+                            span
+                                small= results.document.file_name
+            
+            if results.check
+                .d-flex.flex-row
+                    .d-flex.flex-column.mx-4
+                        .d-flex.flex-row
+                            span
+                                small.font-weight-bold.mr-2 id: 
+                            a.text-info(href='/checks/'+results.check.id)
+                                small= results.check.id
+                        .d-flex.flex-row
+                            span
+                                small.font-weight-bold.mr-2 applicant id: 
+                            a.text-primary(href='/applicants/'+results.check.applicant_id)
+                                small= results.check.applicant_id 
+                        .d-flex.flex-row
+                            span
+                                small.font-weight-bold.mr-2 created at: 
+                            span
+                                small 
+                                    +displayDate(results.check.created_at)
+                    .d-flex.flex-column.mx-4
+                        .d-flex.flex-row
+                            span
+                                small.font-weight-bold.mr-2 status: 
+                            span
+                                small
+                                    +displayStatus(results.check.status)
+                        .d-flex.flex-row
+                            span
+                                small.font-weight-bold.mr-2 result: 
+                            span
+                                small
+                                    if results.check.result
+                                        +displayResult(results.check.result)
+                        each report_id in results.check.report_ids
+                            .d-flex.flex-row
+                                span
+                                    small.font-weight-bold.mr-2 report: 
+                                a.text-success(href='/reports/'+report_id)
+                                    small= report_id
+            
+            if results.report
+                .d-flex.flex-row
+                    .d-flex.flex-column.mx-4
+                        .d-flex.flex-row
+                            span
+                                small.font-weight-bold.mr-2 id: 
+                            a.text-success(href='/reports/'+results.report.id)
+                                small= results.report.id
+                        .d-flex.flex-row
+                            span
+                                small.font-weight-bold.mr-2 check id: 
+                            a.text-primary(href='/check/'+results.report.check_id)
+                                small= results.report.check_id 
+                        .d-flex.flex-row
+                            span
+                                small.font-weight-bold.mr-2 created at: 
+                            span
+                                small 
+                                    +displayDate(results.report.created_at)
+                    .d-flex.flex-column.mx-4
+                        .d-flex.flex-row
+                            span
+                                small.font-weight-bold.mr-2 name: 
+                            span
+                                small= results.report.name
+                        .d-flex.flex-row
+                            span
+                                small.font-weight-bold.mr-2 status: 
+                            span
+                                small
+                                    +displayStatus(results.report.status)
+                        .d-flex.flex-row
+                            span
+                                small.font-weight-bold.mr-2 result: 
+                            span
+                                small
+                                    if results.report.sub_result
+                                        +displayResult(results.report.sub_result)
+                                    else if results.report.result
+                                        +displayResult(results.report.result)

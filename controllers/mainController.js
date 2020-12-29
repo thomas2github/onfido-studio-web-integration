@@ -1,21 +1,110 @@
-const { Onfido, Region, OnfidoApiError } = require('@onfido/api');
-const { on } = require('nodemon');
+const { Onfido } = require('@onfido/api');
 const moment = require('moment');
-const app = require('../app');
-const fs = require('fs');
+const axios = require('axios');
+
+axios.defaults.baseURL = 'https://api.onfido.com/v3/';
+axios.defaults.headers.common['Accept'] = 'application/json';
+axios.defaults.headers.post['Content-Type'] = 'application/json';
+axios.defaults.headers.put['Content-Type'] = 'application/json';
+
+const logInStacktrace = function (api, type, nowRequest, data, stacktrace) {
+    const now = moment();
+    const message = {
+        date: now.format('YYYY-MM-DD HH:mm:ss.SSS'),
+        api: api,
+        type: type,
+        delai: (type === 'RESPONSE')?now-nowRequest:'',
+        data: JSON.stringify(data, null, 2)
+    };
+    stacktrace.push(message);
+    return now;
+};
+
+const getAllResourcesByApplicant = function (applicant_id) {
+    // get applicant / documents / live_photo / live_video / checks & reports
+    const applicant = axios.default.get('/applicants/'+applicant_id).then(response => response.data);
+    const documents = axios.default.get('/documents?applicant_id='+applicant_id).then(response => response.data.documents);
+    const photos = axios.default.get('/live_photos?applicant_id='+applicant_id).then(response => response.data.live_photos);
+    const videos = axios.default.get('/live_videos?applicant_id='+applicant_id).then(response => response.data.live_videos); 
+    
+    const getCheckAndReports = function(check) {
+        axios.default.get('/reports?check_id='+check.id).then(response => {
+            check['reports'] = response.data.reports;
+            return check;
+        });
+    }    
+    const checks = axios.default.get('/checks?applicant_id='+applicant_id).then(response => response.data.checks.map(check => getCheckAndReports(check)));
+    
+    Promise.all([applicant, documents, photos, videos, checks]).then(children => { 
+       let applicant = children[0];
+       applicant['documents'] = children[1];
+       applicant['photos'] = children[2];
+       applicant['videos'] = children[3];
+       applicant['checks'] = children[4];
+       return applicant;
+    });
+};
+
+const getAllResourcesByCheck = function (check_id) {
+    // get checks then reports / applicant / documents / live_photo / live_video
+    axios.default.get('/checks/'+check_id).then(response => {
+        let check = response.data;
+
+        const reports = axios.default.get('/reports?check_id='+check.id).then(response => response.data.reports);
+        const applicant = axios.default.get('/applicants/'+check.applicant_id).then(response => response.data);
+        const documents = axios.default.get('/documents?applicant_id='+check.pplicant_id).then(response => response.data.documents);
+        const photos = axios.default.get('/live_photos?applicant_id='+check.applicant_id).then(response => response.data.live_photos);
+        const videos = axios.default.get('/live_videos?applicant_id='+check.applicant_id).then(response => response.data.live_videos);
+
+        Promise.all([reports, applicant, documents, photos, videos]).then(children => { 
+            check['reports'] = children[0];
+            let applicant = children[1];
+            applicant['documents'] = children[2];
+            applicant['photos'] = children[3];
+            applicant['videos'] = children[4];
+            check['applicant'] = applicant;
+            return check;
+        });
+    });
+};
+
+const getAllResourcesByReport = function (report_id) {
+    // get report then check & documents then applicant / live_photo / live_video
+    axios.default.get('/reports/'+report_id).then(response => {
+        let report = response.data;
+        const check = axios.default.get('/checks/'+report.check_id).then(response => response.data);
+        const documents = report.documents.map(id => axios.default.get('/documents/'+id).then(response => response.data));
+        Promise.all([check, documents]).then(children => {
+            let check = children[0];
+            report['check'] = check;
+            report['documents'] = children[1];
+            const applicant = axios.default.get('/applicants/'+check.applicant_id).then(response => response.data);
+            const photos = axios.default.get('/live_photos?applicant_id='+check.applicant_id).then(response => response.data.live_photos);
+            const videos = axios.default.get('/live_videos?applicant_id='+check.applicant_id).then(response => response.data.live_videos);
+            Promise.all([applicant, photos, videos]).then(children => { 
+                let applicant = children[0];
+                applicant['photos'] = children[1];
+                applicant['videos'] = children[2];
+                report['applicant'] = applicant;
+                return report;
+            });
+        });
+    });
+};
 
 // Display index.
-exports.index = function(req, res) {
+exports.index = function(req, res, next) {
+    axios.defaults.headers.common['Authorization'] = 'Token token='+req.session.apiToken;
     req.session.url = req.originalUrl;
     const applicant = (req.session.applicant)?req.session.applicant:null;
     if(applicant){
         res.redirect('/applicants/'+applicant.id);
     }
     const stacktrace = (req.session.stacktrace)?req.session.stacktrace:[];
-    res.render('index', { applicant: applicant, stacktrace: stacktrace });
+    res.render('index', { applicant: applicant, stacktrace: stacktrace});
 };
 
-exports.clearSession = function(req, res) {
+exports.clearSession = function(req, res, next) {
     req.session.applicant = null;
     req.session.applicants = [];
     req.session.stacktrace = [];
@@ -30,227 +119,160 @@ exports.clearSession = function(req, res) {
     res.redirect('/index');
 };
 
-exports.clearStacktrace = function(req, res) {
+exports.clearStacktrace = function(req, res, next) {
     req.session.stacktrace = [];
     res.redirect(req.session.url);
 };
 
-exports.listApplicants = function(req, res) {
+exports.listApplicants = function(req, res, next) {
     req.session.url = req.originalUrl;
+    const page = (req.query.page)?req.query.page:1;
+    
+    const data = { };
+    const nowRequest = logInStacktrace('List Applicants', 'REQUEST', null, data, req.session.stacktrace);
+    
+    axios.default.get('/applicants?page='+page).then(response => {
+    
+        logInStacktrace('List Applicants', 'RESPONSE', nowRequest, response.data, req.session.stacktrace);
+        const totalApplicants = response.headers['x-total-count'];
+        const totalPages = Math.ceil(totalApplicants/20)
 
-    const onfido = new Onfido({ apiToken: req.session.apiToken });
-    const nowRequest = moment();
-    const request = { };
-    const message = {
-        date: nowRequest.format('YYYY-MM-DD HH:mm:ss.SSS'),
-        api: 'List Applicants',
-        type: 'REQUEST',
-        delai: '',
-        data: JSON.stringify(request, null, 2)
-    };
-    req.session.stacktrace.push(message);
+        const enhancedApplicant = function(applicant) {
+            const total_checks = axios.default.get('/checks?applicant_id='+applicant.id).then(response => response.data.checks.length);
+            const photo = axios.default.get('/live_photos?applicant_id='+applicant.id).then(response => (response.data.live_photos.length > 0)?response.data.live_photos[0]:null);
+            const video = axios.default.get('/live_videos?applicant_id='+applicant.id).then(response => (response.data.live_videos.length > 0)?response.data.live_videos[0]:null);
+            return Promise.all([total_checks, photo, video]).then(children => {
+                applicant['total_checks'] = children[0];
+                applicant['photo'] = children[1];
+                applicant['video'] = children[2];
+                return applicant;
+            });
+        }
 
-    onfido.applicant.list().then((applicants) => {
-        const nowResponse = moment();
-        const message = {
-            date: nowResponse.format('YYYY-MM-DD HH:mm:ss.SSS'),
-            api: 'List Applicants',
-            type: 'RESPONSE',
-            delai: nowResponse-nowRequest,
-            data: JSON.stringify(applicants, null, 2)
-        };
-        req.session.stacktrace.push(message);
-
-        const applicant = (req.session.applicant)?req.session.applicant:null;
-        const stacktrace = (req.session.stacktrace)?req.session.stacktrace:[];
-        const checks = (req.session.checks)?req.session.checks:[];
-        const documents = (req.session.documents)?req.session.documents:[];
-        const photos = (req.session.photos)?req.session.photos:[];
-        const videos = (req.session.videos)?req.session.videos:[];
-        res.render('applicants', { applicants: applicants, applicant: applicant, stacktrace: stacktrace, documents: documents, photos: photos, videos: videos, checks: checks });
-    });
-};
-
-exports.retrieveApplicant = function(req, res) {
-    req.session.url = req.originalUrl;
-    const applicantId = req.params.id;
-    const onfido = new Onfido({ apiToken: req.session.apiToken });
-    const nowRequest = moment();
-    const request = { id: applicantId };
-    const message = {
-        date: nowRequest.format('YYYY-MM-DD HH:mm:ss.SSS'),
-        api: 'Retrieve Applicant',
-        type: 'REQUEST',
-        delai: '',
-        data: JSON.stringify(request, null, 2)
-    };
-    req.session.stacktrace.push(message);
-
-    onfido.applicant.find(applicantId).then((applicant) => {
-        const nowResponse = moment();
-        const message = {
-            date: nowResponse.format('YYYY-MM-DD HH:mm:ss.SSS'),
-            api: 'Retrieve Applicant',
-            type: 'RESPONSE',
-            delai: nowResponse-nowRequest,
-            data: JSON.stringify(applicant, null, 2)
-        };
-        req.session.stacktrace.push(message);
-        req.session.applicant = applicant;
-        const documents = onfido.document.list(applicant.id);
-        const photos = onfido.livePhoto.list(applicant.id);
-        const videos = onfido.liveVideo.list(applicant.id);
-        
-        Promise.all([documents, photos, videos]).then((children) => {
-            req.session.documents = children[0];
-            req.session.photos = children[1];
-            req.session.videos = children[2];
+        const applicants = response.data.applicants.map(applicant => enhancedApplicant(applicant));
+        Promise.all(applicants).then(applicants => {
             const applicant = (req.session.applicant)?req.session.applicant:null;
-            const applicants = (req.session.applicants)?req.session.applicants:[];
             const stacktrace = (req.session.stacktrace)?req.session.stacktrace:[];
-            res.render('actions', { applicants: applicants, applicant: applicant, stacktrace: stacktrace, documents: children[0], photos: children[1], videos: children[2] });
+            const checks = (req.session.checks)?req.session.checks:[];
+            const documents = (req.session.documents)?req.session.documents:[];
+            const photos = (req.session.photos)?req.session.photos:[];
+            const videos = (req.session.videos)?req.session.videos:[];
+            res.render('applicants', { page: page, totalPages: totalPages, totalApplicants: totalApplicants, applicants: applicants, applicant: applicant, stacktrace: stacktrace, documents: documents, photos: photos, videos: videos, checks: checks });
         });
     })
-    .catch((error) => console.log(error.message));
+    .catch((error) => {console.log(error.message);next(error);});
 };
 
-exports.updateApplicant = function(req, res) {
-    const applicantId = req.params.id;
+exports.retrieveApplicant = function(req, res, next) {
+    req.session.url = req.originalUrl;
+    const applicant_id = req.params.id;
+    
+    const data = { id: applicant_id };
+
+    const logAndGetApplicant = function(applicant_id) {
+        const nowRequest = logInStacktrace('Retrieve Applicant', 'REQUEST', null, data, req.session.stacktrace);
+        return axios.default.get('/applicants/'+applicant_id).then((response) => {
+            const applicant = response.data;
+            logInStacktrace('Retrieve Applicant', 'RESPONSE', nowRequest, applicant, req.session.stacktrace);
+            return applicant;
+        });
+    }    
+
+    const applicant = logAndGetApplicant(applicant_id);
+    const documents = axios.default.get('/documents?applicant_id='+applicant_id).then(response => response.data.documents);
+    const photos = axios.default.get('/live_photos?applicant_id='+applicant_id).then(response => response.data.live_photos);
+    const videos = axios.default.get('/live_videos?applicant_id='+applicant_id).then(response => response.data.live_videos);
+    
+    Promise.all([applicant, documents, photos, videos]).then((children) => {
+        req.session.applicant = children[0];
+        req.session.documents = children[1];
+        req.session.photos = children[2];
+        req.session.videos = children[3];
+        const applicants = (req.session.applicants)?req.session.applicants:[];
+        const stacktrace = (req.session.stacktrace)?req.session.stacktrace:[];
+        res.render('actions', { applicants: applicants, applicant: children[0], stacktrace: stacktrace, documents: req.session.documents, photos: req.session.photos, videos: req.session.videos });
+    })
+    .catch((error) => {console.log(error.message);next(error);});
+};
+
+exports.updateApplicant = function(req, res, next) {
+    const applicant_id = req.params.id;
     const firstname = (req.body.firstname !== '')?req.body.firstname:'';
     const lastname = (req.body.lastname !== '')?req.body.lastname:'';
-    const onfido = new Onfido({ apiToken: req.session.apiToken });
-    const nowRequest = moment();
-    const request = { 
-        firstName: firstname, 
-        lastName: lastname
-    };
-    const message = {
-        date: nowRequest.format('YYYY-MM-DD HH:mm:ss.SSS'),
-        api: 'Update Applicant',
-        type: 'REQUEST',
-        delai: '',
-        data: JSON.stringify(request, null, 2)
-    };
-    req.session.stacktrace.push(message);
 
-    onfido.applicant.update(applicantId, request)
-    .then((applicant) => {
-        const nowResponse = moment();
-        const message = {
-            date: nowResponse.format('YYYY-MM-DD HH:mm:ss.SSS'),
-            api: 'Update Applicant',
-            type: 'RESPONSE',
-            delai: nowResponse-nowRequest,
-            data: JSON.stringify(applicant, null, 2)
-        };
-        req.session.stacktrace.push(message);
-        req.session.applicant = applicant;
+    const data = { first_name: firstname, last_name: lastname };
+    const nowRequest = logInStacktrace('Update Applicant', 'REQUEST', null, data, req.session.stacktrace);
+    
+    axios.default.put('/applicants/'+applicant_id, data).then((response) => {
+        
+        logInStacktrace('Update Applicant', 'RESPONSE', nowRequest, response.data, req.session.stacktrace);
+        req.session.applicant = response.data;
+
         res.redirect('/checks/new');
     })
-    .catch((error) => console.log(error.message));
+    .catch((error) => {console.log(error.message);next(error);});
 };
 
-exports.createApplicant = function(req, res) {
+exports.createApplicant = function(req, res, next) {
     const firstname = (req.body.firstname !== '')?req.body.firstname:'temp user';
     const lastname = (req.body.lastname !== '')?req.body.lastname:'to delete';
-    const onfido = new Onfido({ apiToken: req.session.apiToken });
-    const nowRequest = moment();
-    const request = { firstName: firstname, lastName: lastname };
-    const message = {
-        date: nowRequest.format('YYYY-MM-DD HH:mm:ss.SSS'),
-        api: 'Create Applicant',
-        type: 'REQUEST',
-        delai: '',
-        data: JSON.stringify(request, null, 2)
-    };
-    req.session.stacktrace.push(message);
+    
+    const data = { first_name: firstname, last_name: lastname };
+    const nowRequest = logInStacktrace('Create Applicant', 'REQUEST', null, data, req.session.stacktrace);
+    axios.default.post('/applicants/', data).then((response) => {
 
-    onfido.applicant.create(request)
-    .then((applicant) => {
-        const nowResponse = moment();
-        const message = {
-            date: nowResponse.format('YYYY-MM-DD HH:mm:ss.SSS'),
-            api: 'Create Applicant',
-            type: 'RESPONSE',
-            delai: nowResponse-nowRequest,
-            data: JSON.stringify(applicant, null, 2)
-        };
-        req.session.stacktrace.push(message);
+        logInStacktrace('Create Applicant', 'RESPONSE', nowRequest, response.data, req.session.stacktrace);
+        const applicant = response.data;
+
         res.redirect('/applicants/'+applicant.id);
     })
-    .catch((error) => console.log(error.message));
+    .catch((error) => {console.log(error.message);next(error);});
 };
 
-exports.deleteApplicant = function(req, res) {
-    const applicantId = req.params.id;
-    const onfido = new Onfido({ apiToken: req.session.apiToken });
-    const nowRequest = moment();
-    const request = { id: applicantId };
-    const message = {
-        date: nowRequest.format('YYYY-MM-DD HH:mm:ss.SSS'),
-        api: 'Delete Applicant',
-        type: 'REQUEST',
-        delai: '',
-        data: JSON.stringify(request, null, 2)
-    };
-    req.session.stacktrace.push(message);
+exports.deleteApplicant = function(req, res, next) {
+    const applicant_id = req.params.id;
+    
+    const data = { id: applicant_id };
+    const nowRequest = logInStacktrace('Delete Applicant', 'REQUEST', null, data, req.session.stacktrace);
 
-    onfido.applicant.delete(applicantId).then(() => {
-        const nowResponse = moment();
-        const message = {
-            date: nowResponse.format('YYYY-MM-DD HH:mm:ss.SSS'),
-            api: 'Delete Applicant',
-            type: 'RESPONSE',
-            delai: nowResponse-nowRequest,
-            data: null
-        };
-        req.session.stacktrace.push(message);
+    axios.default.delete('/applicants/'+applicant_id).then(() => {
+        logInStacktrace('Delete Applicant', 'RESPONSE', nowRequest, {}, req.session.stacktrace);
+        
         if(req.session.applicant.id == req.params.id) {
             req.session.applicant = null; 
-            res.redirect('/index');
+            res.redirect('/applicants');
         } else {
             res.redirect(req.session.url);
         }
     })
-    .catch((error) => console.log(error.message));
+    .catch((error) => {console.log(error.message);next(error);});
 };
 
-exports.deleteApplicants = function(req, res) {
-    const applicantIds = req.body.applicantsToDelete;
-    const onfido = new Onfido({ apiToken: req.session.apiToken });
-
-    const promises = applicantIds.map(applicantId => onfido.applicant.delete(applicantId));
-    Promise.all(promises).then(() => res.redirect('/index'))
-    .catch((error) => console.log(error.message));
+exports.deleteApplicants = function(req, res, next) {
+    const applicant_ids = req.body.applicantsToDelete;
+    
+    if(Array.isArray(applicant_ids)){
+        const promises = applicant_ids.map(applicant_id => axios.default.delete('/applicants/'+applicant_id));
+        Promise.all(promises).then(() => res.redirect('/applicants'))
+        .catch((error) => {console.log(error.message);next(error);});
+    } else {
+        axios.default.delete('/applicants/'+applicant_ids).then(() => res.redirect('/applicants'))
+        .catch((error) => {console.log(error.message);next(error);});
+    }
 };
 
-exports.initSdk = function(req, res) {
+exports.initSdk = function(req, res, next) {
     req.session.url = req.originalUrl;
-    const onfido = new Onfido({ apiToken: req.session.apiToken });
-    const nowRequest = moment();
-    const request = { 
-        applicantId: req.session.applicant.id,
+    
+    const data = { 
+        applicant_id: req.session.applicant.id,
         referrer: '*://*/*'
     };
-    const message = {
-        date: nowRequest.format('YYYY-MM-DD HH:mm:ss.SSS'),
-        api: 'Get SDK Token',
-        type: 'REQUEST',
-        delai: '',
-        data: JSON.stringify(request, null, 2)
-    };
-    req.session.stacktrace.push(message);
-
-    onfido.sdkToken.generate( request ).then((sdkToken) => {
-        const nowResponse = moment();
-        const message = {
-            date: nowResponse.format('YYYY-MM-DD HH:mm:ss.SSS'),
-            api: 'Get SDK Token',
-            type: 'RESPONSE',
-            delai: nowResponse-nowRequest,
-            data: JSON.stringify(sdkToken, null, 2)
-        };
-        req.session.stacktrace.push(message);
+    const nowRequest = logInStacktrace('Get SDK Token', 'REQUEST', null, data, req.session.stacktrace);
+    
+    axios.default.post('/sdk_token/', data).then((response) => {
+        logInStacktrace('Get SDK Token', 'RESPONSE', nowRequest, response.data, req.session.stacktrace);
+        const sdkToken = response.data.token;
 
         const applicant = (req.session.applicant)?req.session.applicant:null;
         const stacktrace = (req.session.stacktrace)?req.session.stacktrace:[];
@@ -258,11 +280,12 @@ exports.initSdk = function(req, res) {
         const documents = (req.session.documents)?req.session.documents:[];
         const photos = (req.session.photos)?req.session.photos:[];
         const videos = (req.session.videos)?req.session.videos:[];
-        res.render('sdk', { applicants: applicants, applicant: applicant, stacktrace: stacktrace, documents: documents, photos: photos, videos: videos, sdkToken: sdkToken });
-    });
+        res.render('sdk', { applicants: applicants, applicant: applicant, stacktrace: stacktrace, documents: documents, photos: photos, videos: videos, sdkToken: sdkToken, showSdkEvents: true });
+    })
+    .catch((error) => {console.log(error.message);next(error);});
 };
 
-exports.initCheck = function(req, res) {
+exports.initCheck = function(req, res, next) {
     req.session.url = req.originalUrl;
     req.session.check = null;
     const applicant = (req.session.applicant)?req.session.applicant:null;
@@ -271,110 +294,63 @@ exports.initCheck = function(req, res) {
     const documents = (req.session.documents)?req.session.documents:[];
     const photos = (req.session.photos)?req.session.photos:[];
     const videos = (req.session.videos)?req.session.videos:[];
-    res.render('check', { applicants: applicants, applicant: applicant, stacktrace: stacktrace, documents: documents, photos: photos, videos: videos, check: null});
+    res.render('check', { applicants: applicants, applicant: applicant, stacktrace: stacktrace, documents: documents, photos: photos, videos: videos, check: null });
 };
 
-exports.createCheck = function(req, res) {
+exports.createCheck = function(req, res, next) {
     // res.send(JSON.stringify(req.body));
     req.session.url = req.originalUrl;
     const applicant = (req.session.applicant)?req.session.applicant:null;    
     const reportNames = Array.isArray(req.body.reports)?req.body.reports:[req.body.reports];
-    const onfido = new Onfido({ apiToken: req.session.apiToken });
-    const nowRequest = moment();
-    const request = { 
-        applicantId: applicant.id,
-        reportNames: reportNames,
+
+    const data = { 
+        applicant_id: applicant.id,
+        report_names: reportNames,
         // asynchronous: true,
         // tags: null,
-        // documentIds: null
-     };
-    const message = {
-        date: nowRequest.format('YYYY-MM-DD HH:mm:ss.SSS'),
-        api: 'Create Check',
-        type: 'REQUEST',
-        delai: '',
-        data: JSON.stringify(request, null, 2)
+        // document_ids: null
     };
-    req.session.stacktrace.push(message);
-
-    onfido.check.create(request).then((check) => {
-        const nowResponse = moment();
-        const message = {
-            date: nowResponse.format('YYYY-MM-DD HH:mm:ss.SSS'),
-            api: 'Create Check',
-            type: 'RESPONSE',
-            delai: nowResponse-nowRequest,
-            data: JSON.stringify(check, null, 2)
-        };
-        req.session.stacktrace.push(message);
+    const nowRequest = logInStacktrace('Create Check', 'REQUEST', null, data, req.session.stacktrace);
+    
+    axios.default.post('/checks/', data).then((response) => {
+        
+        logInStacktrace('Create Check', 'RESPONSE', nowRequest, response.data, req.session.stacktrace);
+        const check = response.data;
 
         res.redirect('/checks/'+check.id);
     })
-    .catch((error) => console.log(error.message));
+    .catch((error) => {console.log(error.message);next(error);});
 };
 
-exports.retrieveCheck = function(req, res) {
+exports.retrieveCheck = function(req, res, next) {
     // res.send(JSON.stringify(req.body));
     req.session.url = req.originalUrl;
-    const checkId = req.params.id;   
+    const check_id = req.params.id;   
     
-    const onfido = new Onfido({ apiToken: req.session.apiToken });
-    const nowRequest = moment();
-    const request = { 
-        id: checkId
-     };
-    const message = {
-        date: nowRequest.format('YYYY-MM-DD HH:mm:ss.SSS'),
-        api: 'Retrieve Check',
-        type: 'REQUEST',
-        delai: '',
-        data: JSON.stringify(request, null, 2)
-    };
-    req.session.stacktrace.push(message);
-
-    onfido.check.find(checkId).then((check) => {
-        const nowResponse = moment();
-        const message = {
-            date: nowResponse.format('YYYY-MM-DD HH:mm:ss.SSS'),
-            api: 'Retrieve Check',
-            type: 'RESPONSE',
-            delai: nowResponse-nowRequest,
-            data: JSON.stringify(check, null, 2)
-        };
-        req.session.stacktrace.push(message);
+    const data = { id: check_id };
+    const nowRequest = logInStacktrace('Retrieve Check', 'REQUEST', null, data, req.session.stacktrace);
+    
+    axios.default.get('/checks/'+check_id).then((response) => {
+        
+        logInStacktrace('Retrieve Check', 'RESPONSE', nowRequest, response.data, req.session.stacktrace);
+        const check = response.data;
         req.session.check = check;
         
         // GET REPORTS
-        function fnRetrieveReport(reportId) {
-            const nowRequest = moment();
-            const request = { 
-                id: reportId
-            };
-            const message = {
-                date: nowRequest.format('YYYY-MM-DD HH:mm:ss.SSS'),
-                api: 'Retrieve Report',
-                type: 'REQUEST',
-                delai: '',
-                data: JSON.stringify(request, null, 2)
-            };
-            req.session.stacktrace.push(message);
+        function fnRetrieveReport(report_id) {
 
-            return onfido.report.find(reportId).then((report) => {
-                const nowResponse = moment();
-                const message = {
-                    date: nowResponse.format('YYYY-MM-DD HH:mm:ss.SSS'),
-                    api: 'Retrieve Report',
-                    type: 'RESPONSE',
-                    delai: nowResponse-nowRequest,
-                    data: JSON.stringify(report, null, 2)
-                };
-                req.session.stacktrace.push(message);
-
-                return report;
+            const data = { id: report_id };
+            const nowRequest = logInStacktrace('Retrieve Report', 'REQUEST', null, data, req.session.stacktrace);
+            
+            return axios.default.get('/reports/'+report_id).then((response) => {
+                
+                logInStacktrace('Retrieve Report', 'RESPONSE', nowRequest, response.data, req.session.stacktrace);
+                
+                return response.data;
             });
         }
 
-        const promises = check.reportIds.map(reportId => Promise.resolve(fnRetrieveReport(reportId)));
+        const promises = check.report_ids.map(report_id => Promise.resolve(fnRetrieveReport(report_id)));
         
         Promise.all(promises).then((reports) => {
             req.session.reports = reports;
@@ -385,40 +361,54 @@ exports.retrieveCheck = function(req, res) {
             const documents = (req.session.documents)?req.session.documents:[];
             const photos = (req.session.photos)?req.session.photos:[];
             const videos = (req.session.videos)?req.session.videos:[];
-            res.render('check', { applicants: applicants, applicant: applicant, stacktrace: stacktrace, documents: documents, photos: photos, videos: videos, check: check, reports: reports});
+            res.render('check', { applicants: applicants, applicant: applicant, stacktrace: stacktrace, documents: documents, photos: photos, videos: videos, check: check, reports: reports });
         });
     })
-    .catch((error) => console.log(error.message));
+    .catch((error) => {console.log(error.message);next(error);});
 };
 
-exports.listChecks = function(req, res) {
+exports.listChecks = function(req, res, next) {
     req.session.url = req.originalUrl;
-    const applicantId = req.session.applicant.id;
+    const applicant_id = req.session.applicant.id;
 
-    const onfido = new Onfido({ apiToken: req.session.apiToken });
-    const nowRequest = moment();
-    const request = { 
-        id: applicantId
-     };
-    const message = {
-        date: nowRequest.format('YYYY-MM-DD HH:mm:ss.SSS'),
-        api: 'List Checks',
-        type: 'REQUEST',
-        delai: '',
-        data: JSON.stringify(request, null, 2)
-    };
-    req.session.stacktrace.push(message);
+    const data = { id: applicant_id };
+    const nowRequest = logInStacktrace('List Checks', 'REQUEST', null, data, req.session.stacktrace);
 
-    onfido.check.list(applicantId).then((checks) => {
-        const nowResponse = moment();
-        const message = {
-            date: nowResponse.format('YYYY-MM-DD HH:mm:ss.SSS'),
-            api: 'List Checks',
-            type: 'RESPONSE',
-            delai: nowResponse-nowRequest,
-            data: JSON.stringify(checks, null, 2)
-        };
-        req.session.stacktrace.push(message);
+    axios.default.get('/checks?applicant_id='+applicant_id).then((response) => {
+
+        logInStacktrace('List Checks', 'RESPONSE', nowRequest, response.data, req.session.stacktrace);
+
+        const enhancedCheck = function(check) {
+            return axios.default.get('/reports?check_id='+check.id).then(response => {
+                check['reports'] = response.data.reports;
+                return check;
+            });
+        }
+
+        const checks = response.data.checks.map(check => enhancedCheck(check));
+        Promise.all(checks).then(checks => {
+            const applicant = (req.session.applicant)?req.session.applicant:null;
+            const stacktrace = (req.session.stacktrace)?req.session.stacktrace:[];
+            const applicants = (req.session.applicants)?req.session.applicants:[];
+            const documents = (req.session.documents)?req.session.documents:[];
+            const photos = (req.session.photos)?req.session.photos:[];
+            const videos = (req.session.videos)?req.session.videos:[];
+            res.render('checks', { applicants: applicants, applicant: applicant, stacktrace: stacktrace, documents: documents, photos: photos, videos: videos, checks: checks});
+        });
+    })
+    .catch((error) => {console.log(error.message);next(error);});
+};
+
+exports.retrieveReport = function(req, res, next) {
+    req.session.url = req.originalUrl;
+    const report_id = req.params.id;   
+    
+    const data = { id: report_id };
+    const nowRequest = logInStacktrace('Retrieve Report', 'REQUEST', null, data, req.session.stacktrace);
+    
+    axios.default.get('/reports/'+report_id).then((response) => {
+        logInStacktrace('Retrieve Report', 'RESPONSE', nowRequest, response.data, req.session.stacktrace);
+        const report = response.data;
         
         const applicant = (req.session.applicant)?req.session.applicant:null;
         const stacktrace = (req.session.stacktrace)?req.session.stacktrace:[];
@@ -426,40 +416,23 @@ exports.listChecks = function(req, res) {
         const documents = (req.session.documents)?req.session.documents:[];
         const photos = (req.session.photos)?req.session.photos:[];
         const videos = (req.session.videos)?req.session.videos:[];
-        res.render('checks', { applicants: applicants, applicant: applicant, stacktrace: stacktrace, documents: documents, photos: photos, videos: videos, checks: checks });
-
-    });
+        res.render('report', { applicants: applicants, applicant: applicant, stacktrace: stacktrace, documents: documents, photos: photos, videos: videos, report: report});
+    })
+    .catch((error) => {console.log(error.message);next(error);});
 };
 
-exports.autofill = function(req, res) {
+exports.autofill = function(req, res, next) {
     // res.send(JSON.stringify(req.body));
     req.session.url = req.originalUrl;
-    const documentId = req.params.id;    
-    const onfido = new Onfido({ apiToken: req.session.apiToken });
-    const nowRequest = moment();
-    const request = { 
-        documentId: documentId
-     };
-    const message = {
-        date: nowRequest.format('YYYY-MM-DD HH:mm:ss.SSS'),
-        api: 'Autofill',
-        type: 'REQUEST',
-        delai: '',
-        data: JSON.stringify(request, null, 2)
-    };
-    req.session.stacktrace.push(message);
+    const document_id = req.params.id;    
 
-    onfido.autofill.perform(documentId).then((extraction) => {
-        const nowResponse = moment();
-        const message = {
-            date: nowResponse.format('YYYY-MM-DD HH:mm:ss.SSS'),
-            api: 'Autofill',
-            type: 'RESPONSE',
-            delai: nowResponse-nowRequest,
-            data: JSON.stringify(extraction, null, 2)
-        };
-        req.session.stacktrace.push(message);
-        req.session.extraction = extraction;
+    const data = { document_id: document_id };
+    const nowRequest = logInStacktrace('Autofill', 'REQUEST', null, data, req.session.stacktrace);
+
+    axios.default.post('/extractions', data).then((response) => {
+
+        logInStacktrace('Autofill', 'RESPONSE', nowRequest, response.data, req.session.stacktrace);
+        req.session.extraction = response.data;
     })
     .catch((error) => req.session.extraction = error)
     .finally(() => {
@@ -470,25 +443,49 @@ exports.autofill = function(req, res) {
         const documents = (req.session.documents)?req.session.documents:[];
         const photos = (req.session.photos)?req.session.photos:[];
         const videos = (req.session.videos)?req.session.videos:[];
-        res.render('autofill', { applicants: applicants, applicant: applicant, stacktrace: stacktrace, documents: documents, photos: photos, videos: videos, documentId: documentId, extraction: extraction });
+        res.render('autofill', { applicants: applicants, applicant: applicant, stacktrace: stacktrace, documents: documents, photos: photos, videos: videos, document_id: document_id, extraction: extraction });
     });
-    
 };
 
-exports.downloadDocument = function(req, res) {
+// TODO TGA LATER: remove Onfido nodeJS client to download document
+exports.downloadDocument = function(req, res, next) {
+    res.set('Cache-control', 'public, max-age=15552000');
     const onfido = new Onfido({ apiToken: req.session.apiToken });
     const id = req.params.id;
-    onfido.document.download(id).then(document => document.asStream().pipe(res));
+    onfido.document.download(id).then(photo => photo.asStream().pipe(res));
 };
 
-exports.downloadPhoto = function(req, res) {
+exports.downloadPhoto = function(req, res, next) {
+    res.set('Cache-control', 'public, max-age=15552000');
     const onfido = new Onfido({ apiToken: req.session.apiToken });
     const id = req.params.id;
     onfido.livePhoto.download(id).then(photo => photo.asStream().pipe(res));
 };
 
-exports.downloadVideoFrame = function(req, res) {
+exports.downloadVideoFrame = function(req, res, next) {
+    res.set('Cache-control', 'public, max-age=15552000');
     const onfido = new Onfido({ apiToken: req.session.apiToken });
     const id = req.params.id;
     onfido.liveVideo.frame(id).then(frame => frame.asStream().pipe(res));
 };
+
+exports.globalSearch = function(req, res, next) {
+    const id = req.query.uuid;
+    const applicant = axios.default.get('/applicants/'+id).then(response => response.data).catch(() => null);
+    const document = axios.default.get('/documents/'+id).then(response => response.data).catch(() => null);
+    const check = axios.default.get('/checks/'+id).then(response => response.data).catch(() => null);
+    const report = axios.default.get('/reports/'+id).then(response => response.data).catch(() => null);
+
+    Promise.all([applicant, document, check, report]).then(children => {
+        const results = {
+            applicant: children[0],
+            document: children[1],
+            check: children[2],
+            report: children[3]
+        }
+        res.render('search', {results: results});
+    });
+}
+
+// TODO TGA LATER: add webhooks management
+// TODO TGA: fix cannot set url error

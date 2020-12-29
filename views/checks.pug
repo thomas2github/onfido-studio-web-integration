@@ -20,21 +20,29 @@ block content
                             small STATUS
                         th 
                             small RESULT
-                        th
-                            small NB REPORTS
+                        th 
+                            small REPORTS
                 if checks
                     each check in checks
                         tbody
                             tr
                                 td
-                                    a(href='/checks/'+check.id)= check.id
+                                    a.text-info(href='/checks/'+check.id)= check.id
                                 td 
-                                    +displayDate(check.createdAt)
+                                    +displayDate(check.created_at)
                                 td
                                     +displayStatus(check.status)
                                 td
                                     +displayResult(check.result)
-                                td.text-center= check.reportIds.length
-                //- TODO: add nb reports and reports type + results/sub result
+                                td
+                                    each report in check.reports
+                                        small.mr-2= report.name
+                                        if report.sub_result
+                                            +displayResult(report.sub_result)
+                                        else if report.result
+                                            +displayResult(report.result)
+                                        else
+                                            +displayStatus(report.status)
+                                        br
 
     

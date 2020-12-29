@@ -73,7 +73,7 @@ block content
                                         +displayResult(check.result)
                                     h6.card-title Check
                                         span.ml-4
-                                            +displayDate(check.createdAt)
+                                            +displayDate(check.created_at)
                                     p.card-category=  check.id
                             .card-body.hide(style='display:none;')
                                 pre= JSON.stringify(check, null, 4)
@@ -84,7 +84,7 @@ block content
                                 //-         div(data-toggle='toggle')
                                 //-             .float-right
                                 //-                 if report.name == 'document'
-                                //-                     +displayResult(report.subResult)
+                                //-                     +displayResult(report.sub_result)
                                 //-                 else
                                 //-                     +displayResult(report.result)
                                 //-             h6.card-title= report.name
@@ -95,7 +95,7 @@ block content
                                         div(data-toggle='toggle')
                                             .float-right
                                                 if report.subResult
-                                                    +displayResult(report.subResult)
+                                                    +displayResult(report.sub_result)
                                                 else if report.result
                                                     +displayResult(report.result)
                                                 else
@@ -114,6 +114,5 @@ block content
                                             div
                                                 +displayJson(report.properties,0)
                                         
-
 append bottom
-    script(src='/javascripts/checks.js')
+    script(src='/javascripts/check.js')

@@ -4255,7 +4255,7 @@ tbody.collapse.show {
   border-radius: 0 0 0 0;
 }
 
-.nav {
+/* .nav {
   display: flex;
   flex-wrap: wrap;
   padding-left: 0;
@@ -4313,7 +4313,7 @@ tbody.collapse.show {
   margin-top: -1px;
   border-top-left-radius: 0;
   border-top-right-radius: 0;
-}
+} */
 
 .nav-pills .nav-link {
   border-radius: 0.25rem;
@@ -14462,7 +14462,7 @@ h2.title {
   color: #999999 !important;
 }
 
-.nav-tabs {
+/* .nav-tabs {
   border: 0;
   border-radius: 3px;
   padding: 0 15px;
@@ -14590,7 +14590,7 @@ h2.title {
 
 .card-nav-tabs .card-header {
   margin-top: -30px !important;
-}
+} */
 
 .tab-content .tab-pane .td-actions {
   display: -webkit-box;
@@ -17456,9 +17456,9 @@ html[dir="rtl"] .form-check .form-check-sign .check:before {
   color: #fff;
 }
 
-.card .card-header .nav-tabs {
+/* .card .card-header .nav-tabs {
   padding: 0;
-}
+} */
 
 .card .card-header.card-header-image {
   position: relative;
@@ -17756,7 +17756,7 @@ html[dir="rtl"] .form-check .form-check-sign .check:before {
   font-weight: 300;
 }
 
-.card .card-header.card-header-tabs .nav-tabs {
+/* .card .card-header.card-header-tabs .nav-tabs {
   background: transparent;
   padding: 0;
 }
@@ -17765,7 +17765,7 @@ html[dir="rtl"] .form-check .form-check-sign .check:before {
   float: left;
   padding: 10px 10px 10px 0;
   line-height: 24px;
-}
+} */
 
 .card.card-plain .card-header.card-header-icon+.card-body .card-title,
 .card.card-plain .card-header.card-header-icon+.card-body .card-category {

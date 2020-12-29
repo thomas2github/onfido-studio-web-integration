@@ -9,35 +9,40 @@ block content
                 a.btn.btn-outline-secondary.py-4.mx-4(href='/checks/new') Verify (API)
             a.btn.btn-outline-secondary.py-4.mx-4(href='/checks') Consult checks
         .d-flex.flex-row.justify-content-around.align-items-center.mt-5
-            a(href='/documents/'+documentId target='_blank')
-                img(src='/documents/'+documentId width=300)
-            .card.ml-4(style='min-width: 300px')
-                form#applicant(action='/applicants/'+applicant.id method='post')
+            a(href='/documents/'+document_id target='_blank')
+                img(src='/documents/'+document_id width=300)
+            if(extraction.extracted_data)
+                .card.ml-4(style='min-width: 300px')
+                    form#applicant(action='/applicants/'+applicant.id method='post')
+                        .card-body
+                            .form-group
+                                label.bmd-label-floating Firstname
+                                input#firstname.form-control(type='text' name='firstname' value=extraction.extracted_data.first_name?extraction.extracted_data.first_name:null)
+                            .form-group
+                                label.bmd-label-floating Lastname
+                                input#lastname.form-control(type='text' name='lastname' value=extraction.extracted_data.last_name?extraction.extracted_data.last_name:null)
+                            .form-group
+                                label.bmd-label-floating Date of Birth
+                                input#dob.form-control(type='text' name='dob' value=extraction.extracted_data.date_of_birth?extraction.extracted_data.date_of_birth:null)
+                            .form-group
+                                label.bmd-label-floating Document Number
+                                input#documentNumber.form-control(type='text' name='documentNumber' value=extraction.extracted_data.document_number?extraction.extracted_data.document_number:null)
+                            span
+                                small.font-weight-bold MRZ line 1:
+                            span
+                                small.ml-2= extraction.extracted_data.mrz_line1?extraction.extracted_data.mrz_line1:''
+                            br
+                            span
+                                small.font-weight-bold MRZ line 2:
+                            span
+                                small.ml-2= extraction.extracted_data.mrz_line2?extraction.extracted_data.mrz_line2:''
+                            br
+                            .float-right.my-3
+                                button.btn.btn-outline-success(type='submit' value='applicant') Update applicant
+            else
+                .card.ml-4(style='min-width: 300px')
                     .card-body
-                        .form-group
-                            label.bmd-label-floating Firstname
-                            input#firstname.form-control(type='text' name='firstname' value=extraction.extractedData.firstName?extraction.extractedData.firstName:null)
-                        .form-group
-                            label.bmd-label-floating Lastname
-                            input#lastname.form-control(type='text' name='lastname' value=extraction.extractedData.lastName?extraction.extractedData.lastName:null)
-                        .form-group
-                            label.bmd-label-floating Date of Birth
-                            input#dob.form-control(type='text' name='dob' value=extraction.extractedData.dateOfBirth?extraction.extractedData.dateOfBirth:null)
-                        .form-group
-                            label.bmd-label-floating Document Number
-                            input#documentNumber.form-control(type='text' name='documentNumber' value=extraction.extractedData.documentNumber?extraction.extractedData.documentNumber:null)
-                        span
-                            small.font-weight-bold MRZ line 1:
-                        span
-                            small.ml-2= extraction.extractedData.mrzLine1?extraction.extractedData.mrzLine1:''
-                        br
-                        span
-                            small.font-weight-bold MRZ line 2:
-                        span
-                            small.ml-2= extraction.extractedData.mrzLine2?extraction.extractedData.mrzLine2:''
-                        br
-                        .float-right.my-3
-                            button.btn.btn-outline-success(type='submit' value='applicant') Update applicant
+                        pre= JSON.stringify(extraction, null, 4)
 
 
     

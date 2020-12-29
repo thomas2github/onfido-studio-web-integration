@@ -25,22 +25,9 @@ block content
                 .custom-control.custom-switch
                     input#completeStep.custom-control-input(type='checkbox')
                     label.custom-control-label.text-secondary(for='completeStep') add complete step
-                .my-2
-                h6 language
-                .btn-group.btn-group-toggle.mt-1(data-toggle='buttons')
-                    label.btn.btn-xs.btn-outline-secondary.active
-                        input#languageEN(type='radio' name='language' autocomplete='off' value='en_US' checked)
-                        | EN
-                    label.btn.btn-xs.btn-outline-secondary
-                        input#languageFR(type='radio' name='language' autocomplete='off' value='fr_FR')
-                        | FR
-                    label.btn.btn-xs.btn-outline-secondary
-                        input#languageES(type='radio' name='language' autocomplete='off' value='es_ES')
-                        | ES
-                    label.btn.btn-xs.btn-outline-secondary
-                        input#languageDE(type='radio' name='language' autocomplete='off' value='de_DE')
-                        | DE
-                    
+                .custom-control.custom-switch.d-none
+                    input#hideOnfidoLogo.custom-control-input(type='checkbox')
+                    label.custom-control-label.text-secondary(for='hideOnfidoLogo') hide Onfido logo
 
             .d-flex.flex-column.flex-wrap.ml-5
                 h6 Capture
@@ -59,9 +46,7 @@ block content
                 .custom-control.custom-switch.d-none
                     input#useLiveDocumentCapture.custom-control-input(type='checkbox')
                     label.custom-control-label.text-secondary(for='useLiveDocumentCapture') use live document capture
-                .custom-control.custom-switch.d-none
-                    input#useWebcam.custom-control-input(type='checkbox')
-                    label.custom-control-label.text-secondary(for='useWebcam') use webcam
+                                    
             .d-flex.flex-column.flex-wrap.ml-5
                 h6 accepted document types
                 .custom-control.custom-switch
@@ -79,6 +64,22 @@ block content
                 .custom-control.custom-switch.d-none
                     input#showCountrySelection.custom-control-input(type='checkbox' checked)
                     label.custom-control-label.text-secondary(for='showCountrySelection') show country selection
+
+        .d-flex.flex-row.justify-content-start.align-items-center.mt-3
+            h6(style='margin-top:0.5rem;') language
+            .btn-group.btn-group-toggle.ml-3(data-toggle='buttons')
+                label.btn.btn-xs.btn-outline-secondary.active
+                    input#languageEN(type='radio' name='language' autocomplete='off' value='en_US' checked)
+                    | EN
+                label.btn.btn-xs.btn-outline-secondary
+                    input#languageFR(type='radio' name='language' autocomplete='off' value='fr_FR')
+                    | FR
+                label.btn.btn-xs.btn-outline-secondary
+                    input#languageES(type='radio' name='language' autocomplete='off' value='es_ES')
+                    | ES
+                label.btn.btn-xs.btn-outline-secondary
+                    input#languageDE(type='radio' name='language' autocomplete='off' value='de_DE')
+                    | DE
         .d-flex.flex-row.justify-content-around
             button#dislpaySdk.btn.btn-outline-info.my-4(type='button' data-token=sdkToken data-applicant-id=applicant.id) display SDK
         .d-flex.flex-row.justify-content-around
