@@ -1,0 +1,45 @@
+extends layout
+
+block content
+    .d-flex.flex-column.align-items-center
+        if usecase.steps[current_index].process_name
+            h6.text-secondary.mt-3= usecase.steps[current_index].process_name
+        .card.mt-5(style='width: 512px')
+            .card-header
+                h6.text-info Complete user form with extracted data
+            .card-body
+                if extraction.extracted_data
+                    span
+                        small.font-weight-bold First name:
+                    span
+                        small.ml-2= extraction.extracted_data.first_name?extraction.extracted_data.first_name:''
+                    br
+                    span
+                        small.font-weight-bold Last name:
+                    span
+                        small.ml-2= extraction.extracted_data.last_name?extraction.extracted_data.last_name:''
+                    br
+                    span
+                        small.font-weight-bold Date of birth:
+                    span
+                        small.ml-2= extraction.extracted_data.date_of_birth?extraction.extracted_data.date_of_birth:''
+                    br
+                    span
+                        small.font-weight-bold Document Number:
+                    span
+                        small.ml-2= extraction.extracted_data.document_number?extraction.extracted_data.document_number:''
+                    br
+                    span
+                        small.font-weight-bold MRZ line 1:
+                    span
+                        small.ml-2= extraction.extracted_data.mrz_line1?extraction.extracted_data.mrz_line1:''
+                    br
+                    span
+                        small.font-weight-bold MRZ line 2:
+                    span
+                        small.ml-2= extraction.extracted_data.mrz_line2?extraction.extracted_data.mrz_line2:''
+                    br
+                else
+                    pre= JSON.stringify(extraction, null, 4)
+                a.btn.btn-outline-secondary.my-4(href='/usecases/'+usecase.steps[current_index+1].route) Continue
+

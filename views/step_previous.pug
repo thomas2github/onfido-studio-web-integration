@@ -1,0 +1,15 @@
+extends layout
+
+block content
+    .d-flex.flex-column.align-items-center
+        if usecase.steps[current_index].process_name
+            h6.text-secondary.mt-3= usecase.steps[current_index].process_name
+        .card.mt-5(style='width: 512px')
+            .card-header
+                h6.text-info Previous steps of your process
+            .card-body
+                .d-flex.flex-column.align-items-center
+                    if usecase.steps[current_index + 1].route == 'capture'
+                        a.btn.btn-outline-secondary.py-4.my-4(href='/usecases/capture') Capture identity document &amp; selfie
+                    else if usecase.steps[current_index + 1].route == 'check'
+                        a.btn.btn-outline-secondary.py-4.my-4(href='/usecases/check') Verify identity

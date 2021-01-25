@@ -11,7 +11,7 @@ block content
                 a.btn.btn-outline-secondary.py-4.mx-4(href='/checks') Consult checks
             .d-flex.flex-row.justify-content-around.mt-4
                 if documents.length > 0
-                    .d-flex.flex-column.flex-wrap.justify-content-start.align-content-start
+                    .d-flex.flex-column.flex-wrap.justify-content-start.align-items-start
                         h6 Document Reports
                         .custom-control.custom-switch
                             input#reportDocument.custom-control-input(name='reports' type='checkbox' value='document' checked)
@@ -24,7 +24,7 @@ block content
                             label.custom-control-label.text-secondary(for='reportDocumentWDLI') Document with driving licence information
                         .my-2
                 if photos.length > 0 || videos.length > 0 
-                    .d-flex.flex-column.flex-wrap.justify-content-start.align-content-start.ml-5
+                    .d-flex.flex-column.flex-wrap.justify-content-start.align-items-start.ml-5
                         h6 Facial Similarity Reports
                         if photos.length > 0
                             .custom-control.custom-switch
@@ -43,7 +43,7 @@ block content
                                 input#reportKnownFaces.custom-control-input(name='reports' type='checkbox' value='known_faces')
                                 label.custom-control-label.text-secondary(for='reportKnownFaces') Known faces
                 if documents.length > 0
-                    .d-flex.flex-column.flex-wrap.justify-content-start.align-content-start.ml-5
+                    .d-flex.flex-column.flex-wrap.justify-content-start.align-items-start.ml-5
                         h6 Watchlist Reports
                         .custom-control.custom-switch
                             input#reportWatchlistStandard.custom-control-input(name='reports' type='checkbox' value='watchlist_standard')
@@ -69,37 +69,28 @@ block content
                         .card(style='min-width: 726px')
                             .card-header
                                 div(data-toggle='toggle')
-                                    span.float-right
+                                    .float-right.text-right
                                         +displayResult(check.result)
-                                    h6.card-title Check
-                                        span.ml-4
+                                        .small.card-category created at:&nbsp;
                                             +displayDate(check.created_at)
+                                    h6.card-title Check
                                     p.card-category=  check.id
                             .card-body.hide(style='display:none;')
                                 pre= JSON.stringify(check, null, 4)
                         if reports
                             each report in reports
-                                //- .card(style='min-width: 726px')
-                                //-     .card-header.card-header-info
-                                //-         div(data-toggle='toggle')
-                                //-             .float-right
-                                //-                 if report.name == 'document'
-                                //-                     +displayResult(report.sub_result)
-                                //-                 else
-                                //-                     +displayResult(report.result)
-                                //-             h6.card-title= report.name
-                                //-     .card-body.hide(style='display:none;')
-                                //-         pre= JSON.stringify(report, null, 4)
                                 .card
                                     .card-header
                                         div(data-toggle='toggle')
-                                            .float-right
+                                            .float-right.text-right
                                                 if report.subResult
                                                     +displayResult(report.sub_result)
                                                 else if report.result
                                                     +displayResult(report.result)
                                                 else
                                                     +displayStatus(report.status)
+                                                .small.card-category created at:&nbsp;
+                                                    +displayDate(report.created_at)
                                             h6.card-title= report.name
                                             p.card-category=  report.id
                                     .card-body.hide(style='display:none;')
@@ -112,7 +103,8 @@ block content
                                         if Object.keys(report.properties).length > 0
                                             h4.float-right Properties
                                             div
-                                                +displayJson(report.properties,0)
-                                        
-append bottom
-    script(src='/javascripts/check.js')
+                                                if report.name == 'known_faces'
+                                                    +displayKnownFacesProperties(report.properties,0)
+                                                else
+                                                    +displayJson(report.properties,0)
+                                                

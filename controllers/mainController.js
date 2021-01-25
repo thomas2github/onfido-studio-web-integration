@@ -1,6 +1,8 @@
 const { Onfido } = require('@onfido/api');
 const moment = require('moment');
 const axios = require('axios');
+const { get } = require('request');
+const { use } = require('../routes/mainRouter');
 
 axios.defaults.baseURL = 'https://api.onfido.com/v3/';
 axios.defaults.headers.common['Accept'] = 'application/json';
@@ -92,7 +94,7 @@ const getAllResourcesByReport = function (report_id) {
     });
 };
 
-// Display index.
+// GLOBAL
 exports.index = function(req, res, next) {
     axios.defaults.headers.common['Authorization'] = 'Token token='+req.session.apiToken;
     req.session.url = req.originalUrl;
@@ -116,6 +118,8 @@ exports.clearSession = function(req, res, next) {
     req.session.checks = [];
     req.session.extraction = null;
     req.session.url = null;
+    req.session.usecase = null;
+    req.session.current_index = null;
     res.redirect('/index');
 };
 
@@ -190,7 +194,7 @@ exports.retrieveApplicant = function(req, res, next) {
         req.session.videos = children[3];
         const applicants = (req.session.applicants)?req.session.applicants:[];
         const stacktrace = (req.session.stacktrace)?req.session.stacktrace:[];
-        res.render('actions', { applicants: applicants, applicant: children[0], stacktrace: stacktrace, documents: req.session.documents, photos: req.session.photos, videos: req.session.videos });
+        res.render('applicant_home', { applicants: applicants, applicant: children[0], stacktrace: stacktrace, documents: req.session.documents, photos: req.session.photos, videos: req.session.videos });
     })
     .catch((error) => {console.log(error.message);next(error);});
 };
@@ -261,6 +265,47 @@ exports.deleteApplicants = function(req, res, next) {
     }
 };
 
+// TODO TGA LATER: remove Onfido nodeJS client to download document
+exports.downloadDocument = function(req, res, next) {
+    res.set('Cache-control', 'public, max-age=15552000');
+    const onfido = new Onfido({ apiToken: req.session.apiToken });
+    const id = req.params.id;
+    onfido.document.download(id).then(photo => photo.asStream().pipe(res)).catch((error) => {console.log(error.message);next(error);});
+};
+
+exports.downloadPhoto = function(req, res, next) {
+    res.set('Cache-control', 'public, max-age=15552000');
+    const onfido = new Onfido({ apiToken: req.session.apiToken });
+    const id = req.params.id;
+    onfido.livePhoto.download(id).then(photo => photo.asStream().pipe(res)).catch((error) => {console.log(error.message);next(error);});
+};
+
+exports.downloadVideoFrame = function(req, res, next) {
+    res.set('Cache-control', 'public, max-age=15552000');
+    const onfido = new Onfido({ apiToken: req.session.apiToken });
+    const id = req.params.id;
+    onfido.liveVideo.frame(id).then(frame => frame.asStream().pipe(res)).catch((error) => {console.log(error.message);next(error);});
+};
+
+exports.globalSearch = function(req, res, next) {
+    const id = req.query.uuid;
+    const applicant = axios.default.get('/applicants/'+id).then(response => response.data).catch(() => null);
+    const document = axios.default.get('/documents/'+id).then(response => response.data).catch(() => null);
+    const check = axios.default.get('/checks/'+id).then(response => response.data).catch(() => null);
+    const report = axios.default.get('/reports/'+id).then(response => response.data).catch(() => null);
+
+    Promise.all([applicant, document, check, report]).then(children => {
+        const results = {
+            applicant: children[0],
+            document: children[1],
+            check: children[2],
+            report: children[3]
+        }
+        res.render('search', {results: results});
+    });
+}
+
+// SDK & CHECK
 exports.initSdk = function(req, res, next) {
     req.session.url = req.originalUrl;
     
@@ -329,23 +374,18 @@ exports.retrieveCheck = function(req, res, next) {
     
     const data = { id: check_id };
     const nowRequest = logInStacktrace('Retrieve Check', 'REQUEST', null, data, req.session.stacktrace);
-    
     axios.default.get('/checks/'+check_id).then((response) => {
         
         logInStacktrace('Retrieve Check', 'RESPONSE', nowRequest, response.data, req.session.stacktrace);
         const check = response.data;
         req.session.check = check;
-        
+
         // GET REPORTS
         function fnRetrieveReport(report_id) {
-
             const data = { id: report_id };
             const nowRequest = logInStacktrace('Retrieve Report', 'REQUEST', null, data, req.session.stacktrace);
-            
             return axios.default.get('/reports/'+report_id).then((response) => {
-                
                 logInStacktrace('Retrieve Report', 'RESPONSE', nowRequest, response.data, req.session.stacktrace);
-                
                 return response.data;
             });
         }
@@ -447,45 +487,269 @@ exports.autofill = function(req, res, next) {
     });
 };
 
-// TODO TGA LATER: remove Onfido nodeJS client to download document
-exports.downloadDocument = function(req, res, next) {
-    res.set('Cache-control', 'public, max-age=15552000');
-    const onfido = new Onfido({ apiToken: req.session.apiToken });
-    const id = req.params.id;
-    onfido.document.download(id).then(photo => photo.asStream().pipe(res));
+// USE CASE
+exports.configureUseCase = function(req, res, next) {
+    req.session.url = req.originalUrl;
+    req.session.usecase = null;
+    req.session.current_index = null;
+    const applicant = (req.session.applicant)?req.session.applicant:null;
+    const stacktrace = (req.session.stacktrace)?req.session.stacktrace:[];
+    const documents = (req.session.documents)?req.session.documents:[];
+    const photos = (req.session.photos)?req.session.photos:[];
+    const videos = (req.session.videos)?req.session.videos:[];
+    res.render('configure_use_case', { applicant: applicant, stacktrace: stacktrace, documents: documents, photos: photos, videos: videos });
 };
 
-exports.downloadPhoto = function(req, res, next) {
-    res.set('Cache-control', 'public, max-age=15552000');
-    const onfido = new Onfido({ apiToken: req.session.apiToken });
-    const id = req.params.id;
-    onfido.livePhoto.download(id).then(photo => photo.asStream().pipe(res));
+exports.generateUseCase = function(req, res, next) {
+    req.session.url = req.originalUrl;
+
+    const steps = (req.body.steps)?req.body.steps:'joined';
+    const async = (req.body.async)?req.body.async:'continue';
+    const video_capture = (req.body.video_capture)?true:false;
+    const known_faces = (req.body.known_faces)?true:false;
+    const autofill = (req.body.autofill)?true:false;
+
+    // generate use case based on selected options
+    let usecase = {
+        steps: [],
+        async: async
+    };
+
+    let index = 0;
+    switch (steps) {
+        case 'separated':
+            usecase.steps.push({index: index, view: 'step_previous', route: 'previous', process_name: 'Account creation'});
+            usecase.steps.push({index: ++index, view: 'step_capture', route: 'capture', process_name: 'Account creation', options: {video_capture: video_capture, autofill: autofill}});
+            if(autofill){
+                usecase.steps.push({index: ++index, view: 'step_autofill', route: 'autofill', process_name: 'Account creation'});
+            }
+            usecase.steps.push({index: ++index, view: 'step_next', route: 'next', process_name: 'Account creation'});
+            usecase.steps.push({index: ++index, view: 'step_previous', route: 'previous', process_name: 'First transaction to secure'});
+            usecase.steps.push({index: ++index, view: 'step_check', route: 'check', process_name: 'First transaction to secure', options: {known_faces: known_faces}});
+            if(async == 'wait_and_continue') {
+                usecase.steps.push({index: ++index, view: 'step_wait', route: 'wait', process_name: 'First transaction to secure'});
+            }
+            usecase.steps.push({index: ++index, view: 'step_next', route: 'next', process_name: 'First transaction to secure'});
+            break;
+        case 'joined':
+        default:
+            usecase.steps.push({index: index, view: 'step_previous', route: 'previous', process_name: 'First transaction to secure (it can be account creation)'});
+            usecase.steps.push({index: ++index, view: 'step_capture', route: 'capture', process_name: 'First transaction to secure (it can be account creation)', options: {video_capture: video_capture, autofill: autofill}});
+            if(autofill){
+                usecase.steps.push({index: ++index, view: 'step_autofill', route: 'autofill', process_name: 'First transaction to secure (it can be account creation)'});
+            }
+            usecase.steps.push({index: ++index, view: 'step_check', route: 'check', process_name: 'First transaction to secure (it can be account creation)', options: {known_faces: known_faces}});
+            if(async == 'wait_and_continue') {
+                usecase.steps.push({index: ++index, view: 'step_wait', route: 'wait', process_name: 'First transaction to secure (it can be account creation)'});
+            }
+            usecase.steps.push({index: ++index, view: 'step_next', route: 'next', process_name: 'First transaction to secure (it can be account creation)'});
+            break;
+    }
+
+    req.session.usecase = usecase;
+    const current_index = 0;
+    req.session.current_index = current_index;
+        
+    console.log('usecase:', JSON.stringify(usecase, null, 4));
+    const applicant = (req.session.applicant)?req.session.applicant:null;
+    const stacktrace = (req.session.stacktrace)?req.session.stacktrace:[];
+    const documents = (req.session.documents)?req.session.documents:[];
+    const photos = (req.session.photos)?req.session.photos:[];
+    const videos = (req.session.videos)?req.session.videos:[];
+    res.render('step_previous', { current_index: current_index, usecase: usecase, applicant: applicant, stacktrace: stacktrace, documents: documents, photos: photos, videos: videos });
 };
 
-exports.downloadVideoFrame = function(req, res, next) {
-    res.set('Cache-control', 'public, max-age=15552000');
-    const onfido = new Onfido({ apiToken: req.session.apiToken });
-    const id = req.params.id;
-    onfido.liveVideo.frame(id).then(frame => frame.asStream().pipe(res));
+exports.captureUseCase = function(req, res, next) {
+    req.session.url = req.originalUrl;
+    const usecase = (req.session.usecase)?req.session.usecase:null;
+    const current_index = (Number.isInteger(req.session.current_index))?parseInt(req.session.current_index,10)+1:0;
+    req.session.current_index = current_index;
+
+    // get or create applicant
+    function getApplicant() {
+        return new Promise((successCallback, failureCallback) => {
+            if (req.session.applicant != null) {
+                successCallback(req.session.applicant);
+            }
+            else  {
+                const data = { first_name: 'Jane', last_name: 'Doe' };
+                const nowRequest = logInStacktrace('Create Applicant', 'REQUEST', null, data, req.session.stacktrace);
+                axios.default.post('/applicants/', data).then((response) => {
+                    logInStacktrace('Create Applicant', 'RESPONSE', nowRequest, response.data, req.session.stacktrace);
+                    const applicant = response.data;
+                    req.session.applicant = applicant;
+                    successCallback(applicant);
+                });
+            }
+        })
+    }
+
+    console.log('current index: ', current_index);
+    console.log('usecase: ', usecase);
+    
+    //get SDK Token
+    getApplicant().then(applicant => {
+        const data = { applicant_id: applicant.id, referrer: '*://*/*' };
+        const nowRequest = logInStacktrace('Get SDK Token', 'REQUEST', null, data, req.session.stacktrace);
+        axios.default.post('/sdk_token/', data).then((response) => {
+            logInStacktrace('Get SDK Token', 'RESPONSE', nowRequest, response.data, req.session.stacktrace);
+            const sdkToken = response.data.token;
+            
+            const applicant = (req.session.applicant)?req.session.applicant:null;
+            const stacktrace = (req.session.stacktrace)?req.session.stacktrace:[];
+            const documents = (req.session.documents)?req.session.documents:[];
+            const photos = (req.session.photos)?req.session.photos:[];
+            const videos = (req.session.videos)?req.session.videos:[];
+            res.render('step_capture', { current_index: current_index, usecase: usecase, sdkToken: sdkToken, showSdkEvents: true, applicant: applicant, stacktrace: stacktrace, documents: documents, photos: photos, videos: videos});
+        });
+    })
+    .catch((error) => {console.log(error.message);next(error);})
 };
 
-exports.globalSearch = function(req, res, next) {
-    const id = req.query.uuid;
-    const applicant = axios.default.get('/applicants/'+id).then(response => response.data).catch(() => null);
-    const document = axios.default.get('/documents/'+id).then(response => response.data).catch(() => null);
-    const check = axios.default.get('/checks/'+id).then(response => response.data).catch(() => null);
-    const report = axios.default.get('/reports/'+id).then(response => response.data).catch(() => null);
+exports.refreshApplicantAfterCapture = function(req, res, next) {
+    const applicant_id = req.params.id;
+    const applicant = axios.default.get('/applicants/'+applicant_id);
+    const documents = axios.default.get('/documents?applicant_id='+applicant_id).then(response => response.data.documents);
+    const photos = axios.default.get('/live_photos?applicant_id='+applicant_id).then(response => response.data.live_photos);
+    const videos = axios.default.get('/live_videos?applicant_id='+applicant_id).then(response => response.data.live_videos);
+    
+    Promise.all([applicant, documents, photos, videos]).then((children) => {
+        req.session.applicant = children[0];
+        req.session.documents = children[1];
+        req.session.photos = children[2];
+        req.session.videos = children[3];
+    })
+    .catch((error) => {console.log(error.message);next(error);});
 
-    Promise.all([applicant, document, check, report]).then(children => {
-        const results = {
-            applicant: children[0],
-            document: children[1],
-            check: children[2],
-            report: children[3]
+    const redirect_url = (req.query.next)?req.query.next:'/usecases/step_next';
+    res.redirect(redirect_url);
+};
+
+exports.autofillUsecase = function(req, res, next) {
+    const applicant_id = req.session.applicant.id;
+    req.session.url = req.originalUrl;
+    const usecase = (req.session.usecase)?req.session.usecase:null;
+    const current_index = (Number.isInteger(req.session.current_index))?parseInt(req.session.current_index,10)+1:0;
+    req.session.current_index = current_index;
+    
+    const applicant = axios.default.get('/applicants/'+applicant_id);
+    const documents = axios.default.get('/documents?applicant_id='+applicant_id).then(response => response.data.documents);
+    const photos = axios.default.get('/live_photos?applicant_id='+applicant_id).then(response => response.data.live_photos);
+    const videos = axios.default.get('/live_videos?applicant_id='+applicant_id).then(response => response.data.live_videos);
+    
+    Promise.all([applicant, documents, photos, videos]).then((children) => {
+        req.session.applicant = children[0];
+        req.session.documents = children[1];
+        req.session.photos = children[2];
+        req.session.videos = children[3];
+    })
+    .then(() => {
+        const front_document = req.session.documents.find(document => document.side == 'front');
+        const data = { document_id: front_document.id };
+        const nowRequest = logInStacktrace('Autofill', 'REQUEST', null, data, req.session.stacktrace);
+        return axios.default.post('/extractions', data).then((response) => {
+            logInStacktrace('Autofill', 'RESPONSE', nowRequest, response.data, req.session.stacktrace);
+            req.session.extraction = response.data;
+        })
+        .catch((error) => {
+            req.session.extraction = error;
+        });
+    })
+    .then(() => {
+        if(req.session.extraction.extracted_data){
+            const data = { first_name: req.session.extraction.extracted_data.first_name, last_name: req.session.extraction.extracted_data.last_name };
+            const nowRequest = logInStacktrace('Update Applicant', 'REQUEST', null, data, req.session.stacktrace);
+            return axios.default.put('/applicants/'+applicant_id, data).then((response) => {
+                logInStacktrace('Update Applicant', 'RESPONSE', nowRequest, response.data, req.session.stacktrace);
+                req.session.applicant = response.data;
+            });
         }
-        res.render('search', {results: results});
+    })
+    .catch((error) => console.log(error.message))
+    .finally(() => {
+        const extraction = (req.session.extraction)?req.session.extraction:null;
+        const applicant = (req.session.applicant)?req.session.applicant:null;
+        const stacktrace = (req.session.stacktrace)?req.session.stacktrace:[];
+        const documents = (req.session.documents)?req.session.documents:[];
+        const photos = (req.session.photos)?req.session.photos:[];
+        const videos = (req.session.videos)?req.session.videos:[];
+        res.render('step_autofill', { extraction: extraction, current_index: current_index, usecase: usecase, applicant: applicant, stacktrace: stacktrace, documents: documents, photos: photos, videos: videos });
     });
-}
+};
+
+exports.checkUseCase = function(req, res, next) {
+    req.session.url = req.originalUrl;
+    const usecase = (req.session.usecase)?req.session.usecase:null;
+    const current_index = (Number.isInteger(req.session.current_index))?parseInt(req.session.current_index,10)+1:0;
+    req.session.current_index = current_index;
+
+    const applicant = (req.session.applicant)?req.session.applicant:null;
+    const reportNames = [
+        'document',
+        (usecase.video_capture)?'facial_similarity_video':'facial_similarity_photo_fully_auto'
+    ];
+    if(usecase.known_faces) {
+        reportNames.push('known_faces');
+    }
+    const data = { 
+        applicant_id: applicant.id,
+        report_names: reportNames
+    };
+    const nowRequest = logInStacktrace('Create Check', 'REQUEST', null, data, req.session.stacktrace);
+    
+    axios.default.post('/checks/', data).then((response) => {
+        logInStacktrace('Create Check', 'RESPONSE', nowRequest, response.data, req.session.stacktrace);
+        const check = response.data;
+        req.session.check = check;
+
+        const stacktrace = (req.session.stacktrace)?req.session.stacktrace:[];
+        const documents = (req.session.documents)?req.session.documents:[];
+        const photos = (req.session.photos)?req.session.photos:[];
+        const videos = (req.session.videos)?req.session.videos:[];
+
+        res.render('step_check', { check: check, current_index: current_index, usecase: usecase, applicant: applicant, stacktrace: stacktrace, documents: documents, photos: photos, videos: videos});
+    })
+    .catch((error) => {console.log(error.message);next(error);});
+
+};
+
+exports.waitUseCase = function(req, res, next) {
+    req.session.url = req.originalUrl;
+    const usecase = (req.session.usecase)?req.session.usecase:null;
+    const current_index = (Number.isInteger(req.session.current_index))?parseInt(req.session.current_index,10)+1:0;
+    req.session.current_index = current_index;
+    const viewresult = (req.query.viewresult)?(req.query.viewresult == 'true'):false;
+    const check = (req.session.check)?req.session.check:null;
+
+    if(viewresult) {
+        getAllResourcesByCheck(check.id).then(check => {
+            res.render(usecase.steps[current_index].view, { check: check, viewresult: viewresult, current_index: current_index, usecase: usecase, applicant: check.applicant, stacktrace: stacktrace, documents: check.applicant.documents, photos: check.applicant.photos, videos: check.applicant.videos});
+        });
+    } else { 
+        const applicant = (req.session.applicant)?req.session.applicant:null;
+        const stacktrace = (req.session.stacktrace)?req.session.stacktrace:[];
+        const documents = (req.session.documents)?req.session.documents:[];
+        const photos = (req.session.photos)?req.session.photos:[];
+        const videos = (req.session.videos)?req.session.videos:[];
+        res.render('step_wait', { check: check, viewresult: viewresult, current_index: current_index, usecase: usecase, applicant: applicant, stacktrace: stacktrace, documents: documents, photos: photos, videos: videos});
+    }
+    
+};
+
+exports.nextUseCase = function(req, res, next) {
+    req.session.url = req.originalUrl;
+    const usecase = (req.session.usecase)?req.session.usecase:null;
+    const current_index = (Number.isInteger(req.session.current_index))?parseInt(req.session.current_index,10)+1:0;
+    req.session.current_index = current_index;
+
+    // TODO: create next page
+    
+    const applicant = (req.session.applicant)?req.session.applicant:null;
+    const stacktrace = (req.session.stacktrace)?req.session.stacktrace:[];
+    const documents = (req.session.documents)?req.session.documents:[];
+    const photos = (req.session.photos)?req.session.photos:[];
+    const videos = (req.session.videos)?req.session.videos:[];
+    res.render('step_next', { current_index: current_index, usecase: usecase, applicant: applicant, stacktrace: stacktrace, documents: documents, photos: photos, videos: videos});
+};
 
 // TODO TGA LATER: add webhooks management
-// TODO TGA: fix cannot set url error

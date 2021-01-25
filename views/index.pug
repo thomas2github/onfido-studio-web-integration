@@ -1,8 +1,18 @@
 extends layout
 
 block content
-    .d-flex.flex-column
-        .d-flex.flex-row.justify-content-around.mt-3
-            h6.text-primary Select or create applicant
-        .d-flex.flex-row.justify-content-around.mt-3
-            img(alt='Web SDK Diagram' title='Web SDK Diagram' src='https://developers.onfido.com/static/cfb59ca6fbda28702cbfba92de140f76/c35de/web-integration.jpg' style='max-width: 800px;')
+    .d-flex.flex-column.justify-content-around
+        //- .card.m-5(style='width:400px;')
+        //-     .card-header.card-header-info.text-center
+        //-         h6 Identity Verification in action
+        //-     .card-body.m-4.text-center
+        //-         a.btn.btn-sm.btn-outline-info.mr-2(href='/usecases/new') Select
+        //-         span your business use cases
+        .card.m-5(style='width:400px;')
+            .card-header.card-header-primary.text-center
+                h6.card-title Discover SDK and API
+            .card-body.m-4.text-center
+                a.btn.btn-sm.btn-outline-primary.mr-2(href='/applicants/') Select 
+                span or 
+                button.btn.btn-sm.btn-outline-success.mx-2(data-toggle='modal' data-target='#createApplicant') create 
+                span applicant

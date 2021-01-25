@@ -35,7 +35,9 @@ mixin displayJson(json, level)
             if typeof val === 'object'
                 if isNaN(parseInt(key))
                     h6(style='margin-left: '+level+'em')= key
-                else if parseInt(key) > 0
+                else if parseInt(key) >= 0
+                    br
+                    span= '# '+ (key+1)
                     br
                 +displayJson(val, level+1)
             else
@@ -43,3 +45,30 @@ mixin displayJson(json, level)
                 span(style='margin-left: '+level+'em')= key + ': '
                     b= val
                 br
+
+
+mixin displayKnownFacesProperties(properties)
+    h6= properties.matches.length + ' matches'
+    each match in properties.matches
+        .d-flex.flex-row.justify-content-start.align-items-start.my-3
+            if match.media_type == 'live_photos' 
+                a(href='/photos/'+match.media_id target='_blank')
+                    image(src='/photos/'+match.media_id height=90)
+            else if match.media_type == 'live_videos' 
+                a(href='/videos/'+match.media_id target='_blank')
+                    image(src='/videos/'+match.media_id height=90)
+            .d-flex.flex-column.justify-content-start.align-items-start.ml-4
+                span applicant_id:
+                    a.ml-2(href='/applicants/'+match.applicant_id target='_blank')
+                        b= match.applicant_id
+                span score:
+                    b.ml-2= match.score
+                span media_id:
+                    if match.media_type == 'live_photos' 
+                        a.ml-2(href='/photos/'+match.media_id target='_blank')
+                            b= match.media_id
+                    else if match.media_type == 'live_videos' 
+                        a.ml-2(href='/videos/'+match.media_id target='_blank')
+                            b= match.media_id
+                span media_type:
+                    b.ml-2= match.media_type
