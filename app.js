@@ -39,11 +39,17 @@ app.use(function(req, res, next) {
 app.use(function(err, req, res, next) {
   // set locals, only providing error in development
   res.locals.message = err.message;
-  res.locals.error = req.app.get('env') === 'development' ? err : {};
+  res.locals.error = err;
 
   // render the error page
   res.status(err.status || 500);
-  res.render('error');
+  const applicant = (req.session.applicant)?req.session.applicant:null;
+  const stacktrace = (req.session.stacktrace)?req.session.stacktrace:[];
+  const applicants = (req.session.applicants)?req.session.applicants:[];
+  const documents = (req.session.documents)?req.session.documents:[];
+  const photos = (req.session.photos)?req.session.photos:[];
+  const videos = (req.session.videos)?req.session.videos:[];
+  res.render('error', { applicants: applicants, applicant: applicant, stacktrace: stacktrace, documents: documents, photos: photos, videos: videos});
 });
 
 module.exports = app;

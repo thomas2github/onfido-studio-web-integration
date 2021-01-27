@@ -487,7 +487,7 @@ exports.autofill = function(req, res, next) {
     });
 };
 
-// USE CASE
+// TODO TGA LATER: USE CASE
 exports.configureUseCase = function(req, res, next) {
     req.session.url = req.originalUrl;
     req.session.usecase = null;
