@@ -1,9 +1,11 @@
 .nav.nav-tabs.text-center(data-tabs='tabs')
     a.nav-item.nav-link.text-info.float-right.active(data-toggle='tab' href='#api-calls') 
         h4.font-weight-bold API Calls
-    if showSdkEvents
-        a.nav-item.nav-link.text-info.float-left(data-toggle='tab' href='#sdk-events')
-           h4.font-weight-bold SDK Events
+    //- if showSdkEvents
+    a.nav-item.nav-link.text-info.float-left(data-toggle='tab' href='#sdk-events')
+        h4.font-weight-bold SDK Events
+    a.nav-item.nav-link.text-info(data-toggle='tab' href='#webhook_pane')
+        h4.font-weight-bold Webhook
 .d-flex.flex-column.justify-content-start
     a.btn.btn-outline-info(type='button' href='/stacktrace/clear') clear
     .tab-content
@@ -37,3 +39,10 @@
                         small EVENT
                     th 
                         small TIMESTAMP
+        .tab-pane.flex-column#webhook_pane
+            row
+                .input-group.mb-3
+                    input#webhook_url.form-control(placeholder='your webhook url...' value='https://tga-onfido.requestcatcher.com/')
+                    button#webhook_button.btn.btn-sm.btn-outline-secondary.ml-1(type='button') view
+            row
+                iframe#webhook_iframe.w-100.border-0.d-none(style='height: calc(100vh - 320px); overflow: hidden;')

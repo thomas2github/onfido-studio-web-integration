@@ -95,6 +95,9 @@ $(document).ready(function() {
                 onfidoSdk.setOptions({isModalOpen: false})
             },
             onComplete: function(data) {
+                row = '<tbody><tr data-toggle="toggle" data-ol-has-click-handler><td>' + 'on complete' + '</td><td>' +  + '</td></tr></tbody>';
+                row += '<tbody><tr><td colspan="2"><pre>' + JSON.stringify(data) + '</td></tr></tbody>';
+                $('#sdk-events').append(row);
                 window.location = '/applicants/'+applicantId;
             },
         };

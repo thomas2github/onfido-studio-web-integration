@@ -751,5 +751,3 @@ exports.nextUseCase = function(req, res, next) {
     const videos = (req.session.videos)?req.session.videos:[];
     res.render('step_next', { current_index: current_index, usecase: usecase, applicant: applicant, stacktrace: stacktrace, documents: documents, photos: photos, videos: videos});
 };
-
-// TODO TGA LATER: add webhooks management

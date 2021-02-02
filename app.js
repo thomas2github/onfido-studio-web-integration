@@ -28,6 +28,8 @@ app.use(session({
   saveUninitialized: true
 }));
 
+
+
 app.use('/', mainRouter);
 
 // catch 404 and forward to error handler
