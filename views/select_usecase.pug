@@ -1,0 +1,39 @@
+extends layout2
+
+block content
+    .d-flex.flex-column.justify-content-around.align-items-start.mt-2
+        //- language
+        //- h4.text-info.font-weight-bold select your language
+        //- .btn-group.btn-group-toggle(data-toggle='buttons')
+        //-     label.btn.btn.btn-outline-secondary.active
+        //-         input#languageEN(type='radio' name='language' autocomplete='off' value='en_US' checked)
+        //-         | EN
+        //-     label.btn.btn.btn-outline-secondary
+        //-         input#languageFR(type='radio' name='language' autocomplete='off' value='fr_FR')
+        //-         | FR
+        //-     label.btn.btn.btn-outline-secondary
+        //-         input#languageES(type='radio' name='language' autocomplete='off' value='es_ES')
+        //-         | ES
+        //-     label.btn.btn.btn-outline-secondary
+        //-         input#languageDE(type='radio' name='language' autocomplete='off' value='de_DE')
+        //-         | DE
+        //- //- market
+        //- h4.text-info.font-weight-bold.mt-4 select your market
+        //- .btn-group.btn-group-toggle(data-toggle='buttons')
+        //-     label.btn.btn.btn-outline-secondary.active
+        //-         input#marketFS(type='radio' name='language' autocomplete='off' value='fs' checked)
+        //-         | Financial Services
+        //-     label.btn.btn.btn-outline-secondary
+        //-         input#marketCrypto(type='radio' name='language' autocomplete='off' value='crypto')
+        //-         | Crypto
+        //-     label.btn.btn.btn-outline-secondary
+        //-         input#marketTransportion(type='radio' name='language' autocomplete='off' value='transportation')
+        //-         | Transportation
+        //-     label.btn.btn.btn-outline-secondary
+        //-         input#languageTelecom(type='radio' name='language' autocomplete='off' value='telecom')
+        //-         | Telecom
+        //- use case
+        h4.text-info.font-weight-bold.mt-4 select your use case
+        a.btn.btn-outline-secondary(href='/usecases/registration') Onboarding / Registration
+        a.btn.btn-outline-secondary(href='/usecases/verification') Identity Verification
+        a.btn.btn-outline-secondary(href='/usecases/authentication') Authentication / Secure Transaction

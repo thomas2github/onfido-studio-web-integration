@@ -1,0 +1,12 @@
+extends layout2
+
+block content
+    h4.text-info.font-weight-bold.mt-4 Registration form
+    form#registration_form(action='/usecases/registration/form' method='post')
+        .form-group
+            label.bmd-label-floating Email
+            input#email.form-control(type='text' name='email')
+        .form-group
+            label.bmd-label-floating Mobile
+            input#mobile.form-control(type='text' name='mobile')
+        button.btn.btn-success(type='submit') Register

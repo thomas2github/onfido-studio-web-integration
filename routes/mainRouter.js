@@ -46,26 +46,13 @@ router.get('/reports/:id', auth, main_controller.retrieveReport);
 router.get('/autofill/:id', auth, main_controller.autofill)
 
 // USE CASE
-router.get('/usecases/new', auth, main_controller.configureUseCase);
-router.post('/usecases/new', auth, main_controller.generateUseCase);
-router.get('/usecases/capture', auth, main_controller.captureUseCase);
-router.get('/applicants/:id/refresh-after-capture', auth, main_controller.refreshApplicantAfterCapture);
-router.get('/usecases/autofill', auth, main_controller.autofillUsecase);
-router.get('/usecases/check', auth, main_controller.checkUseCase);
-router.get('/usecases/wait', auth, main_controller.waitUseCase);
-router.get('/usecases/next', auth, main_controller.nextUseCase);
+router.get('/usecases/select', auth, main_controller.selectUseCase);
+// REGISTRATION
+router.get('/usecases/registration', auth, main_controller.registrationUseCase);
+router.get('/usecases/registration/:step', auth, main_controller.registrationUseCase);
+router.post('/usecases/registration/:step', auth, main_controller.registrationUseCase);
+// router.get('/usecases/verification', auth, main_controller.verificationUseCase);
+// router.get('/usecases/authentication', auth, main_controller.authenticationUseCase);
 
-// TODO TGA: add many scenarios 
-// OPTIONS
-// Selfie or Video
-// Known Faces verification
-// Autofill to complete form and update applicant
-// AUTO & MANUAL
-// 1- wait 15s for callback and manage async then
-// 2- manage async with callback
-// ASYNC CHECK MANAGEMENT
-// 1- confirm request (add stand-by state) when check succeed
-// 2- wait for check success before creating request
-// 3- validate request automatically, delete request if check failed
 
 module.exports = router;

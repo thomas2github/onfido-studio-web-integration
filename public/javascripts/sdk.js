@@ -21,6 +21,7 @@ $(document).ready(function() {
 
         let steps = [];
         if (documentStep) {
+            
             steps.push(
                 {
                     type: 'document',

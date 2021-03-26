@@ -1,0 +1,103 @@
+extends layout2
+
+block content
+    form(action='/usecases/new' method='post')
+        .d-flex.flex-column.justify-content-around.align-items-start.mt-2
+            //- language
+            //- h4.text-info.font-weight-bold select your language
+            //- .btn-group.btn-group-toggle(data-toggle='buttons')
+            //-     label.btn.btn.btn-outline-secondary.active
+            //-         input#languageEN(type='radio' name='language' autocomplete='off' value='en_US' checked)
+            //-         | EN
+            //-     label.btn.btn.btn-outline-secondary
+            //-         input#languageFR(type='radio' name='language' autocomplete='off' value='fr_FR')
+            //-         | FR
+            //-     label.btn.btn.btn-outline-secondary
+            //-         input#languageES(type='radio' name='language' autocomplete='off' value='es_ES')
+            //-         | ES
+            //-     label.btn.btn.btn-outline-secondary
+            //-         input#languageDE(type='radio' name='language' autocomplete='off' value='de_DE')
+            //-         | DE
+            //- //- market
+            //- h4.text-info.font-weight-bold.mt-4 select your market
+            //- .btn-group.btn-group-toggle(data-toggle='buttons')
+            //-     label.btn.btn.btn-outline-secondary.active
+            //-         input#marketFS(type='radio' name='language' autocomplete='off' value='fs' checked)
+            //-         | Financial Services
+            //-     label.btn.btn.btn-outline-secondary
+            //-         input#marketCrypto(type='radio' name='language' autocomplete='off' value='crypto')
+            //-         | Crypto
+            //-     label.btn.btn.btn-outline-secondary
+            //-         input#marketTransportion(type='radio' name='language' autocomplete='off' value='transportation')
+            //-         | Transportation
+            //-     label.btn.btn.btn-outline-secondary
+            //-         input#languageTelecom(type='radio' name='language' autocomplete='off' value='telecom')
+            //-         | Telecom
+            //- use case
+            h4.text-info.font-weight-bold.mt-4 select your use case
+            .btn-group.btn-group-toggle(data-toggle='buttons')
+                label.btn.btn.btn-outline-secondary.active
+                    input#usecaseRegistration(type='radio' name='language' autocomplete='off' value='fs' checked)
+                    | Onboarding / Registration
+                label.btn.btn.btn-outline-secondary
+                    input#usecaseVerification(type='radio' name='language' autocomplete='off' value='crypto')
+                    | Identity Verification
+                label.btn.btn.btn-outline-secondary
+                    input#usecaseAuthentication(type='radio' name='language' autocomplete='off' value='transportation')
+                    | Authentication / Secure Transaction
+
+            button.btn.btn-outline-info.my-4(type='submit') start use case
+
+        //- .d-flex.flex-column.justify-content-around.align-items-start.mt-4
+
+        //-     -var index = 0
+
+        //-     h4.text-info.font-weight-bold= ++index + '. Include identity verification in customer lifecycle'
+        //-     .form-check.form-check-radio
+        //-         label.form-check-label.text-secondary
+        //-             input#joinedSteps.form-check-input(type='radio' name='steps' value='joined' checked)
+        //-             | Capture &amp; check in same process
+        //-             span.circle
+        //-                 span.check
+        //-     .form-check.form-check-radio
+        //-         label.form-check-label.text-secondary
+        //-             input#separatedSteps.form-check-input(type='radio' name='steps' value='separated')
+        //-             | Capture &amp; check in separated processes
+        //-             span.circle
+        //-                 span.check
+            
+        //-     h4.text-info.font-weight-bold.mt-4= ++index + '. Define asynchronous strategy'
+        //-     .form-check.form-check-radio
+        //-         label.form-check-label.text-secondary
+        //-             input#fullAsync.form-check-input(type='radio' name='async' value='continue' checked)
+        //-             | Continue anyway and update on asynchronous callback
+        //-             span.circle
+        //-                 span.check
+        //-     .form-check.form-check-radio
+        //-         label.form-check-label.text-secondary
+        //-             input#mixedAsync.form-check-input(type='radio' name='async' value='wait_and_continue')
+        //-             | Wait for automatic verification and force to continue after 15s 
+        //-             span.circle
+        //-                 span.check
+
+        //-     h4.text-info.font-weight-bold.mt-4= ++index + '. Select options'
+        //-     .form-check
+        //-         label.form-check-label.text-secondary
+        //-             input#video_capture.form-check-input(type='checkbox' name='video_capture' value='video_capture')
+        //-             | *** VIDEO CAPTURE ***&nbsp;&nbsp;&nbsp;Liveness detection
+        //-             span.form-check-sign
+        //-                 span.check
+        //-     .form-check
+        //-         label.form-check-label.text-secondary
+        //-             input#known_faces.form-check-input(type='checkbox' name='known_faces' value='known_faces')
+        //-             | *** KNOWN FACES ***&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Detect multi-fraudster and avoid duplicates
+        //-             span.form-check-sign
+        //-                 span.check
+        //-     .form-check
+        //-         label.form-check-label.text-secondary
+        //-             input#autofill.form-check-input(type='checkbox' name='autofill' value='autofill')
+        //-             | *** AUTOFILL ***&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Complete user form with extracted data
+        //-             span.form-check-sign
+        //-                 span.check
+
+        //-     button.btn.btn-outline-info.my-4(type='submit') start use case
