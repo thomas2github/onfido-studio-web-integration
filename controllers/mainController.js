@@ -308,7 +308,7 @@ exports.globalSearch = function(req, res, next) {
 // SDK & CHECK
 exports.initSdk = function(req, res, next) {
     req.session.url = req.originalUrl;
-    
+
     const data = { 
         applicant_id: req.session.applicant.id,
         referrer: '*://*/*'
@@ -319,13 +319,16 @@ exports.initSdk = function(req, res, next) {
         logInStacktrace('Get SDK Token', 'RESPONSE', nowRequest, response.data, req.session.stacktrace);
         const sdkToken = response.data.token;
 
+        // load default customUI
+        const customUI = require("../data/customUI.json");
+
         const applicant = (req.session.applicant)?req.session.applicant:null;
         const stacktrace = (req.session.stacktrace)?req.session.stacktrace:[];
         const applicants = (req.session.applicants)?req.session.applicants:[];
         const documents = (req.session.documents)?req.session.documents:[];
         const photos = (req.session.photos)?req.session.photos:[];
         const videos = (req.session.videos)?req.session.videos:[];
-        res.render('sdk', { applicants: applicants, applicant: applicant, stacktrace: stacktrace, documents: documents, photos: photos, videos: videos, sdkToken: sdkToken, showSdkEvents: true });
+        res.render('sdk', { applicants: applicants, applicant: applicant, stacktrace: stacktrace, documents: documents, photos: photos, videos: videos, sdkToken: sdkToken, showSdkEvents: true, customUI: customUI });
     })
     .catch((error) => {console.log(error.message);next(error);});
 };

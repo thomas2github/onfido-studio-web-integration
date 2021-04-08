@@ -1,4 +1,12 @@
 $(document).ready(function() {
+    // update & reset customUI
+    $('#udpateCustomUI').click(function(){
+        $('#customUI').val($('#customUIEditor').val());
+    });
+    $('#resetCustomUI').click(function(){
+        document.location.reload();
+    });
+
 
     // Init & display Onfido web SDK ID Document
     $('#dislpaySdk').click(function(){
@@ -18,6 +26,9 @@ $(document).ready(function() {
         const acceptResidencePermit = $('#acceptResidencePermit').is(':checked');
         const showCountrySelection = $('#showCountrySelection').is(':checked');
         const language = $('#languageFR').is(':checked')?$('#languageFR').val():($('#languageES').is(':checked')?$('#languageES').val():($('#languageDE').is(':checked')?$('#languageDE').val():$('#languageEN').val()));
+
+        // CUSTOM UI
+        const customUI = ($('#customUI').val()!='')?JSON.parse($('#customUI').val()):'';
 
         let steps = [];
         if (documentStep) {
@@ -73,9 +84,11 @@ $(document).ready(function() {
                 }
             );
         }
+        
         let onfidoSdk;
         const token = $(this).attr('data-token');
         const applicantId = $(this).attr('data-applicant-id');
+
         let sdkParam = {
             useModal: useModal,
             // shouldCloseOnOverlayClick: true,
@@ -88,6 +101,7 @@ $(document).ready(function() {
             //     hideOnfidoLogo: hideOnfidoLogo,
             //     cobrand: null
             // },
+            customUI: customUI,
             token: token,
             containerId: 'onfido-mount',
             isModalOpen: true,

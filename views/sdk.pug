@@ -6,6 +6,21 @@ append head
     link(rel='stylesheet' href='/dist/style.css')
 
 block content
+
+    // Modal Custom UI
+    #customUIModal.modal.fade(tabindex='-1')
+        .modal-dialog
+            .modal-content
+                .modal-header
+                    h4.text-primary.font-weight-bold.modal-title customize UI
+                    button#resetCustomUI.btn.btn-info(type='button' data-dismiss='modal') Default
+                    button#udpateCustomUI.btn.btn-success(type='button' data-dismiss='modal') Update
+                .modal-body
+                    textarea#customUIEditor.form-control(rows='55')= JSON.stringify(customUI, null, 4)
+                    input#customUI(type='hidden' value='')
+                    
+                    
+
     .d-flex.flex-column
         .d-flex.flex-row.justify-content-around
             a.btn.py-4.mx-4(href='/capture') Capture (SDK)
@@ -65,21 +80,24 @@ block content
                     input#showCountrySelection.custom-control-input(type='checkbox' checked)
                     label.custom-control-label.text-secondary(for='showCountrySelection') show country selection
 
-        .d-flex.flex-row.justify-content-start.align-items-center.mt-3
-            h6(style='margin-top:0.5rem;') language
-            .btn-group.btn-group-toggle.ml-3(data-toggle='buttons')
-                label.btn.btn-xs.btn-outline-secondary.active
-                    input#languageEN(type='radio' name='language' autocomplete='off' value='en_US' checked)
-                    | EN
-                label.btn.btn-xs.btn-outline-secondary
-                    input#languageFR(type='radio' name='language' autocomplete='off' value='fr_FR')
-                    | FR
-                label.btn.btn-xs.btn-outline-secondary
-                    input#languageES(type='radio' name='language' autocomplete='off' value='es_ES')
-                    | ES
-                label.btn.btn-xs.btn-outline-secondary
-                    input#languageDE(type='radio' name='language' autocomplete='off' value='de_DE')
-                    | DE
+        .d-flex.flex-row.justify-content-between.align-items-center.mt-3
+            .d-flex.flex-column.flex-wrap
+                h6(style='margin-top:0.5rem;') language
+                .btn-group.btn-group-toggle.ml-3(data-toggle='buttons')
+                    label.btn.btn-xs.btn-outline-secondary.active
+                        input#languageEN(type='radio' name='language' autocomplete='off' value='en_US' checked)
+                        | EN
+                    label.btn.btn-xs.btn-outline-secondary
+                        input#languageFR(type='radio' name='language' autocomplete='off' value='fr_FR')
+                        | FR
+                    label.btn.btn-xs.btn-outline-secondary
+                        input#languageES(type='radio' name='language' autocomplete='off' value='es_ES')
+                        | ES
+                    label.btn.btn-xs.btn-outline-secondary
+                        input#languageDE(type='radio' name='language' autocomplete='off' value='de_DE')
+                        | DE
+            .d-flex.flex-column.flex-wrap
+                button.btn.btn-sm.btn-outline-primary(data-toggle='modal' data-target='#customUIModal') customize UI
         .d-flex.flex-row.justify-content-around
             button#dislpaySdk.btn.btn-outline-info.my-4(type='button' data-token=sdkToken data-applicant-id=applicant.id) display SDK
         .d-flex.flex-row.justify-content-around
