@@ -1,18 +1,17 @@
 {
     "fontFamilyTitle": "Arial sans-serif",
-    "fontFamilySubtitle": "Arial, sans-serif",
-    "fontFamilyBody": "Courier New, sans-serif",
-
     "fontSizeTitle": "2rem",
-    "fontSizeSubtitle": "1.5rem",
-    "fontSizeBody": "1rem",
-
     "fontWeightTitle": 600,
-    "fontWeightSubtitle": 400,
-    "fontWeightBody": 200,
-
     "colorContentTitle": "#E76F51",
+    
+    "fontFamilySubtitle": "Arial, sans-serif",
+    "fontSizeSubtitle": "1.5rem",
+    "fontWeightSubtitle": 400,
     "colorContentSubtitle": "#2A9D8F",
+    
+    "fontFamilyBody": "Courier New, sans-serif",
+    "fontSizeBody": "1rem",
+    "fontWeightBody": 200,
     "colorContentBody": "#264653F",
 
     "colorBackgroundSurfaceModal": "#E9C46A",
@@ -26,6 +25,7 @@
     "colorBackgroundButtonPrimaryHover": "#264653F",
     "colorBackgroundButtonPrimaryActive": "#264653F",
     "colorBorderButtonPrimary": "#264653F",
+    "borderRadiusButton": "5px",
 
     "colorContentButtonSecondaryText": "#FFF",
     "colorBackgroundButtonSecondary": "#f4a261",
@@ -39,7 +39,6 @@
     "colorBorderDocTypeButtonHover": "#264653F",
     "colorBorderDocTypeButtonActive": "#264653F",
     "colorBackgroundIcon": "#2A9D8F",
-    "borderRadiusButton": "5px",
 
     "buttonGroupStacked": "buttonGroupStacked",
 
