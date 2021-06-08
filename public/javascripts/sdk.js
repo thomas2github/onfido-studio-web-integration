@@ -18,6 +18,7 @@ $(document).ready(function() {
         const documentStep = $('#documentStep').is(':checked');
         const selfieStep = $('#selfieStep').is(':checked');
         const videoStep = $('#videoStep').is(':checked');
+        const authenticateStep = $('#authenticateStep').is(':checked');
         const forceCrossDevice = $('#forceCrossDevice').is(':checked');
         const useLiveDocumentCapture = $('#useLiveDocumentCapture').is(':checked');
         const acceptPassport = $('#acceptPassport').is(':checked');
@@ -37,6 +38,7 @@ $(document).ready(function() {
                 {
                     type: 'document',
                     options: {
+                        // requestedVariant: 'video',
                         forceCrossDevice: forceCrossDevice,
                         useLiveDocumentCapture: useLiveDocumentCapture,
                         uploadFallback: true,
@@ -71,6 +73,16 @@ $(document).ready(function() {
                         requestedVariant: 'video',
                         // useMultipleSelfieCapture: true,
                         // uploadFallback: true
+                    }
+                }
+            );
+        }
+        if (authenticateStep) {
+            steps.push(
+                {
+                    type: 'auth',
+                    options: {
+                        retries: 3
                     }
                 }
             );
@@ -110,6 +122,7 @@ $(document).ready(function() {
                 onfidoSdk.setOptions({isModalOpen: false})
             },
             onComplete: function(data) {
+                // TODO: display document ids in a popup before redirection
                 row = '<tbody><tr data-toggle="toggle" data-ol-has-click-handler><td>' + 'on complete' + '</td><td>' +  + '</td></tr></tbody>';
                 row += '<tbody><tr><td colspan="2"><pre>' + JSON.stringify(data) + '</td></tr></tbody>';
                 $('#sdk-events').append(row);

@@ -10,6 +10,7 @@ block content
                     a.btn.py-4.mx-4(href='/checks/new') Verify (API)
                 a.btn.btn-outline-secondary.py-4.mx-4(href='/checks') Consult checks
             .d-flex.flex-row.justify-content-around.mt-4
+                //- TODO: add hyperlink to API documentation
                 if documents.length > 0
                     .d-flex.flex-column.flex-wrap.justify-content-start.align-items-start
                         h6 Document Reports
@@ -59,6 +60,7 @@ block content
                         .custom-control.custom-switch
                             input#reportIdentityEnhanced.custom-control-input(name='reportIdentityEnhanced' type='checkbox' value='identity_enhanced')
                             label.custom-control-label.text-secondary(for='reportIdentityEnhanced') Identity enhanced
+                        //- TODO: add POA and RTW
             .d-flex.flex-row.justify-content-around.mt-4
                 button#createCheck.btn.btn-outline-info.my-4(type='submit') submit check
                 if check
@@ -83,7 +85,7 @@ block content
                                     .card-header
                                         div(data-toggle='toggle')
                                             .float-right.text-right
-                                                if report.subResult
+                                                if report.sub_result
                                                     +displayResult(report.sub_result)
                                                 else if report.result
                                                     +displayResult(report.result)

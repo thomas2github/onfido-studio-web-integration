@@ -40,7 +40,7 @@
     "colorBorderDocTypeButtonActive": "#264653F",
     "colorBackgroundIcon": "#2A9D8F",
 
-    "buttonGroupStacked": "buttonGroupStacked",
+    "buttonGroupStacked": "true",
 
     "colorContentLinkTextHover": "#2A9D8F",
     "colorBorderLinkUnderline": "#2A9D8F",
@@ -61,5 +61,23 @@
     "colorBackgroundButtonIconActive": "#e76f51",
     
     "colorBackgroundButtonCameraHover": "#e9c46a",
-    "colorBackgroundButtonCameraActive": "#e76f51"
+    "colorBackgroundButtonCameraActive": "#e76f51",
+
+    "authAccentColor": "#E76F51",
+    "authFrameColor": "#E9C46A",
+    "authButtonCornerRadius": "5px",
+
+    "authDualSpinnercolor": "#f4a261",
+    "authRetryScreenOvalcolor": "#264653F",
+    "authOvalColor": "#E76F51",
+    "authButtonColorNormal": "#e9c46a",
+    "authButtonColorDisabled": "#f4a261",
+    "authButtonColorPressed": "#264653F",
+    "authFeedbackBarColor": "#E76F51",
+
+    "authTextColor": "#2A9D8F",
+    "authButtonTextHighlightColor": "#264653F",
+    "authButtonTextDisabledColor": "#f4a261",
+    "authButtonTextNormalColor": "#e9c46a",
+    "authFeedbackBarTextColor": "#264653F"
 }

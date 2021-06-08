@@ -12,7 +12,6 @@ mixin displayBreakdownIcon(result)
                 i.material-icons.ml-2(title=result style='font-size: 18px; vertical-align:middle; diplay: inline-block' class='text-danger')= 'cancel'
             default
                 span.ml-2.text-secondary= result
-
       
 mixin reportBreakdown(breakdown)
     .d-flex.flex-wrap.justify-content-around
@@ -45,7 +44,6 @@ mixin displayJson(json, level)
                 span(style='margin-left: '+level+'em')= key + ': '
                     b= val
                 br
-
 
 mixin displayKnownFacesProperties(properties)
     h6= properties.matches.length + ' matches'

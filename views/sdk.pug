@@ -56,6 +56,9 @@ block content
                     input#videoStep.custom-control-input(type='checkbox')
                     label.custom-control-label.text-secondary(for='videoStep') video (liveness)
                 .custom-control.custom-switch
+                    input#authenticateStep.custom-control-input(type='checkbox')
+                    label.custom-control-label.text-danger(for='authenticateStep') authenticate
+                .custom-control.custom-switch
                     input#forceCrossDevice.custom-control-input(type='checkbox' checked)
                     label.custom-control-label.text-secondary(for='forceCrossDevice') force mobile device
                 .custom-control.custom-switch.d-none
@@ -105,6 +108,7 @@ block content
 
 append bottom
     script(src='/dist/onfido.min.js')
+    script(src='/dist/onfidoAuth.min.js')
     script(src='https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/js/bootstrap4-toggle.min.js')
     script(src='/javascripts/sdk.js')
     

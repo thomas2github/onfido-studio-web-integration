@@ -1,10 +1,11 @@
-const { Onfido } = require('@onfido/api');
+const { Onfido, Region } = require('@onfido/api');
 const moment = require('moment');
 const axios = require('axios');
 const { get } = require('request');
 const { use } = require('../routes/mainRouter');
 
-axios.defaults.baseURL = 'https://api.onfido.com/v3/';
+// axios.defaults.baseURL = 'https://api.onfido.com/v3/';
+axios.defaults.baseURL = 'https://api.eu.onfido.com/v3.1/';
 axios.defaults.headers.common['Accept'] = 'application/json';
 axios.defaults.headers.post['Content-Type'] = 'application/json';
 axios.defaults.headers.put['Content-Type'] = 'application/json';
@@ -103,6 +104,7 @@ exports.index = function(req, res, next) {
         res.redirect('/applicants/'+applicant.id);
     }
     const stacktrace = (req.session.stacktrace)?req.session.stacktrace:[];
+    // console.log(process.env);
     res.render('index', { applicant: applicant, stacktrace: stacktrace});
 };
 
@@ -200,6 +202,8 @@ exports.retrieveApplicant = function(req, res, next) {
 };
 
 exports.updateApplicant = function(req, res, next) {
+    
+    // TODO: manage address object update (street / town / postcode / country)
     const applicant_id = req.params.id;
     const firstname = (req.body.firstname !== '')?req.body.firstname:'';
     const lastname = (req.body.lastname !== '')?req.body.lastname:'';
@@ -218,6 +222,8 @@ exports.updateApplicant = function(req, res, next) {
 };
 
 exports.createApplicant = function(req, res, next) {
+
+    // TODO: manage address object creation (street / town / postcode / country)
     const firstname = (req.body.firstname !== '')?req.body.firstname:'temp user';
     const lastname = (req.body.lastname !== '')?req.body.lastname:'to delete';
     
@@ -268,21 +274,21 @@ exports.deleteApplicants = function(req, res, next) {
 // TODO TGA LATER: remove Onfido nodeJS client to download document
 exports.downloadDocument = function(req, res, next) {
     res.set('Cache-control', 'public, max-age=15552000');
-    const onfido = new Onfido({ apiToken: req.session.apiToken });
+    const onfido = new Onfido({ apiToken: req.session.apiToken, region: Region.EU });
     const id = req.params.id;
     onfido.document.download(id).then(photo => photo.asStream().pipe(res)).catch((error) => {console.log(error.message);next(error);});
 };
 
 exports.downloadPhoto = function(req, res, next) {
     res.set('Cache-control', 'public, max-age=15552000');
-    const onfido = new Onfido({ apiToken: req.session.apiToken });
+    const onfido = new Onfido({ apiToken: req.session.apiToken, region: Region.EU });
     const id = req.params.id;
     onfido.livePhoto.download(id).then(photo => photo.asStream().pipe(res)).catch((error) => {console.log(error.message);next(error);});
 };
 
 exports.downloadVideoFrame = function(req, res, next) {
     res.set('Cache-control', 'public, max-age=15552000');
-    const onfido = new Onfido({ apiToken: req.session.apiToken });
+    const onfido = new Onfido({ apiToken: req.session.apiToken, region: Region.EU });
     const id = req.params.id;
     onfido.liveVideo.frame(id).then(frame => frame.asStream().pipe(res)).catch((error) => {console.log(error.message);next(error);});
 };
@@ -310,14 +316,24 @@ exports.initSdk = function(req, res, next) {
     req.session.url = req.originalUrl;
 
     const data = { 
-        applicant_id: req.session.applicant.id,
-        referrer: '*://*/*'
+        applicant_id: req.session.applicant.id
+        // referrer: '*://*/*'
     };
     const nowRequest = logInStacktrace('Get SDK Token', 'REQUEST', null, data, req.session.stacktrace);
     
     axios.default.post('/sdk_token/', data).then((response) => {
         logInStacktrace('Get SDK Token', 'RESPONSE', nowRequest, response.data, req.session.stacktrace);
         const sdkToken = response.data.token;
+
+        // // get authenticate token
+        // function fnGetAuthToken(sdkToken) {
+        //     const data = { sdk_token: sdkToken, sdk_type: 'onfido_web_sdk' };
+        //     const nowRequest = logInStacktrace('Get Auth Token', 'REQUEST', null, data, req.session.stacktrace);
+        //     return axios.default.get('/auth_3d/session/', data).then((response) => {
+        //         logInStacktrace('Get Auth Token', 'RESPONSE', nowRequest, response.data, req.session.stacktrace);
+        //         return response.data;
+        //     });
+        // }
 
         // load default customUI
         const customUI = require("../data/customUI.json");
