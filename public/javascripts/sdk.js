@@ -126,6 +126,7 @@ $(document).ready(function() {
                 row = '<tbody><tr data-toggle="toggle" data-ol-has-click-handler><td>' + 'on complete' + '</td><td>' +  + '</td></tr></tbody>';
                 row += '<tbody><tr><td colspan="2"><pre>' + JSON.stringify(data) + '</td></tr></tbody>';
                 $('#sdk-events').append(row);
+                alert(JSON.stringify(data));
                 window.location = '/applicants/'+applicantId;
             },
         };
@@ -150,7 +151,7 @@ $(document).ready(function() {
             sdkParam.steps.unshift(welcomeParam);
         }
         console.log('sdkconfig: ', sdkParam);
-        onfidoSdk = Onfido.init(sdkParam);
+        onfidoSdk = OnfidoAuth.init(sdkParam);
         return false;
     });
 
