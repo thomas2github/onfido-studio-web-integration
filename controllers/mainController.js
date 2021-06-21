@@ -203,12 +203,11 @@ exports.retrieveApplicant = function(req, res, next) {
 
 exports.updateApplicant = function(req, res, next) {
     
-    // TODO: manage address object update (street / town / postcode / country)
     const applicant_id = req.params.id;
     const firstname = (req.body.firstname !== '')?req.body.firstname:'';
     const lastname = (req.body.lastname !== '')?req.body.lastname:'';
 
-    const data = { first_name: firstname, last_name: lastname };
+    const data = { first_name: firstname, last_name: lastname};
     const nowRequest = logInStacktrace('Update Applicant', 'REQUEST', null, data, req.session.stacktrace);
     
     axios.default.put('/applicants/'+applicant_id, data).then((response) => {
@@ -223,11 +222,15 @@ exports.updateApplicant = function(req, res, next) {
 
 exports.createApplicant = function(req, res, next) {
 
-    // TODO: manage address object creation (street / town / postcode / country)
     const firstname = (req.body.firstname !== '')?req.body.firstname:'temp user';
     const lastname = (req.body.lastname !== '')?req.body.lastname:'to delete';
+    // const street = (req.body.street !== '')?req.body.street:'';
+    // const town = (req.body.town !== '')?req.body.town:'';
+    // const postcode = (req.body.postcode !== '')?req.body.postcode:'';
+    // const country = (req.body.country !== '')?req.body.country:'';
     
-    const data = { first_name: firstname, last_name: lastname };
+    const data = { first_name: firstname, last_name: lastname};
+    // const data = { first_name: firstname, last_name: lastname, address: { street: street, town: town, postcode: postcode, country: country } };
     const nowRequest = logInStacktrace('Create Applicant', 'REQUEST', null, data, req.session.stacktrace);
     axios.default.post('/applicants/', data).then((response) => {
 
@@ -325,16 +328,6 @@ exports.initSdk = function(req, res, next) {
         logInStacktrace('Get SDK Token', 'RESPONSE', nowRequest, response.data, req.session.stacktrace);
         const sdkToken = response.data.token;
 
-        // // get authenticate token
-        // function fnGetAuthToken(sdkToken) {
-        //     const data = { sdk_token: sdkToken, sdk_type: 'onfido_web_sdk' };
-        //     const nowRequest = logInStacktrace('Get Auth Token', 'REQUEST', null, data, req.session.stacktrace);
-        //     return axios.default.get('/auth_3d/session/', data).then((response) => {
-        //         logInStacktrace('Get Auth Token', 'RESPONSE', nowRequest, response.data, req.session.stacktrace);
-        //         return response.data;
-        //     });
-        // }
-
         // load default customUI
         const customUI = require("../data/customUI.json");
 
@@ -345,6 +338,31 @@ exports.initSdk = function(req, res, next) {
         const photos = (req.session.photos)?req.session.photos:[];
         const videos = (req.session.videos)?req.session.videos:[];
         res.render('sdk', { applicants: applicants, applicant: applicant, stacktrace: stacktrace, documents: documents, photos: photos, videos: videos, sdkToken: sdkToken, showSdkEvents: true, customUI: customUI });
+    })
+    .catch((error) => {console.log(error.message);next(error);});
+};
+
+exports.initSdkAuth = function(req, res, next) {
+    req.session.url = req.originalUrl;
+
+    const data = { 
+        applicant_id: req.session.applicant.id
+        // referrer: '*://*/*'
+    };
+
+    const nowRequest = logInStacktrace('Get SDK Token', 'REQUEST', null, data, req.session.stacktrace);
+    
+    axios.default.post('/sdk_token/', data).then((response) => {
+        logInStacktrace('Get SDK Token', 'RESPONSE', nowRequest, response.data, req.session.stacktrace);
+        const sdkToken = response.data.token;
+
+        const applicant = (req.session.applicant)?req.session.applicant:null;
+        const stacktrace = (req.session.stacktrace)?req.session.stacktrace:[];
+        const applicants = (req.session.applicants)?req.session.applicants:[];
+        const documents = (req.session.documents)?req.session.documents:[];
+        const photos = (req.session.photos)?req.session.photos:[];
+        const videos = (req.session.videos)?req.session.videos:[];
+        res.render('authenticate', { applicants: applicants, applicant: applicant, stacktrace: stacktrace, documents: documents, photos: photos, videos: videos, sdkToken: sdkToken, showSdkEvents: true });
     })
     .catch((error) => {console.log(error.message);next(error);});
 };

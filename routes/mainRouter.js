@@ -35,6 +35,7 @@ router.get('/search', auth, main_controller.globalSearch)
 
 // SDK & CHECK
 router.get('/sdk', auth, main_controller.initSdk);
+router.get('/authenticate', auth, main_controller.initSdkAuth);
 
 router.get('/checks', auth, main_controller.listChecks);
 router.get('/checks/new', auth, main_controller.initCheck);

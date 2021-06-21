@@ -5,8 +5,12 @@ block content
         .d-flex.flex-column
             .d-flex.flex-row.justify-content-around
                 a.btn.btn-outline-secondary.py-4.mx-4(href='/sdk') Capture (SDK)
+                - var canWeAuthenticate = (photos.length > 0 || videos.length > 0)
+                if canWeAuthenticate
+                    a.btn.btn-outline-secondary.py-4.mx-4(href='/authenticate') Authenthicate (SDK)
                 - var hasSomethingToVerify = true //(documents.length > 0 || photos.length > 0 || videos.length > 0)
-                if hasSomethingToVerify
+                //- if hasSomethingToVerify
+                if true 
                     a.btn.py-4.mx-4(href='/checks/new') Verify (API)
                 a.btn.btn-outline-secondary.py-4.mx-4(href='/checks') Consult checks
             .d-flex.flex-row.justify-content-around.mt-4
@@ -56,11 +60,19 @@ block content
                             input#reportWatchlistSanctions.custom-control-input(name='reports' type='checkbox' value='watchlist_sanctions_only')
                             label.custom-control-label.text-secondary(for='reportWatchlistSanctions') Watchlist sanctions only
                         .my-2
+                    .d-flex.flex-column.flex-wrap.justify-content-start.align-items-start.ml-5
                         h6 Identity Reports
                         .custom-control.custom-switch
-                            input#reportIdentityEnhanced.custom-control-input(name='reportIdentityEnhanced' type='checkbox' value='identity_enhanced')
+                            input#reportIdentityEnhanced.custom-control-input(name='reports' type='checkbox' value='identity_enhanced')
                             label.custom-control-label.text-secondary(for='reportIdentityEnhanced') Identity enhanced
-                        //- TODO: add POA and RTW
+                        //- h6 Proof of Address
+                        //- .custom-control.custom-switch
+                        //-     input#reportProofOfAddress.custom-control-input(name='reports' type='checkbox' value='proof_of_address')
+                        //-     label.custom-control-label.text-secondary(for='reportProofOfAddress') Proof of Address
+                        //- h6 Right to Work
+                        //- .custom-control.custom-switch
+                        //-     input#reportRightToWork.custom-control-input(name='reports' type='checkbox' value='right_to_work')
+                        //-     label.custom-control-label.text-secondary(for='reportRightToWork') Right to Work
             .d-flex.flex-row.justify-content-around.mt-4
                 button#createCheck.btn.btn-outline-info.my-4(type='submit') submit check
                 if check

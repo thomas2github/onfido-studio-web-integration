@@ -1,0 +1,20 @@
+extends layout3
+
+append head
+    link(href='https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/css/bootstrap4-toggle.min.css' rel='stylesheet')
+    // Onfido SDK CSS
+    link(rel='stylesheet' href='/dist/style.css')
+
+block content
+    .d-flex.flex-column
+        .d-flex.flex-row.justify-content-around
+            input#sdkToken(type='hidden' value=sdkToken)
+            input#applicantId(type='hidden' value=applicant.id)
+            #onfido-mount.my-4
+
+append bottom
+    script(src='/dist/onfidoAuth.min.js')
+    script(src='https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/js/bootstrap4-toggle.min.js')
+    script(src='/javascripts/authenticate.js')
+
+    

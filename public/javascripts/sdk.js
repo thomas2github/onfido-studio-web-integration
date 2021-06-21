@@ -10,6 +10,7 @@ $(document).ready(function() {
 
     // Init & display Onfido web SDK ID Document
     $('#dislpaySdk').click(function(){
+        
         $('.onfido-sdk-ui-Modal-inner').remove();
         const useModal = $('#useModal').is(':checked');
         const welcomeStep = $('#welcomeStep').is(':checked');
@@ -18,7 +19,6 @@ $(document).ready(function() {
         const documentStep = $('#documentStep').is(':checked');
         const selfieStep = $('#selfieStep').is(':checked');
         const videoStep = $('#videoStep').is(':checked');
-        const authenticateStep = $('#authenticateStep').is(':checked');
         const forceCrossDevice = $('#forceCrossDevice').is(':checked');
         const useLiveDocumentCapture = $('#useLiveDocumentCapture').is(':checked');
         const acceptPassport = $('#acceptPassport').is(':checked');
@@ -77,16 +77,6 @@ $(document).ready(function() {
                 }
             );
         }
-        if (authenticateStep) {
-            steps.push(
-                {
-                    type: 'auth',
-                    options: {
-                        retries: 3
-                    }
-                }
-            );
-        }
         if (completeStep) {
             steps.push(
                 {
@@ -122,7 +112,6 @@ $(document).ready(function() {
                 onfidoSdk.setOptions({isModalOpen: false})
             },
             onComplete: function(data) {
-                // TODO: display document ids in a popup before redirection
                 row = '<tbody><tr data-toggle="toggle" data-ol-has-click-handler><td>' + 'on complete' + '</td><td>' +  + '</td></tr></tbody>';
                 row += '<tbody><tr><td colspan="2"><pre>' + JSON.stringify(data) + '</td></tr></tbody>';
                 $('#sdk-events').append(row);
@@ -151,7 +140,7 @@ $(document).ready(function() {
             sdkParam.steps.unshift(welcomeParam);
         }
         console.log('sdkconfig: ', sdkParam);
-        onfidoSdk = OnfidoAuth.init(sdkParam);
+        onfidoSdk = Onfido.init(sdkParam);
         return false;
     });
 
