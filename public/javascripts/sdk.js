@@ -26,7 +26,7 @@ $(document).ready(function() {
         const acceptDrivingLicence = $('#acceptDrivingLicence').is(':checked');
         const acceptResidencePermit = $('#acceptResidencePermit').is(':checked');
         const showCountrySelection = $('#showCountrySelection').is(':checked');
-        const language = $('#languageFR').is(':checked')?$('#languageFR').val():($('#languageES').is(':checked')?$('#languageES').val():($('#languageDE').is(':checked')?$('#languageDE').val():$('#languageEN').val()));
+        const language = $('#languageFR').is(':checked')?$('#languageFR').val():($('#languageES').is(':checked')?$('#languageES').val():($('#languageDE').is(':checked')?$('#languageDE').val():($('#languageIT').is(':checked')?$('#languageIT').val():($('#languagePT').is(':checked')?$('#languagePT').val():$('#languageEN').val()))));
 
         // CUSTOM UI
         const customUI = ($('#customUI').val()!='')?JSON.parse($('#customUI').val()):'';
