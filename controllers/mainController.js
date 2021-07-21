@@ -29,7 +29,9 @@ const getAllResourcesByApplicant = function (applicant_id) {
     const documents = axios.default.get('/documents?applicant_id='+applicant_id).then(response => response.data.documents);
     const photos = axios.default.get('/live_photos?applicant_id='+applicant_id).then(response => response.data.live_photos);
     const videos = axios.default.get('/live_videos?applicant_id='+applicant_id).then(response => response.data.live_videos); 
-    
+    // TODO: update with new media object type
+    // const video_documents = axios.default.get('/video_documents?applicant_id='+applicant_id).then(response => response.data.video_documents); 
+
     const getCheckAndReports = function(check) {
         axios.default.get('/reports?check_id='+check.id).then(response => {
             check['reports'] = response.data.reports;
@@ -38,13 +40,17 @@ const getAllResourcesByApplicant = function (applicant_id) {
     }    
     const checks = axios.default.get('/checks?applicant_id='+applicant_id).then(response => response.data.checks.map(check => getCheckAndReports(check)));
     
+    // Promise.all([applicant, documents, photos, videos, video_documents, checks]).then(children => { 
     Promise.all([applicant, documents, photos, videos, checks]).then(children => { 
-       let applicant = children[0];
-       applicant['documents'] = children[1];
-       applicant['photos'] = children[2];
-       applicant['videos'] = children[3];
-       applicant['checks'] = children[4];
-       return applicant;
+        let applicant = children[0];
+        applicant['documents'] = children[1];
+        applicant['photos'] = children[2];
+        applicant['videos'] = children[3];
+        applicant['checks'] = children[54];
+        // TODO: update with new media object type
+        // applicant['video_documents'] = children[4];
+        // applicant['checks'] = children[5];
+        return applicant;
     });
 };
 
@@ -58,13 +64,18 @@ const getAllResourcesByCheck = function (check_id) {
         const documents = axios.default.get('/documents?applicant_id='+check.pplicant_id).then(response => response.data.documents);
         const photos = axios.default.get('/live_photos?applicant_id='+check.applicant_id).then(response => response.data.live_photos);
         const videos = axios.default.get('/live_videos?applicant_id='+check.applicant_id).then(response => response.data.live_videos);
+        // TODO: update with new media object type
+        // const video_documents = axios.default.get('/video_documents?applicant_id='+applicant_id).then(response => response.data.video_documents); 
 
+        // Promise.all([reports, applicant, documents, photos, videos, video_documents]).then(children => { 
         Promise.all([reports, applicant, documents, photos, videos]).then(children => { 
             check['reports'] = children[0];
             let applicant = children[1];
             applicant['documents'] = children[2];
             applicant['photos'] = children[3];
             applicant['videos'] = children[4];
+            // TODO: update with new media object type
+            // applicant['video_documents'] = children[5];
             check['applicant'] = applicant;
             return check;
         });
@@ -77,6 +88,7 @@ const getAllResourcesByReport = function (report_id) {
         let report = response.data;
         const check = axios.default.get('/checks/'+report.check_id).then(response => response.data);
         const documents = report.documents.map(id => axios.default.get('/documents/'+id).then(response => response.data));
+        // TODO: update with new media object type
         Promise.all([check, documents]).then(children => {
             let check = children[0];
             report['check'] = check;
@@ -84,6 +96,7 @@ const getAllResourcesByReport = function (report_id) {
             const applicant = axios.default.get('/applicants/'+check.applicant_id).then(response => response.data);
             const photos = axios.default.get('/live_photos?applicant_id='+check.applicant_id).then(response => response.data.live_photos);
             const videos = axios.default.get('/live_videos?applicant_id='+check.applicant_id).then(response => response.data.live_videos);
+            
             Promise.all([applicant, photos, videos]).then(children => { 
                 let applicant = children[0];
                 applicant['photos'] = children[1];
@@ -115,6 +128,7 @@ exports.clearSession = function(req, res, next) {
     req.session.documents = [];
     req.session.photos = [];
     req.session.videos = [];
+    // req.session.video_documents = [];
     req.session.check = null;
     req.session.reports = [];
     req.session.checks = [];
@@ -186,14 +200,18 @@ exports.retrieveApplicant = function(req, res, next) {
 
     const applicant = logAndGetApplicant(applicant_id);
     const documents = axios.default.get('/documents?applicant_id='+applicant_id).then(response => response.data.documents);
+    // TODO: update with the new media object type
+    // const video_documents = axios.default.get('/video_documents?applicant_id='+applicant_id).then(response => response.data.video_documents);
     const photos = axios.default.get('/live_photos?applicant_id='+applicant_id).then(response => response.data.live_photos);
     const videos = axios.default.get('/live_videos?applicant_id='+applicant_id).then(response => response.data.live_videos);
     
+    // Promise.all([applicant, documents, photos, videos, video_documents]).then((children) => {
     Promise.all([applicant, documents, photos, videos]).then((children) => {
         req.session.applicant = children[0];
         req.session.documents = children[1];
         req.session.photos = children[2];
         req.session.videos = children[3];
+        // req.session.video_documents = children[4];
         const applicants = (req.session.applicants)?req.session.applicants:[];
         const stacktrace = (req.session.stacktrace)?req.session.stacktrace:[];
         res.render('applicant_home', { applicants: applicants, applicant: children[0], stacktrace: stacktrace, documents: req.session.documents, photos: req.session.photos, videos: req.session.videos });

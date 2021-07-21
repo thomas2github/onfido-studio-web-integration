@@ -52,13 +52,16 @@ block content
                 h6 Capture
                 .custom-control.custom-switch
                     input#documentStep.custom-control-input(type='checkbox' checked)
-                    label.custom-control-label.text-secondary(for='documentStep') ID document
+                    label.custom-control-label.text-secondary(for='documentStep') document photo
+                .custom-control.custom-switch
+                    input#documentVideoStep.custom-control-input(type='checkbox')
+                    label.custom-control-label.text-secondary(for='documentVideoStep') document video
                 .custom-control.custom-switch
                     input#selfieStep.custom-control-input(type='checkbox' checked)
-                    label.custom-control-label.text-secondary(for='selfieStep') selfie
+                    label.custom-control-label.text-secondary(for='selfieStep') face selfie
                 .custom-control.custom-switch
                     input#videoStep.custom-control-input(type='checkbox')
-                    label.custom-control-label.text-secondary(for='videoStep') video (liveness)
+                    label.custom-control-label.text-secondary(for='videoStep') face video
                 .custom-control.custom-switch
                     input#forceCrossDevice.custom-control-input(type='checkbox' checked)
                     label.custom-control-label.text-secondary(for='forceCrossDevice') force mobile device

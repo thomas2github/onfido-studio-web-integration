@@ -17,6 +17,7 @@ $(document).ready(function() {
         const completeStep = $('#completeStep').is(':checked');
         const hideOnfidoLogo = $('#hideOnfidoLogo').is(':checked');
         const documentStep = $('#documentStep').is(':checked');
+        const documentVideoStep = $('#documentVideoStep').is(':checked');
         const selfieStep = $('#selfieStep').is(':checked');
         const videoStep = $('#videoStep').is(':checked');
         const forceCrossDevice = $('#forceCrossDevice').is(':checked');
@@ -49,6 +50,28 @@ $(document).ready(function() {
                             residence_permit: acceptResidencePermit
                         },
                         showCountrySelection: showCountrySelection
+                    }
+                }
+            );
+        }
+        if (documentVideoStep) {
+            
+            steps.push(
+                {
+                    type: 'document',
+                    options: {
+                        requestedVariant: 'video',
+                        forceCrossDevice: forceCrossDevice,
+                        useLiveDocumentCapture: false,
+                        uploadFallback: true,
+                        useWebcam: false,
+                        documentTypes: {
+                            // passport: acceptPassport,
+                            // driving_licence: acceptDrivingLicence,
+                            // national_identity_card: acceptNationalId,
+                            // residence_permit: acceptResidencePermit
+                        },
+                        showCountrySelection: false
                     }
                 }
             );
@@ -148,6 +171,7 @@ $(document).ready(function() {
     window.addEventListener('userAnalyticsEvent', (event) => {
         console.log(event);
         row = '<tbody><tr data-toggle="toggle" data-ol-has-click-handler><td>' + event.detail.eventName + '</td><td>' + Math.floor(event.timeStamp) + '</td></tr></tbody>';
+        // alert(JSON.stringify(event.detail));
         row += '<tbody class="hide" style="display:none;"><tr><td colspan="2"><pre>' + JSON.stringify(event.detail) + '</td></tr></tbody>';
         $('#sdk-events').append(row);
     });

@@ -27,6 +27,9 @@ block content
                         .custom-control.custom-switch
                             input#reportDocumentWDLI.custom-control-input(name='reports' type='checkbox' value='document_with_driving_licence_information')
                             label.custom-control-label.text-secondary(for='reportDocumentWDLI') Document with driving licence information
+                        .custom-control.custom-switch
+                            input#reportDocumentVideo.custom-control-input(name='reports' type='checkbox' value='document_video_capture' disabled)
+                            label.custom-control-label.text-secondary(for='reportDocumentVideo') Document video capture
                         .my-2
                 if photos.length > 0 || videos.length > 0 
                     .d-flex.flex-column.flex-wrap.justify-content-start.align-items-start.ml-5

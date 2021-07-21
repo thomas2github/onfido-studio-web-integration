@@ -1,6 +1,5 @@
 $(document).ready(function() {
-    $('.onfido-sdk-ui-Modal-inner').remove();
-    
+    // $('.onfido-sdk-ui-Modal-inner').remove();
     let steps = [];
     steps.push(
         {
@@ -22,6 +21,10 @@ $(document).ready(function() {
         token: token,
         containerId: 'onfido-mount',
         onComplete: function(data) {
+            alert(JSON.stringify(data));
+            window.location = '/applicants/'+applicantId;
+        },
+        onError: function(data) {
             alert(JSON.stringify(data));
             window.location = '/applicants/'+applicantId;
         },
