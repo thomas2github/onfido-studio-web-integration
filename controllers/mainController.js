@@ -5,8 +5,8 @@ const { get } = require('request');
 const { use } = require('../routes/mainRouter');
 
 // axios.defaults.baseURL = 'https://api.onfido.com/v3/';
-// axios.defaults.baseURL = req.session.environment;
-axios.defaults.baseURL = 'https://api.eu.onfido.com/v3.1/';
+axios.defaults.baseURL = req.session.environment;
+// axios.defaults.baseURL = 'https://api.eu.onfido.com/v3.2/';
 axios.defaults.headers.common['Accept'] = 'application/json';
 axios.defaults.headers.post['Content-Type'] = 'application/json';
 axios.defaults.headers.put['Content-Type'] = 'application/json';
