@@ -5,11 +5,10 @@ const { get } = require('request');
 const { use } = require('../routes/mainRouter');
 
 // axios.defaults.baseURL = 'https://api.onfido.com/v3/';
-axios.defaults.baseURL = req.session.environment;
 // axios.defaults.baseURL = 'https://api.eu.onfido.com/v3.2/';
-axios.defaults.headers.common['Accept'] = 'application/json';
-axios.defaults.headers.post['Content-Type'] = 'application/json';
-axios.defaults.headers.put['Content-Type'] = 'application/json';
+// axios.defaults.headers.common['Accept'] = 'application/json';
+// axios.defaults.headers.post['Content-Type'] = 'application/json';
+// axios.defaults.headers.put['Content-Type'] = 'application/json';
 
 const logInStacktrace = function (api, type, nowRequest, data, stacktrace) {
     const now = moment();
@@ -111,7 +110,11 @@ const getAllResourcesByReport = function (report_id) {
 
 // GLOBAL
 exports.index = function(req, res, next) {
+    axios.defaults.baseURL = req.session.environment;
     axios.defaults.headers.common['Authorization'] = 'Token token='+req.session.apiToken;
+    axios.defaults.headers.common['Accept'] = 'application/json';
+    axios.defaults.headers.post['Content-Type'] = 'application/json';
+    axios.defaults.headers.put['Content-Type'] = 'application/json';
     req.session.url = req.originalUrl;
     const applicant = (req.session.applicant)?req.session.applicant:null;
     if(applicant){

@@ -10,16 +10,16 @@ exports.getLogin = function(req, res) {
 
 exports.postLogin = function(req, res) {
     const token = req.body.apiToken;
-    // const environment = req.body.environment;
+    const onfidoEnv = req.body.environment;
     //test API Token
-    axios.defaults.baseURL = environement;
+    axios.defaults.baseURL = onfidoEnv;
     // axios.defaults.baseURL = 'https://api.onfido.com/v3/';
     axios.defaults.headers.common['Authorization'] = 'Token token='+token;
     axios.defaults.headers.common['Accept'] = 'application/json';
     axios.default.get('/applicants?page=0&perPage=1').then((response) => {
         //save Token in session
         req.session.apiToken = token,
-        req.session.environment = environment,
+        req.session.environment = onfidoEnv,
         req.session.stacktrace = [],
         //redirect to dashboard
         res.redirect('/index')
