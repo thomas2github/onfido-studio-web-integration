@@ -37,6 +37,7 @@ if applicant
                         .d-flex.flex-column.justify-content-start.align-items-center.ml-1
                             a(href='/documents/'+document.id target='_blank')
                                 image(src='/documents/'+document.id width=75)
+                            a.btn.btn-sm.btn-outline-secondary(href='/autofill/'+document.id) autofill
     if photos.length > 0
         h5.my-3.text-primary photos
         p

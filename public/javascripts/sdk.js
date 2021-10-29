@@ -1,4 +1,20 @@
 $(document).ready(function() {
+    // update & reset language
+    $('#udpateCustomLanguage').click(function(){
+        $('#customLanguage').val($('#customLanguageEditor').val());
+    });
+    $('#resetCustomLanguage').click(function(){
+        document.location.reload();
+    });
+
+    // update & reset steps
+    $('#udpateCustomSteps').click(function(){
+        $('#customSteps').val($('#customStepsEditor').val());
+    });
+    $('#resetCustomSteps').click(function(){
+        document.location.reload();
+    });
+
     // update & reset customUI
     $('#udpateCustomUI').click(function(){
         $('#customUI').val($('#customUIEditor').val());
@@ -26,11 +42,9 @@ $(document).ready(function() {
         const acceptNationalId = $('#acceptNationalId').is(':checked');
         const acceptDrivingLicence = $('#acceptDrivingLicence').is(':checked');
         const acceptResidencePermit = $('#acceptResidencePermit').is(':checked');
+        const acceptOthers = $('#acceptOthers').is(':checked');
         const showCountrySelection = $('#showCountrySelection').is(':checked');
         const language = $('#languageFR').is(':checked')?$('#languageFR').val():($('#languageES').is(':checked')?$('#languageES').val():($('#languageDE').is(':checked')?$('#languageDE').val():($('#languageIT').is(':checked')?$('#languageIT').val():($('#languagePT').is(':checked')?$('#languagePT').val():$('#languageEN').val()))));
-
-        // CUSTOM UI
-        const customUI = ($('#customUI').val()!='')?JSON.parse($('#customUI').val()):'';
 
         let steps = [];
         if (documentStep) {
@@ -66,10 +80,10 @@ $(document).ready(function() {
                         uploadFallback: true,
                         useWebcam: false,
                         documentTypes: {
-                            // passport: acceptPassport,
-                            // driving_licence: acceptDrivingLicence,
-                            // national_identity_card: acceptNationalId,
-                            // residence_permit: acceptResidencePermit
+                            passport: acceptPassport,
+                            driving_licence: acceptDrivingLicence,
+                            national_identity_card: acceptNationalId,
+                            residence_permit: acceptResidencePermit
                         },
                         showCountrySelection: false
                     }
@@ -95,7 +109,9 @@ $(document).ready(function() {
                     options: {
                         requestedVariant: 'video',
                         // useMultipleSelfieCapture: true,
-                        // uploadFallback: true
+                        uploadFallback: false, 
+                        photoCaptureFallback: false
+                        // forceCrossDevice: true
                     }
                 }
             );
@@ -110,6 +126,13 @@ $(document).ready(function() {
             );
         }
         
+        // CUSTOM LANGUAGE
+        let customLanguage = ($('#customLanguage').val()!='')?JSON.parse($('#customLanguage').val()):'';
+        // CUSTOM STEPS
+        let customSteps = ($('#customSteps').val()!='')?JSON.parse($('#customSteps').val()):'';
+        // CUSTOM UI
+        let customUI = ($('#customUI').val()!='')?JSON.parse($('#customUI').val()):'';
+
         let onfidoSdk;
         const token = $(this).attr('data-token');
         const applicantId = $(this).attr('data-applicant-id');
@@ -118,6 +141,10 @@ $(document).ready(function() {
             useModal: useModal,
             // shouldCloseOnOverlayClick: true,
             language: language,
+            // language: {
+            //     locale: 'en_US',
+            //     phrases: { doc_select: { button_permit: 'National Health Insurance Card' } }
+            // },
             // disableAnalytics: false,
             // useMemoryHistory: false,
             steps: steps,
@@ -135,10 +162,11 @@ $(document).ready(function() {
                 onfidoSdk.setOptions({isModalOpen: false})
             },
             onComplete: function(data) {
+                console.log(JSON.stringify(data));
                 row = '<tbody><tr data-toggle="toggle" data-ol-has-click-handler><td>' + 'on complete' + '</td><td>' +  + '</td></tr></tbody>';
                 row += '<tbody><tr><td colspan="2"><pre>' + JSON.stringify(data) + '</td></tr></tbody>';
                 $('#sdk-events').append(row);
-                alert(JSON.stringify(data));
+                alert(JSON.stringify(data)); //NOT FOR PRODUCTION: display data with document and photo ids
                 window.location = '/applicants/'+applicantId;
             },
         };
@@ -170,9 +198,8 @@ $(document).ready(function() {
     // display sdk events
     window.addEventListener('userAnalyticsEvent', (event) => {
         console.log(event);
-        row = '<tbody><tr data-toggle="toggle" data-ol-has-click-handler><td>' + event.detail.eventName + '</td><td>' + Math.floor(event.timeStamp) + '</td></tr></tbody>';
+        row = '<tbody><tr><td>' + event.detail.eventName + '</td><td>' + Math.floor(event.timeStamp) + '</td></tr><tr><td colspan="2"><pre>' + JSON.stringify(event.detail) + '</td></tr></tbody>';
         // alert(JSON.stringify(event.detail));
-        row += '<tbody class="hide" style="display:none;"><tr><td colspan="2"><pre>' + JSON.stringify(event.detail) + '</td></tr></tbody>';
         $('#sdk-events').append(row);
     });
 });

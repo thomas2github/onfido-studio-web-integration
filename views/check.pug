@@ -21,15 +21,15 @@ block content
                         .custom-control.custom-switch
                             input#reportDocument.custom-control-input(name='reports' type='checkbox' value='document' checked)
                             label.custom-control-label.text-secondary(for='reportDocument') Document
-                        .custom-control.custom-switch
-                            input#reportDocumentWAI.custom-control-input(name='reports' type='checkbox' value='document_with_address_information')
-                            label.custom-control-label.text-secondary(for='reportDocumentWAI') Document with address information
-                        .custom-control.custom-switch
-                            input#reportDocumentWDLI.custom-control-input(name='reports' type='checkbox' value='document_with_driving_licence_information')
-                            label.custom-control-label.text-secondary(for='reportDocumentWDLI') Document with driving licence information
-                        .custom-control.custom-switch
-                            input#reportDocumentVideo.custom-control-input(name='reports' type='checkbox' value='document_video_capture' disabled)
-                            label.custom-control-label.text-secondary(for='reportDocumentVideo') Document video capture
+                        //- .custom-control.custom-switch
+                        //-     input#reportDocumentWAI.custom-control-input(name='reports' type='checkbox' value='document_with_address_information')
+                        //-     label.custom-control-label.text-secondary(for='reportDocumentWAI') Document with address information
+                        //- .custom-control.custom-switch
+                        //-     input#reportDocumentWDLI.custom-control-input(name='reports' type='checkbox' value='document_with_driving_licence_information')
+                        //-     label.custom-control-label.text-secondary(for='reportDocumentWDLI') Document with driving licence information
+                        //- .custom-control.custom-switch
+                        //-     input#reportDocumentVideo.custom-control-input(name='reports' type='checkbox' value='document_video_capture' disabled)
+                        //-     label.custom-control-label.text-secondary(for='reportDocumentVideo') Document video capture
                         .my-2
                 if photos.length > 0 || videos.length > 0 
                     .d-flex.flex-column.flex-wrap.justify-content-start.align-items-start.ml-5
@@ -41,6 +41,10 @@ block content
                             .custom-control.custom-switch
                                 input#reportPhotoFullyAuto.custom-control-input(name='reports' type='checkbox' value='facial_similarity_photo_fully_auto')
                                 label.custom-control-label.text-secondary(for='reportPhotoFullyAuto') Photo fully auto (selfie)
+                        //- if true
+                        //- .custom-control.custom-switch
+                        //-         input#reportVideo.custom-control-input(name='reports' type='checkbox' value='facial_similarity_video' checked)
+                        //-         label.custom-control-label.text-secondary(for='reportVideo') Video (liveness)
                         if videos.length > 0
                             .custom-control.custom-switch
                                 input#reportVideo.custom-control-input(name='reports' type='checkbox' value='facial_similarity_video' checked)
@@ -63,11 +67,11 @@ block content
                             input#reportWatchlistSanctions.custom-control-input(name='reports' type='checkbox' value='watchlist_sanctions_only')
                             label.custom-control-label.text-secondary(for='reportWatchlistSanctions') Watchlist sanctions only
                         .my-2
-                    .d-flex.flex-column.flex-wrap.justify-content-start.align-items-start.ml-5
-                        h6 Identity Reports
-                        .custom-control.custom-switch
-                            input#reportIdentityEnhanced.custom-control-input(name='reports' type='checkbox' value='identity_enhanced')
-                            label.custom-control-label.text-secondary(for='reportIdentityEnhanced') Identity enhanced
+                    //- .d-flex.flex-column.flex-wrap.justify-content-start.align-items-start.ml-5
+                    //-     h6 Identity Reports
+                    //-     .custom-control.custom-switch
+                    //-         input#reportIdentityEnhanced.custom-control-input(name='reports' type='checkbox' value='identity_enhanced')
+                    //-         label.custom-control-label.text-secondary(for='reportIdentityEnhanced') Identity enhanced
                         //- h6 Proof of Address
                         //- .custom-control.custom-switch
                         //-     input#reportProofOfAddress.custom-control-input(name='reports' type='checkbox' value='proof_of_address')

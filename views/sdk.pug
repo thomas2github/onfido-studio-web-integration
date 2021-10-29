@@ -7,6 +7,28 @@ append head
 
 block content
 
+    // Modal Custom Language
+    #customLanguageModal.modal.fade(tabindex='-1')
+        .modal-dialog
+            .modal-content
+                .modal-header
+                    h4.text-primary.font-weight-bold.modal-title customize language
+                    button#resetCustomLanguage.btn.btn-info(type='button' data-dismiss='modal') Default
+                    button#udpateCustomLanguage.btn.btn-success(type='button' data-dismiss='modal') Update
+                .modal-body
+                    textarea#customLanguageEditor.form-control(rows='55')= JSON.stringify(customLanguage, null, 4)
+                    input#customLanguage(type='hidden' value='')
+    // Modal Custom Steps
+    #customStepsModal.modal.fade(tabindex='-1')
+        .modal-dialog
+            .modal-content
+                .modal-header
+                    h4.text-primary.font-weight-bold.modal-title customize steps
+                    button#resetCustomSteps.btn.btn-info(type='button' data-dismiss='modal') Reset
+                    button#udpateCustomSteps.btn.btn-success(type='button' data-dismiss='modal') Update
+                .modal-body
+                    textarea#customStepsEditor.form-control(rows='55')= JSON.stringify(customSteps, null, 4)
+                    input#customSteps(type='hidden' value='')
     // Modal Custom UI
     #customUIModal.modal.fade(tabindex='-1')
         .modal-dialog
@@ -53,9 +75,9 @@ block content
                 .custom-control.custom-switch
                     input#documentStep.custom-control-input(type='checkbox' checked)
                     label.custom-control-label.text-secondary(for='documentStep') document photo
-                .custom-control.custom-switch
-                    input#documentVideoStep.custom-control-input(type='checkbox')
-                    label.custom-control-label.text-secondary(for='documentVideoStep') document video
+                //- .custom-control.custom-switch
+                //-     input#documentVideoStep.custom-control-input(type='checkbox')
+                //-     label.custom-control-label.text-secondary(for='documentVideoStep') document video
                 .custom-control.custom-switch
                     input#selfieStep.custom-control-input(type='checkbox' checked)
                     label.custom-control-label.text-secondary(for='selfieStep') face selfie
@@ -65,7 +87,7 @@ block content
                 .custom-control.custom-switch
                     input#forceCrossDevice.custom-control-input(type='checkbox' checked)
                     label.custom-control-label.text-secondary(for='forceCrossDevice') force mobile device
-                .custom-control.custom-switch.d-none
+                .custom-control.custom-switch
                     input#useLiveDocumentCapture.custom-control-input(type='checkbox' checked)
                     label.custom-control-label.text-secondary(for='useLiveDocumentCapture') use live document capture
                                     
@@ -81,8 +103,11 @@ block content
                     input#acceptDrivingLicence.custom-control-input(type='checkbox')
                     label.custom-control-label.text-secondary(for='acceptDrivingLicence') driving licence
                 .custom-control.custom-switch
-                    input#acceptResidencePermit.custom-control-input(type='checkbox')
+                    input#acceptResidencePermit.custom-control-input(type='checkbox' checked)
                     label.custom-control-label.text-secondary(for='acceptResidencePermit') residence permit
+                //- .custom-control.custom-switch
+                //-     input#acceptOthers.custom-control-input(type='checkbox')
+                //-     label.custom-control-label.text-secondary(for='acceptOthers') others
                 .custom-control.custom-switch.d-none
                     input#showCountrySelection.custom-control-input(type='checkbox' checked)
                     label.custom-control-label.text-secondary(for='showCountrySelection') show country selection
@@ -91,11 +116,11 @@ block content
             .d-flex.flex-column.flex-wrap
                 h6(style='margin-top:0.5rem;') language
                 .btn-group.btn-group-toggle.ml-3(data-toggle='buttons')
-                    label.btn.btn-xs.btn-outline-secondary.active
-                        input#languageEN(type='radio' name='language' autocomplete='off' value='en_US' checked)
-                        | EN
                     label.btn.btn-xs.btn-outline-secondary
-                        input#languageFR(type='radio' name='language' autocomplete='off' value='fr_FR')
+                        input#languageEN(type='radio' name='language' autocomplete='off' value='en_US')
+                        | EN
+                    label.btn.btn-xs.btn-outline-secondary.active
+                        input#languageFR(type='radio' name='language' autocomplete='off' value='fr_FR' checked)
                         | FR
                     label.btn.btn-xs.btn-outline-secondary
                         input#languageES(type='radio' name='language' autocomplete='off' value='es_ES')
@@ -109,8 +134,10 @@ block content
                     label.btn.btn-xs.btn-outline-secondary
                         input#languagePT(type='radio' name='language' autocomplete='off' value='pt_PT')
                         | PT
-            .d-flex.flex-column.flex-wrap
-                button.btn.btn-sm.btn-outline-primary(data-toggle='modal' data-target='#customUIModal') customize UI
+            .d-flex.flex-row.flex-wrap
+                button.btn.btn-sm.btn-outline-primary.mx-3.d-none(data-toggle='modal' data-target='#customLanguageModal') customize language
+                button.btn.btn-sm.btn-outline-primary.mx-3.d-none(data-toggle='modal' data-target='#customStepsModal') customize steps
+                button.btn.btn-sm.btn-outline-primary.mx-3(data-toggle='modal' data-target='#customUIModal') customize UI
         .d-flex.flex-row.justify-content-around
             button#dislpaySdk.btn.btn-outline-info.my-4(type='button' data-token=sdkToken data-applicant-id=applicant.id) display SDK
         .d-flex.flex-row.justify-content-around

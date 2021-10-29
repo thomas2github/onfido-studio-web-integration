@@ -5,6 +5,7 @@ const { get } = require('request');
 const { use } = require('../routes/mainRouter');
 
 // axios.defaults.baseURL = 'https://api.onfido.com/v3/';
+// axios.defaults.baseURL = req.session.environment;
 axios.defaults.baseURL = 'https://api.eu.onfido.com/v3.1/';
 axios.defaults.headers.common['Accept'] = 'application/json';
 axios.defaults.headers.post['Content-Type'] = 'application/json';
@@ -225,7 +226,7 @@ exports.updateApplicant = function(req, res, next) {
     const firstname = (req.body.firstname !== '')?req.body.firstname:'';
     const lastname = (req.body.lastname !== '')?req.body.lastname:'';
 
-    const data = { first_name: firstname, last_name: lastname};
+    const data = { first_name: firstname, last_name: lastname };
     const nowRequest = logInStacktrace('Update Applicant', 'REQUEST', null, data, req.session.stacktrace);
     
     axios.default.put('/applicants/'+applicant_id, data).then((response) => {
