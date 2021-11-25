@@ -407,12 +407,20 @@ exports.createCheck = function(req, res, next) {
     const applicant = (req.session.applicant)?req.session.applicant:null;    
     const reportNames = Array.isArray(req.body.reports)?req.body.reports:[req.body.reports];
 
+    var document_ids = [];
+    if(req.body.frontDocumentId!=''){
+        document_ids.push(req.body.frontDocumentId);
+    }
+    if(req.body.backDocumentId!=''){
+        document_ids.push(req.body.backDocumentId);
+    }
+
     const data = { 
         applicant_id: applicant.id,
         report_names: reportNames,
         // asynchronous: true,
         // tags: null,
-        // document_ids: null
+        document_ids: (document_ids.length>0)?document_ids:null
     };
     const nowRequest = logInStacktrace('Create Check', 'REQUEST', null, data, req.session.stacktrace);
     

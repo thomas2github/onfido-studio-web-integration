@@ -21,37 +21,30 @@ if applicant
     if documents.length > 0
         h5.my-3.text-primary documents
         .d-flex.flex-row.flex-wrap.justify-content-start.align-items-start
-            - var front = false
-            - var back = false
             each document in documents                
-                if !front
-                    if document.side == 'front'
-                        - front = true
-                        .d-flex.flex-column.justify-content-start.align-items-center.ml-1
-                            a(href='/documents/'+document.id target='_blank')
-                                image(src='/documents/'+document.id width=75)
-                            a.btn.btn-sm.btn-outline-secondary(href='/autofill/'+document.id) autofill
-                if !back
-                    if document.side == 'back'
-                        - back = true
-                        .d-flex.flex-column.justify-content-start.align-items-center.ml-1
-                            a(href='/documents/'+document.id target='_blank')
-                                image(src='/documents/'+document.id width=75)
-                            a.btn.btn-sm.btn-outline-secondary(href='/autofill/'+document.id) autofill
+                .d-flex.flex-column.justify-content-start.align-items-center.ml-1
+                    h6=document.type
+                    small=document.side
+                    small=document.issuing_country                    
+                    a(href='/documents/'+document.id target='_blank')
+                        image(src='/documents/'+document.id width=75)
+                    small=document.id
+                    a.btn.btn-sm.btn-outline-secondary.mb-4(href='/autofill/'+document.id) autofill
     if photos.length > 0
         h5.my-3.text-primary photos
         p
             each photo, index in photos
-                if index < 1
-                    a(href='/photos/'+photo.id target='_blank')
-                        image.mr-2(src='/photos/'+photo.id width=75)
+                a(href='/photos/'+photo.id target='_blank')
+                    image.mr-2(src='/photos/'+photo.id width=75)
+                small=photo.id
     if videos.length > 0
         h5.my-3.text-primary videos
         p
             each video, index in videos
-                if index < 1
-                    a(href='/videos/'+video.id target='_blank')
-                        image.mr-2(src='/videos/'+video.id width=75)
+                a(href='/videos/'+video.id target='_blank')
+                    image.mr-2(src='/videos/'+video.id width=75)
+                br
+                small=video.id
     button.my-3.btn.btn-outline-danger(data-toggle='modal' data-target='#deleteApplicant') delete
 
 // Modal Create Applicant

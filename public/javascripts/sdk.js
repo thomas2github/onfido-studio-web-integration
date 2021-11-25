@@ -36,6 +36,7 @@ $(document).ready(function() {
         const documentVideoStep = $('#documentVideoStep').is(':checked');
         const selfieStep = $('#selfieStep').is(':checked');
         const videoStep = $('#videoStep').is(':checked');
+        const poaStep = $('#poaStep').is(':checked');
         const forceCrossDevice = $('#forceCrossDevice').is(':checked');
         const useLiveDocumentCapture = $('#useLiveDocumentCapture').is(':checked');
         const acceptPassport = $('#acceptPassport').is(':checked');
@@ -116,15 +117,33 @@ $(document).ready(function() {
                 }
             );
         }
+        if (poaStep) {
+            steps.push(
+                {
+                    type: 'poa',
+                    options: {
+                        'country': 'GBR',
+						'documentTypes': {
+							'bank_building_society_statement': true,
+							'utility_bill': true,
+							'council_tax': true,
+							'benefit_letters': true,
+							'government_letter': true
+                        }
+                    }
+                }
+            );
+        }
         if (completeStep) {
             steps.push(
                 {
                     type: 'complete',
                     options: {
-                    }
+					}
                 }
             );
         }
+        
         
         // CUSTOM LANGUAGE
         let customLanguage = ($('#customLanguage').val()!='')?JSON.parse($('#customLanguage').val()):'';

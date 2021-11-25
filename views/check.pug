@@ -31,6 +31,13 @@ block content
                         //-     input#reportDocumentVideo.custom-control-input(name='reports' type='checkbox' value='document_video_capture' disabled)
                         //-     label.custom-control-label.text-secondary(for='reportDocumentVideo') Document video capture
                         .my-2
+                        .form-group
+                            label.bmd-label-floating Front document ID
+                            input#frontDocumentId.form-control(type='text' name='frontDocumentId')
+                        .form-group
+                            label.bmd-label-floating Back document ID
+                            input#backDocumentId.form-control(type='text' name='backDocumentId')
+                        .my-2
                 if photos.length > 0 || videos.length > 0 
                     .d-flex.flex-column.flex-wrap.justify-content-start.align-items-start.ml-5
                         h6 Facial Similarity Reports
@@ -67,19 +74,18 @@ block content
                             input#reportWatchlistSanctions.custom-control-input(name='reports' type='checkbox' value='watchlist_sanctions_only')
                             label.custom-control-label.text-secondary(for='reportWatchlistSanctions') Watchlist sanctions only
                         .my-2
-                    //- .d-flex.flex-column.flex-wrap.justify-content-start.align-items-start.ml-5
-                    //-     h6 Identity Reports
-                    //-     .custom-control.custom-switch
-                    //-         input#reportIdentityEnhanced.custom-control-input(name='reports' type='checkbox' value='identity_enhanced')
-                    //-         label.custom-control-label.text-secondary(for='reportIdentityEnhanced') Identity enhanced
-                        //- h6 Proof of Address
-                        //- .custom-control.custom-switch
-                        //-     input#reportProofOfAddress.custom-control-input(name='reports' type='checkbox' value='proof_of_address')
-                        //-     label.custom-control-label.text-secondary(for='reportProofOfAddress') Proof of Address
-                        //- h6 Right to Work
-                        //- .custom-control.custom-switch
-                        //-     input#reportRightToWork.custom-control-input(name='reports' type='checkbox' value='right_to_work')
-                        //-     label.custom-control-label.text-secondary(for='reportRightToWork') Right to Work
+                    .d-flex.flex-column.flex-wrap.justify-content-start.align-items-start.ml-5
+                        h6 Other Reports
+                        .custom-control.custom-switch
+                            input#reportIdentityEnhanced.custom-control-input(name='reports' type='checkbox' value='identity_enhanced')
+                            label.custom-control-label.text-secondary(for='reportIdentityEnhanced') Identity enhanced
+                        .custom-control.custom-switch
+                            input#reportProofOfAddress.custom-control-input(name='reports' type='checkbox' value='proof_of_address')
+                            label.custom-control-label.text-secondary(for='reportProofOfAddress') Proof of Address
+                        .custom-control.custom-switch
+                            input#reportRightToWork.custom-control-input(name='reports' type='checkbox' value='right_to_work')
+                            label.custom-control-label.text-secondary(for='reportRightToWork') Right to Work
+                        .my-2
             .d-flex.flex-row.justify-content-around.mt-4
                 button#createCheck.btn.btn-outline-info.my-4(type='submit') submit check
                 if check
