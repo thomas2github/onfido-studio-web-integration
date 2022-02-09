@@ -35,6 +35,7 @@ router.get('/search', auth, main_controller.globalSearch)
 
 // SDK & CHECK
 router.get('/sdk', auth, main_controller.initSdk);
+// router.post('/sdk', auth, main_controller.upload);
 router.get('/authenticate', auth, main_controller.initSdkAuth);
 
 router.get('/checks', auth, main_controller.listChecks);
@@ -45,6 +46,8 @@ router.get('/checks/:id', auth, main_controller.retrieveCheck);
 router.get('/reports/:id', auth, main_controller.retrieveReport);
 
 router.get('/autofill/:id', auth, main_controller.autofill)
+
+router.get('/trusted-face/:type/:id', auth, main_controller.trustedface)
 
 // USE CASE
 router.get('/usecases/select', auth, main_controller.selectUseCase);

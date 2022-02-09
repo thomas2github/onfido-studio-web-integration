@@ -167,6 +167,7 @@ $(document).ready(function() {
             // disableAnalytics: false,
             // useMemoryHistory: false,
             steps: steps,
+            // steps: ['document','document'],
             // mobileFlow: false,
             // enterpriseFeatures: {
             //     hideOnfidoLogo: hideOnfidoLogo,

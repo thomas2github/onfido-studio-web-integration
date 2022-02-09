@@ -14,7 +14,6 @@ block content
                     a.btn.py-4.mx-4(href='/checks/new') Verify (API)
                 a.btn.btn-outline-secondary.py-4.mx-4(href='/checks') Consult checks
             .d-flex.flex-row.justify-content-around.mt-4
-                //- TODO: add hyperlink to API documentation
                 if documents.length > 0
                     .d-flex.flex-column.flex-wrap.justify-content-start.align-items-start
                         h6 Document Reports
@@ -24,9 +23,9 @@ block content
                         //- .custom-control.custom-switch
                         //-     input#reportDocumentWAI.custom-control-input(name='reports' type='checkbox' value='document_with_address_information')
                         //-     label.custom-control-label.text-secondary(for='reportDocumentWAI') Document with address information
-                        //- .custom-control.custom-switch
-                        //-     input#reportDocumentWDLI.custom-control-input(name='reports' type='checkbox' value='document_with_driving_licence_information')
-                        //-     label.custom-control-label.text-secondary(for='reportDocumentWDLI') Document with driving licence information
+                        .custom-control.custom-switch
+                            input#reportDocumentWDLI.custom-control-input(name='reports' type='checkbox' value='document_with_driving_licence_information')
+                            label.custom-control-label.text-secondary(for='reportDocumentWDLI') Document with driving licence information
                         //- .custom-control.custom-switch
                         //-     input#reportDocumentVideo.custom-control-input(name='reports' type='checkbox' value='document_video_capture' disabled)
                         //-     label.custom-control-label.text-secondary(for='reportDocumentVideo') Document video capture
@@ -48,10 +47,6 @@ block content
                             .custom-control.custom-switch
                                 input#reportPhotoFullyAuto.custom-control-input(name='reports' type='checkbox' value='facial_similarity_photo_fully_auto')
                                 label.custom-control-label.text-secondary(for='reportPhotoFullyAuto') Photo fully auto (selfie)
-                        //- if true
-                        //- .custom-control.custom-switch
-                        //-         input#reportVideo.custom-control-input(name='reports' type='checkbox' value='facial_similarity_video' checked)
-                        //-         label.custom-control-label.text-secondary(for='reportVideo') Video (liveness)
                         if videos.length > 0
                             .custom-control.custom-switch
                                 input#reportVideo.custom-control-input(name='reports' type='checkbox' value='facial_similarity_video' checked)

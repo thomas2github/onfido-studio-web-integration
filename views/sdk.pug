@@ -7,6 +7,84 @@ append head
 
 block content
 
+    // Modal Upload Document
+    #uploadDocumentModal.modal.fade(tabindex='-1')
+        .modal-dialog
+            .modal-content
+                .modal-header
+                    h4.text-primary.font-weight-bold.modal-title upload document
+                    button.close(type='button' data-dismiss='modal')
+                        span &times;
+                form#uploadedDocument(action='/sdk' method='post')
+                    .modal-body
+                        .d-flex.flex-row.justify-content-around
+                            .d-flex.flex-column
+                                .form-group
+                                    label.bmd-label-floating Type
+                                    select#documentType.form-control(name='documentType')
+                                        optgroup
+                                            option(value='national_identity_card') National ID
+                                            option(value='passport') Passport 
+                                            option(value='visa') Visa
+                                            option(value='residence_permit') Residence Permit
+                                        optgroup(label='--------------------')
+                                            option(value='driving_licence') Driving Licence
+                                        optgroup(label='--------------------')
+                                            option(value='national_insurance_card') National Health Insurance
+                                        optgroup(label='--------------------')
+                                            option(value='work_permit') Work Permit
+                                            option(value='tax_id') Tax ID
+                                            option(value='voter_id') Voter ID
+                                            option(value='utility_bill') Utility Bill
+                                            option(value='government_letter') Gov Letter
+                                            option(value='bank_statment') Bank Statement
+                                        optgroup(label='--------------------')
+                                            option(value='unknown') unknown
+                                .form-group.mt-3
+                                    label.bmd-label-floating side
+                                    select#documentSide.form-control(name='documentSide')
+                                        option front
+                                        option back
+                                .form-group.mt-3
+                                    label.bmd-label-floating issuing country
+                                    select#documentIssuingCountry.form-control(name='documentIssuingCountry')
+                                        each val, key in countries
+                                            option(value=key)= val
+                            .d-flex.flex-column
+                                h6 File
+                                .form-group.form-file-upload.form-file-simple
+                                    input.form-control.inputFileVisible(type='text' placeholder='select your file...' tooltip='Valid file formats for documents are jpg, png and pdf. The file size must be between 32KB and 10MB. Maximum supported resolution is 64MPx.')
+                                    input#uploadedFile.inputFileHidden(type='file' name='uploadedFile')
+                                .custom-control.custom-switch.mt-3
+                                    input#validateImageQuality.custom-control-input(type='checkbox')
+                                    label.custom-control-label.text-secondary(for='validateImageQuality') validate image quality
+                    .modal-footer
+                        button.btn.btn-outline-secondary(type='button' data-dismiss='modal') Cancel
+                        button.btn.btn-success(type='submit' value='uploadedDocument') Upload
+    // Modal Upload Photo
+    #uploadPhotoModal.modal.fade(tabindex='-1')
+        .modal-dialog
+            .modal-content
+                .modal-header
+                    h4.text-primary.font-weight-bold.modal-title upload photo
+                    button.close(type='button' data-dismiss='modal')
+                        span &times;
+                form#uploadedPhoto(action='/sdk' method='post')
+                    .modal-body
+                        .d-flex.flex-row.justify-content-around
+                            .d-flex.flex-column
+                                .custom-control.custom-switch.mt-3
+                                    input#advancedValidation.custom-control-input(type='checkbox')
+                                    label.custom-control-label.text-secondary(for='advancedValidation') Advanced Validation
+                            .d-flex.flex-column
+                                h6 File
+                                .form-group.form-file-upload.form-file-simple
+                                    input.form-control.inputFileVisible(type='text' placeholder='select your file...')
+                                    input#uploadedFile.inputFileHidden(type='file')
+                    .modal-footer
+                        button.btn.btn-outline-secondary(type='button' data-dismiss='modal') Cancel
+                        button.btn.btn-success(type='submit' value='uploadedDocument') Upload
+    //- TODO: Implement custom language & custom steps
     // Modal Custom Language
     #customLanguageModal.modal.fade(tabindex='-1')
         .modal-dialog
@@ -137,18 +215,22 @@ block content
                     label.btn.btn-xs.btn-outline-secondary
                         input#languagePT(type='radio' name='language' autocomplete='off' value='pt_PT')
                         | PT
+                    label.btn.btn-xs.btn-outline-secondary
+                        input#languageNL(type='radio' name='language' autocomplete='off' value='nl_NL')
+                        | NL
             .d-flex.flex-row.flex-wrap
                 button.btn.btn-sm.btn-outline-primary.mx-3.d-none(data-toggle='modal' data-target='#customLanguageModal') customize language
                 button.btn.btn-sm.btn-outline-primary.mx-3.d-none(data-toggle='modal' data-target='#customStepsModal') customize steps
                 button.btn.btn-sm.btn-outline-primary.mx-3(data-toggle='modal' data-target='#customUIModal') customize UI
         .d-flex.flex-row.justify-content-around
-            button#dislpaySdk.btn.btn-outline-info.my-4(type='button' data-token=sdkToken data-applicant-id=applicant.id) display SDK
+            button#dislpaySdk.btn.btn-info.my-4(type='button' data-token=sdkToken data-applicant-id=applicant.id) display SDK
+            //- button.btn.btn-outline-secondary.my-4.ml-4(data-toggle='modal' data-target='#uploadDocumentModal' data-applicant-id=applicant.id) upload Document
+            //- button.btn.btn-outline-secondary.my-4.ml-4(data-toggle='modal' data-target='#uploadPhotoModal' data-applicant-id=applicant.id) upload Selfie
         .d-flex.flex-row.justify-content-around
             #onfido-mount.my-4
 
 append bottom
     script(src='/dist/onfido.min.js')
-    //- script(src='/dist/onfidoAuth.min.js')
     script(src='https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/js/bootstrap4-toggle.min.js')
     script(src='/javascripts/sdk.js')
     

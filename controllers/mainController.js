@@ -340,18 +340,34 @@ exports.globalSearch = function(req, res, next) {
 exports.initSdk = function(req, res, next) {
     req.session.url = req.originalUrl;
 
+    // //If post -> upload document or photo //TODO add multer express module
+    // if(req.method == 'POST') {
+    //     const uploadData = {
+    //         applicant_id: req.session.applicant.id,
+    //         file: req.file.
+    //     };
+    //     //Id document
+    //     uploadData.type = '';
+    //     uploadData.side = '';
+    //     uploadData.issuing_country = '';
+    //     uploadData.validate_image_quality = false;
+    //     axios.default.post('/documents/', uploadData).then((response) => {});
+    // }
+
     const data = { 
         applicant_id: req.session.applicant.id
         // referrer: '*://*/*'
     };
+
     const nowRequest = logInStacktrace('Get SDK Token', 'REQUEST', null, data, req.session.stacktrace);
-    
+
     axios.default.post('/sdk_token/', data).then((response) => {
         logInStacktrace('Get SDK Token', 'RESPONSE', nowRequest, response.data, req.session.stacktrace);
         const sdkToken = response.data.token;
 
         // load default customUI
         const customUI = require("../data/customUI.json");
+        const countries = require("../data/countries.json");
 
         const applicant = (req.session.applicant)?req.session.applicant:null;
         const stacktrace = (req.session.stacktrace)?req.session.stacktrace:[];
@@ -359,7 +375,7 @@ exports.initSdk = function(req, res, next) {
         const documents = (req.session.documents)?req.session.documents:[];
         const photos = (req.session.photos)?req.session.photos:[];
         const videos = (req.session.videos)?req.session.videos:[];
-        res.render('sdk', { applicants: applicants, applicant: applicant, stacktrace: stacktrace, documents: documents, photos: photos, videos: videos, sdkToken: sdkToken, showSdkEvents: true, customUI: customUI });
+        res.render('sdk', { applicants: applicants, applicant: applicant, stacktrace: stacktrace, documents: documents, photos: photos, videos: videos, sdkToken: sdkToken, showSdkEvents: true, customUI: customUI, countries: countries });
     })
     .catch((error) => {console.log(error.message);next(error);});
 };
@@ -551,6 +567,33 @@ exports.autofill = function(req, res, next) {
         const photos = (req.session.photos)?req.session.photos:[];
         const videos = (req.session.videos)?req.session.videos:[];
         res.render('autofill', { applicants: applicants, applicant: applicant, stacktrace: stacktrace, documents: documents, photos: photos, videos: videos, document_id: document_id, extraction: extraction });
+    });
+};
+
+exports.trustedface = function(req, res, next) {
+    // res.send(JSON.stringify(req.body));
+    req.session.url = req.originalUrl;
+    const media_type = req.params.type;
+    const media_id = req.params.id;
+    const applicant = (req.session.applicant)?req.session.applicant:null;
+
+    let data;
+    if(media_type == 'live_photo'){
+        data = { live_photo_id: media_id };
+    } else {
+        data = { live_video_id: media_id };
+    }
+    
+    const nowRequest = logInStacktrace('Create Trusted Face', 'REQUEST', null, data, req.session.stacktrace);
+
+    axios.default.post('/applicants/'+applicant.id+'/face', data).then((response) => {
+
+        logInStacktrace('Create Trusted Face', 'RESPONSE', nowRequest, response.data, req.session.stacktrace);
+        req.session.extraction = response.data;
+    })
+    .catch((error) => req.session.extraction = error)
+    .finally(() => {
+        res.redirect('/applicants/'+applicant.id);
     });
 };
 

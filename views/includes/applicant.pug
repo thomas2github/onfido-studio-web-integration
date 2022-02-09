@@ -37,6 +37,7 @@ if applicant
                 a(href='/photos/'+photo.id target='_blank')
                     image.mr-2(src='/photos/'+photo.id width=75)
                 small=photo.id
+                a.btn.btn-sm.btn-outline-secondary.mb-4(href='/trusted-face/live_photo/'+photo.id) trusted face
     if videos.length > 0
         h5.my-3.text-primary videos
         p
@@ -45,6 +46,7 @@ if applicant
                     image.mr-2(src='/videos/'+video.id width=75)
                 br
                 small=video.id
+                a.btn.btn-sm.btn-outline-secondary.mb-4(href='/trusted-face/live_video/'+video.id) trusted face
     button.my-3.btn.btn-outline-danger(data-toggle='modal' data-target='#deleteApplicant') delete
 
 // Modal Create Applicant
