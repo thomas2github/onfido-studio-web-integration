@@ -28,6 +28,23 @@ mixin reportBreakdown(breakdown)
                                 p.my-1.ml-4= key3
                                     +displayBreakdownIcon(val3)
 
+mixin reportBreakdownWorkflow(breakdowns)
+    .d-flex.flex-wrap.justify-content-around
+        each val, key in breakdowns
+            .m-4
+                if val.result != 'null'
+                    h6.mt-4= key
+                        +displayBreakdownIcon(val.result)
+                each val2, key2 in val
+                    if val2.result != 'null'
+                        if key2 != 'result'
+                            p.my-1= key2
+                                +displayBreakdownIcon(val2.result)
+                    if val2.properties
+                        each property in val2.properties
+                            p.my-1.ml-4= property.name
+                                +displayBreakdownIcon(property.value)
+
 mixin displayJson(json, level)
     if json
         each val, key in json

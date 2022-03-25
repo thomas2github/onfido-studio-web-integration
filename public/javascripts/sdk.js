@@ -62,7 +62,8 @@ $(document).ready(function() {
                             passport: acceptPassport,
                             driving_licence: acceptDrivingLicence,
                             national_identity_card: acceptNationalId,
-                            residence_permit: acceptResidencePermit
+                            residence_permit: acceptResidencePermit,
+                            unknown: acceptDrivingLicence
                         },
                         showCountrySelection: showCountrySelection
                     }
@@ -122,7 +123,7 @@ $(document).ready(function() {
                 {
                     type: 'poa',
                     options: {
-                        'country': 'GBR',
+                        'country': 'FRA',
 						'documentTypes': {
 							'bank_building_society_statement': true,
 							'utility_bill': true,

@@ -405,6 +405,87 @@ exports.initSdkAuth = function(req, res, next) {
     .catch((error) => {console.log(error.message);next(error);});
 };
 
+exports.initOrchestration = function(req, res, next) {
+    req.session.url = req.originalUrl;
+
+    const data = { 
+        applicant_id: req.session.applicant.id
+        // referrer: '*://*/*'
+    };
+
+    const nowRequest = logInStacktrace('Get SDK Token', 'REQUEST', null, data, req.session.stacktrace);
+
+    axios.default.post('/sdk_token/', data).then((response) => {
+        logInStacktrace('Get SDK Token', 'RESPONSE', nowRequest, response.data, req.session.stacktrace);
+        const sdkToken = response.data.token;
+        // const workflowRunId = "f65ca15a-cabc-4073-966c-89e676bcad0d";
+
+        const data = { 
+            applicant_id: req.session.applicant.id,
+            workflow_id: 'c74519ed-6b8e-4ab8-943f-a1ab7b259078'
+        };
+        axios.defaults.baseURL = 'https://api.onfido.com/v4/';
+        axios.default.post('/workflow_runs/', data).then((response) => {
+            axios.defaults.baseURL = req.session.environment;
+            const workflowRunId = response.data.id;
+            // load default customUI
+            const customUI = require("../data/customUI.json");
+            const countries = require("../data/countries.json");
+
+            const applicant = (req.session.applicant)?req.session.applicant:null;
+            const stacktrace = (req.session.stacktrace)?req.session.stacktrace:[];
+            const applicants = (req.session.applicants)?req.session.applicants:[];
+            const documents = (req.session.documents)?req.session.documents:[];
+            const photos = (req.session.photos)?req.session.photos:[];
+            const videos = (req.session.videos)?req.session.videos:[];
+            res.render('orchestration', { applicants: applicants, applicant: applicant, stacktrace: stacktrace, documents: documents, photos: photos, videos: videos, sdkToken: sdkToken, showSdkEvents: true, customUI: customUI, countries: countries, workflowRunId: workflowRunId });
+        });
+    })
+    .catch((error) => {console.log(error.message);next(error);});
+};
+
+// exports.initOrchestration = function(req, res, next) {
+//     req.session.url = req.originalUrl;
+
+//     const data = { 
+//         applicant_id: req.session.applicant.id
+//         // referrer: '*://*/*'
+//     };
+
+//     const nowRequest2 = logInStacktrace('Get SDK Token', 'REQUEST', null, data, req.session.stacktrace);
+
+//     axios.default.post('/sdk_token/', data).then((response) => {
+//         logInStacktrace('Get SDK Token', 'RESPONSE', nowRequest2, response.data, req.session.stacktrace);
+//         const sdkToken = response.data.token;
+
+//         // request workflow run
+//         const data = { 
+//             // workflow_id: req.session.workflow.id, 
+//             workflow_id: '6885acb0-6640-457a-8dff-cf3db4d63d36', 
+//             applicant_id: req.session.applicant.id
+//         };
+//         const nowRequest = logInStacktrace('Request Worflow Run', 'REQUEST', null, data, req.session.stacktrace);
+//         axios.defaults.baseURL = 'https://api.onfido.com/v4/';
+//         axios.default.post('/workflow_runs', data).then((response) => {
+//             axios.defaults.baseURL = req.session.environment;
+//             logInStacktrace('Request Worflow Run', 'RESPONSE', nowRequest, response.data, req.session.stacktrace);
+//             const workflowRunId = response.data.id;
+//             // load default customUI
+//             const customUI = require("../data/customUI.json");
+//             const countries = require("../data/countries.json");
+
+//             const applicant = (req.session.applicant)?req.session.applicant:null;
+//             const stacktrace = (req.session.stacktrace)?req.session.stacktrace:[];
+//             const applicants = (req.session.applicants)?req.session.applicants:[];
+//             const documents = (req.session.documents)?req.session.documents:[];
+//             const photos = (req.session.photos)?req.session.photos:[];
+//             const videos = (req.session.videos)?req.session.videos:[];
+//             res.render('orchestration', { applicants: applicants, applicant: applicant, stacktrace: stacktrace, documents: documents, photos: photos, videos: videos, sdkToken: sdkToken, showSdkEvents: true, customUI: customUI, countries: countries, workflowRunId: workflowRunId }); 
+//         });
+//     })
+//     .catch((error) => {console.log(error.message);next(error);});
+// };
+
 exports.initCheck = function(req, res, next) {
     req.session.url = req.originalUrl;
     req.session.check = null;
@@ -540,6 +621,30 @@ exports.retrieveReport = function(req, res, next) {
         const photos = (req.session.photos)?req.session.photos:[];
         const videos = (req.session.videos)?req.session.videos:[];
         res.render('report', { applicants: applicants, applicant: applicant, stacktrace: stacktrace, documents: documents, photos: photos, videos: videos, report: report});
+    })
+    .catch((error) => {console.log(error.message);next(error);});
+};
+
+exports.retrieveWorkflowRun = function(req, res, next) {
+    // res.send(JSON.stringify(req.body));
+    req.session.url = req.originalUrl;
+    const workflow_run_id = req.params.id;   
+    
+    const data = { id: workflow_run_id };
+    const nowRequest = logInStacktrace('Retrieve Workflow Run', 'REQUEST', null, data, req.session.stacktrace);
+    axios.defaults.baseURL = 'https://api.onfido.com/v4/';
+    axios.default.get('/workflow_runs/'+workflow_run_id+'?expand=workflow_tasks').then((response) => {
+        axios.defaults.baseURL = req.session.environment;
+        logInStacktrace('Retrieve Workflow Run', 'RESPONSE', nowRequest, response.data, req.session.stacktrace);
+        const workflow_run = response.data;
+        req.session.workflow_run = workflow_run;
+        const applicant = (req.session.applicant)?req.session.applicant:null;
+        const stacktrace = (req.session.stacktrace)?req.session.stacktrace:[];
+        const applicants = (req.session.applicants)?req.session.applicants:[];
+        const documents = (req.session.documents)?req.session.documents:[];
+        const photos = (req.session.photos)?req.session.photos:[];
+        const videos = (req.session.videos)?req.session.videos:[];
+        res.render('workflow_run', { applicants: applicants, applicant: applicant, stacktrace: stacktrace, documents: documents, photos: photos, videos: videos, workflow_run: workflow_run });
     })
     .catch((error) => {console.log(error.message);next(error);});
 };

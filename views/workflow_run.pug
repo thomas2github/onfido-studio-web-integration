@@ -1,0 +1,47 @@
+extends layout
+
+block content
+    .d-flex.flex-row.justify-content-around
+        a.btn.btn-outline-secondary.py-4.mx-4(href='/sdk') Capture (SDK)
+        a.btn.btn-outline-secondary.py-4.mx-4(href='/authenticate') Authenthicate (SDK)
+        a.btn.btn-outline-secondary.py-4.mx-4(href='/checks/new') Verify (API)
+        a.btn.btn-outline-secondary.py-4.mx-4(href='/checks') Consult checks
+        a.btn.btn-outline-warning.py-4.mx-4(href='/orchestration') Orchestration
+    .d-flex.flex-row.justify-content-around.mt-5
+        .d-flex.flex-column
+            if workflow_run.workflow_tasks
+                each task in workflow_run.workflow_tasks
+                    if task.payload
+                        if task.payload.output
+                            .card
+                                .card-header
+                                    div(data-toggle='toggle')
+                                        .float-right.text-right
+                                            if task.payload.output.sub_result
+                                                +displayResult(task.payload.output.sub_result)
+                                            else if task.payload.output.result
+                                                +displayResult(task.payload.output.result)
+                                            else
+                                                +displayStatus(task.payload.output.status)
+                                            .small.card-category created at:&nbsp;
+                                                +displayDate(task.created_at)
+                                        h6.card-title= task.task_def.id
+                                        p.card-category=  task.id
+                                .card-body.hide(style='display:none;')
+                                    if task.payload.output.breakdowns
+                                        if Object.keys(task.payload.output.breakdowns).length > 0
+                                            h4.float-right Breakdown
+                                            div
+                                                +reportBreakdownWorkflow(task.payload.output.breakdowns)
+                                    if task.payload.output.breakdowns && task.payload.output.properties
+                                        if Object.keys(task.payload.output.breakdowns).length > 0 && Object.keys(task.payload.output.properties).length > 0
+                                            hr
+                                    if task.payload.output.properties
+                                        if Object.keys(task.payload.output.properties).length > 0
+                                            h4.float-right Properties
+                                            div
+                                                if task.task_def.id == 'known_faces'
+                                                    +displayKnownFacesProperties(task.payload.output.properties,0)
+                                                else
+                                                    +displayJson(task.payload.output.properties,0)
+                                                
