@@ -36,7 +36,10 @@ router.get('/search', auth, main_controller.globalSearch)
 // SDK & CHECK
 router.get('/sdk', auth, main_controller.initSdk);
 // router.post('/sdk', auth, main_controller.upload);
-router.get('/orchestration', auth, main_controller.initOrchestration);
+
+router.get('/orchestration', auth, main_controller.selectWorkflow);
+router.post('/orchestration', auth, main_controller.initOrchestration);
+
 router.get('/authenticate', auth, main_controller.initSdkAuth);
 
 router.get('/checks', auth, main_controller.listChecks);

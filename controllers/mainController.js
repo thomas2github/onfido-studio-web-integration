@@ -405,6 +405,18 @@ exports.initSdkAuth = function(req, res, next) {
     .catch((error) => {console.log(error.message);next(error);});
 };
 
+exports.selectWorkflow = function(req, res, next) {
+    req.session.url = req.originalUrl;
+
+    const applicant = (req.session.applicant)?req.session.applicant:null;
+    const stacktrace = (req.session.stacktrace)?req.session.stacktrace:[];
+    const applicants = (req.session.applicants)?req.session.applicants:[];
+    const documents = (req.session.documents)?req.session.documents:[];
+    const photos = (req.session.photos)?req.session.photos:[];
+    const videos = (req.session.videos)?req.session.videos:[];
+    res.render('workflow_select', { applicants: applicants, applicant: applicant, stacktrace: stacktrace, documents: documents, photos: photos, videos: videos });
+};
+
 exports.initOrchestration = function(req, res, next) {
     req.session.url = req.originalUrl;
 
@@ -418,11 +430,11 @@ exports.initOrchestration = function(req, res, next) {
     axios.default.post('/sdk_token/', data).then((response) => {
         logInStacktrace('Get SDK Token', 'RESPONSE', nowRequest, response.data, req.session.stacktrace);
         const sdkToken = response.data.token;
-        // const workflowRunId = "f65ca15a-cabc-4073-966c-89e676bcad0d";
+        const workflowId = (req.body.workflowId != '')?req.body.workflowId:null;
 
         const data = { 
             applicant_id: req.session.applicant.id,
-            workflow_id: 'c74519ed-6b8e-4ab8-943f-a1ab7b259078'
+            workflow_id: workflowId
         };
         axios.defaults.baseURL = 'https://api.onfido.com/v4/';
         axios.default.post('/workflow_runs/', data).then((response) => {
