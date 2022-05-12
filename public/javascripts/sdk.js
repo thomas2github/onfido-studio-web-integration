@@ -123,7 +123,7 @@ $(document).ready(function() {
                 {
                     type: 'poa',
                     options: {
-                        'country': 'FRA',
+                        'country': 'GBR',
 						'documentTypes': {
 							'bank_building_society_statement': true,
 							'utility_bill': true,
