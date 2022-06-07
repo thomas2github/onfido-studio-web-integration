@@ -25,7 +25,7 @@ $(document).ready(function() {
             window.location = '/applicants/'+applicantId;
         },
         onError: function(data) {
-            alert(JSON.stringify(data));
+            // alert(JSON.stringify(data));
             window.location = '/applicants/'+applicantId;
         },
     };
