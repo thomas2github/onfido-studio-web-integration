@@ -26,7 +26,7 @@ mixin reportBreakdown(breakdown)
                         if val2.properties
                             each val3, key3 in val2.properties
                                 p.my-1.ml-4= key3
-                                    +displayBreakdownIcon(val3)
+                                    +displayBreakdownIcon(val3.result)
 
 mixin reportBreakdownWorkflow(breakdowns)
     .d-flex.flex-wrap.justify-content-around
@@ -48,8 +48,9 @@ mixin reportBreakdownWorkflow(breakdowns)
 mixin displayJson(json, level)
     if json
         each val, key in json
-            if typeof val === 'object'
+            if typeof val === 'object' && val != null
                 if isNaN(parseInt(key))
+                    br
                     h6(style='margin-left: '+level+'em')= key
                 else if parseInt(key) >= 0
                     br
@@ -59,7 +60,7 @@ mixin displayJson(json, level)
             else
                 //- for known Faces, display link to applicant and video or photo depending on mediatype
                 span(style='margin-left: '+level+'em')= key + ': '
-                    b= val
+                    b= val?val:'null'
                 br
 
 mixin displayKnownFacesProperties(properties)

@@ -451,7 +451,8 @@ exports.initOrchestration = function(req, res, next) {
             const photos = (req.session.photos)?req.session.photos:[];
             const videos = (req.session.videos)?req.session.videos:[];
             res.render('orchestration', { applicants: applicants, applicant: applicant, stacktrace: stacktrace, documents: documents, photos: photos, videos: videos, sdkToken: sdkToken, showSdkEvents: true, customUI: customUI, countries: countries, workflowRunId: workflowRunId });
-        });
+        })
+        .catch((error) => {console.log(error.message);next(error);});
     })
     .catch((error) => {console.log(error.message);next(error);});
 };

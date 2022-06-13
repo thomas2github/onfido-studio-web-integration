@@ -73,6 +73,9 @@ block content
                     .d-flex.flex-column.flex-wrap.justify-content-start.align-items-start.ml-5
                         h6 Other Reports
                         .custom-control.custom-switch
+                            input#reportApplicantFraud.custom-control-input(name='reports' type='checkbox' value='applicant_fraud')
+                            label.custom-control-label.text-secondary(for='reportApplicantFraud') Applicant Fraud
+                        .custom-control.custom-switch
                             input#reportIdentityEnhanced.custom-control-input(name='reports' type='checkbox' value='identity_enhanced')
                             label.custom-control-label.text-secondary(for='reportIdentityEnhanced') Identity enhanced
                         .custom-control.custom-switch
