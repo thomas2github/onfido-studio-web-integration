@@ -1,0 +1,21 @@
+{    
+    "colorContentButtonPrimaryText": "#FFF",
+    "colorBackgroundButtonPrimary": "#2A9D8F",
+    "colorBackgroundButtonPrimaryHover": "#264653F",
+    "colorBackgroundButtonPrimaryActive": "#264653F",
+    "colorBorderButtonPrimary": "#264653F",
+    "borderRadiusButton": "5px",
+
+    "colorContentButtonSecondaryText": "#FFF",
+    "colorBackgroundButtonSecondary": "#f4a261",
+    "colorBackgroundButtonSecondaryHover": "#e76f51",
+    "colorBackgroundButtonSecondaryActive": "#e76f51",
+    "colorBorderButtonSecondary": "#e76f51",
+
+    "colorContentDocTypeButton": "#FFF",
+    "colorBackgroundDocTypeButton": "#2A9D8F",
+    "colorBorderDocTypeButton": "#264653F",
+    "colorBorderDocTypeButtonHover": "#264653F",
+    "colorBorderDocTypeButtonActive": "#264653F",
+    "colorBackgroundIcon": "#2A9D8F"
+}

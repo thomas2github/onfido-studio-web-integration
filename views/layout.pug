@@ -27,29 +27,29 @@ body
         .d-flex.flex-row.justify-content-between.align-items-center.py-2.border-bottom.border-secondary(style='background-color:#fff;')
             .ml-4
                 a.simple-text.logo-normal(href='/restart')
-                    img(src='/images/onfido-logo.png' height='40px')
-            form.form-inline(action='/search' method='get')
-                .form-group
-                    label.bmd-label-floating uuid
-                    input#uuid.form-control(type='text' name='uuid' required style='width: 250px;')
-                button.btn.btn-sm.btn-outline-secondary.ml-4(type='submit') search
+                    img(src='https://static.abeille-assurances.fr/static/images/logo/abeille-assurances-logo.png' height='42px')
+            //- form.form-inline(action='/search' method='get')
+            //-     .form-group
+            //-         label.bmd-label-floating uuid
+            //-         input#uuid.form-control(type='text' name='uuid' required style='width: 250px;')
+            //-     button.btn.btn-sm.btn-outline-secondary.ml-4(type='submit') search
             .mr-4
                 a.nav-link(href='/logout')
                     i.material-icons.text-danger exit_to_app
                     span.text-danger Logout
         
         .main-panel
-            .content.d-flex.flex-row.align-items-stretch.justify-content-between.mx-2
-                .d-flex.flex-column.justify-content-start.p-2.border-right.border-secondary.flex-shrink-0(style='min-width:200px;width:200px')
+            .content.d-flex.flex-row.align-items-center.justify-content-center.mx-2
+                //- .d-flex.flex-column.justify-content-start.p-2.border-right.border-secondary.flex-shrink-0(style='min-width:200px;width:200px')
                     //- h4.text-info.font-weight-bold Use cases
                     //- a.btn.btn-outline-info(href='/usecases/new') See in action
                     //- .mt-4
                     // include applicant
                     include includes/applicant.pug
-                .d-flex.flex-column.justify-content-start.p-2
-                    // Content
-                    block content
-                .d-flex.flex-column.justify-content-start.p-2.border-left.border-secondary(style='min-width:350px;width:350px')
+                //- .d-flex.flex-column.justify-content-start.p-2
+                // Content
+                block content
+                //- .d-flex.flex-column.justify-content-start.p-2.border-left.border-secondary(style='min-width:350px;width:350px')
                     // include stack trace
                     include includes/stacktrace.pug
             // Footer
