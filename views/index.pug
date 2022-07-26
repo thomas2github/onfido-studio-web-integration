@@ -2,14 +2,14 @@ extends layout
 
 block content
     .d-flex.flex-column.justify-content-around
-        //- .card.m-5(style='width:400px;')
-        //-     .card-header.card-header-info.text-center
-        //-         h6 Identity Verification in action
-        //-     .card-body.m-4.text-center
-        //-         a.btn.btn-sm.btn-outline-info.mr-2(href='/usecases/select') Select
-        //-         span your business use cases
         .card.m-5(style='width:400px;')
             .card-header.card-header-primary.text-center
-                h6.card-title Souscrire mon assurance auto
+                h6.card-title Onfido Real Idendity Platform
             .card-body.m-4.text-center
-                a.btn.btn-sm.btn-info.mr-2(href='/launcher/') En voiture Simone ! 
+                a.btn.btn-sm.btn-outline-info.mb-4(href='https://dashboard.onfido.com/studio' target='_blank') workflows list
+                form(action='/launcher/' method='post')
+                    .form-group.text-left
+                        label.bmd-label-floating.text-left Workflow ID
+                        input#workflowId.form-control.text-left(type='text' name='workflowId' required)
+                    br
+                    button#dislpaySdk.btn.btn-info(type='submit') DEMO SDK WEB

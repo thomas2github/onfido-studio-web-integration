@@ -1,0 +1,83 @@
+{
+    "fontFamilyTitle": "Arial sans-serif",
+    "fontSizeTitle": "2rem",
+    "fontWeightTitle": 600,
+    "colorContentTitle": "#E76F51",
+    
+    "fontFamilySubtitle": "Arial, sans-serif",
+    "fontSizeSubtitle": "1.5rem",
+    "fontWeightSubtitle": 400,
+    "colorContentSubtitle": "#2A9D8F",
+    
+    "fontFamilyBody": "Courier New, sans-serif",
+    "fontSizeBody": "1rem",
+    "fontWeightBody": 200,
+    "colorContentBody": "#264653F",
+
+    "colorBackgroundSurfaceModal": "#E9C46A",
+    "colorBorderSurfaceModal": "#F4A261",
+    "borderWidthSurfaceModal": "1px",
+    "borderStyleSurfaceModal": "dotted",
+    "borderRadiusSurfaceModal": "10px",
+    
+    "colorContentButtonPrimaryText": "#FFF",
+    "colorBackgroundButtonPrimary": "#2A9D8F",
+    "colorBackgroundButtonPrimaryHover": "#264653F",
+    "colorBackgroundButtonPrimaryActive": "#264653F",
+    "colorBorderButtonPrimary": "#264653F",
+    "borderRadiusButton": "5px",
+
+    "colorContentButtonSecondaryText": "#FFF",
+    "colorBackgroundButtonSecondary": "#f4a261",
+    "colorBackgroundButtonSecondaryHover": "#e76f51",
+    "colorBackgroundButtonSecondaryActive": "#e76f51",
+    "colorBorderButtonSecondary": "#e76f51",
+
+    "colorContentDocTypeButton": "#FFF",
+    "colorBackgroundDocTypeButton": "#2A9D8F",
+    "colorBorderDocTypeButton": "#264653F",
+    "colorBorderDocTypeButtonHover": "#264653F",
+    "colorBorderDocTypeButtonActive": "#264653F",
+    "colorBackgroundIcon": "#2A9D8F",
+
+    "buttonGroupStacked": "true",
+
+    "colorContentLinkTextHover": "#2A9D8F",
+    "colorBorderLinkUnderline": "#2A9D8F",
+    "colorBackgroundLinkHover": "#264653F",
+    "colorBackgroundLinkActive": "#264653F",
+
+    "colorContentAlertInfo": "#FFF",
+    "colorBackgroundAlertInfo": "#2A9D8F",
+    "colorContentAlertInfoLinkHover": "#264653F",
+    "colorContentAlertInfoLinkActive": "#264653F",
+
+    "colorContentAlertError": "#FFF",
+    "colorBackgroundAlertError": "#f4a261",
+    "colorContentAlertErrorLinkHover": "#e76f51",
+    "colorContentAlertErrorLinkActive": "#e76f51",
+
+    "colorBackgroundButtonIconHover": "#e9c46a",
+    "colorBackgroundButtonIconActive": "#e76f51",
+    
+    "colorBackgroundButtonCameraHover": "#e9c46a",
+    "colorBackgroundButtonCameraActive": "#e76f51",
+
+    "authAccentColor": "#E76F51",
+    "authFrameColor": "#E9C46A",
+    "authButtonCornerRadius": "5px",
+
+    "authDualSpinnercolor": "#f4a261",
+    "authRetryScreenOvalcolor": "#264653F",
+    "authOvalColor": "#E76F51",
+    "authButtonColorNormal": "#e9c46a",
+    "authButtonColorDisabled": "#f4a261",
+    "authButtonColorPressed": "#264653F",
+    "authFeedbackBarColor": "#E76F51",
+
+    "authTextColor": "#2A9D8F",
+    "authButtonTextHighlightColor": "#264653F",
+    "authButtonTextDisabledColor": "#f4a261",
+    "authButtonTextNormalColor": "#e9c46a",
+    "authFeedbackBarTextColor": "#264653F"
+}

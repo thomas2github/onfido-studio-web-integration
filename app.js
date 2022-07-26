@@ -23,7 +23,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(session({
-  secret: "secret f0r TGA dem0 @pp",
+  secret: "secret f0r studi0 web dem0 @pp",
   resave: true,
   saveUninitialized: true
 }));
@@ -51,11 +51,7 @@ app.use(function(err, req, res, next) {
   const documents = (req.session.documents)?req.session.documents:[];
   const photos = (req.session.photos)?req.session.photos:[];
   const videos = (req.session.videos)?req.session.videos:[];
-  // TODO: update with new media object type
-  // const video_documents = (req.session.video_documents)?req.session.video_documents:[];
   res.render('error', { applicants: applicants, applicant: applicant, stacktrace: stacktrace, documents: documents, photos: photos, videos: videos});
-  // TODO: update with new media object type
-  // res.render('error', { applicants: applicants, applicant: applicant, stacktrace: stacktrace, documents: documents, photos: photos, video_documents: video_documents});
 });
 
 module.exports = app;

@@ -19,6 +19,6 @@ router.get('/logout', login_controller.logout);
 
 router.get('/restart', auth, main_controller.clearSession);
 
-router.get('/launcher', auth, main_controller.launcher);
+router.post('/launcher', auth, main_controller.launcher);
 
 module.exports = router;

@@ -6,8 +6,37 @@ append head
     link(rel='stylesheet' href='/dist/style.css')
 
 block content
+    // Modal Custom UI
+    #customUIModal.modal.fade(tabindex='-1')
+        .modal-dialog
+            .modal-content
+                .modal-header
+                    h4.text-primary.font-weight-bold.modal-title customize UI
+                    button#resetCustomUI.btn.btn-info(type='button' data-dismiss='modal') Default
+                    button#udpateCustomUI.btn.btn-primary(type='button' data-dismiss='modal') Update
+                .modal-body
+                    textarea#customUIEditor.form-control(rows='55')= JSON.stringify(customUI, null, 4)
+                    input#customUI(type='hidden' value=JSON.stringify(customUI, null, 4))
+
+    // Modal Custom Language
+    #customLanguageModal.modal.fade(tabindex='-1')
+        .modal-dialog
+            .modal-content
+                .modal-header
+                    h4.text-primary.font-weight-bold.modal-title customize language
+                    button#resetCustomLanguage.btn.btn-info(type='button' data-dismiss='modal') Default
+                    button#udpateCustomLanguage.btn.btn-primary(type='button' data-dismiss='modal') Update
+                .modal-body
+                    textarea#customLanguageEditor.form-control(rows='55')= JSON.stringify(customLanguage, null, 4)
+                    input#customLanguage(type='hidden' value=JSON.stringify(customLanguage, null, 4))
+
     .d-flex.flex-row.justify-content-around
-        #onfido-mount.my-4(data-token=sdkToken data-workflow-run-id=workflowRunId) 
+        #onfido-mount.my-4(data-token=sdkToken data-workflow-run-id=workflowRunId)
+        .d-flex.flex-column.justify-content-center
+            button.btn.btn-sm.btn-primary.mx-3(data-toggle='modal' data-target='#customUIModal') customize UI
+            button.btn.btn-sm.btn-info.mx-3(data-toggle='modal' data-target='#customLanguageModal') customize language
+            br
+            a.btn.btn-sm.btn-outline-info.mx-3(href='https://dashboard.onfido.com/results?p=1&sort=desc' target='blank') verification results
 
 append bottom
     script(src='/dist/onfido.min.js')
