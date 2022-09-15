@@ -1,181 +1,35 @@
 {   
-    "locale": "fr_FR",
+    "locale": "en_US",
     "phrases": {
-        "welcome": {
-            "start_workflow_button": "Démarrer la vérification"
-        },
-        "country_select": {
-            "poa_alert": {
-                "intro": "Vous ne trouvez pas le pays ?"
-            }
+        "doc_confirmation": {
+            "body_permit": "Make sure your details of passport card are clear and unobstructed"
         },
         "doc_select": {
-            "subtitle_poa": "Voici les documents les plus susceptibles d'indiquer votre adresse de résidence actuelle",
-            "subtitle_country": "Sélectionnez le pays émetteur pour voir quels documents nous acceptons",
-            "section": {
-                "header_country": "Pays d'émission",
-                "input_country_not_found": "Aucun résultat",
-                "input_placeholder_country": "Commencer à taper pour chercher le pays",
-                "header_doc_type": "Documents acceptés"
-            }
+            "button_permit": "Passport Card"
         },
-        "profile_data": {
-            "personal_details_title":"Ajoutez vos informations personnelles",
-            "address_detials_title":"Ajoutez votre adresse",
-            "field_labels": {
-                "first_name":"Prénom",
-                "last_name":"Nom de famille",
-                "dob":"Date de naissance",
-                "country":"Pays",
-                "line1":"Ligne d'adresse 1",
-                "line2":"Ligne d'adresse 2",
-                "line3":"Ligne d'adresse 3",
-                "town":"Ville",
-                "postcode":"Code postal",
-                "gbr_specific":{
-                    "town":"Ville/Ville",
-                    "postcode":"Code postal"
-                },
-                "usa_specific":{
-                    "line1_helper_text":"Adresse, par exemple : 200 Albert Street",
-                    "line2_helper_text":"Appartement, suite, unité, etc.",
-                    "state":"Etat",
-                    "postcode":"Code postal"
-                }
-            },
-            "field_validation":{
-                "required_first_name":"Veuillez saisir votre prénom",
-                "required_last_name":"Veuillez entrer votre nom de famille",
-                "required_dob":"Veuillez saisir votre date de naissance",
-                "required_country":"Veuillez sélectionner un pays",
-                "required_line1":"Veuillez saisir votre adresse",
-                "required_postcode":"Veuillez saisir votre code postal",
-                "invalid":"Veuillez vérifier les caractères ou symboles invalides",
-                "invalid_dob":"Veuillez entrer une date de naissance valide",
-                "too_short_last_name":"Le nom de famille est trop court",
-                "too_short_postcode":"Le code postal est trop court",
-                "too_long_first_name":"Le prénom est trop long",
-                "too_long_last_name":"Le nom de famille est trop long",
-                "too_long_line1":"La ligne d'adresse est trop longue",
-                "too_long_line2":"La ligne d'adresse est trop longue",
-                "too_long_line3":"La ligne d'adresse est trop longue",
-                "too_long_town":"La ville est trop longue",
-                "too_long_postcode":"Le code postal est trop long",
-                "gbr_specific":{
-                    "required_postcode":"Veuillez saisir votre code postal",
-                    "too_short_postcode":"Le code postal est trop court",
-                    "too_long_postcode":"Le code postal est trop long"
-                },
-                "usa_specific":{
-                    "required_state":"Veuillez sélectionner un état",
-                    "required_postcode":"Veuillez entrer votre code postal",
-                    "too_short_postcode":"Le code postal est trop court",
-                    "too_long_postcode":"Le code postal est trop long"
-                }
-            },
-            "field_optional":"(facultatif)",
-            "button_submit":"Continuer",
-            "components":{
-                "country_select":{
-                    "placeholder":"Sélectionnez un pays"
-                },
-                "state_select":{
-                    "placeholder":"Sélectionnez un état"
-                }
-            },
-            "prompt":{
-                "header_timeout":"Il semble que vous ayez pris trop de temps",
-                "detail_timeout":"Recommencer"
-            }
+        "doc_submit": {
+            "title_permit_back": "Submit passport card (back)",
+            "title_permit_front": "Submit passport card (front)"
+        },
+        "photo_upload": {
+            "body_permit_back": "Upload back of passport card from your computer",
+            "body_permit_front": "Upload front of passport card from your computer"
         }
     },
     "mobilePhrases": {
-        "welcome": {
-            "start_workflow_button": "Démarrer la vérification"
-        }, 
-        "country_select": {
-            "poa_alert": {
-                "intro": "Vous ne trouvez pas le pays ?"
-            }
+        "doc_confirmation": {
+            "body_permit": "Make sure your details of passport card are clear and unobstructed"
         },
         "doc_select": {
-            "subtitle_poa": "Voici les documents les plus susceptibles d'indiquer votre adresse de résidence actuelle",
-            "subtitle_country": "Sélectionnez le pays émetteur pour voir quels documents nous acceptons",
-            "section": {
-                "header_country": "Pays d'émission",
-                "input_country_not_found": "Aucun résultat",
-                "input_placeholder_country": "Commencer à taper pour chercher le pays",
-                "header_doc_type": "Documents acceptés"
-            }
+            "button_permit": "Passport Card"
         },
-        "profile_data": {
-            "personal_details_title":"Ajoutez vos informations personnelles",
-            "address_detials_title":"Ajoutez votre adresse",
-            "field_labels": {
-                "first_name":"Prénom",
-                "last_name":"Nom de famille",
-                "dob":"Date de naissance",
-                "country":"Pays",
-                "line1":"Ligne d'adresse 1",
-                "line2":"Ligne d'adresse 2",
-                "line3":"Ligne d'adresse 3",
-                "town":"Ville",
-                "postcode":"Code postal",
-                "gbr_specific":{
-                    "town":"Ville/Ville",
-                    "postcode":"Code postal"
-                },
-                "usa_specific":{
-                    "line1_helper_text":"Adresse, par exemple : 200 Albert Street",
-                    "line2_helper_text":"Appartement, suite, unité, etc.",
-                    "state":"Etat",
-                    "postcode":"Code postal"
-                }
-            },
-            "field_validation":{
-                "required_first_name":"Veuillez saisir votre prénom",
-                "required_last_name":"Veuillez entrer votre nom de famille",
-                "required_dob":"Veuillez saisir votre date de naissance",
-                "required_country":"Veuillez sélectionner un pays",
-                "required_line1":"Veuillez saisir votre adresse",
-                "required_postcode":"Veuillez saisir votre code postal",
-                "invalid":"Veuillez vérifier les caractères ou symboles invalides",
-                "invalid_dob":"Veuillez entrer une date de naissance valide",
-                "too_short_last_name":"Le nom de famille est trop court",
-                "too_short_postcode":"Le code postal est trop court",
-                "too_long_first_name":"Le prénom est trop long",
-                "too_long_last_name":"Le nom de famille est trop long",
-                "too_long_line1":"La ligne d'adresse est trop longue",
-                "too_long_line2":"La ligne d'adresse est trop longue",
-                "too_long_line3":"La ligne d'adresse est trop longue",
-                "too_long_town":"La ville est trop longue",
-                "too_long_postcode":"Le code postal est trop long",
-                "gbr_specific":{
-                    "required_postcode":"Veuillez saisir votre code postal",
-                    "too_short_postcode":"Le code postal est trop court",
-                    "too_long_postcode":"Le code postal est trop long"
-                },
-                "usa_specific":{
-                    "required_state":"Veuillez sélectionner un état",
-                    "required_postcode":"Veuillez entrer votre code postal",
-                    "too_short_postcode":"Le code postal est trop court",
-                    "too_long_postcode":"Le code postal est trop long"
-                }
-            },
-            "field_optional":"(facultatif)",
-            "button_submit":"Continuer",
-            "components":{
-                "country_select":{
-                    "placeholder":"Sélectionnez un pays"
-                },
-                "state_select":{
-                    "placeholder":"Sélectionnez un état"
-                }
-            },
-            "prompt":{
-                "header_timeout":"Il semble que vous ayez pris trop de temps",
-                "detail_timeout":"Recommencer"
-            }
+        "doc_submit": {
+            "title_permit_back": "Submit passport card (back)",
+            "title_permit_front": "Submit passport card (front)"
+        },
+        "photo_upload": {
+            "body_permit_back": "Take a photo of the back of your passport card",
+            "body_permit_front": "Take a photo of the front of your passport card"
         }
     }
 }
