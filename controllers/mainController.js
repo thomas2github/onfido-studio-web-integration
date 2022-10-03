@@ -3,61 +3,58 @@ const moment = require('moment');
 const axios = require('axios');
 const { get } = require('request');
 const { use } = require('../routes/mainRouter');
+const onfido_axios = require('../apis/onfido');
+const onfido_v4_axios = require('../apis/onfidoV4');
 
 exports.index = function(req, res, next) {
-    axios.defaults.baseURL = req.session.environment;
-    axios.defaults.headers.common['Authorization'] = 'Token token='+req.session.apiToken;
-    axios.defaults.headers.common['Accept'] = 'application/json';
-    axios.defaults.headers.post['Content-Type'] = 'application/json';
-    axios.defaults.headers.put['Content-Type'] = 'application/json';
     req.session.url = req.originalUrl;
     res.render('index');
 };
 
 exports.clearSession = function(req, res, next) {
-    req.session.applicant = null;
-    req.session.applicants = [];
-    req.session.stacktrace = [];
-    req.session.documents = [];
-    req.session.photos = [];
-    req.session.videos = [];
-    req.session.check = null;
-    req.session.reports = [];
-    req.session.checks = [];
-    req.session.extraction = null;
-    req.session.url = null;
-    req.session.usecase = null;
-    req.session.current_index = null;
+
     res.redirect('/index');
 };
 
 exports.launcher = function(req, res, next) {
     req.session.url = req.originalUrl;
 
+    req.session.language = (req.body.language)?req.body.language:'FR';
+    const transaction_amount = (req.body.amount)?parseInt(req.body.amount):15
+
     // Create new applicant
-    const firstname = 'John';
-    const lastname = 'Doe';
-    const dataCreateApplicant = { first_name: firstname, last_name: lastname};
-    axios.default.post('/applicants/', dataCreateApplicant).then((response) => {
+    const dataApplicant = require("../data/dataApplicant.json");
+    onfido_axios.post('/applicants/', dataApplicant).then((response) => {
         const applicant = response.data;
 
          // Create sdk
          const dataCreateSdk = { applicant_id: applicant.id };
-         axios.default.post('/sdk_token/', dataCreateSdk).then((response) => {
+         onfido_axios.post('/sdk_token/', dataCreateSdk).then((response) => {
             const sdkToken = response.data.token;
 
             // Create workflow_run
-            const workflowId = (req.body.workflowId != '')?req.body.workflowId:null;
-            const dataCreateWorkflowRun = { applicant_id: applicant.id, workflow_id: workflowId };
-            axios.defaults.baseURL = 'https://api.onfido.com/v4/';
-            axios.default.post('/workflow_runs/', dataCreateWorkflowRun).then((response) => {
+            const workflowId = '64e15697-976a-49c5-96bf-8de8ff3c15ca';
+            const dataCreateWorkflowRun = { 
+                applicant_id: applicant.id, 
+                workflow_id: workflowId,
+                custom_data: {
+                    transaction_amount: transaction_amount
+                } 
+            };
+            // const workflowId = 'cef74530-b9a3-47ed-b9c5-e566772410f0';
+            // const dataCreateWorkflowRun = { 
+            //     applicant_id: applicant.id, 
+            //     workflow_id: workflowId
+            // };
+            onfido_v4_axios.defaults.headers.common['Authorization'] = 'Token token='+req.session.onfido_api_token;
+            onfido_v4_axios.post('/workflow_runs/', dataCreateWorkflowRun).then((response) => {
                 const workflowRun = response.data;
 
                 // load default custom data
                 const customUI = require("../data/customUI.json");
                 const customLanguage = require("../data/customLanguage.json");
 
-                res.render('launcher', { sdkToken: sdkToken, workflowRunId: workflowRun.id, customUI: customUI, customLanguage: customLanguage });            
+                res.render('launcher', { sdkToken: sdkToken, workflowRunId: workflowRun.id, customUI: customUI, customLanguage: customLanguage, language: req.session.language });            
             })
             .catch((error) => {console.log(error.message);next(error);});
          })

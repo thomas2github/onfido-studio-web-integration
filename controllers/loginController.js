@@ -1,5 +1,6 @@
 // Require the package
 const axios = require('axios');
+const onfido_axios = require('../apis/onfido');
 
 // Display login page.
 exports.getLogin = function(req, res) {
@@ -9,18 +10,17 @@ exports.getLogin = function(req, res) {
 };
 
 exports.postLogin = function(req, res) {
-    const token = req.body.apiToken;
-    const onfidoEnv = req.body.environment;
-    //test API Token
-    axios.defaults.baseURL = onfidoEnv;
-    // axios.defaults.baseURL = 'https://api.onfido.com/v3/';
-    axios.defaults.headers.common['Authorization'] = 'Token token='+token;
-    axios.defaults.headers.common['Accept'] = 'application/json';
-    axios.default.get('/applicants?page=0&perPage=1').then((response) => {
+    const onfido_token = req.body.apiToken;
+    const onfido_env = req.body.environment;
+
+    onfido_axios.defaults.baseURL = onfido_env;
+    onfido_axios.defaults.headers.common['Authorization'] = 'Token token='+onfido_token;
+
+    onfido_axios.get('/applicants?page=0&perPage=1').then((response) => {
         //save Token in session
-        req.session.apiToken = token,
-        req.session.environment = onfidoEnv,
-        req.session.stacktrace = [],
+        req.session.onfido_api_token = onfido_token,
+        req.session.onfido_api_environment = onfido_env,
+
         //redirect to dashboard
         res.redirect('/index')
     })

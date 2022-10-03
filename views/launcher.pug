@@ -6,6 +6,9 @@ append head
     link(rel='stylesheet' href='/dist/style.css')
 
 block content
+    // Language
+    input#language(type='hidden' value=language)
+
     // Modal Custom UI
     #customUIModal.modal.fade(tabindex='-1')
         .modal-dialog
@@ -36,7 +39,7 @@ block content
             button.btn.btn-sm.btn-primary.mx-3(data-toggle='modal' data-target='#customUIModal') customize UI
             button.btn.btn-sm.btn-info.mx-3(data-toggle='modal' data-target='#customLanguageModal') customize language
             br
-            a.btn.btn-sm.btn-outline-info.mx-3(href='https://dashboard.onfido.com/results?p=1&sort=desc' target='blank') verification results
+            a.btn.btn-sm.btn-outline-info.mx-3(href='https://dashboard.onfido.com/results/'+workflowRunId target='blank') verification results
 
 append bottom
     script(src='/dist/onfido.min.js')

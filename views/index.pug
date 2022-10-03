@@ -1,15 +1,66 @@
 extends layout
 
 block content
-    .d-flex.flex-column.justify-content-around
-        .card.m-5(style='width:400px;')
-            .card-header.card-header-primary.text-center
-                h6.card-title Onfido Real Idendity Platform
-            .card-body.m-4.text-center
-                a.btn.btn-sm.btn-outline-info.mb-4(href='https://dashboard.onfido.com/studio' target='_blank') workflows list
-                form(action='/launcher/' method='post')
-                    .form-group.text-left
-                        label.bmd-label-floating.text-left Workflow ID
-                        input#workflowId.form-control.text-left(type='text' name='workflowId' required)
-                    br
-                    button#dislpaySdk.btn.btn-info(type='submit') DEMO SDK WEB
+    form(method='post' action='/launcher')
+        .d-flex.flex-column.justify-content-around
+            button.d-flex.flex-row.align-items-center.justify-content-center(type='submit' style='border-width:0')
+                img.mr-4(src='/images/onfido-logo.png' style='height:50px')
+                svg(width='2' height='75px' xmlns='http://www.w3.org/2000/svg')
+                    line(x1='0' y1='0' x2='0' y2='75px' style='stroke:rgb(0,0,0);stroke-width:2')
+                img.ml-4(src='https://upload.wikimedia.org/wikipedia/fr/thumb/f/fc/Monnaie_de_Paris_logo.svg/1200px-Monnaie_de_Paris_logo.svg.png' style='height:150px')
+        .d-flex.flex-row.align-items-center.justify-content-center.mt-5
+            .btn-group.btn-group-toggle(data-toggle='buttons' style='background:#fff;')
+                //- label(for='amount' style='position:relative;top:0px;') Montant de la transaction (€)
+                //- input#amount.form-control.text-center(type='number' name='amount' style='font-size:24px;width:150px' value='100')
+                .d-flex.flex-column.align-items-center
+                    h4.text-uppercase.my-3 Sélectionner votre monnaie
+                    .d-flex.flex-row.justify-content-center
+                        label.mx-4.text-center
+                            input#amount15.d-none(type='radio' name='amount' value=15)
+                            img#amount15.amount-selector.mb-4(src='https://www.monnaiedeparis.fr/media/catalog/product/cache/6918adbdd7525a35321ec8b096fc89b8/M/5/M5066_MDP_00062178_BD_13e2.jpg' height=150)
+                            p
+                                | Jeux Olympiques de Paris 2024
+                                br
+                                | Qualité courante Millésime 2022
+                            h4 15 €
+                        label.mx-4.text-center
+                            img#amount270.amount-selector.mb-4(src='https://www.monnaiedeparis.fr/media/catalog/product/cache/6918adbdd7525a35321ec8b096fc89b8/M/5/M5066_MDP_00062186_BD_c971.jpg' height=150)
+                            p
+                                | Jeux Olympiques de Paris 2024
+                                br
+                                | Qualité BU Millésime 2022
+                            h4 270 €
+                        label.mx-4.text-center
+                            img#amount5000.amount-selector.mb-4(src='https://www.monnaiedeparis.fr/media/catalog/product/cache/6918adbdd7525a35321ec8b096fc89b8/M/O/MONNAIE_5000____OR_BLE_NATURES_DE_FRANCE_2023_FACE_323e.jpg' height=150)
+                            p
+                                | Blé
+                                br
+                                | Qualité BE millésime 2022
+                            h4 5 000 €
+                    input#amount(type='hidden' name='amount' value=15)
+
+        .d-flex.flex-row.align-items-center.justify-content-center.mt-2
+            .btn-group.btn-group-sm.btn-group-toggle(data-toggle='buttons')
+                label.btn.btn-sm.btn-outline-secondary
+                    input#languageEN(type='radio' name='language' autocomplete='off' value='EN')
+                    | EN
+                label.btn.btn-sm.btn-outline-secondary.active
+                    input#languageFR(type='radio' name='language' autocomplete='off' value='FR' checked)
+                    | FR
+                label.btn.btn-sm.btn-outline-secondary
+                    input#languageES(type='radio' name='language' autocomplete='off' value='ES')
+                    | ES
+                label.btn.btn-sm.btn-outline-secondary
+                    input#languageDE(type='radio' name='language' autocomplete='off' value='DE')
+                    | DE
+                label.btn.btn-sm.btn-outline-secondary
+                    input#languageIT(type='radio' name='language' autocomplete='off' value='IT')
+                    | IT
+        .d-flex.flex-row.justify-content-center
+            button.btn.btn-outline.btn-sm(type='submit') démarrer le workflow
+        .d-flex.flex-row.justify-content-center.mt-5
+            small
+                a.text-info(href='https://dashboard.onfido.com/studio/editor/64e15697-976a-49c5-96bf-8de8ff3c15ca/1' target='_blank') studio workflow
+
+
+                    

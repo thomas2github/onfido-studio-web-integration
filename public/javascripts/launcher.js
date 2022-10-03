@@ -28,7 +28,18 @@ function initSDk() {
     // Init & display Onfido web SDK ID Document        
     $('.onfido-sdk-ui-Modal-inner').remove();
     const useModal = false;
-    // const language = 'fr';
+    
+    // LANGUAGE
+    let language = 'fr_FR';
+    const lang = ($('#language').val()!='')?$('#language').val():'FR';
+    switch(lang){
+        case 'EN':
+            language = 'en_US'
+            break;
+        default:
+            language = lang.toLowerCase()+'_'+lang;
+            break;
+    }
 
     // CUSTOM LANGUAGE
     let customLanguage = ($('#customLanguage').val()!='')?JSON.parse($('#customLanguage').val()):'';
@@ -41,7 +52,7 @@ function initSDk() {
 
     let sdkParam = {
         useModal: useModal,
-        language: customLanguage,
+        language: (lang == 'FR')?customLanguage:language,
         token: token,
         workflowRunId: workflowRunId,
         containerId: 'onfido-mount',

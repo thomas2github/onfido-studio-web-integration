@@ -5,7 +5,7 @@ block content
       if error.response
         pre #{error.response}
         if error.response.data
-          h6.mt-5 #{error.response.data.error.message}
+          h6.mt-5 #{error.response.data}
         div(style='font-size: 0.7rem;')
           pre #{error.stack}
         a.btn.btn-outline-secondary.mt-5(href='/index') back
